@@ -66,7 +66,7 @@
         <div class="b">
           <h2 data-t="install"></h2>
           <p id="s1-text" data-t="install_text"></p>
-          <a class="btn" id="dl" href="/download/LoveAround.dmg"></a>
+          <a class="btn" id="dl" href="https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg"></a>
           <span class="alt" id="alt"></span>
         </div>
       </li>
@@ -135,7 +135,7 @@
   if (os === 'mac' || os === 'win') {
     $('desk').hidden = false;
     var mac = os === 'mac';
-    $('dl').href = mac ? '/download/LoveAround.dmg' : '/download/LoveAroundSetup.exe';
+    $('dl').href = mac ? 'https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg' : 'https://github.com/lovearound-me/windows/releases/latest/download/LoveAroundSetup.exe';
     $('dl').textContent = mac ? T.mac : T.windows;
     $('alt').innerHTML = mac ? T.alt_windows : T.alt_mac;
 
