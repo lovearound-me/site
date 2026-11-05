@@ -1,0 +1,19 @@
+.firebase/
+# Written by build.py from src/ and i18n/
+/public/index.html
+/public/es/
+/public/en/
+/public/ru/
+/public/de/
+/public/fr/
+/public/uk/
+/public/pt/
+/public/it/
+/public/pl/
+/public/tr/
+/public/id/
+/public/ko/
+/public/zh/
+/public/localized/
+/public/i/
+/public/signin/

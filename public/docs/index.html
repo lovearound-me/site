@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Docs — lovearound</title>
+<meta name="description" content="How lovearound works: signals, contacts, devices, the REST API, WebSocket and your own ESP32 device.">
+<link rel="icon" href="/heart.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a>
+    <nav class="nav" aria-label="Docs">
+      <a class="nl" href="/docs" aria-current="page">Overview</a>
+      <a class="nl" href="/docs/rest">REST</a>
+      <a class="nl" href="/docs/ws">WebSocket</a>
+      <a class="nl" href="/docs/esp32">ESP32</a>
+      <a class="btn sm" href="/#w-get">Download</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+  <div class="doc-hero">
+    <span class="kicker">Docs</span>
+    <h1>How lovearound works</h1>
+    <p class="lead">Signals can be sent and received by more than the app. A lamp, a soft toy, a small screen or your own script will do. This is how it all works and how to connect to it.</p>
+    <nav class="tabs" aria-label="Docs sections">
+      <a href="/docs" aria-current="page">Overview</a>
+      <a href="/docs/rest">REST API</a>
+      <a href="/docs/ws">WebSocket</a>
+      <a href="/docs/esp32">ESP32 toy</a>
+    </nav>
+  </div>
+
+  <article class="doc">
+
+    <h2 id="what">What a signal is</h2>
+    <p>A signal is a heart someone sends to a person they’re thinking of. It carries nothing: no text, no sender’s name, not even the time it was pressed. All the recipient sees is that someone thought of them.</p>
+    <p>A signal only lives in the moment. It reaches the devices that are online right now. If the person is offline, the signal isn’t queued and won’t arrive later — by design.</p>
+
+    <h2 id="terms">Key terms</h2>
+    <div class="tbl"><table>
+      <thead><tr><th>Term</th><th>What it is</th></tr></thead>
+      <tbody>
+        <tr><td><b>Account</b></td><td>Google sign-in in the Mac or Windows app. Created the first time you sign in.</td></tr>
+        <tr><td><b>Love ID</b></td><td>Your 10-character code, for example <code>GSSV7-A33HN</code>, and the link with it: <code>lovearound.me/i/GSSV7-A33HN</code>. People add you to their list with it.</td></tr>
+        <tr><td><b>Contact</b></td><td>A person in your list. It has an <code>id</code> and a label only you can see. The person isn’t told they were added.</td></tr>
+        <tr><td><b>Device</b></td><td>A toy, lamp or script connected to your account with its own token. It can receive signals, send them, or both.</td></tr>
+        <tr><td><b>Event</b></td><td>What the server delivers to online devices. There is one type for now: <code>signal</code>.</td></tr>
+        <tr><td><b>Stream</b></td><td>The WebSocket a device keeps open to receive events.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="flow">How a signal travels</h2>
+    <div class="flow" role="img" aria-label="The sender makes POST /v1/events, the server finds the recipient and sends the event over WebSocket to all of their online devices">
+      <svg viewBox="0 0 720 200" font-family="Manrope, sans-serif" font-size="15">
+        <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#AD4255"/></marker></defs>
+        <rect x="8" y="70" width="170" height="60" rx="16" fill="#F8E5DE"/>
+        <text x="93" y="97" text-anchor="middle" font-weight="800" fill="#302A27">Sender</text>
+        <text x="93" y="117" text-anchor="middle" fill="#5B504B" font-size="13">app, button</text>
+        <line x1="182" y1="100" x2="268" y2="100" stroke="#AD4255" stroke-width="2" marker-end="url(#ar)"/>
+        <text x="225" y="88" text-anchor="middle" fill="#302A27" font-size="12" font-family="ui-monospace, Menlo, monospace">POST</text>
+        <rect x="272" y="62" width="176" height="76" rx="16" fill="#302A27"/>
+        <text x="360" y="95" text-anchor="middle" font-weight="800" fill="#fff">Server</text>
+        <text x="360" y="116" text-anchor="middle" fill="#D8CEC8" font-size="13">finds the recipient</text>
+        <line x1="452" y1="88" x2="536" y2="38" stroke="#AD4255" stroke-width="2" marker-end="url(#ar)"/>
+        <line x1="452" y1="100" x2="536" y2="100" stroke="#AD4255" stroke-width="2" marker-end="url(#ar)"/>
+        <line x1="452" y1="112" x2="536" y2="162" stroke="#AD4255" stroke-width="2" marker-end="url(#ar)"/>
+        <text x="482" y="76" text-anchor="middle" fill="#302A27" font-size="12" font-family="ui-monospace, Menlo, monospace">WS</text>
+        <rect x="540" y="14" width="172" height="46" rx="14" fill="#E6EEE7"/>
+        <text x="626" y="42" text-anchor="middle" fill="#302A27" font-weight="700">recipient’s Mac</text>
+        <rect x="540" y="77" width="172" height="46" rx="14" fill="#E6EEE7"/>
+        <text x="626" y="105" text-anchor="middle" fill="#302A27" font-weight="700">their toy</text>
+        <rect x="540" y="140" width="172" height="46" rx="14" fill="#E6EEE7"/>
+        <text x="626" y="168" text-anchor="middle" fill="#302A27" font-weight="700">their lamp</text>
+      </svg>
+    </div>
+    <ol>
+      <li>The sender makes a single HTTP request, <code>POST /v1/events</code>, with the <code>id</code> of a contact from their list.</li>
+      <li>The server finds who is behind that contact and answers <code>202</code>: the signal is accepted.</li>
+      <li>Every device of the recipient that has a <code>/v1/stream</code> open right now gets the same event and lights up.</li>
+    </ol>
+    <p>Signals are sent only over REST and received only over WebSocket. The stream is one-way: the server ignores anything a client writes to it. That way sending has one path and one place for every check.</p>
+
+    <h2 id="principles">What the server doesn’t do</h2>
+    <ul>
+      <li><b>It doesn’t say who a signal is from.</b> No event has a <code>from</code> field, and none ever will. Not even the server log records the sender.</li>
+      <li><b>It doesn’t store signals.</b> There is no history and no queue for people who are offline. That’s why <code>202</code> means “accepted”, not “delivered”.</li>
+      <li><b>It doesn’t reveal who is who.</b> Clients only see the <code>id</code>s of contacts in their own list. People’s internal identifiers never leave the server.</li>
+      <li><b>It doesn’t confirm that a Love ID exists.</b> A wrong code is added just like a right one; signals to it simply go nowhere. Guessing codes gets you nothing.</li>
+      <li><b>It doesn’t tell anyone they were added or removed.</b></li>
+    </ul>
+
+    <h2 id="access">Access and tokens</h2>
+    <p>The server’s address:</p>
+    <pre><code>https://api.lovearound.me</code></pre>
+    <p>Every request, including opening the WebSocket, carries a token in the <code>Authorization: Bearer …</code> header. There are two kinds of token:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Who</th><th>Token</th><th>What it can do</th></tr></thead>
+      <tbody>
+        <tr><td><b>App</b></td><td>A Firebase ID token after Google sign-in</td><td>Everything: account, contact list, devices, signals</td></tr>
+        <tr><td><b>Device</b></td><td><code>dev_</code> followed by 32 letters and digits. Created in the app: <b>Settings → Devices</b></td><td>Read the contact list, send signals (if allowed to <code>send</code>), receive them (if allowed to <code>receive</code>). Anything else is <code>403</code></td></tr>
+      </tbody>
+    </table></div>
+    <p>Your own device or script only needs a device token. It is shown once. If it leaks, disconnect the device in the same place: the token and every connection opened with it stop working at once.</p>
+
+    <h2 id="compat">Compatibility</h2>
+    <ul>
+      <li>Every path starts with <code>/v1</code>. Breaking changes will only come under a new version.</li>
+      <li>Every event has a <code>type</code> and a version <code>v</code>. <b>Skip any <code>type</code> or <code>v</code> you don’t know</b>, and your device will survive new kinds of events.</li>
+      <li>Skip unknown fields in responses too: there may be more of them over time.</li>
+    </ul>
+
+    <h2 id="next">Where next</h2>
+    <div class="cards">
+      <a href="/docs/rest"><b>REST API</b><span>Every request: account, contacts, devices, sending a signal. Status codes and limits.</span><em>Open →</em></a>
+      <a href="/docs/ws"><b>WebSocket</b><span>The event stream: connecting, messages, reconnecting, examples in Node and Python.</span><em>Open →</em></a>
+      <a href="/docs/esp32"><b>ESP32 toy</b><span>Glows when someone thinks of you and sends a heart at the press of a button. Wiring and sketch.</span><em>Build it →</em></a>
+    </div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
+    <span>© 2026 lovearound</span>
+  </div>
+</footer>
+</body>
+</html>

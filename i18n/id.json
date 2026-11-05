@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "title": "lovearound — bagikan cinta",
+    "description": "Satu tanda perhatian kecil bisa menembus jarak apa pun. Kirimkan untuk orang tersayang, atau untuk seseorang yang belum pernah kamu temui.",
+    "og_title": "lovearound — bagikan cinta. Rasakan terhubung dengan dunia."
+  },
+  "lang": {
+    "label": "Bahasa"
+  },
+  "nav": {
+    "label": "Bagian",
+    "idea": "Gagasan",
+    "how": "Cara kerja",
+    "faq": "FAQ",
+    "download": "Unduh"
+  },
+  "hero": {
+    "kicker": "Satu tanda perhatian kecil. Satu ikatan dengan dunia.",
+    "title": "Bagikan cinta.<br>Rasakan terhubung dengan dunia.",
+    "lead": "Satu tanda perhatian kecil bisa menembus jarak apa pun. Kirimkan untuk orang tersayang, atau untuk seseorang yang belum pernah kamu temui.",
+    "text": "lovearound adalah cara untuk mengirim dan menerima sinyal cinta. Setiap orang punya Love ID sendiri. Sinyal tiba di komputer atau perangkat yang terhubung dan dengan lembut mengingatkan: ada yang memikirkanmu. Tanpa kata-kata, dan tanpa perlu membalas.",
+    "cta": "Unduh aplikasinya",
+    "how": "Cara kerja"
+  },
+  "close": {
+    "kicker": "01 / Cinta untuk orang terdekat",
+    "p1": "“Aku memikirkanmu”",
+    "p2": "“Aku butuh kamu”",
+    "p3": "“Aku di sini”",
+    "p4": "“Kamu tidak sendiri”",
+    "p5": "“Aku sayang kamu”",
+    "text": "Untuk sahabat, untuk ibu, untuk seseorang yang kamu rindukan. Biarkan mereka merasakan perhatianmu dengan satu ketukan. Tanpa kata-kata, dan tanpa perlu membalas.",
+    "link": "Kirim ke orang terdekat →"
+  },
+  "world": {
+    "kicker": "02 / Cinta untuk dunia",
+    "title": "Seseorang di&nbsp;luar&nbsp;sana",
+    "text": "Kirim sedikit cinta untuk pengguna acak yang terbuka menerima sinyal seperti ini. Mungkin kalian tak akan pernah bertemu — tapi tetap bisa saling memberi momen yang hangat.",
+    "link": "Kirim cinta ke dunia →"
+  },
+  "idea": {
+    "kicker": "Cinta tumbuh saat kita meneruskannya",
+    "title": "Lebih banyak cinta.<br>Lebih banyak ikatan di antara kita.",
+    "lead": "Satu tanda perhatian kecil bisa melintasi ruangan, kota, atau samudra. Ia bisa sampai ke orang terdekat atau seseorang yang belum pernah kamu temui, dan membuatnya merasa tidak sendiri.",
+    "text": "Siapa pun yang pernah menerima cinta bisa meneruskannya. Ke sahabat, ke keluarga, atau ke seseorang di belahan dunia lain. Begitulah satu gestur menjadi awal rantai yang menghubungkan semakin banyak orang.",
+    "why": "Karena itu kami membangun lovearound:",
+    "why_text": "agar cinta bisa berkelana lebih bebas ke seluruh dunia, dan kita lebih sering merasa saling terhubung."
+  },
+  "how": {
+    "title": "Love ID — alamatmu untuk cinta",
+    "text": "Satu ID pribadi menghubungkanmu dengan orang-orang dan perangkat tempat kamu menerima sinyal perhatian.",
+    "s1": "Dapatkan Love ID-mu",
+    "s1_text": "Love ID muncul saat pertama kali kamu masuk. Bagikan tautanmu agar orang lain bisa mengirimimu cinta.",
+    "s2": "Kirim tanda perhatian",
+    "s2_text": "Pilih orang terdekat, atau “Seseorang di luar sana”. Satu ketukan bisa membuat hari seseorang sedikit lebih cerah.",
+    "s3": "Rasakan dengan <span style=\"white-space:nowrap\">caramu sendiri</span>",
+    "s3_text": "Terima sinyal di komputer atau perangkat yang terhubung. Tak perlu membalas.",
+    "s4": "Teruskan",
+    "s4_text": "Kapan pun kamu mau, kirim sinyalmu sendiri ke orang terdekat atau seseorang yang baru."
+  },
+  "heart": {
+    "kicker": "Rasakan cinta dari dekat",
+    "title": "Sebuah hati kecil.<br>Satu ikatan dengan dunia.",
+    "alt": "Heart — hati kecil berwarna putih yang menyala lembut berwarna merah muda",
+    "badge": "SEGERA",
+    "caption": "Heart adalah konsep perangkat. Desain akhirnya bisa berbeda.",
+    "h3": "Hati yang menanggapi perhatian.",
+    "p1": "Saat seseorang mengirimimu cinta, Heart menyala lembut dan berdenyut. Di balik setiap cahaya ada seseorang — sangat dekat atau ribuan kilometer jauhnya. Seseorang mengirim sedikit cinta, dan kini kamu merasakannya di sini. Lalu kamu bisa meneruskannya.",
+    "p2": "Letakkan di samping tempat tidur, di meja kerja, atau di mana pun kamu ingin sedikit kehangatan. Terhubung dengan Love ID-mu, hati ini menerima sinyal dari orang-orang terdekat, dan dari seseorang di luar sana jika kamu memilih menerimanya.",
+    "strong": "Miliki untuk dirimu, atau hadiahkan kepada seseorang yang ingin kamu dekati.",
+    "cta": "Kabari saat Heart rilis"
+  },
+  "devices": {
+    "kicker": "Love ID-mu selalu bersamamu",
+    "title": "Satu Love ID.<br>Banyak cara merasakan perhatian.",
+    "lead": "Heart adalah langkah pertama. Kami ingin kamu juga bisa menghubungkan perangkat lain ke lovearound, dan memilih bagaimana sinyal cinta hadir di duniamu.",
+    "tag": "DIRENCANAKAN",
+    "lamp": "Lampu tidur",
+    "lamp_text": "Menyala lembut saat seseorang mengirimimu cinta.",
+    "band": "Gelang atau jam tangan",
+    "band_text": "Meneruskan getaran singkat yang lembut — tanda perhatian kecil yang menemanimu sepanjang hari.",
+    "toy": "Boneka kesayangan",
+    "toy_text": "Menanggapi dengan cahaya atau denyut lembut, mengubah benda yang akrab menjadi hadiah istimewa.",
+    "screen": "Layar kecil di meja",
+    "screen_text": "Menampilkan hati begitu sebuah sinyal sampai kepadamu.",
+    "diy": "Tak mau menunggu? Rakit perangkatmu sendiri",
+    "diy_text": "Lampu, boneka, atau layar kecil dengan ESP32 yang menanggapi Love ID-mu. Panduan langkah demi langkah — dari kabel pertama hingga sinyal pertama.",
+    "diy_go": "Cara merakitnya →",
+    "note": "Koneksi ini bagian dari rencana kami. Perangkat dan fitur yang kompatibel akan kami tambahkan secara bertahap.",
+    "closing": "Kamu yang memilih cara merasakan cinta."
+  },
+  "moments": {
+    "kicker": "Momen kecil yang menghubungkan kita",
+    "title": "Saat kamu ingin memberi<br>sedikit kehangatan.",
+    "m1": "Untuk ibu, sambil minum kopi pagi",
+    "m1_text": "Ia tinggal di kota lain. Hari ini kamu mengirim tanda kecil: “Aku memikirkanmu.”",
+    "m2": "Untuk sahabat sebelum hari besar",
+    "m2_text": "Sebelum ujian, wawancara kerja, atau pentas. Tanda dukungan yang tenang, tanpa perlu balasan.",
+    "m3": "Untuk dirimu sendiri, saat butuh dukungan",
+    "m3_text": "Bagikan tautanmu kepada teman-teman. Mereka tak perlu mencari kata yang tepat agar kamu merasa diperhatikan.",
+    "m4": "Untuk seseorang di belahan dunia lain",
+    "m4_text": "Kalian belum saling kenal. Tapi satu gestur bisa menghubungkan kalian sejenak dan membuat hari seseorang sedikit lebih cerah."
+  },
+  "app": {
+    "title": "Perhatian dalam jangkauan, selagi kamu di depan komputer",
+    "text": "Aplikasi untuk Mac dan Windows tinggal di bilah menu atau baki sistem. Pilih seseorang, kirim sinyal, lalu lanjutkan harimu. Cinta yang kamu terima muncul sebagai cahaya lembut di layar.",
+    "menu_title": "Siapa yang sedang kamu pikirkan?",
+    "menu_close": "Orang terdekat",
+    "menu_a": "I",
+    "menu_b": "B",
+    "menu_c": "L"
+  },
+  "get": {
+    "mac": "macOS 13 atau lebih baru",
+    "mac_button": "Unduh .dmg",
+    "windows": "Windows 10 dan 11",
+    "windows_button": "Unduh .exe",
+    "smartscreen": "Windows menampilkan “Windows melindungi PC Anda”",
+    "smartscreen_text": "Begitulah Windows menyambut program baru yang belum punya tanda tangan penerbit. Klik “Info selengkapnya”, lalu “Tetap jalankan”. Penginstal memasang aplikasi hanya untukmu, tanpa hak administrator. Hati akan muncul di baki di samping jam; jika tidak terlihat, klik panah “^” dan seret ke bilah tugas."
+  },
+  "faq": {
+    "kicker": "Awal yang sederhana",
+    "title": "Setiap orang punya sedikit cinta untuk dibagikan.",
+    "q1": "Apakah orang itu akan tahu kalau itu aku?",
+    "a1": "Tidak. Sinyal tiba tanpa nama dan tanpa kata — hanya tanda bahwa seseorang memikirkannya. Kami tidak menyimpan catatan siapa mengirim apa kepada siapa.",
+    "q2": "Apakah aku harus membeli hatinya?",
+    "a2": "Kamu bisa mulai dengan aplikasi komputer. Heart akan menjadi cara tambahan yang nyata untuk menerima sinyal.",
+    "q3": "Siapa yang menerima sinyal “Seseorang di luar sana”?",
+    "a3": "Pengguna acak yang sudah setuju menerima sinyal seperti ini. Dengan begitu, perhatian bisa sampai ke orang di luar lingkaran yang kamu kenal.",
+    "q4": "Apakah aku harus membalas sinyal?",
+    "a4": "Tidak. Kamu cukup menikmati momennya. Dan saat kamu mau, teruskan sedikit cinta.",
+    "q5": "Bisakah aku menghubungkan perangkat apa saja?",
+    "a5": "Koneksi baru akan hadir secara bertahap. Lampu, gelang, boneka, dan layar kecil adalah contoh arah yang ingin kami tuju.",
+    "q6": "Berapa biayanya?",
+    "a6": "Aplikasinya gratis. Harga Heart akan kami umumkan menjelang peluncuran."
+  },
+  "end": {
+    "title": "Mari bawa sedikit lebih banyak perhatian ke dunia.",
+    "text": "Mulailah dari satu orang. Atau kirim sedikit cinta untuk seseorang di luar sana."
+  },
+  "invite": {
+    "title": "Kamu dikirimi Love ID — lovearound",
+    "og_title": "Kamu dikirimi Love ID",
+    "description": "Tambahkan di lovearound dan beri tahu orang ini kapan saja bahwa kamu memikirkannya. Ia tidak akan tahu itu kamu.",
+    "h1": "Kamu dikirimi <span style=\"white-space:nowrap\">Love ID</span>",
+    "lead": "Tambahkan di lovearound, dan kapan pun kamu mau, kamu bisa memberi tahu orang ini bahwa kamu memikirkannya. Satu ketukan, tanpa kata.",
+    "copied": "Tersalin ✓",
+    "install": "Pasang lovearound",
+    "install_text": "Aplikasinya tinggal di bilah menu dan tidak mengganggu.",
+    "mac": "Unduh untuk Mac",
+    "windows": "Unduh untuk Windows",
+    "alt_mac": "Pakai Mac? <a href=\"/download/LoveAround.dmg\">Unduh untuk Mac</a>",
+    "alt_windows": "Pakai Windows? <a href=\"/download/LoveAroundSetup.exe\">Unduh untuk Windows</a>",
+    "add": "Tambahkan Love ID",
+    "add_text": "Setelah aplikasi terpasang, buka tautan ini di dalamnya.",
+    "open_installed": "Sudah terpasang — buka di lovearound",
+    "nothing": "Tidak ada yang terbuka?",
+    "nothing_text": "Berarti lovearound belum terpasang. Unduh dulu (langkah 1 di atas), lalu tekan “Buka” lagi.",
+    "away": "Buka tautan ini di komputer",
+    "away_text": "lovearound berjalan di Mac dan Windows. Kirim tautan ini ke dirimu sendiri dan buka di sana — halaman ini akan menunjukkan langkahnya.",
+    "share": "Kirim ke diriku",
+    "copy": "Salin tautan",
+    "away_alt": "Ternyata di komputer? Unduh untuk <a href=\"/download/LoveAround.dmg\">Mac</a> · <a href=\"/download/LoveAroundSetup.exe\">Windows</a>",
+    "anon": "Sinyal tiba tanpa nama: orang itu tidak akan tahu itu darimu.",
+    "no_code": "Tautan ini tidak berisi Love ID. Minta dikirim ulang.",
+    "installed_mac": "Buka LoveAround.dmg dari folder Unduhan, seret lovearound ke Aplikasi, lalu jalankan.",
+    "installed_windows": "Jalankan LoveAroundSetup.exe dari folder Unduhan — lovearound akan muncul di samping jam.",
+    "open": "Buka di lovearound",
+    "add_after": "Setelah aplikasi berjalan, kembali ke sini dan tekan tombolnya. Tautan sudah tersalin, jadi kamu juga bisa menempelkannya di jendela “Tambah” pada aplikasi.",
+    "other": "Untuk saat ini, aplikasi tersedia untuk Mac dan Windows",
+    "other_text": "lovearound belum tersedia untuk sistemmu. Simpan tautannya dan buka di Mac atau PC Windows.",
+    "share_text": "Buka di komputer",
+    "copied_button": "Tersalin ✓"
+  },
+  "signin": {
+    "title": "Masuk — lovearound",
+    "heading": "Masuk dengan Google",
+    "text": "Masuklah, dan aplikasi akan terbuka dengan akunmu.",
+    "button": "Masuk dengan Google",
+    "back": "Kembali ke aplikasi",
+    "from_app": "Mulai masuk dari aplikasi",
+    "from_app_text": "Klik ikon hati di bilah menu (di Windows, di samping jam) lalu pilih “Masuk dengan Google”.",
+    "done": "Selesai!",
+    "done_text": "Mengembalikanmu ke aplikasi. Jika tidak terjadi apa-apa, tekan tombol di bawah.",
+    "closed": "Jendela masuk ditutup. Coba lagi.",
+    "failed": "Gagal masuk. Coba lagi."
+  }
+}

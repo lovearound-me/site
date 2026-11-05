@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ESP32 toy — lovearound</title>
+<meta name="description" content="An ESP32 toy that glows when someone thinks of you and sends a heart at the press of a button: parts, wiring and sketch.">
+<link rel="icon" href="/heart.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a>
+    <nav class="nav" aria-label="Docs">
+      <a class="nl" href="/docs">Overview</a>
+      <a class="nl" href="/docs/rest">REST</a>
+      <a class="nl" href="/docs/ws">WebSocket</a>
+      <a class="nl" href="/docs/esp32" aria-current="page">ESP32</a>
+      <a class="btn sm" href="/#w-get">Download</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+  <div class="doc-hero">
+    <span class="kicker">Your own device</span>
+    <h1>ESP32 toy</h1>
+    <p class="lead">A soft toy with a ring of LEDs in its tummy and a button in its paw. It glows when someone thinks of you, and pressing the paw sends a heart to someone close.</p>
+    <div class="duo">
+      <div class="pink"><b>Receive</b><p>The toy keeps a <a href="/docs/ws">WebSocket</a> open, and the server tells it about every heart.</p></div>
+      <div class="sage"><b>Send</b><p>The button makes one <a href="/docs/rest#post-events">HTTP request</a> and sends a heart to a person in your list.</p></div>
+    </div>
+    <nav class="tabs" aria-label="Docs sections">
+      <a href="/docs">Overview</a>
+      <a href="/docs/rest">REST API</a>
+      <a href="/docs/ws">WebSocket</a>
+      <a href="/docs/esp32" aria-current="page">ESP32 toy</a>
+    </nav>
+  </div>
+
+  <article class="doc">
+    <div class="note"><p>A device only sees your contact list and can only send and receive signals. It can’t change the list, delete the account or find out who sent a signal: nobody knows that.</p></div>
+
+    <h2><span class="n">1</span>Get a device token</h2>
+    <p>Click the heart in the menu bar (on Windows, in the tray next to the clock) → <b>Settings → Devices</b> (<b>Настройки → Устройства</b>). Give the device a name, for example “Kitty on the shelf”, tick what it can do — receive, send or both — and click <b>Connect device</b> (<b>Подключить устройство</b>).</p>
+    <p>The app shows the token once:</p>
+    <pre><code>dev_4kq9XbT2mWc7RfLp8sHn3vYzAe6uJd5G</code></pre>
+    <p>Copy it and keep it to yourself: anyone with it can send hearts in your name. If the token leaks or the device gets lost, disconnect the device in the same place and the token stops working at once.</p>
+    <div class="note"><p>The app speaks only Russian for now, so the menu names are given in both languages.</p></div>
+
+    <h2><span class="n">2</span>Find out whom to send to</h2>
+    <p>The easiest way is the menu: right-click a person → <b>Copy id for a device</b> (<b>Скопировать id для устройства</b>). Or ask the server for the list:</p>
+    <pre><code>GET /v1/contacts</code></pre>
+    <pre><code>{
+  &quot;contacts&quot;: [
+    { &quot;id&quot;: &quot;DXEjjB91rJYQvgaGGdsx&quot;, &quot;label&quot;: &quot;Mom&quot;, &quot;position&quot;: 0, &quot;close&quot;: true, … },
+    { &quot;id&quot;: &quot;Qm3LkT0pZ8aW2vRcN5yE&quot;, &quot;label&quot;: &quot;Anna&quot;, &quot;position&quot;: 1, &quot;close&quot;: false, … }
+  ]
+}</code></pre>
+    <p>More about the fields in <a href="/docs/rest#contacts">REST API</a>. <code>id</code> is the person’s identifier in your list. Map the buttons on your device to the <code>id</code>s you want, for example “left paw — Mom”.</p>
+
+    <h2 id="parts"><span class="n">3</span>What you’ll need</h2>
+    <ul>
+      <li><b>A board.</b> Any ESP32, for example an ESP32‑DevKitC or an ESP32‑C3 Super Mini. The ESP32 only sees 2.4 GHz Wi‑Fi networks, and the network name is case-sensitive: “GGWP” and “ggwp” are different networks.</li>
+      <li><b>LEDs.</b> A WS2812B ring of 12–16: data in on GPIO 5, power on 5V and GND.</li>
+      <li><b>A button</b> between GPIO 4 and GND; the pull-up is enabled on the board.</li>
+      <li><b>A body.</b> A soft toy: the LEDs in its tummy, the button in its paw.</li>
+    </ul>
+    <p>Libraries for the Arduino IDE, from the Library Manager: <b>WebSockets</b> (Markus Sattler), <b>ArduinoJson</b> version 7 (Benoit Blanchon; the sketch won’t build with version 6), <b>Adafruit NeoPixel</b>.</p>
+
+    <h2 id="sketch"><span class="n">4</span>The sketch</h2>
+    <p>Fill in your Wi‑Fi, token and contact <code>id</code> at the top and upload it to the board.</p>
+    <pre><code>#include &lt;WiFi.h&gt;
+#include &lt;HTTPClient.h&gt;
+#include &lt;WiFiClientSecure.h&gt;
+#include &lt;WebSocketsClient.h&gt;
+#include &lt;ArduinoJson.h&gt;
+#include &lt;Adafruit_NeoPixel.h&gt;
+
+// ---- your settings ----------------------------------------------------
+const char* WIFI_SSID  = &quot;my-network&quot;;
+const char* WIFI_PASS  = &quot;password&quot;;
+const char* TOKEN      = &quot;dev_…&quot;;                  // from Settings → Devices
+const char* CONTACT_ID = &quot;…&quot;;                      // whom the button sends to
+const uint32_t COLOR   = 0xE86A9A;                 // glow color
+
+const char* HOST = &quot;api.lovearound.me&quot;;
+const int LED_PIN = 5, LED_COUNT = 12, BUTTON_PIN = 4;
+// -----------------------------------------------------------------------
+
+Adafruit_NeoPixel ring(LED_COUNT, LED_PIN, NEO_GRB + NEO_KHZ800);
+WebSocketsClient ws;
+
+void fill(int level) {
+  const uint8_t r = COLOR &gt;&gt; 16, g = COLOR &gt;&gt; 8, b = COLOR;
+  ring.fill(ring.Color(r * level / 255, g * level / 255, b * level / 255));
+  ring.show();
+}
+
+// Three soft flashes, like on the Mac.
+void glow() {
+  for (int flash = 0; flash &lt; 3; flash++) {
+    for (int i = 0; i &lt;= 255; i += 5) { fill(i); delay(5); }
+    for (int i = 255; i &gt;= 40; i -= 5) { fill(i); delay(5); }
+  }
+  ring.clear(); ring.show();
+}
+
+void onMessage(WStype_t type, uint8_t* payload, size_t length) {
+  if (type != WStype_TEXT) return;
+  JsonDocument msg;
+  if (deserializeJson(msg, payload, length)) return;
+  // Skip unknown types and versions.
+  if (msg[&quot;type&quot;] == &quot;event&quot; &amp;&amp; msg[&quot;event&quot;][&quot;type&quot;] == &quot;signal&quot; &amp;&amp; msg[&quot;event&quot;][&quot;v&quot;] == 1) {
+    glow();
+  }
+}
+
+void sendSignal() {
+  WiFiClientSecure tls;
+  tls.setInsecure();  // fine for a prototype; in a finished device set the root certificate with setCACert
+  HTTPClient http;
+  http.begin(tls, String(&quot;https://&quot;) + HOST + &quot;/v1/events&quot;);
+  http.addHeader(&quot;Authorization&quot;, String(&quot;Bearer &quot;) + TOKEN);
+  http.addHeader(&quot;Content-Type&quot;, &quot;application/json&quot;);
+  int code = http.POST(String(&quot;{\&quot;type\&quot;:\&quot;signal\&quot;,\&quot;to\&quot;:{\&quot;contact\&quot;:\&quot;&quot;) + CONTACT_ID + &quot;\&quot;}}&quot;);
+  http.end();
+  // A short white flash: it's on its way.
+  if (code == 202) { ring.fill(ring.Color(40, 40, 40)); ring.show(); delay(150); ring.clear(); ring.show(); }
+}
+
+void setup() {
+  pinMode(BUTTON_PIN, INPUT_PULLUP);
+  ring.begin(); ring.setBrightness(120); ring.clear(); ring.show();
+
+  WiFi.begin(WIFI_SSID, WIFI_PASS);
+  while (WiFi.status() != WL_CONNECTED) delay(300);
+
+  ws.beginSSL(HOST, 443, &quot;/v1/stream&quot;);
+  ws.setExtraHeaders((String(&quot;Authorization: Bearer &quot;) + TOKEN).c_str());
+  ws.onEvent(onMessage);
+  ws.setReconnectInterval(5000);      // reconnect after a drop
+  ws.enableHeartbeat(30000, 5000, 2); // ping every 30 s
+}
+
+void loop() {
+  ws.loop();
+  static bool wasDown = false;
+  bool down = digitalRead(BUTTON_PIN) == LOW;
+  if (down &amp;&amp; !wasDown) sendSignal();
+  wasDown = down;
+  delay(10);
+}</code></pre>
+    <p>Upload the sketch, and the toy will glow when someone thinks of you. Pressing the paw sends a heart to Mom.</p>
+    <p>The sketch takes up almost all of the default program memory. If you extend it, choose <b>Tools → Partition Scheme → Huge APP</b> in the Arduino IDE.</p>
+
+    <p>What the sketch does: the toy opens the <code>/v1/stream</code> stream, glows on every <code>signal</code> event and skips anything it doesn’t know. The button sends <code>POST /v1/events</code>. The library handles drops on its own: it reconnects after 5 seconds and pings every 30 seconds. All messages and status codes are described in <a href="/docs/ws">WebSocket</a> and <a href="/docs/rest">REST API</a>.</p>
+    <p>For the toy to also get “someone out there” hearts from strangers, connect to <code>/v1/stream?anyone=true</code>. Such a signal arrives at most once an hour.</p>
+
+    <h2 id="more">Where to take it</h2>
+    <ul>
+      <li><b>Several buttons.</b> Each with its own contact and color: the mapping lives on the device; the server knows nothing about colors.</li>
+      <li><b>A vibration motor or a buzzer</b> instead of LEDs.</li>
+      <li><b>Quiet at night.</b> The ESP32 can get the time over NTP and stay dark from 23:00 to 8:00.</li>
+      <li><b>Wi‑Fi and token without reflashing.</b> Through a setup access point, for example with the WiFiManager library.</li>
+      <li><b>A screen and choosing a person.</b> A board with a screen, for example the LilyGO T‑Display‑S3 AMOLED: two buttons scroll the list, after 3 seconds the heart flies to the chosen person, and the last item is “Someone out there”. The list comes from <code>GET /v1/contacts</code> and refreshes on <code>{&quot;type&quot;:&quot;sync&quot;}</code>.</li>
+    </ul>
+
+    <h2 id="security">Security</h2>
+    <ul>
+      <li><b>The token lets anyone send hearts in your name.</b> Don’t publish a sketch with a real token in it.</li>
+      <li><b>A disconnected device loses access at once</b>, open connection included.</li>
+      <li><b>Don’t leave <code>setInsecure()</code> in a finished device.</b> Check the server’s certificate with <code>setCACert</code>.</li>
+    </ul>
+
+    <div class="next"><a href="/docs/ws">← WebSocket</a><a href="/docs">Overview →</a></div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
+    <span>© 2026 lovearound</span>
+  </div>
+</footer>
+</body>
+</html>

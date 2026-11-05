@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WebSocket — lovearound</title>
+<meta name="description" content="The lovearound event stream over WebSocket: connecting, the ready, event and sync messages, reconnecting, examples in Node and Python.">
+<link rel="icon" href="/heart.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a>
+    <nav class="nav" aria-label="Docs">
+      <a class="nl" href="/docs">Overview</a>
+      <a class="nl" href="/docs/rest">REST</a>
+      <a class="nl" href="/docs/ws" aria-current="page">WebSocket</a>
+      <a class="nl" href="/docs/esp32">ESP32</a>
+      <a class="btn sm" href="/#w-get">Download</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+  <div class="doc-hero short">
+    <span class="kicker">Docs</span>
+    <h1>WebSocket</h1>
+    <p class="lead">The event stream: a device keeps the connection open, and the server pushes signals into it the moment they’re sent.</p>
+    <nav class="tabs" aria-label="Docs sections">
+      <a href="/docs">Overview</a>
+      <a href="/docs/rest">REST API</a>
+      <a href="/docs/ws" aria-current="page">WebSocket</a>
+      <a href="/docs/esp32">ESP32 toy</a>
+    </nav>
+  </div>
+
+  <article class="doc">
+
+    <h2 id="connect">Connecting</h2>
+    <div class="ep" style="margin-top:0"><span class="m ws">WS</span><code>/v1/stream</code><span class="who dev">device, receive permission</span></div>
+    <pre><code>wss://api.lovearound.me/v1/stream
+Authorization: Bearer dev_…</code></pre>
+    <p>The token goes in a header, as with REST. The browser’s built-in <code>WebSocket</code> can’t set headers, so connect from your own program: on a board, in Node, Python, on a phone.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Parameter</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><code>anyone=true</code></td><td>Receive “someone out there” signals from strangers. Off by default for devices, on for the apps. Nothing is stored: each connection decides for itself</td></tr>
+        <tr><td><code>anyone=false</code></td><td>Don’t receive them</td></tr>
+      </tbody>
+    </table></div>
+    <p>Responses to connecting:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Code</th><th>What to do</th></tr></thead>
+      <tbody>
+        <tr><td><code>101</code></td><td>The connection is open; <code>ready</code> comes next</td></tr>
+        <tr><td><code>401</code></td><td>The token is wrong, or the device was disconnected. Reconnecting won’t help</td></tr>
+        <tr><td><code>403</code></td><td>The device doesn’t have the <code>receive</code> permission</td></tr>
+        <tr><td><code>503</code></td><td>The server is updating. Connect again in a couple of seconds</td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="messages">Messages from the server</h2>
+    <p>Each message is a text frame with one JSON object. The <code>type</code> field says what kind of message it is.</p>
+
+    <h3 id="ready"><code>ready</code></h3>
+    <pre><code>{ &quot;type&quot;: &quot;ready&quot; }</code></pre>
+    <p>The first message after connecting: from now on, signals are delivered. Things may have changed while you were disconnected, so on every <code>ready</code> reload whatever you keep locally, such as the contact list.</p>
+
+    <h3 id="event"><code>event</code></h3>
+    <pre><code>{
+  &quot;type&quot;: &quot;event&quot;,
+  &quot;event&quot;: {
+    &quot;id&quot;: &quot;ev_q8ZkT1mW4aLp0sXv7cRb&quot;,
+    &quot;type&quot;: &quot;signal&quot;,
+    &quot;v&quot;: 1,
+    &quot;at&quot;: &quot;2026-10-10T14:00:00.000Z&quot;
+  }
+}</code></pre>
+    <div class="tbl"><table>
+      <thead><tr><th>Field</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><code>event.id</code></td><td>The event’s identifier. One event reaches all of the recipient’s devices with the same <code>id</code></td></tr>
+        <tr><td><code>event.type</code></td><td>Only <code>signal</code> for now</td></tr>
+        <tr><td><code>event.v</code></td><td>The format version of this type. For <code>signal</code> it’s <code>1</code></td></tr>
+        <tr><td><code>event.at</code></td><td>When the server accepted the event</td></tr>
+      </tbody>
+    </table></div>
+    <p>Someone sent you a heart — time to glow. The event has no sender. A signal from a close one and a signal to “anyone” look exactly the same.</p>
+
+    <h3 id="sync"><code>sync</code></h3>
+    <pre><code>{ &quot;type&quot;: &quot;sync&quot;, &quot;what&quot;: &quot;contacts&quot; }</code></pre>
+    <p>The contact list changed: someone was added, renamed, moved or removed. If your device shows the list, reload it with <a href="/docs/rest#get-contacts"><code>GET /v1/contacts</code></a>. If it doesn’t, you can skip this message.</p>
+
+    <div class="note"><p><b>Skip what you don’t know.</b> If you don’t recognise the <code>type</code>, <code>event.type</code>, <code>event.v</code> or <code>what</code>, do nothing. The server will add new messages, and older devices should quietly ignore them.</p></div>
+
+    <h2 id="client">From client to server</h2>
+    <p>Nothing. The stream is one-way; the server ignores anything you write to it. Send signals with <a href="/docs/rest#post-events"><code>POST /v1/events</code></a>: sending has one path, and every check and limit lives in one place.</p>
+
+    <h2 id="alive">Keeping the connection alive</h2>
+    <ul>
+      <li><b>Ping.</b> The server pings every 25 seconds; well-behaved clients answer with pong on their own. Send your own ping too, every 30 seconds: if no pong comes back within a few seconds, the connection is dead, even if the socket doesn’t know it yet.</li>
+      <li><b>Reconnecting.</b> Connections drop: Wi‑Fi goes away, the server updates. On an update the server closes old connections itself so everyone moves to the new version. Reconnect with a pause: start at one second and double it up to a minute; after <code>ready</code>, reset it to one second.</li>
+      <li><b>When not to reconnect.</b> If connecting returns <code>401</code>, the device was disconnected or the token is wrong. Tell the owner instead of hammering the server.</li>
+      <li><b>The server closes the stream itself</b> when the device is disconnected in the app or the account is deleted.</li>
+    </ul>
+
+    <h2 id="many">Several connections</h2>
+    <p>One account can have any number of open streams: Mac, Windows, a toy, a lamp. Every event reaches each of them. One device can also hold several connections, but one is usually enough.</p>
+    <p>Only streams with <code>anyone=true</code> get “anyone” signals. One person gets such a signal at most once an hour.</p>
+
+    <h2 id="examples">Examples</h2>
+    <h3>From a terminal</h3>
+    <p>With <a href="https://github.com/vi/websocat">websocat</a>:</p>
+    <pre><code>websocat -H &quot;Authorization: Bearer dev_…&quot; \
+  wss://api.lovearound.me/v1/stream</code></pre>
+
+    <h3>Node.js</h3>
+    <p>With the <code>ws</code> package (<code>npm i ws</code>):</p>
+    <pre><code>import WebSocket from &quot;ws&quot;;
+
+const URL = &quot;wss://api.lovearound.me/v1/stream&quot;;
+const TOKEN = process.env.LOVEAROUND_TOKEN; // dev_…
+let delay = 1000;
+
+function connect() {
+  const ws = new WebSocket(URL, { headers: { Authorization: `Bearer ${TOKEN}` } });
+
+  ws.on(&quot;message&quot;, (data) =&gt; {
+    let msg;
+    try { msg = JSON.parse(data); } catch { return; }
+    if (msg.type === &quot;ready&quot;) { delay = 1000; console.log(&quot;online&quot;); }
+    if (msg.type === &quot;event&quot; &amp;&amp; msg.event?.type === &quot;signal&quot; &amp;&amp; msg.event?.v === 1) {
+      console.log(&quot;💗 someone thought of you&quot;);
+    }
+    // skip everything else
+  });
+
+  // ping every 30 s; no pong by the next one means the connection is dead
+  let alive = true;
+  ws.on(&quot;pong&quot;, () =&gt; { alive = true; });
+  const ping = setInterval(() =&gt; {
+    if (!alive) return ws.terminate();
+    alive = false;
+    ws.ping();
+  }, 30_000);
+
+  ws.on(&quot;error&quot;, (err) =&gt; {
+    if (err.message.includes(&quot;Unexpected server response: 401&quot;)) {
+      console.error(&quot;the token doesn't work&quot;);
+      process.exit(1);
+    }
+    // an error is always followed by close
+  });
+
+  ws.on(&quot;close&quot;, () =&gt; {
+    clearInterval(ping);
+    setTimeout(connect, delay);
+    delay = Math.min(delay * 2, 60_000);
+  });
+}
+
+connect();</code></pre>
+
+    <h3>Python</h3>
+    <p>With the <code>websockets</code> package, version 14 or later (<code>pip install websockets</code>):</p>
+    <pre><code>import asyncio, json, os
+import websockets
+from websockets.exceptions import InvalidStatus
+
+URL = &quot;wss://api.lovearound.me/v1/stream&quot;
+TOKEN = os.environ[&quot;LOVEAROUND_TOKEN&quot;]  # dev_…
+
+async def main():
+    delay = 1
+    while True:
+        try:
+            async with websockets.connect(
+                URL,
+                additional_headers={&quot;Authorization&quot;: f&quot;Bearer {TOKEN}&quot;},
+                ping_interval=30,
+            ) as ws:
+                async for raw in ws:
+                    msg = json.loads(raw)
+                    if msg.get(&quot;type&quot;) == &quot;ready&quot;:
+                        delay = 1
+                        print(&quot;online&quot;)
+                    ev = msg.get(&quot;event&quot;) or {}
+                    if msg.get(&quot;type&quot;) == &quot;event&quot; and ev.get(&quot;type&quot;) == &quot;signal&quot; and ev.get(&quot;v&quot;) == 1:
+                        print(&quot;💗 someone thought of you&quot;)
+        except InvalidStatus as e:
+            if e.response.status_code == 401:
+                raise SystemExit(&quot;the token doesn't work&quot;)
+        except (OSError, websockets.WebSocketException):
+            pass  # dropped, 503, no network: just reconnect
+        await asyncio.sleep(delay)
+        delay = min(delay * 2, 60)
+
+asyncio.run(main())</code></pre>
+    <p>An example for a board is in <a href="/docs/esp32">ESP32 toy</a>.</p>
+
+    <div class="next"><a href="/docs/rest">← REST API</a><a href="/docs/esp32">ESP32 toy →</a></div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
+    <span>© 2026 lovearound</span>
+  </div>
+</footer>
+</body>
+</html>

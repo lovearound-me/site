@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "title": "lovearound — teile Liebe",
+    "description": "Eine kleine Geste der Fürsorge überwindet jede Entfernung. Schick sie jemandem, der dir am Herzen liegt, oder jemandem, den du noch nicht kennst.",
+    "og_title": "lovearound — teile Liebe. Fühl dich mit der Welt verbunden."
+  },
+  "lang": {
+    "label": "Sprache"
+  },
+  "nav": {
+    "label": "Bereiche",
+    "idea": "Die Idee",
+    "how": "So funktioniert’s",
+    "faq": "FAQ",
+    "download": "Download"
+  },
+  "hero": {
+    "kicker": "Eine kleine Geste der Fürsorge. Eine Verbindung zur Welt.",
+    "title": "Teile Liebe.<br>Fühl dich mit der Welt verbunden.",
+    "lead": "Eine kleine Geste der Fürsorge überwindet jede Entfernung. Schick sie jemandem, der dir am Herzen liegt, oder jemandem, den du noch nicht kennst.",
+    "text": "lovearound ist eine Möglichkeit, Signale der Liebe zu senden und zu empfangen. Jeder hat eine eigene Love ID. Ein Signal kommt auf einem verbundenen Computer oder Gerät an und erinnert dich sanft daran: Jemand hat an dich gedacht. Ohne Worte, und du musst nicht antworten.",
+    "cta": "App herunterladen",
+    "how": "So funktioniert’s"
+  },
+  "close": {
+    "kicker": "01 / Liebe für deine Lieben",
+    "p1": "„Ich denke an dich“",
+    "p2": "„Ich brauche dich“",
+    "p3": "„Ich bin da“",
+    "p4": "„Du bist nicht allein“",
+    "p5": "„Ich hab dich lieb“",
+    "text": "Einer Freundin, deiner Mama, jemandem, der dir fehlt. Lass sie deine Fürsorge mit einem einzigen Klick spüren. Ohne Worte, und ohne antworten zu müssen.",
+    "link": "An einen lieben Menschen senden →"
+  },
+  "world": {
+    "kicker": "02 / Liebe für die Welt",
+    "title": "Irgendwer da&nbsp;draußen",
+    "text": "Schick ein bisschen Liebe an ein zufälliges Mitglied, das solche Signale empfangen möchte. Vielleicht begegnet ihr euch nie — und schenkt euch trotzdem einen Moment der Wärme.",
+    "link": "Liebe in die Welt senden →"
+  },
+  "idea": {
+    "kicker": "Liebe wächst, wenn wir sie weitergeben",
+    "title": "Mehr Liebe.<br>Mehr Verbindung zwischen uns.",
+    "lead": "Eine kleine Geste der Fürsorge kann ein Zimmer, eine Stadt oder einen Ozean überqueren. Sie kann einen nahen Menschen erreichen oder jemanden, den du nie getroffen hast, und ihn spüren lassen, dass er nicht allein ist.",
+    "text": "Wer Liebe bekommen hat, kann sie weitergeben. An Freunde, an die Familie oder an jemanden am anderen Ende der Welt. So wird eine Geste zum Anfang einer Kette, die immer mehr Menschen verbindet.",
+    "why": "Darum bauen wir lovearound:",
+    "why_text": "damit Liebe freier um die Welt reisen kann und wir uns öfter miteinander verbunden fühlen."
+  },
+  "how": {
+    "title": "Love ID — deine Adresse für Liebe",
+    "text": "Eine persönliche ID verbindet dich mit den Menschen und Geräten, über die du Signale der Fürsorge empfängst.",
+    "s1": "Hol dir deine Love ID",
+    "s1_text": "Sie entsteht bei der ersten Anmeldung. Teile deinen Link, damit andere dir Liebe schicken können.",
+    "s2": "Sende ein Zeichen der Fürsorge",
+    "s2_text": "Wähle einen lieben Menschen oder „Irgendwer da draußen“. Ein Klick kann jemandes Tag ein bisschen heller machen.",
+    "s3": "Spür es <span style=\"white-space:nowrap\">auf deine Art</span>",
+    "s3_text": "Empfange Signale auf deinem Computer oder einem verbundenen Gerät. Keine Antwort nötig.",
+    "s4": "Gib es weiter",
+    "s4_text": "Wann immer dir danach ist, schick dein eigenes Signal an einen lieben Menschen oder an jemand Neues."
+  },
+  "heart": {
+    "kicker": "Spür die Liebe ganz nah",
+    "title": "Ein kleines Herz.<br>Eine Verbindung zur Welt.",
+    "alt": "Heart — ein kleines weißes Herz, das sanft rosa leuchtet",
+    "badge": "BALD",
+    "caption": "Heart ist ein Gerätekonzept. Das endgültige Design kann abweichen.",
+    "h3": "Ein Herz, das auf Fürsorge reagiert.",
+    "p1": "Wenn dir jemand Liebe schickt, leuchtet Heart sanft und pulsiert. Hinter jedem Leuchten steht ein Mensch — ganz in der Nähe oder Tausende Kilometer entfernt. Jemand hat dir ein bisschen Liebe geschickt, und jetzt spürst du sie genau hier. Und kannst sie weitergeben.",
+    "p2": "Stell es ans Bett, auf den Schreibtisch oder überallhin, wo du dir ein bisschen Wärme wünschst. Verbunden mit deiner Love ID empfängt das Herz Signale von deinen Lieben und, wenn du willst, auch von irgendwem da draußen.",
+    "strong": "Hol es dir selbst oder schenk es jemandem, dem du dich näher fühlen möchtest.",
+    "cta": "Benachrichtige mich zum Start von Heart"
+  },
+  "devices": {
+    "kicker": "Deine Love ID bleibt bei dir",
+    "title": "Eine Love ID.<br>Viele Wege, Fürsorge zu spüren.",
+    "lead": "Heart ist der erste Schritt. Wir möchten, dass du auch andere Geräte mit lovearound verbinden und selbst wählen kannst, wie ein Signal der Liebe in deiner Welt erscheint.",
+    "tag": "GEPLANT",
+    "lamp": "Eine Nachttischlampe",
+    "lamp_text": "Leuchtet sanft auf, wenn dir jemand Liebe schickt.",
+    "band": "Ein Armband oder eine Uhr",
+    "band_text": "Gibt eine kurze, sanfte Vibration weiter — ein kleines Zeichen der Fürsorge, das dich durch den Tag begleitet.",
+    "toy": "Ein Lieblingskuscheltier",
+    "toy_text": "Antwortet mit Licht oder einem sanften Puls und macht etwas Vertrautes zu einem besonderen Geschenk.",
+    "screen": "Ein kleiner Bildschirm auf dem Schreibtisch",
+    "screen_text": "Zeigt ein Herz, sobald dich ein Signal erreicht.",
+    "diy": "Keine Lust zu warten? Bau dein eigenes Gerät",
+    "diy_text": "Eine Lampe, ein Kuscheltier oder ein kleiner Bildschirm mit einem ESP32, der auf deine Love ID reagiert. Eine Schritt-für-Schritt-Anleitung — von den ersten Kabeln bis zum ersten Signal.",
+    "diy_go": "So baust du es →",
+    "note": "Diese Verbindungen gehören zu unseren Plänen. Kompatible Geräte und Funktionen kommen Schritt für Schritt dazu.",
+    "closing": "Du entscheidest, wie du Liebe spürst."
+  },
+  "moments": {
+    "kicker": "Kleine Momente, die uns verbinden",
+    "title": "Wenn du ein bisschen<br>Wärme schenken willst.",
+    "m1": "An Mama, beim Morgenkaffee",
+    "m1_text": "Sie wohnt in einer anderen Stadt. Heute schickst du ihr ein kleines Zeichen: „Ich denke an dich.“",
+    "m2": "An eine Freundin vor einem großen Tag",
+    "m2_text": "Vor einer Prüfung, einem Vorstellungsgespräch oder einem Auftritt. Ein stilles Zeichen der Unterstützung, das keine Antwort braucht.",
+    "m3": "An dich selbst, wenn du Halt brauchst",
+    "m3_text": "Teile deinen Link mit Freunden. Sie müssen nicht die richtigen Worte finden, damit du dich umsorgt fühlst.",
+    "m4": "An jemanden am anderen Ende der Welt",
+    "m4_text": "Ihr kennt euch noch nicht. Aber eine Geste kann euch für einen Moment verbinden und jemandes Tag ein bisschen heller machen."
+  },
+  "app": {
+    "title": "Fürsorge griffbereit, während du am Computer sitzt",
+    "text": "Die App für Mac und Windows wohnt in der Menüleiste oder im Infobereich. Wähle einen Menschen, sende ein Signal und mach mit deinem Tag weiter. Liebe, die du bekommst, erscheint als sanftes Leuchten auf deinem Bildschirm.",
+    "menu_title": "An wen denkst du gerade?",
+    "menu_close": "Deine Lieben",
+    "menu_a": "M",
+    "menu_b": "B",
+    "menu_c": "L"
+  },
+  "get": {
+    "mac": "macOS 13 oder neuer",
+    "mac_button": ".dmg herunterladen",
+    "windows": "Windows 10 und 11",
+    "windows_button": ".exe herunterladen",
+    "smartscreen": "Windows meldet „Der Computer wurde durch Windows geschützt“",
+    "smartscreen_text": "So begrüßt Windows neue Programme, die noch keine Herausgebersignatur haben. Klicke auf „Weitere Informationen“ und dann auf „Trotzdem ausführen“. Das Installationsprogramm richtet die App nur für dich ein, ohne Administratorrechte. Das Herz erscheint im Infobereich neben der Uhr; wenn du es nicht siehst, klicke auf den Pfeil „^“ und zieh es in die Taskleiste."
+  },
+  "faq": {
+    "kicker": "Ein einfacher Anfang",
+    "title": "Jeder hat ein bisschen Liebe zu verschenken.",
+    "q1": "Erfährt die Person, dass ich es bin?",
+    "a1": "Nein. Das Signal kommt ohne Namen und ohne Worte an — nur als Zeichen, dass jemand an sie gedacht hat. Wir speichern nicht, wer wem was geschickt hat.",
+    "q2": "Muss ich das Herz kaufen?",
+    "a2": "Du kannst mit der Desktop-App anfangen. Heart wird ein zusätzlicher, greifbarer Weg sein, Signale zu empfangen.",
+    "q3": "Wer bekommt ein Signal an „Irgendwer da draußen“?",
+    "a3": "Ein zufälliges Mitglied, das zugestimmt hat, solche Signale zu empfangen. So kann Fürsorge auch Menschen außerhalb deines Bekanntenkreises erreichen.",
+    "q4": "Muss ich auf ein Signal antworten?",
+    "a4": "Nein. Du kannst den Moment einfach genießen. Und wenn dir danach ist, schick ein bisschen Liebe weiter.",
+    "q5": "Kann ich jedes Gerät verbinden?",
+    "a5": "Neue Verbindungen kommen Schritt für Schritt. Lampen, Armbänder, Kuscheltiere und kleine Bildschirme sind Beispiele dafür, wohin wir wollen.",
+    "q6": "Was kostet das?",
+    "a6": "Die App ist kostenlos. Den Preis von Heart verraten wir kurz vor dem Start."
+  },
+  "end": {
+    "title": "Lass uns ein bisschen mehr Fürsorge in die Welt bringen.",
+    "text": "Fang mit einem Menschen an. Oder schick ein bisschen Liebe an irgendwen da draußen."
+  },
+  "invite": {
+    "title": "Du hast eine Love ID bekommen — lovearound",
+    "og_title": "Du hast eine Love ID bekommen",
+    "description": "Füge sie in lovearound hinzu und lass diesen Menschen jederzeit wissen, dass du an ihn denkst. Er erfährt nicht, dass du es bist.",
+    "h1": "Du hast eine <span style=\"white-space:nowrap\">Love ID</span> bekommen",
+    "lead": "Füge sie in lovearound hinzu, und du kannst diesem Menschen jederzeit zeigen, dass du an ihn denkst. Ein Klick, ohne Worte.",
+    "copied": "Kopiert ✓",
+    "install": "Installiere lovearound",
+    "install_text": "Die App wohnt in der Menüleiste und stört nicht.",
+    "mac": "Für Mac herunterladen",
+    "windows": "Für Windows herunterladen",
+    "alt_mac": "Am Mac? <a href=\"/download/LoveAround.dmg\">Für Mac herunterladen</a>",
+    "alt_windows": "Unter Windows? <a href=\"/download/LoveAroundSetup.exe\">Für Windows herunterladen</a>",
+    "add": "Füge die Love ID hinzu",
+    "add_text": "Wenn die App installiert ist, öffne diesen Link darin.",
+    "open_installed": "Schon installiert — in lovearound öffnen",
+    "nothing": "Nichts passiert?",
+    "nothing_text": "Dann ist lovearound noch nicht installiert. Lade die App herunter (Schritt 1 oben) und klicke dann noch einmal auf „Öffnen“.",
+    "away": "Öffne diesen Link am Computer",
+    "away_text": "lovearound läuft auf Mac und Windows. Schick dir den Link selbst und öffne ihn dort — diese Seite zeigt dir, was zu tun ist.",
+    "share": "An mich senden",
+    "copy": "Link kopieren",
+    "away_alt": "Doch am Computer? Herunterladen für <a href=\"/download/LoveAround.dmg\">Mac</a> · <a href=\"/download/LoveAroundSetup.exe\">Windows</a>",
+    "anon": "Das Signal kommt ohne Namen an: Die Person erfährt nicht, dass es von dir ist.",
+    "no_code": "In diesem Link ist keine Love ID. Bitte darum, ihn noch einmal zu schicken.",
+    "installed_mac": "Öffne LoveAround.dmg aus deinen Downloads, zieh lovearound in „Programme“ und starte es.",
+    "installed_windows": "Starte LoveAroundSetup.exe aus deinen Downloads — lovearound erscheint neben der Uhr.",
+    "open": "In lovearound öffnen",
+    "add_after": "Wenn die App läuft, komm hierher zurück und klicke auf den Button. Der Link ist schon kopiert, du kannst ihn also auch einfach im Fenster „Hinzufügen“ der App einfügen.",
+    "other": "Bisher gibt es Apps für Mac und Windows",
+    "other_text": "Für dein System gibt es lovearound noch nicht. Speichere den Link und öffne ihn auf einem Mac oder Windows-PC.",
+    "share_text": "Am Computer öffnen",
+    "copied_button": "Kopiert ✓"
+  },
+  "signin": {
+    "title": "Anmelden — lovearound",
+    "heading": "Mit Google anmelden",
+    "text": "Melde dich an, und die App öffnet sich mit deinem Konto.",
+    "button": "Mit Google anmelden",
+    "back": "Zurück zur App",
+    "from_app": "Starte die Anmeldung in der App",
+    "from_app_text": "Klicke auf das Herz in der Menüleiste (unter Windows neben der Uhr) und wähle „Mit Google anmelden“.",
+    "done": "Fertig!",
+    "done_text": "Du wirst zur App zurückgebracht. Wenn nichts passiert, klicke unten auf den Button.",
+    "closed": "Das Anmeldefenster wurde geschlossen. Bitte versuch es noch einmal.",
+    "failed": "Anmeldung fehlgeschlagen. Bitte versuch es noch einmal."
+  }
+}

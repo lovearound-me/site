@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "title": "lovearound — comparte amor",
+    "description": "Un pequeño gesto de cariño puede superar cualquier distancia. Envíalo a alguien que te importa o a una persona a la que aún no conoces.",
+    "og_title": "lovearound — comparte amor. Siente la conexión con el mundo."
+  },
+  "lang": {
+    "label": "Idioma"
+  },
+  "nav": {
+    "label": "Secciones",
+    "idea": "La idea",
+    "how": "Cómo funciona",
+    "faq": "Preguntas",
+    "download": "Descargar"
+  },
+  "hero": {
+    "kicker": "Un pequeño gesto de cariño. Una conexión con el mundo.",
+    "title": "Comparte amor.<br>Siente la conexión con el mundo.",
+    "lead": "Un pequeño gesto de cariño puede superar cualquier distancia. Envíalo a alguien que te importa o a una persona a la que aún no conoces.",
+    "text": "lovearound es una forma de enviar y recibir señales de amor. Cada persona tiene su propio Love ID. La señal llega a un ordenador o dispositivo conectado y te recuerda con suavidad: alguien ha pensado en ti. Sin palabras y sin necesidad de responder.",
+    "cta": "Descargar la app",
+    "how": "Cómo funciona"
+  },
+  "close": {
+    "kicker": "01 / Amor para los tuyos",
+    "p1": "«Pienso en ti»",
+    "p2": "«Te necesito»",
+    "p3": "«Estoy aquí»",
+    "p4": "«Estoy contigo»",
+    "p5": "«Te quiero»",
+    "text": "A un amigo, a tu madre, a alguien a quien echas de menos. Hazle sentir tu cariño con un solo toque. Sin palabras y sin necesidad de responder.",
+    "link": "Enviar a alguien cercano →"
+  },
+  "world": {
+    "kicker": "02 / Amor para el mundo",
+    "title": "Alguien en el&nbsp;mundo",
+    "text": "Envía un poco de amor a una persona al azar que esté abierta a estas señales. Puede que nunca os conozcáis, y aun así os regaláis un momento de calidez.",
+    "link": "Enviar amor al mundo →"
+  },
+  "idea": {
+    "kicker": "El amor crece cuando lo compartimos",
+    "title": "Más amor.<br>Más conexión entre nosotros.",
+    "lead": "Un pequeño gesto de cariño puede cruzar una habitación, una ciudad o un océano. Llegar a alguien cercano o a alguien a quien nunca has visto, y hacerle sentir que no está solo.",
+    "text": "Cuando recibes amor, puedes pasarlo a otros. A un amigo, a tu familia o a alguien al otro lado del mundo. Así un solo gesto se convierte en el comienzo de una cadena que une a cada vez más personas.",
+    "why": "Por eso creamos lovearound:",
+    "why_text": "para que el amor viaje con más libertad por el mundo y sintamos más a menudo que estamos conectados."
+  },
+  "how": {
+    "title": "Love ID: tu dirección para el amor",
+    "text": "Un ID personal te conecta con las personas y los dispositivos con los que recibes señales de cariño.",
+    "s1": "Consigue tu Love ID",
+    "s1_text": "Aparece la primera vez que inicias sesión. Comparte tu enlace para que otros puedan enviarte amor.",
+    "s2": "Envía una señal de cariño",
+    "s2_text": "Elige a alguien cercano o «Alguien en el mundo». Un toque puede alegrarle el día a alguien.",
+    "s3": "Siéntelo <span style=\"white-space:nowrap\">a tu manera</span>",
+    "s3_text": "Recibe señales en tu ordenador o en un dispositivo conectado. No hace falta responder.",
+    "s4": "Pásalo a otros",
+    "s4_text": "Cuando te apetezca, envía tu propia señal a alguien cercano o a alguien nuevo."
+  },
+  "heart": {
+    "kicker": "Siente el amor cerca",
+    "title": "Un pequeño corazón.<br>Una conexión con el mundo.",
+    "alt": "Heart: un pequeño corazón blanco que brilla suavemente en rosa",
+    "badge": "PRONTO",
+    "caption": "Heart es un concepto de dispositivo. El diseño final puede variar.",
+    "h3": "Un corazón que responde al cariño.",
+    "p1": "Cuando alguien te envía amor, Heart brilla y late suavemente. Cada destello empieza con una persona, cerca o a miles de kilómetros. Alguien te ha enviado un poco de amor, y ahora puedes sentirlo aquí. Y después, pasarlo a otros.",
+    "p2": "Ponlo junto a la cama, en tu escritorio o donde te apetezca un poco de calidez. Conectado a tu Love ID, el corazón podrá recibir señales de los tuyos y de alguien en el mundo, si decides recibirlas.",
+    "strong": "Elígelo para ti o regálaselo a alguien a quien quieras sentir más cerca.",
+    "cta": "Avísame cuando salga Heart"
+  },
+  "devices": {
+    "kicker": "Tu Love ID va contigo",
+    "title": "Un Love ID.<br>Muchas formas de sentir el cariño.",
+    "lead": "Heart es el primer paso. Queremos que también puedas conectar otros dispositivos a lovearound y elegir cómo se manifiesta una señal de amor en tu mundo.",
+    "tag": "EN PLANES",
+    "lamp": "Una lámpara junto a la cama",
+    "lamp_text": "Se enciende suavemente cuando alguien te envía amor.",
+    "band": "Una pulsera o un reloj",
+    "band_text": "Transmiten una vibración breve y suave: una pequeña señal de cariño que te acompaña durante el día.",
+    "toy": "Un juguete favorito",
+    "toy_text": "Responde con luz o con un suave latido y convierte un objeto conocido en un regalo especial.",
+    "screen": "Una pequeña pantalla en el escritorio",
+    "screen_text": "Muestra un corazón en el momento en que te llega una señal.",
+    "diy": "¿No quieres esperar? Construye tu propio dispositivo",
+    "diy_text": "Una lámpara, un juguete o una pequeña pantalla con ESP32 que responde a tu Love ID. Una guía paso a paso, de los primeros cables a la primera señal.",
+    "diy_go": "Cómo construirlo →",
+    "note": "Estas conexiones forman parte de nuestros planes. Iremos añadiendo dispositivos compatibles y funciones poco a poco.",
+    "closing": "Tú eliges cómo sentir el amor."
+  },
+  "moments": {
+    "kicker": "Pequeños momentos que nos unen",
+    "title": "Cuando quieres regalar<br>un poco de calidez.",
+    "m1": "A mamá, con el café de la mañana",
+    "m1_text": "Vive en otra ciudad. Hoy le envías una pequeña señal: «Pienso en ti».",
+    "m2": "A un amigo antes de un gran día",
+    "m2_text": "Antes de un examen, una entrevista o una actuación. Una señal silenciosa de apoyo que no pide respuesta.",
+    "m3": "A ti, cuando necesitas apoyo",
+    "m3_text": "Comparte tu enlace con tus amigos. No tienen que buscar las palabras para hacerte sentir su cariño.",
+    "m4": "A alguien al otro lado del mundo",
+    "m4_text": "Aún no os conocéis. Pero un gesto puede uniros por un instante y alegrarle el día a alguien."
+  },
+  "app": {
+    "title": "Cariño a mano mientras estás en el ordenador",
+    "text": "La app para Mac y Windows vive en la barra de menús o en la bandeja del sistema. Elige a una persona, envía una señal y sigue con tu día. El amor que recibes se refleja en un suave resplandor en la pantalla.",
+    "menu_title": "¿En quién estás pensando?",
+    "menu_close": "Los tuyos",
+    "menu_a": "M",
+    "menu_b": "B",
+    "menu_c": "L"
+  },
+  "get": {
+    "mac": "macOS 13 o posterior",
+    "mac_button": "Descargar .dmg",
+    "windows": "Windows 10 y 11",
+    "windows_button": "Descargar .exe",
+    "smartscreen": "Windows dice «Windows protegió su PC»",
+    "smartscreen_text": "Así recibe Windows a los programas nuevos que aún no tienen firma de editor. Pulsa «Más información» y luego «Ejecutar de todas formas». El instalador instala la app solo para ti, sin permisos de administrador. El corazón aparecerá en la bandeja junto al reloj; si no lo ves, pulsa la flecha «^» y arrástralo a la barra de tareas."
+  },
+  "faq": {
+    "kicker": "Un comienzo sencillo",
+    "title": "Todos tenemos un poco de amor para compartir.",
+    "q1": "¿La persona sabrá que soy yo?",
+    "a1": "No. La señal llega sin nombre y sin palabras: solo un aviso de que alguien ha pensado en ella. No guardamos quién envió qué a quién.",
+    "q2": "¿Tengo que comprar el corazón?",
+    "a2": "Puedes empezar con la app para ordenador. Heart será una forma física más de recibir señales.",
+    "q3": "¿A quién le llega una señal «Alguien en el mundo»?",
+    "a3": "A una persona al azar que ha aceptado recibir este tipo de señales. Así el cariño puede llegar a alguien fuera de tu círculo.",
+    "q4": "¿Hay que responder a la señal?",
+    "a4": "No. Puedes simplemente vivir ese momento. Y cuando te apetezca, enviar un poco de amor a otros.",
+    "q5": "¿Se puede conectar cualquier dispositivo?",
+    "a5": "Las nuevas conexiones irán llegando poco a poco. Lámparas, pulseras, juguetes y pequeñas pantallas son ejemplos de lo que queremos desarrollar.",
+    "q6": "¿Cuánto cuesta?",
+    "a6": "La app es gratuita. Anunciaremos el precio de Heart más cerca del lanzamiento."
+  },
+  "end": {
+    "title": "Que haya un poco más de cariño en el mundo.",
+    "text": "Empieza por una persona. O envía un poco de amor a alguien en el mundo."
+  },
+  "invite": {
+    "title": "Te han enviado un Love ID — lovearound",
+    "og_title": "Te han enviado un Love ID",
+    "description": "Añádelo a lovearound y hazle saber a esta persona que piensas en ella cuando quieras. No sabrá que eres tú.",
+    "h1": "Te han enviado un <span style=\"white-space:nowrap\">Love ID</span>",
+    "lead": "Añádelo a lovearound y, cuando quieras, podrás hacerle saber a esta persona que piensas en ella. Con un toque, sin palabras.",
+    "copied": "Copiado ✓",
+    "install": "Instala lovearound",
+    "install_text": "La app vive en la barra de menús y no te molesta mientras trabajas.",
+    "mac": "Descargar para Mac",
+    "windows": "Descargar para Windows",
+    "alt_mac": "¿Tienes un Mac? <a href=\"/download/LoveAround.dmg\">Descargar para Mac</a>",
+    "alt_windows": "¿Tienes Windows? <a href=\"/download/LoveAroundSetup.exe\">Descargar para Windows</a>",
+    "add": "Añade el Love ID",
+    "add_text": "Cuando la app esté instalada, abre este enlace en ella.",
+    "open_installed": "Ya la tengo: abrir en lovearound",
+    "nothing": "¿No se ha abierto nada?",
+    "nothing_text": "Entonces lovearound aún no está instalada. Descárgala (paso 1, arriba) y vuelve a pulsar «Abrir».",
+    "away": "Abre este enlace en un ordenador",
+    "away_text": "lovearound funciona en Mac y Windows. Envíate el enlace y ábrelo allí: esta página te dirá qué hacer.",
+    "share": "Enviármelo",
+    "copy": "Copiar enlace",
+    "away_alt": "¿Estás en un ordenador? Descargar para <a href=\"/download/LoveAround.dmg\">Mac</a> · <a href=\"/download/LoveAroundSetup.exe\">Windows</a>",
+    "anon": "La señal llega sin nombre: la persona no sabrá que fuiste tú.",
+    "no_code": "Este enlace no contiene un Love ID. Pide que te lo vuelvan a enviar.",
+    "installed_mac": "Abre LoveAround.dmg desde Descargas, arrastra lovearound a Aplicaciones y ábrela.",
+    "installed_windows": "Ejecuta LoveAroundSetup.exe desde Descargas: lovearound aparecerá junto al reloj.",
+    "open": "Abrir en lovearound",
+    "add_after": "Cuando la app se abra, vuelve aquí y pulsa el botón. El enlace ya está copiado, así que también puedes pegarlo en la ventana «Añadir» de la app.",
+    "other": "De momento hay apps para Mac y Windows",
+    "other_text": "lovearound aún no está disponible para tu sistema. Guarda el enlace y ábrelo en un Mac o en un PC con Windows.",
+    "share_text": "Abrir en el ordenador",
+    "copied_button": "Copiado ✓"
+  },
+  "signin": {
+    "title": "Iniciar sesión — lovearound",
+    "heading": "Inicia sesión con Google",
+    "text": "Inicia sesión y la app se abrirá ya con tu cuenta.",
+    "button": "Iniciar sesión con Google",
+    "back": "Volver a la app",
+    "from_app": "Inicia sesión desde la app",
+    "from_app_text": "Haz clic en el corazón de la barra de menús (en Windows, junto al reloj) y elige «Iniciar sesión con Google».",
+    "done": "¡Listo!",
+    "done_text": "Volviendo a la app. Si no pasa nada, pulsa el botón de abajo.",
+    "closed": "Se ha cerrado la ventana de inicio de sesión. Inténtalo de nuevo.",
+    "failed": "No se ha podido iniciar sesión. Inténtalo de nuevo."
+  }
+}

@@ -1,0 +1,78 @@
+{
+  "hosting": [
+    {
+      "site": "lovearound",
+      "public": "public",
+      "cleanUrls": true,
+      "trailingSlash": false,
+      "i18n": {
+        "root": "/localized"
+      },
+      "rewrites": [
+        {
+          "source": "/i/**",
+          "destination": "/i/index.html"
+        }
+      ],
+      "headers": [
+        {
+          "source": "**/*.@(html|css|xml|json)",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "no-cache"
+            }
+          ]
+        }
+      ],
+      "redirects": [
+        {
+          "source": "/download/Needed.dmg",
+          "destination": "https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg",
+          "type": 302
+        },
+        {
+          "source": "/download/LoveAround.dmg",
+          "destination": "https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg",
+          "type": 302
+        },
+        {
+          "source": "/download/appcast.xml",
+          "destination": "https://github.com/lovearound-me/mac/releases/latest/download/appcast.xml",
+          "type": 302
+        },
+        {
+          "source": "/download/LoveAroundSetup.exe",
+          "destination": "https://github.com/lovearound-me/windows/releases/latest/download/LoveAroundSetup.exe",
+          "type": 302
+        },
+        {
+          "source": "/download/windows/latest.json",
+          "destination": "https://github.com/lovearound-me/windows/releases/latest/download/latest.json",
+          "type": 302
+        },
+        {
+          "source": "/download/LoveAround.deb",
+          "destination": "https://github.com/lovearound-me/linux/releases/latest/download/LoveAround.deb",
+          "type": 302
+        }
+      ]
+    },
+    {
+      "site": "needed-app",
+      "public": "redirect",
+      "redirects": [
+        {
+          "source": "/",
+          "destination": "https://lovearound.me/",
+          "type": 301
+        },
+        {
+          "source": "/:path*",
+          "destination": "https://lovearound.me/:path",
+          "type": 301
+        }
+      ]
+    }
+  ]
+}

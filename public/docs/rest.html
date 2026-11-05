@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REST API — lovearound</title>
+<meta name="description" content="The lovearound REST API: account, contacts, devices and sending signals. Requests, responses, error codes and limits.">
+<link rel="icon" href="/heart.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a>
+    <nav class="nav" aria-label="Docs">
+      <a class="nl" href="/docs">Overview</a>
+      <a class="nl" href="/docs/rest" aria-current="page">REST</a>
+      <a class="nl" href="/docs/ws">WebSocket</a>
+      <a class="nl" href="/docs/esp32">ESP32</a>
+      <a class="btn sm" href="/#w-get">Download</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+  <div class="doc-hero short">
+    <span class="kicker">Docs</span>
+    <h1>REST API</h1>
+    <p class="lead">Anything that changes state or sends a signal is a plain HTTP request with JSON.</p>
+    <nav class="tabs" aria-label="Docs sections">
+      <a href="/docs">Overview</a>
+      <a href="/docs/rest" aria-current="page">REST API</a>
+      <a href="/docs/ws">WebSocket</a>
+      <a href="/docs/esp32">ESP32 toy</a>
+    </nav>
+  </div>
+
+  <article class="doc">
+
+    <h2 id="basics">Basics</h2>
+    <pre><code>https://api.lovearound.me</code></pre>
+    <ul>
+      <li><b>Authorization:</b> <code>Authorization: Bearer &lt;token&gt;</code> on every request. The kinds of token are in the <a href="/docs#access">overview</a>.</li>
+      <li><b>Request body:</b> JSON with the <code>Content-Type: application/json</code> header.</li>
+      <li><b>Time:</b> ISO 8601 strings in UTC, for example <code>2026-10-10T14:00:00.000Z</code>.</li>
+      <li><b><code>X-Client</code></b> (optional): the client’s name and version, for example <code>my-lamp/1.2</code>. It goes into the server log along with the signal and helps track down problems. Without it, the log gets the User-Agent.</li>
+    </ul>
+    <p>Each request is marked with who may call it:</p>
+    <p><span class="who">app</span> — the app token only; a device gets <code>403</code>. <span class="who dev">device</span> — a device token works too.</p>
+
+    <h3>Errors</h3>
+    <p>An error comes with an HTTP status and a body:</p>
+    <pre><code>{ &quot;error&quot;: &quot;already in contacts&quot; }</code></pre>
+    <p>The text in <code>error</code> is for people and logs. Decide by the status code, not the text.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Code</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td><code>400</code></td><td>The request makes sense but a value is wrong: an empty label, a malformed code, nothing to change. Also <code>400</code> when the body isn’t JSON</td></tr>
+        <tr><td><code>401</code></td><td>No token, or it’s wrong or expired, the device was disconnected, the account was deleted</td></tr>
+        <tr><td><code>403</code></td><td>A device token can’t do this: the request is app-only, or the device lacks the permission</td></tr>
+        <tr><td><code>404</code></td><td>No such contact or device in your account</td></tr>
+        <tr><td><code>409</code></td><td>The person is already in the list, or there are already 20 devices</td></tr>
+        <tr><td><code>415</code></td><td>No <code>Content-Type: application/json</code></td></tr>
+        <tr><td><code>422</code></td><td>The JSON doesn’t fit the schema: a required field is missing, an extra field in an event, a wrong type. The response body here is plain text, not JSON</td></tr>
+        <tr><td><code>429</code></td><td>A limit was hit, see below</td></tr>
+        <tr><td><code>5xx</code></td><td>Something failed on the server. Retry later, with a pause</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>Limits</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>What</th><th>How many</th><th>Beyond that</th></tr></thead>
+      <tbody>
+        <tr><td>Signal to one contact</td><td>1 per second</td><td><code>202</code>, but the repeat isn’t delivered</td></tr>
+        <tr><td>Signal to “anyone”</td><td>1 attempt per hour per account</td><td><code>429</code></td></tr>
+        <tr><td>Adding a contact</td><td>30 per hour per account, 60 per hour per IP</td><td><code>429</code></td></tr>
+        <tr><td>Contacts in the list</td><td>200</td><td><code>400</code></td></tr>
+        <tr><td>Devices per account</td><td>20</td><td><code>409</code></td></tr>
+      </tbody>
+    </table></div>
+
+    <h2 id="events">Signals</h2>
+
+    <div class="ep" id="post-events"><span class="m post">POST</span><code>/v1/events</code><span class="who dev">device, send permission</span></div>
+    <p>Send a signal to a person in your list:</p>
+    <pre><code>{ &quot;type&quot;: &quot;signal&quot;, &quot;to&quot;: { &quot;contact&quot;: &quot;DXEjjB91rJYQvgaGGdsx&quot; } }</code></pre>
+    <p>Or to a random person online who accepts signals from anyone (never to yourself):</p>
+    <pre><code>{ &quot;type&quot;: &quot;signal&quot;, &quot;to&quot;: { &quot;anyone&quot;: true } }</code></pre>
+    <div class="tbl"><table>
+      <thead><tr><th>Field</th><th>Type</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><code>type</code></td><td>string</td><td>Only <code>&quot;signal&quot;</code> for now. Anything else is <code>400</code></td></tr>
+        <tr><td><code>to.contact</code></td><td>string</td><td>A contact’s <code>id</code> from <a href="#get-contacts"><code>GET /v1/contacts</code></a></td></tr>
+        <tr><td><code>to.anyone</code></td><td>bool</td><td><code>true</code> — someone out there. Not allowed together with <code>contact</code></td></tr>
+      </tbody>
+    </table></div>
+    <p>A signal has no <code>data</code> field: with one, you get <code>400</code>. There must be no other fields either, or you get <code>422</code>.</p>
+    <p>The response is <code>202 Accepted</code>:</p>
+    <pre><code>{ &quot;id&quot;: &quot;ev_q8ZkT1mW4aLp0sXv7cRb&quot; }</code></pre>
+    <p><code>202</code> means “accepted”. The response doesn’t say whether the recipient was online or how many devices they have. A signal to a contact added with a wrong Love ID is accepted too and goes nowhere. “Anyone” also returns <code>202</code>, even when nobody is online.</p>
+    <p>Errors: <code>400</code> a wrong <code>type</code> or <code>to</code>, <code>403</code> the device may not send, <code>404</code> no such contact, <code>429</code> “anyone” was already used this hour (every attempt counts).</p>
+
+    <h2 id="contacts">Contacts</h2>
+    <p>The contact object:</p>
+    <pre><code>{
+  &quot;id&quot;: &quot;DXEjjB91rJYQvgaGGdsx&quot;,
+  &quot;label&quot;: &quot;Mom&quot;,
+  &quot;position&quot;: 0,
+  &quot;close&quot;: true,
+  &quot;created_at&quot;: &quot;2026-10-02T09:12:44.120Z&quot;
+}</code></pre>
+    <div class="tbl"><table>
+      <thead><tr><th>Field</th><th>Type</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><code>id</code></td><td>string</td><td>The person’s identifier in your list. Other lists know nothing about it</td></tr>
+        <tr><td><code>label</code></td><td>string</td><td>Your label, 1–64 characters. The person never sees it</td></tr>
+        <tr><td><code>position</code></td><td>int</td><td>Order in the list</td></tr>
+        <tr><td><code>close</code></td><td>bool</td><td>A close one: a circle at the top of the app’s menu. Handy to show first</td></tr>
+        <tr><td><code>created_at</code></td><td>string</td><td>When they were added</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ep" id="get-contacts"><span class="m get">GET</span><code>/v1/contacts</code><span class="who dev">device</span></div>
+    <p>The whole list, by <code>position</code>, then by when they were added.</p>
+    <pre><code>{ &quot;contacts&quot;: [ { &quot;id&quot;: &quot;DXEjjB91rJYQvgaGGdsx&quot;, &quot;label&quot;: &quot;Mom&quot;, … }, … ] }</code></pre>
+    <p>When the list changes, a <a href="/docs/ws#sync"><code>sync</code></a> arrives over WebSocket: load it again then.</p>
+
+    <div class="ep" id="post-contacts"><span class="m post">POST</span><code>/v1/contacts</code><span class="who">app</span></div>
+    <p>Add a person by their Love ID:</p>
+    <pre><code>{ &quot;code&quot;: &quot;GSSV7-A33HN&quot;, &quot;label&quot;: &quot;Mom&quot;, &quot;close&quot;: true }</code></pre>
+    <p><code>code</code> is 10 characters from <code>23456789ABCDEFGHJKMNPQRSTVWXYZ</code>; case and dashes don’t matter. <code>close</code> is optional and defaults to <code>false</code>. A new contact goes to the end of the list.</p>
+    <p>The response is <code>201</code> with the contact object. A wrong but well-formed code also gets <code>201</code>: the server doesn’t say whether anyone is behind a code.</p>
+    <p>Errors: <code>400</code> a malformed code, an empty label or one longer than 64 characters, your own code, 200 people already in the list. <code>409</code> this person is already in the list. <code>429</code> too many additions this hour.</p>
+
+    <div class="ep" id="patch-contact"><span class="m patch">PATCH</span><code>/v1/contacts/{id}</code><span class="who">app</span></div>
+    <p>Change the label, the position or the “close” mark. Any subset of the fields:</p>
+    <pre><code>{ &quot;label&quot;: &quot;Mommy&quot;, &quot;position&quot;: 2, &quot;close&quot;: false }</code></pre>
+    <p>The response is <code>200</code> with the updated contact. To reorder several people, send one request for each. Errors: <code>400</code> an empty body or a bad label, <code>404</code> no such contact.</p>
+
+    <div class="ep" id="delete-contact"><span class="m delete">DELETE</span><code>/v1/contacts/{id}</code><span class="who">app</span></div>
+    <p>Remove from the list. The response is <code>204</code>, also when the contact is already gone. The person isn’t told.</p>
+
+    <h2 id="devices">Devices</h2>
+    <p>The device object:</p>
+    <pre><code>{
+  &quot;id&quot;: &quot;r7Hc2LqW9xPz4KmN0aTe&quot;,
+  &quot;kind&quot;: &quot;toy&quot;,
+  &quot;name&quot;: &quot;Kitty on the shelf&quot;,
+  &quot;capabilities&quot;: [&quot;receive&quot;, &quot;send&quot;],
+  &quot;created_at&quot;: &quot;2026-10-20T18:03:10.442Z&quot;,
+  &quot;last_seen_at&quot;: &quot;2026-11-01T07:55:02.918Z&quot;
+}</code></pre>
+    <div class="tbl"><table>
+      <thead><tr><th>Field</th><th>Type</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><code>kind</code></td><td>string</td><td><code>toy</code> or <code>custom</code></td></tr>
+        <tr><td><code>name</code></td><td>string</td><td>1–64 characters</td></tr>
+        <tr><td><code>capabilities</code></td><td>string[]</td><td><code>receive</code> — receive signals, <code>send</code> — send them</td></tr>
+        <tr><td><code>last_seen_at</code></td><td>string</td><td>When the device last opened a stream. Missing if it never has</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="ep" id="get-devices"><span class="m get">GET</span><code>/v1/devices</code><span class="who">app</span></div>
+    <p>The devices, by creation time: <code>{ &quot;devices&quot;: [ … ] }</code>.</p>
+
+    <div class="ep" id="post-devices"><span class="m post">POST</span><code>/v1/devices</code><span class="who">app</span></div>
+    <pre><code>{ &quot;name&quot;: &quot;Kitty on the shelf&quot;, &quot;kind&quot;: &quot;toy&quot;, &quot;capabilities&quot;: [&quot;receive&quot;] }</code></pre>
+    <p><code>kind</code> defaults to <code>custom</code>, <code>capabilities</code> to both. The response is <code>201</code>:</p>
+    <pre><code>{ &quot;device&quot;: { &quot;id&quot;: &quot;r7Hc2LqW9xPz4KmN0aTe&quot;, … }, &quot;token&quot;: &quot;dev_4kq9XbT2mWc7RfLp8sHn3vYzAe6uJd5G&quot; }</code></pre>
+    <p>The token is shown only here; the server keeps just its hash. Errors: <code>400</code> a bad name, <code>kind</code> or capabilities, <code>409</code> there are already 20 devices.</p>
+
+    <div class="ep" id="delete-device"><span class="m delete">DELETE</span><code>/v1/devices/{id}</code><span class="who">app</span></div>
+    <p>Disconnect a device. Its token stops working at once and the streams it opened are closed. The response is <code>204</code>, or <code>404</code> if there is no such device.</p>
+
+    <h2 id="account">Account</h2>
+
+    <div class="ep" id="get-me"><span class="m get">GET</span><code>/v1/me</code><span class="who">app</span></div>
+    <p>Your own account. On the first call after sign-in, the server creates it and issues a Love ID.</p>
+    <pre><code>{
+  &quot;uid&quot;: &quot;…&quot;,
+  &quot;created_at&quot;: &quot;2026-09-28T11:40:00.000Z&quot;,
+  &quot;invite_url&quot;: &quot;https://lovearound.me/i/GSSV7-A33HN&quot;
+}</code></pre>
+    <p><code>uid</code> is your own identifier. The server never hands out anyone else’s.</p>
+
+    <div class="ep" id="delete-me"><span class="m delete">DELETE</span><code>/v1/me</code><span class="who">app</span></div>
+    <p>Delete the account with all its data: the list, devices and their tokens, the Love ID, the sign-in. Open streams are closed. The response is <code>204</code>. This can’t be undone.</p>
+
+    <h2 id="stream">Stream</h2>
+    <div class="ep"><span class="m ws">WS</span><code>/v1/stream</code><span class="who dev">device, receive permission</span></div>
+    <p>Receiving signals. Described in <a href="/docs/ws">WebSocket</a>.</p>
+
+    <h3>Health check</h3>
+    <div class="ep" style="margin-top:12px"><span class="m get">GET</span><code>/</code><span class="who dev">no token</span></div>
+    <p>Answers <code>200</code> with the text <code>needed</code>.</p>
+
+    <h2 id="curl">Try it from a terminal</h2>
+    <pre><code>TOKEN=dev_…
+API=https://api.lovearound.me
+
+curl -H &quot;Authorization: Bearer $TOKEN&quot; $API/v1/contacts
+
+curl -X POST $API/v1/events \
+  -H &quot;Authorization: Bearer $TOKEN&quot; \
+  -H &quot;Content-Type: application/json&quot; \
+  -d '{&quot;type&quot;:&quot;signal&quot;,&quot;to&quot;:{&quot;contact&quot;:&quot;DXEjjB91rJYQvgaGGdsx&quot;}}'</code></pre>
+
+    <div class="next"><a href="/docs">← Overview</a><a href="/docs/ws">WebSocket →</a></div>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
+    <span>© 2026 lovearound</span>
+  </div>
+</footer>
+</body>
+</html>

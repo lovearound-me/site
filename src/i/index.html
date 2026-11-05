@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="{{@lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{invite.title}}</title>
+<meta name="description" content="{{invite.description}}">
+<meta property="og:title" content="{{invite.og_title}}">
+<meta property="og:description" content="{{invite.description}}">
+<meta property="og:image" content="https://lovearound.me/img/heart.jpg">
+<meta name="robots" content="noindex">
+<link rel="icon" href="/heart.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/style.css">
+<style>
+.card{align-items:stretch;text-align:left;max-width:600px}
+.card .btn{max-width:none;margin-top:0}
+.intro{display:flex;flex-direction:column;gap:14px}
+.intro h1{font-size:clamp(32px,6vw,42px)}
+.lid{padding:18px 22px;border-radius:18px;background:var(--well);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.lid small{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted)}
+.lid b{display:block;margin-top:2px;font-size:24px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
+.lid span{font-size:13px;font-weight:700;color:#5E8C6A;white-space:nowrap}
+.steps-i{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
+.steps-i li{display:flex;gap:16px;padding:22px;border-radius:20px;background:#FFFCFA;box-shadow:0 0 0 1px var(--line)}
+.steps-i li.on{background:var(--pink);box-shadow:none}
+.steps-i .n{width:32px;height:32px;flex-shrink:0;border-radius:50%;background:#fff;color:var(--accent);box-shadow:0 0 0 1px var(--line);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
+.steps-i li.on .n{box-shadow:none}
+.steps-i li.done .n{background:var(--sage);color:#4E7A5B;box-shadow:none}
+.steps-i .b{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.steps-i h2{font-size:19px;font-weight:700;letter-spacing:-.01em}
+.steps-i p{font-size:15px}
+.btn.ghost{background:#fff;color:var(--accent);box-shadow:inset 0 0 0 1.5px #E3C3C6}
+.btn.ghost:hover{background:var(--pink);color:var(--accent-hover);box-shadow:inset 0 0 0 1.5px #D9AEB3}
+.alt{font-size:14px;color:var(--muted)}
+.alt a{font-weight:700;text-decoration:none}
+.warn{padding:16px 18px;border-radius:14px;background:#FCEFD9;display:flex;flex-direction:column;gap:6px}
+.warn b{font-size:15px}
+.warn p{font-size:14px;color:var(--ink)}
+.row2{display:flex;flex-wrap:wrap;gap:10px}
+.row2 .btn{flex:1 1 200px}
+.anon{font-size:14px;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="page">
+<header class="top"><div class="wrap"><a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a></div></header>
+<main>
+  <div class="card">
+    <div class="intro">
+      <h1 data-t="h1"></h1>
+      <p class="lead" data-t="lead"></p>
+    </div>
+
+    <div class="lid" id="lid" hidden>
+      <div><small>LOVE ID</small><b id="code"></b></div>
+      <span id="copied" data-t="copied" hidden></span>
+    </div>
+
+    <!-- Mac and Windows: install first, then add -->
+    <ol class="steps-i" id="desk" hidden>
+      <li class="on" id="s1">
+        <span class="n" id="n1">1</span>
+        <div class="b">
+          <h2 data-t="install"></h2>
+          <p id="s1-text" data-t="install_text"></p>
+          <a class="btn" id="dl" href="/download/LoveAround.dmg"></a>
+          <span class="alt" id="alt"></span>
+        </div>
+      </li>
+      <li id="s2">
+        <span class="n">2</span>
+        <div class="b">
+          <h2 data-t="add"></h2>
+          <p id="s2-text" data-t="add_text"></p>
+          <a class="btn ghost" id="open" href="/" data-t="open_installed"></a>
+          <div class="warn" id="warn" hidden>
+            <b data-t="nothing"></b>
+            <p data-t="nothing_text"></p>
+          </div>
+        </div>
+      </li>
+    </ol>
+
+    <!-- Phone, tablet and other systems: open on a computer -->
+    <div class="steps-i" id="away" hidden>
+      <div class="warn" style="background:var(--well)">
+        <b id="away-title" data-t="away"></b>
+        <p id="away-text" data-t="away_text"></p>
+      </div>
+      <div class="row2">
+        <button class="btn" id="share" type="button" data-t="share" hidden></button>
+        <button class="btn ghost" id="copy" type="button" data-t="copy"></button>
+      </div>
+      <span class="alt" id="away-alt" data-t="away_alt" hidden></span>
+    </div>
+
+    <p class="anon" data-t="anon"></p>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
+    <span>© 2026 lovearound</span>
+  </div>
+</footer>
+</div>
+<script src="/lang.js"></script>
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var T = lovearoundLang.apply({{@strings}});
+
+  // /i/<code> → lovearound://add/<code>
+  var code = decodeURIComponent(location.pathname.replace(/^\/i\/?/, '').split('/')[0] || '');
+  var valid = /^[A-Za-z0-9-]{10,12}$/.test(code);
+  var link = location.origin + '/i/' + code;
+
+  var ua = navigator.userAgent;
+  var ipad = /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+  var os = /iPhone|iPad|iPod|Android/.test(ua) || ipad ? 'phone'
+    : /Macintosh|Mac OS X/.test(ua) ? 'mac'
+    : /Windows/.test(ua) ? 'win' : 'other';
+
+  if (valid) { $('code').textContent = code.toUpperCase(); $('lid').hidden = false; }
+
+  function copy(then) {
+    try {
+      navigator.clipboard.writeText(link).then(function () { $('copied').hidden = false; then && then(true); }, function () { then && then(false); });
+    } catch (e) { then && then(false); }
+  }
+
+  if (os === 'mac' || os === 'win') {
+    $('desk').hidden = false;
+    var mac = os === 'mac';
+    $('dl').href = mac ? '/download/LoveAround.dmg' : '/download/LoveAroundSetup.exe';
+    $('dl').textContent = mac ? T.mac : T.windows;
+    $('alt').innerHTML = mac ? T.alt_windows : T.alt_mac;
+
+    if (valid) $('open').href = 'lovearound://add/' + code;
+    else {
+      $('s2-text').textContent = T.no_code;
+      $('open').hidden = true;
+    }
+
+    // Download: step 1 is done, step 2 is next. The link goes to the clipboard:
+    // the app's "Add" window picks it up from there.
+    $('dl').addEventListener('click', function () {
+      if (valid) copy();
+      $('s1').className = 'done'; $('n1').textContent = '✓';
+      $('s1-text').textContent = mac ? T.installed_mac : T.installed_windows;
+      $('s2').className = 'on';
+      $('open').className = 'btn';
+      $('open').textContent = T.open;
+      if (valid) $('s2-text').textContent = T.add_after;
+      $('warn').hidden = true;
+    });
+
+    // Open: the browser can't tell whether the app is there. If the page is
+    // still in front a moment later, say so and point at step 1.
+    $('open').addEventListener('click', function () {
+      if (!valid) return;
+      var left = false;
+      var gone = function () { left = true; };
+      window.addEventListener('blur', gone, { once: true });
+      document.addEventListener('visibilitychange', gone, { once: true });
+      setTimeout(function () { if (!left && !document.hidden) $('warn').hidden = false; }, 1500);
+    });
+  } else {
+    $('away').hidden = false;
+    if (os === 'other') {
+      $('away-title').textContent = T.other;
+      $('away-text').textContent = T.other_text;
+    }
+    $('away-alt').hidden = false;
+    if (!valid) { $('copy').hidden = true; }
+    if (valid && navigator.share) {
+      $('share').hidden = false;
+      $('share').addEventListener('click', function () {
+        navigator.share({ title: 'Love ID', text: T.share_text, url: link }).catch(function () {});
+      });
+    }
+    $('copy').addEventListener('click', function () {
+      copy(function (ok) { $('copy').textContent = ok ? T.copied_button : link; });
+    });
+  }
+})();
+</script>
+</body>
+</html>

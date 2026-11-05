@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="{{@lang}}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{signin.title}}</title>
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/heart.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<!--
+  Google sign-in for the apps. The app opens /signin/?state=<random>&key=<its
+  one-time public key>; this page signs in with the Firebase JS SDK, seals
+  the session (uid, email, refresh token) to that key and hands it back as
+  lovearound://signin?state=…&epk=…&box=…, then signs the browser out. Only
+  the app that opened the page can open the box: the link itself is useless
+  to whoever sees it (the process list, the browser's history, another app
+  that registered the scheme). The app accepts only the state it generated.
+
+  The box: ECDH P-256 between the app's key and a fresh key of this page
+  (epk, the raw uncompressed point), HKDF-SHA256 (no salt, info
+  "lovearound signin v1") → AES-256-GCM key, the state as associated data;
+  box = 12-byte nonce + ciphertext + tag. Base64url without padding.
+
+  Builds older than the key open the page without key=; they know only the
+  codename's scheme, so they get needed://signin?state=…&uid=…&email=…&rt=…
+  in the clear, as before. Drop that branch once those builds have updated.
+-->
+<div class="page">
+<header class="top"><div class="wrap"><a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a></div></header>
+<main>
+  <div class="card">
+    <div class="badge"><svg aria-hidden="true" width="44" height="44" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg></div>
+    <h1 id="title" data-t="heading"></h1>
+    <p class="lead" id="text" data-t="text"></p>
+    <button class="btn" id="go" type="button" data-t="button"></button>
+    <a class="btn" id="back" href="#" data-t="back" hidden></a>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
+    <span>© 2026 lovearound</span>
+  </div>
+</footer>
+</div>
+<script src="/lang.js"></script>
+<script type="module">
+  import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, inMemoryPersistence, setPersistence }
+    from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+
+  const app = initializeApp({
+    apiKey: 'AIzaSyBZJfln_KXsxRxo3fvVaV1ePmiVUIn5YXY',
+    authDomain: 'needed-app-2026.firebaseapp.com',
+    projectId: 'needed-app-2026',
+  });
+  const auth = getAuth(app);
+  const params = new URLSearchParams(location.search);
+  const state = params.get('state') || '';
+  const key = params.get('key') || '';
+  const $ = (id) => document.getElementById(id);
+  const T = lovearoundLang.apply({{@strings}});
+
+  const b64url = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes)))
+    .replaceAll('+', '-').replaceAll('/', '_').replace(/=+$/, '');
+  const unb64url = (text) => Uint8Array.from(
+    atob(text.replaceAll('-', '+').replaceAll('_', '/')), (c) => c.charCodeAt(0));
+
+  // The session sealed to the app's key: see the comment at the top.
+  async function seal(session) {
+    const ecdh = { name: 'ECDH', namedCurve: 'P-256' };
+    const theirs = await crypto.subtle.importKey('raw', unb64url(key), ecdh, false, []);
+    const mine = await crypto.subtle.generateKey(ecdh, true, ['deriveBits']);
+    const shared = await crypto.subtle.deriveBits({ name: 'ECDH', public: theirs }, mine.privateKey, 256);
+    const hkdf = await crypto.subtle.importKey('raw', shared, 'HKDF', false, ['deriveKey']);
+    const aes = await crypto.subtle.deriveKey(
+      { name: 'HKDF', hash: 'SHA-256', salt: new Uint8Array(0), info: new TextEncoder().encode('lovearound signin v1') },
+      hkdf, { name: 'AES-GCM', length: 256 }, false, ['encrypt']);
+    const nonce = crypto.getRandomValues(new Uint8Array(12));
+    const sealed = await crypto.subtle.encrypt(
+      { name: 'AES-GCM', iv: nonce, additionalData: new TextEncoder().encode(state) },
+      aes, new TextEncoder().encode(JSON.stringify(session)));
+    const box = new Uint8Array(12 + sealed.byteLength);
+    box.set(nonce);
+    box.set(new Uint8Array(sealed), 12);
+    return { epk: b64url(await crypto.subtle.exportKey('raw', mine.publicKey)), box: b64url(box) };
+  }
+
+  if (!/^[A-Za-z0-9-]{8,64}$/.test(state) || (key && !/^[A-Za-z0-9_-]{87}$/.test(key))) {
+    $('title').textContent = T.from_app;
+    $('text').textContent = T.from_app_text;
+    $('go').hidden = true;
+  }
+
+  $('go').addEventListener('click', async () => {
+    $('go').disabled = true;
+    try {
+      // The browser keeps nothing: the session goes to the app only.
+      await setPersistence(auth, inMemoryPersistence);
+      const { user } = await signInWithPopup(auth, new GoogleAuthProvider());
+      const session = { uid: user.uid, email: user.email || '', rt: user.refreshToken };
+      const back = key
+        ? 'lovearound://signin?' + new URLSearchParams({ state, ...await seal(session) })
+        : 'needed://signin?' + new URLSearchParams({ state, ...session });
+      await signOut(auth);
+      $('title').textContent = T.done;
+      $('text').textContent = T.done_text;
+      $('go').hidden = true;
+      $('back').href = back;
+      $('back').hidden = false;
+      location.href = back;
+    } catch (e) {
+      $('go').disabled = false;
+      $('text').textContent = e && e.code === 'auth/popup-closed-by-user'
+        ? T.closed
+        : T.failed;
+    }
+  });
+</script>
+</body>
+</html>

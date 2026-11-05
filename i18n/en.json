@@ -1,0 +1,188 @@
+{
+  "meta": {
+    "title": "lovearound — share love",
+    "description": "A small gesture of care can cross any distance. Send it to someone you hold dear, or to someone you haven’t met yet.",
+    "og_title": "lovearound — share love. Feel connected to the world."
+  },
+  "lang": {
+    "label": "Language"
+  },
+  "nav": {
+    "label": "Sections",
+    "idea": "The idea",
+    "how": "How it works",
+    "faq": "FAQ",
+    "download": "Download"
+  },
+  "hero": {
+    "kicker": "A small gesture of care. A link to the wider world.",
+    "title": "Share love.<br>Feel connected to the world.",
+    "lead": "A small gesture of care can cross any distance. Send it to someone you hold dear, or to someone you haven’t met yet.",
+    "text": "lovearound is a way to send and receive signals of love. Everyone has their own Love ID. A signal arrives on a connected computer or device and gently reminds you: someone thought of you. No words, and no need to reply.",
+    "cta": "Download the app",
+    "how": "How it works"
+  },
+  "close": {
+    "kicker": "01 / Love for close ones",
+    "p1": "“I’m thinking of you”",
+    "p2": "“I need you”",
+    "p3": "“I’m here”",
+    "p4": "“You’re not alone”",
+    "p5": "“I love you”",
+    "text": "A friend, your mom, someone you miss having around. Let them feel your care with a single tap. No words, and no need to reply.",
+    "link": "Send to someone close →"
+  },
+  "world": {
+    "kicker": "02 / Love for the world",
+    "title": "Someone out&nbsp;there",
+    "text": "Send a little love to a random member who’s open to these signals. You may never meet — and still give each other a moment of warmth.",
+    "link": "Send love into the world →"
+  },
+  "idea": {
+    "kicker": "Love grows when we pass it on",
+    "title": "More love.<br>More connection between us.",
+    "lead": "A small gesture of care can cross a room, a city or an ocean. It can reach someone close or someone you’ve never met, and let them feel they’re not alone.",
+    "text": "Once you’ve received love, you can pass it on. To a friend, to family, or to someone on the other side of the world. That’s how one gesture becomes the start of a chain that connects more and more people.",
+    "why": "That’s why we’re building lovearound:",
+    "why_text": "so love can travel more freely around the world, and we can feel connected to each other more often."
+  },
+  "how": {
+    "title": "Love ID — your address for love",
+    "text": "One personal ID connects you with the people and devices you receive signals of care through.",
+    "s1": "Get your Love ID",
+    "s1_text": "It appears the first time you sign in. Share your link so others can send you love.",
+    "s2": "Send a sign of care",
+    "s2_text": "Pick someone close, or “Someone out there”. One tap can make someone’s day a little brighter.",
+    "s3": "Feel it <span style=\"white-space:nowrap\">your way</span>",
+    "s3_text": "Receive signals on your computer or a connected device. No reply needed.",
+    "s4": "Pass it on",
+    "s4_text": "Whenever you feel like it, send your own signal to someone close or someone new."
+  },
+  "heart": {
+    "kicker": "Feel love close by",
+    "title": "A little heart.<br>A link to the wider world.",
+    "alt": "Heart — a small white heart that glows softly pink",
+    "badge": "SOON",
+    "caption": "Heart is a device concept. The final design may differ.",
+    "h3": "A heart that responds to care.",
+    "p1": "When someone sends you love, Heart glows softly and pulses. Every glow starts with a person — nearby or thousands of kilometers away. Someone sent a little love, and now you can feel it right here. And then pass it on.",
+    "p2": "Put it by your bed, on your desk, or wherever you’d like a little warmth. Linked to your Love ID, the heart can receive signals from your close ones, and from someone out there if you choose to receive them.",
+    "strong": "Get one for yourself, or give it to someone you’d like to feel closer to.",
+    "cta": "Hear when Heart launches"
+  },
+  "devices": {
+    "kicker": "Your Love ID stays with you",
+    "title": "One Love ID.<br>Many ways to feel cared for.",
+    "lead": "Heart is the first step. We want you to be able to connect other devices to lovearound too, and choose how a signal of love shows up in your world.",
+    "tag": "PLANNED",
+    "lamp": "A bedside lamp",
+    "lamp_text": "Lights up softly when someone sends you love.",
+    "band": "A bracelet or a watch",
+    "band_text": "Passes on a short, gentle vibration — a small sign of care that stays with you through the day.",
+    "toy": "A favorite toy",
+    "toy_text": "Responds with light or a soft pulse, turning something familiar into a special gift.",
+    "screen": "A small screen on your desk",
+    "screen_text": "Shows a heart the moment a signal reaches you.",
+    "diy": "Don’t want to wait? Build your own device",
+    "diy_text": "A lamp, a toy or a small screen on an ESP32 that responds to your Love ID. A step-by-step guide — from the first wires to the first signal.",
+    "diy_go": "How to build it →",
+    "note": "These connections are part of our plans. We’ll add compatible devices and features step by step.",
+    "closing": "You choose how to feel love."
+  },
+  "moments": {
+    "kicker": "Small moments that connect us",
+    "title": "When you want to give<br>a little warmth.",
+    "m1": "To Mom, over morning coffee",
+    "m1_text": "She lives in another city. Today you send her a small sign: “I’m thinking of you.”",
+    "m2": "To a friend before a big day",
+    "m2_text": "Before an exam, an interview or a performance. A quiet sign of support that needs no reply.",
+    "m3": "To yourself, when you need support",
+    "m3_text": "Share your link with friends. They don’t have to find the right words to let you feel cared for.",
+    "m4": "To someone on the other side of the world",
+    "m4_text": "You haven’t met yet. But one gesture can connect you for a moment and make someone’s day a little brighter."
+  },
+  "app": {
+    "title": "Care at hand while you’re at your computer",
+    "text": "The app for Mac and Windows lives in the menu bar or the system tray. Pick a person, send a signal and get back to your day. Love you receive shows up as a soft glow on your screen.",
+    "menu_title": "Who are you thinking of?",
+    "menu_close": "Close ones",
+    "menu_a": "M",
+    "menu_b": "B",
+    "menu_c": "L"
+  },
+  "get": {
+    "mac": "macOS 13 or later",
+    "mac_button": "Download .dmg",
+    "windows": "Windows 10 and 11",
+    "windows_button": "Download .exe",
+    "smartscreen": "Windows says “Windows protected your PC”",
+    "smartscreen_text": "That’s how Windows greets new programs that don’t have a publisher signature yet. Click “More info”, then “Run anyway”. The installer sets the app up just for you, without admin rights. The heart appears in the tray next to the clock; if you can’t see it, click the “^” arrow and drag it onto the taskbar."
+  },
+  "faq": {
+    "kicker": "A simple start",
+    "title": "Everyone has a little love to share.",
+    "q1": "Will the person know it’s me?",
+    "a1": "No. The signal arrives with no name and no words — just a sign that someone thought of them. We don’t keep a record of who sent what to whom.",
+    "q2": "Do I need to buy the heart?",
+    "a2": "You can start with the desktop app. Heart will be an extra, physical way to receive signals.",
+    "q3": "Who gets a “Someone out there” signal?",
+    "a3": "A random member who has agreed to receive these signals. That way care can reach someone beyond the people you know.",
+    "q4": "Do I have to reply to a signal?",
+    "a4": "No. You can simply take in the moment. And when you feel like it, send a little love on.",
+    "q5": "Can I connect any device?",
+    "a5": "New connections will arrive step by step. Lamps, bracelets, toys and small screens are examples of where we want to go.",
+    "q6": "How much does it cost?",
+    "a6": "The app is free. We’ll share Heart’s price closer to launch."
+  },
+  "end": {
+    "title": "Let’s bring a little more care into the world.",
+    "text": "Start with one person. Or send a little love to someone out there."
+  },
+  "invite": {
+    "title": "You’ve been sent a Love ID — lovearound",
+    "og_title": "You’ve been sent a Love ID",
+    "description": "Add it to lovearound and let this person know you’re thinking of them, anytime. They won’t know it’s you.",
+    "h1": "You’ve been sent a <span style=\"white-space:nowrap\">Love ID</span>",
+    "lead": "Add it to lovearound, and anytime you like, you can let this person know you’re thinking of them. One tap, no words.",
+    "copied": "Copied ✓",
+    "install": "Install lovearound",
+    "install_text": "The app lives in the menu bar and stays out of your way.",
+    "mac": "Download for Mac",
+    "windows": "Download for Windows",
+    "alt_mac": "On a Mac? <a href=\"/download/LoveAround.dmg\">Download for Mac</a>",
+    "alt_windows": "On Windows? <a href=\"/download/LoveAroundSetup.exe\">Download for Windows</a>",
+    "add": "Add the Love ID",
+    "add_text": "Once the app is installed, open this link in it.",
+    "open_installed": "Already installed — open in lovearound",
+    "nothing": "Nothing opened?",
+    "nothing_text": "Then lovearound isn’t installed yet. Download it (step 1 above), then press “Open” again.",
+    "away": "Open this link on a computer",
+    "away_text": "lovearound runs on Mac and Windows. Send the link to yourself and open it there — this page will show you what to do.",
+    "share": "Send to myself",
+    "copy": "Copy link",
+    "away_alt": "On a computer after all? Download for <a href=\"/download/LoveAround.dmg\">Mac</a> · <a href=\"/download/LoveAroundSetup.exe\">Windows</a>",
+    "anon": "The signal arrives without a name: the person won’t know it was you.",
+    "no_code": "There’s no Love ID in this link. Ask for it to be sent again.",
+    "installed_mac": "Open LoveAround.dmg from your Downloads, drag lovearound into Applications and launch it.",
+    "installed_windows": "Run LoveAroundSetup.exe from your Downloads — lovearound will appear next to the clock.",
+    "open": "Open in lovearound",
+    "add_after": "Once the app is running, come back here and press the button. The link is already copied, so you can also just paste it into the app’s “Add” window.",
+    "other": "For now there are apps for Mac and Windows",
+    "other_text": "lovearound isn’t available for your system yet. Save the link and open it on a Mac or a Windows PC.",
+    "share_text": "Open on a computer",
+    "copied_button": "Copied ✓"
+  },
+  "signin": {
+    "title": "Sign in — lovearound",
+    "heading": "Sign in with Google",
+    "text": "Sign in, and the app will open with your account.",
+    "button": "Sign in with Google",
+    "back": "Back to the app",
+    "from_app": "Start signing in from the app",
+    "from_app_text": "Click the heart in the menu bar (on Windows, next to the clock) and choose “Sign in with Google”.",
+    "done": "Done!",
+    "done_text": "Taking you back to the app. If nothing happens, press the button below.",
+    "closed": "The sign-in window was closed. Please try again.",
+    "failed": "Couldn’t sign in. Please try again."
+  }
+}
