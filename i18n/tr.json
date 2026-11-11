@@ -9,52 +9,67 @@
   },
   "nav": {
     "label": "Bölümler",
-    "idea": "Fikir",
+    "menu": "Menü",
     "how": "Nasıl çalışır",
     "faq": "SSS",
-    "download": "İndir"
+    "docs": "Belgeler",
+    "download": "İndir",
+    "open": "Aç"
   },
   "hero": {
-    "kicker": "Küçük bir ilgi göstergesi. Dünyayla bir bağ.",
+    "kicker": "Sevginin insanlara yolunu bulduğu bir platform",
     "title": "Sevgini paylaş.<br>Dünyayla bağ kur.",
     "lead": "Küçük bir ilgi göstergesi her mesafeyi aşar. Onu değer verdiğin birine ya da henüz tanışmadığın birine gönder.",
-    "text": "lovearound, sevgi sinyalleri gönderip almanın bir yolu. Herkesin kendine ait bir Love ID’si var. Sinyal bağlı bir bilgisayara ya da cihaza ulaşır ve nazikçe hatırlatır: biri seni düşündü. Söze gerek yok, cevap vermene de.",
+    "text": "lovearound, sevgi sinyalleri gönderip almanın bir yolu. Herkesin kendine ait bir Love ID’si var. Anonim sinyal bağlı bir bilgisayara ya da cihaza ulaşır ve nazikçe hatırlatır: biri seni düşündü. Söze gerek yok, cevap vermene de.",
     "cta": "Uygulamayı indir",
+    "open": "Uygulamayı aç",
     "how": "Nasıl çalışır"
   },
-  "close": {
-    "kicker": "01 / Yakınlarına sevgi",
-    "p1": "“Seni düşünüyorum”",
-    "p2": "“Sana ihtiyacım var”",
-    "p3": "“Buradayım”",
-    "p4": "“Yalnız değilsin”",
-    "p5": "“Seni seviyorum”",
-    "text": "Bir arkadaşa, annene, yokluğunu hissettiğin birine. Tek dokunuşla ilgini hissettir. Söze gerek yok, cevap vermeye de.",
-    "link": "Bir yakınına gönder →"
-  },
-  "world": {
-    "kicker": "02 / Dünyaya sevgi",
-    "title": "Dünyada&nbsp;biri",
-    "text": "Bu sinyallere açık, rastgele seçilmiş bir kullanıcıya biraz sevgi gönder. Belki hiç tanışmayacaksınız — ama yine de birbirinize sıcacık bir an armağan edeceksiniz.",
-    "link": "Dünyaya sevgi gönder →"
-  },
   "idea": {
-    "kicker": "Sevgi paylaştıkça büyür",
     "title": "Daha çok sevgi.<br>Aramızda daha çok bağ.",
     "lead": "Küçük bir ilgi göstergesi bir odayı, bir şehri ya da bir okyanusu aşabilir. Yakınındaki birine ya da hiç tanımadığın birine ulaşıp yalnız olmadığını hissettirebilir.",
     "text": "Sevgi alan, onu başkasına aktarabilir. Bir arkadaşa, aileye ya da dünyanın öbür ucundaki birine. Böylece tek bir jest, giderek daha çok insanı birbirine bağlayan bir zincirin başlangıcı olur.",
     "why": "lovearound’u bu yüzden yapıyoruz:",
     "why_text": "sevgi dünyada daha özgürce dolaşsın, biz de birbirimize bağlı olduğumuzu daha sık hissedelim diye."
   },
+  "platform": {
+    "title": "Nasıl istersen gönder. Her yerde aynı anda hisset.",
+    "analogy": "Love ID’n bir e-posta adresi gibi: tek bir tane var ama postalar aynı anda hem telefonuna hem dizüstüne gelir. Sinyaller de öyle: bağladığın her şeye ulaşır. Sadece gönderen asla görünmez.",
+    "p1": "Nasıl istersen gönder",
+    "p1_text": "Bilgisayarındaki uygulamadan, kendi cihazındaki bir düğmeyle ya da rastgele, “Dünyada biri”ne.",
+    "p2": "Senin olduğunu kimse bilmez",
+    "p2_text": "Sinyal isimsiz gelir. Kimin kime ne gönderdiğini saklamayız, bu yüzden alıcı bunu hiçbir şekilde öğrenemez.",
+    "p3": "Her yerde aynı anda hisset",
+    "p3_text": "Love ID’ne istediğin kadar uygulama ve cihaz bağla. Sinyal hepsine aynı anda ulaşır.",
+    "p4": "Herkese açık",
+    "p4_text": "API belgelenmiş, uygulamaların kodu açık. Herkes kendi cihazını ya da uygulamasını yapabilir.",
+    "sender_tag": "Elif · başka bir şehirde",
+    "room_tag": "Can · evde",
+    "mom": "Annem",
+    "to": "Can",
+    "third": "Deniz",
+    "sender_alt": "Elif dizüstünde Can’ın adının yanındaki kalbe dokunuyor",
+    "room_alt": "Can’ın akşam odası: masada bir dizüstü, komodinde Heart ve bir lamba, duvarda bir kolye",
+    "laptop": "Dizüstü",
+    "lamp": "Lamba",
+    "pendant": "Kolye",
+    "devices_label": "Can’ın Love ID’sine bağlı olanlar",
+    "hint": "Cihazları aç ve kapat: sinyal yalnızca açık olanlara ulaşır.",
+    "bubble": "♥ Biri seni düşündü",
+    "bubble_sub": "isimsiz",
+    "st_press": "Elif “Can”ın yanındaki kalbe dokunuyor",
+    "st_fly": "Sinyal uçup gidiyor. Gönderenin adı geride kalıyor",
+    "st_done": "Sinyal bağlı olan her şeyi yaktı. Can, bunun Elif olduğunu asla bilmeyecek.",
+    "st_none": "Can’ın bağlı hiçbir şeyi yok, sinyalin gidecek yeri yok. En az bir cihazı aç."
+  },
   "how": {
-    "title": "Love ID — sevgi için adresin",
-    "text": "Tek bir kişisel ID, ilgi sinyallerini aldığın insanlara ve cihazlara seni bağlar.",
-    "s1": "Love ID’ni al",
+    "title": "Love ID — sevgi için adresin",
+    "s1": "Love ID’ni al",
     "s1_text": "İlk girişte oluşur. Başkaları sana sevgi gönderebilsin diye bağlantını paylaş.",
     "s2": "Bir ilgi işareti gönder",
     "s2_text": "Bir yakınını ya da “Dünyada biri”ni seç. Tek dokunuş birinin gününü biraz daha aydınlık yapabilir.",
     "s3": "<span style=\"white-space:nowrap\">Kendi tarzınla</span> hisset",
-    "s3_text": "Sinyalleri bilgisayarında ya da bağlı bir cihazda al. Cevap vermen gerekmez.",
+    "s3_text": "Sinyalleri bilgisayarında ya da bağlı bir cihazda al. Sadece birinin seni düşündüğünü hisset.",
     "s4": "Sen de aktar",
     "s4_text": "İçinden geldiğinde kendi sinyalini bir yakınına ya da yeni birine gönder."
   },
@@ -66,13 +81,11 @@
     "caption": "Heart bir cihaz konsepti. Son tasarım farklı olabilir.",
     "h3": "İlgiye karşılık veren bir kalp.",
     "p1": "Biri sana sevgi gönderdiğinde Heart yumuşakça parlar ve atar. Her ışığın ardında bir insan var — hemen yanında ya da binlerce kilometre ötede. Biri biraz sevgi gönderdi ve şimdi onu tam burada hissediyorsun. Sonra sen de aktarabilirsin.",
-    "p2": "Yatağının yanına, masana ya da biraz sıcaklık istediğin her yere koy. Love ID’ne bağlı kalp, yakınlarının sinyallerini ve istersen dünyadaki birinin sinyallerini alır.",
-    "strong": "Kendine al ya da daha yakın hissetmek istediğin birine hediye et.",
-    "cta": "Heart çıkınca haber ver"
+    "p2": "Yatağının yanına, masana ya da biraz sıcaklık istediğin her yere koy. Love ID’ne bağlı kalp, yakınlarının sinyallerini ve istersen dünyadaki birinin sinyallerini alır.",
+    "strong": "Kendine al ya da daha yakın hissetmek istediğin birine hediye et."
   },
   "devices": {
-    "kicker": "Love ID’n hep seninle",
-    "title": "Tek Love ID.<br>İlgiyi hissetmenin birçok yolu.",
+    "title": "Tek Love ID.<br>İlgiyi hissetmenin birçok yolu.",
     "lead": "Heart ilk adım. Başka cihazları da lovearound’a bağlayabilmeni ve bir sevgi sinyalinin dünyanda nasıl görüneceğini seçebilmeni istiyoruz.",
     "tag": "PLANLANAN",
     "lamp": "Bir başucu lambası",
@@ -84,13 +97,10 @@
     "screen": "Masanda küçük bir ekran",
     "screen_text": "Bir sinyal ulaştığı anda bir kalp gösterir.",
     "diy": "Beklemek istemiyor musun? Kendi cihazını yap",
-    "diy_text": "Love ID’ne karşılık veren ESP32’li bir lamba, oyuncak ya da küçük ekran. İlk kablolardan ilk sinyale adım adım bir rehber.",
-    "diy_go": "Nasıl yapılır →",
-    "note": "Bu bağlantılar planlarımızın bir parçası. Uyumlu cihazları ve özellikleri adım adım ekleyeceğiz.",
-    "closing": "Sevgiyi nasıl hissedeceğini sen seçersin."
+    "diy_text": "lovearound açık bir platform: API belgelenmiş, uygulamaların kodu açık ve herkes Love ID için kendi cihazını ya da uygulamasını yapabilir. Love ID’ne karşılık veren ESP32’li bir lamba, oyuncak ya da küçük ekran. İlk kablolardan ilk sinyale adım adım bir rehber.",
+    "diy_go": "Nasıl yapılır →"
   },
   "moments": {
-    "kicker": "Bizi birbirimize bağlayan küçük anlar",
     "title": "Biraz sıcaklık<br>vermek istediğinde.",
     "m1": "Sabah kahvesinde annene",
     "m1_text": "Başka bir şehirde yaşıyor. Bugün ona küçük bir işaret gönderiyorsun: “Seni düşünüyorum.”",
@@ -103,7 +113,7 @@
   },
   "app": {
     "title": "Bilgisayar başındayken ilgi elinin altında",
-    "text": "Mac ve Windows uygulaması menü çubuğunda ya da sistem tepsisinde durur. Birini seç, sinyal gönder ve gününe devam et. Aldığın sevgi ekranında yumuşak bir ışıltı olarak görünür.",
+    "text": "Mac, Windows ve Linux uygulaması menü çubuğunda ya da sistem tepsisinde durur. Birini seç, sinyal gönder ve gününe devam et. Aldığın sevgi ekranında yumuşak bir ışıltı olarak görünür.",
     "menu_title": "Şu an kimi düşünüyorsun?",
     "menu_close": "Yakınların",
     "menu_a": "A",
@@ -116,10 +126,18 @@
     "windows": "Windows 10 ve 11",
     "windows_button": ".exe indir",
     "smartscreen": "Windows “Windows bilgisayarınızı korudu” diyor",
-    "smartscreen_text": "Windows, henüz yayımcı imzası olmayan yeni programları böyle karşılar. “Ek bilgi”ye, ardından “Yine de çalıştır”a tıkla. Yükleyici uygulamayı yönetici izni olmadan yalnızca senin için kurar. Kalp, saatin yanındaki sistem tepsisinde görünür; göremiyorsan “^” okuna tıkla ve onu görev çubuğuna sürükle."
+    "smartscreen_text": "Windows, henüz yayımcı imzası olmayan yeni programları böyle karşılar. “Ek bilgi”ye, ardından “Yine de çalıştır”a tıkla. Yükleyici uygulamayı yönetici izni olmadan yalnızca senin için kurar. Kalp, saatin yanındaki sistem tepsisinde görünür; göremiyorsan “^” okuna tıkla ve onu görev çubuğuna sürükle.",
+    "linux": "Ubuntu 24.04 ve üzeri, GNOME ve KDE",
+    "linux_button": ".deb indir",
+    "source": "Uygulamalar açık kaynak: kod ve tüm sürümler <a href=\"https://github.com/lovearound-me\">GitHub</a> üzerinde.",
+    "linux_help": "Linux’a kurulum",
+    "linux_help_text": "Ubuntu’da indirilen dosyayı aç ve “Yükle”ye tıkla ya da terminalde <code>sudo apt install ./LoveAround.deb</code> komutunu çalıştır. Kalp sistem tepsisinde belirir. GNOME’da kurulumdan sonra ekranın parlayabilmesi için bir kez oturumu kapatıp yeniden aç; o zamana kadar sinyaller bildirim olarak gelir.",
+    "support": "Kuramadın mı? <a href=\"https://t.me/lovearound_help\">Telegram grubumuza</a> yaz, yardım edelim.",
+    "web": "Tarayıcıda lovearound",
+    "web_text": "Web sürümü telefonda ve bilgisayarda çalışır. Hiçbir şey kurman gerekmez.",
+    "web_go": "Aç →"
   },
   "faq": {
-    "kicker": "Basit bir başlangıç",
     "title": "Herkesin paylaşacak biraz sevgisi var.",
     "q1": "Karşımdaki kişi benim olduğumu anlar mı?",
     "a1": "Hayır. Sinyal isimsiz ve sözsüz gelir — yalnızca birinin onu düşündüğünün işareti olarak. Kimin kime ne gönderdiğini kaydetmiyoruz.",
@@ -130,19 +148,24 @@
     "q4": "Bir sinyale cevap vermem gerekir mi?",
     "a4": "Hayır. O anın tadını çıkarman yeterli. İçinden geldiğinde biraz sevgiyi sen de aktarırsın.",
     "q5": "Herhangi bir cihaz bağlayabilir miyim?",
-    "a5": "Yeni bağlantılar adım adım gelecek. Lambalar, bileklikler, oyuncaklar ve küçük ekranlar gitmek istediğimiz yönün örnekleri.",
+    "a5": "Evet. Kendi cihazını, örneğin bir ESP32 ile, şimdiden yapıp <a href=\"/docs\">açık API</a> üzerinden bağlayabilirsin. Lamba, bileklik, oyuncak ve küçük ekran gibi hazır cihazlar planlarımızda; onları adım adım ekleyeceğiz.",
     "q6": "Ücreti ne kadar?",
-    "a6": "Uygulama ücretsiz. Heart’ın fiyatını çıkışa yakın paylaşacağız."
+    "a6": "Uygulama ücretsiz. Heart’ın fiyatını çıkışa yakın paylaşacağız.",
+    "q7": "Uygulama kurulmazsa ne yapmalı?",
+    "a7": "Telegram’da <a href=\"https://t.me/lovearound_help\">@lovearound_help</a> grubuna yaz: hangi sistemi kullandığını ve neyin ters gittiğini anlat, ekran görüntüsü çok yardımcı olur. Orada yanıtlıyoruz; cevabın başkalarının sorularında zaten olabilir."
   },
   "end": {
     "title": "Dünyaya biraz daha ilgi katalım.",
     "text": "Bir kişiyle başla. Ya da dünyadaki birine biraz sevgi gönder."
   },
+  "footer": {
+    "motto": "Sevgini paylaş. Dünyayla bağ kur."
+  },
   "invite": {
-    "title": "Sana bir Love ID gönderildi — lovearound",
-    "og_title": "Sana bir Love ID gönderildi",
+    "title": "Sana bir Love ID gönderildi — lovearound",
+    "og_title": "Sana bir Love ID gönderildi",
     "description": "lovearound’a ekle ve bu kişiye istediğin zaman onu düşündüğünü hissettir. Senin olduğunu bilmeyecek.",
-    "h1": "Sana bir <span style=\"white-space:nowrap\">Love ID</span> gönderildi",
+    "h1": "Sana bir <span style=\"white-space:nowrap\">Love ID</span> gönderildi",
     "lead": "lovearound’a ekle; istediğin zaman bu kişiye onu düşündüğünü hissettirebilirsin. Tek dokunuş, sözsüz.",
     "copied": "Kopyalandı ✓",
     "install": "lovearound’u yükle",
@@ -151,26 +174,30 @@
     "windows": "Windows için indir",
     "alt_mac": "Mac mi kullanıyorsun? <a href=\"/download/LoveAround.dmg\">Mac için indir</a>",
     "alt_windows": "Windows mu kullanıyorsun? <a href=\"/download/LoveAroundSetup.exe\">Windows için indir</a>",
-    "add": "Love ID’yi ekle",
+    "add": "Love ID’yi ekle",
     "add_text": "Uygulama yüklüyse bu bağlantıyı onda aç.",
     "open_installed": "Zaten yüklü — lovearound’da aç",
     "nothing": "Hiçbir şey açılmadı mı?",
     "nothing_text": "O hâlde lovearound henüz yüklü değil. Uygulamayı indir (yukarıdaki 1. adım), sonra yine “Aç”a bas.",
     "away": "Bu bağlantıyı bir bilgisayarda aç",
-    "away_text": "lovearound Mac ve Windows’ta çalışır. Bağlantıyı kendine gönder ve orada aç — bu sayfa ne yapacağını gösterecek.",
+    "away_text": "lovearound Mac, Windows ve Linux’ta çalışır. Bağlantıyı kendine gönder ve orada aç — bu sayfa ne yapacağını gösterecek.",
     "share": "Kendime gönder",
     "copy": "Bağlantıyı kopyala",
-    "away_alt": "Yoksa bilgisayarda mısın? İndir: <a href=\"/download/LoveAround.dmg\">Mac</a> · <a href=\"/download/LoveAroundSetup.exe\">Windows</a>",
+    "away_alt": "Yoksa bilgisayarda mısın? İndir: <a href=\"/download/LoveAround.dmg\">Mac</a> · <a href=\"/download/LoveAroundSetup.exe\">Windows</a> · <a href=\"/download/LoveAround.deb\">Linux</a>",
     "anon": "Sinyal isimsiz gelir: karşındaki kişi senin olduğunu bilmeyecek.",
-    "no_code": "Bu bağlantıda Love ID yok. Tekrar göndermelerini iste.",
+    "no_code": "Bu bağlantıda Love ID yok. Tekrar göndermelerini iste.",
     "installed_mac": "İndirilenler’deki LoveAround.dmg dosyasını aç, lovearound’u Uygulamalar’a sürükle ve başlat.",
     "installed_windows": "İndirilenler’deki LoveAroundSetup.exe dosyasını çalıştır — lovearound saatin yanında görünecek.",
     "open": "lovearound’da aç",
     "add_after": "Uygulama açılınca buraya dön ve düğmeye bas. Bağlantı zaten kopyalandı; istersen uygulamanın “Ekle” penceresine de yapıştırabilirsin.",
-    "other": "Şimdilik Mac ve Windows uygulamaları var",
-    "other_text": "lovearound henüz senin sistemin için yok. Bağlantıyı kaydet ve bir Mac’te ya da Windows bilgisayarda aç.",
+    "other": "Şimdilik Mac, Windows ve Linux uygulamaları var",
+    "other_text": "lovearound henüz senin sistemin için yok. Bağlantıyı kaydet ve Mac, Windows ya da Linux bir bilgisayarda aç.",
     "share_text": "Bilgisayarda aç",
-    "copied_button": "Kopyalandı ✓"
+    "copied_button": "Kopyalandı ✓",
+    "telegram": "Telegram'da aç",
+    "linux": "Linux için indir",
+    "alt_linux": "Linux mu kullanıyorsun? <a href=\"/download/LoveAround.deb\">Linux için indir</a>",
+    "installed_linux": "İndirilenler’deki LoveAround.deb dosyasını aç ve “Yükle”ye tıkla — lovearound sistem tepsisinde görünecek."
   },
   "signin": {
     "title": "Giriş — lovearound",
@@ -183,6 +210,9 @@
     "done": "Tamam!",
     "done_text": "Uygulamaya dönüyorsun. Bir şey olmazsa aşağıdaki düğmeye bas.",
     "closed": "Giriş penceresi kapatıldı. Lütfen tekrar dene.",
-    "failed": "Giriş yapılamadı. Lütfen tekrar dene."
+    "failed": "Giriş yapılamadı. Lütfen tekrar dene.",
+    "telegram_text": "Giriş yap, Telegram'daki bot hesabınla açılsın.",
+    "telegram_back": "Telegram'a dön",
+    "telegram_done": "Telegram'a dönülüyor. Bir şey olmazsa aşağıdaki düğmeye bas."
   }
 }

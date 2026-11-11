@@ -9,52 +9,67 @@
   },
   "nav": {
     "label": "Sekcje",
-    "idea": "Idea",
+    "menu": "Menu",
     "how": "Jak to działa",
     "faq": "Pytania",
-    "download": "Pobierz"
+    "docs": "Dokumentacja",
+    "download": "Pobierz",
+    "open": "Otwórz"
   },
   "hero": {
-    "kicker": "Mały gest troski. Więź ze światem.",
+    "kicker": "Platforma, dzięki której miłość znajduje drogę do ludzi",
     "title": "Dziel się miłością.<br>Poczuj więź ze światem.",
     "lead": "Mały gest troski pokona każdą odległość. Wyślij go komuś bliskiemu albo komuś, kogo jeszcze nie znasz.",
-    "text": "lovearound to sposób na wysyłanie i odbieranie sygnałów miłości. Każdy ma własny Love ID. Sygnał trafia na podłączony komputer lub urządzenie i delikatnie przypomina: ktoś o tobie pomyślał. Bez słów i bez potrzeby odpowiadania.",
+    "text": "lovearound to sposób na wysyłanie i odbieranie sygnałów miłości. Każdy ma własny Love ID. Anonimowy sygnał trafia na podłączony komputer lub urządzenie i delikatnie przypomina: ktoś o tobie pomyślał. Bez słów i bez potrzeby odpowiadania.",
     "cta": "Pobierz aplikację",
+    "open": "Otwórz aplikację",
     "how": "Jak to działa"
   },
-  "close": {
-    "kicker": "01 / Miłość dla bliskich",
-    "p1": "„Myślę o tobie”",
-    "p2": "„Potrzebuję cię”",
-    "p3": "„Jestem obok”",
-    "p4": "„Nie jesteś sam”",
-    "p5": "„Kocham cię”",
-    "text": "Przyjacielowi, mamie, komuś, kogo ci brakuje. Daj im poczuć swoją troskę jednym dotknięciem. Bez słów i bez potrzeby odpowiadania.",
-    "link": "Wyślij komuś bliskiemu →"
-  },
-  "world": {
-    "kicker": "02 / Miłość dla świata",
-    "title": "Komuś na&nbsp;świecie",
-    "text": "Wyślij trochę miłości losowej osobie, która jest otwarta na takie sygnały. Może nigdy się nie spotkacie — a mimo to podarujecie sobie chwilę ciepła.",
-    "link": "Wyślij miłość w świat →"
-  },
   "idea": {
-    "kicker": "Miłość rośnie, gdy ją przekazujemy",
     "title": "Więcej miłości.<br>Więcej więzi między nami.",
     "lead": "Mały gest troski może przemierzyć pokój, miasto albo ocean. Może dotrzeć do kogoś bliskiego albo do kogoś, kogo nigdy nie spotkałeś, i dać mu poczuć, że nie jest sam.",
     "text": "Kto otrzymał miłość, może przekazać ją dalej. Przyjacielowi, rodzinie albo komuś na drugim końcu świata. Tak jeden gest staje się początkiem łańcucha, który łączy coraz więcej ludzi.",
     "why": "Dlatego tworzymy lovearound:",
     "why_text": "żeby miłość mogła swobodniej krążyć po świecie, a my częściej czuli, że jesteśmy ze sobą połączeni."
   },
+  "platform": {
+    "title": "Wyślij, jak ci wygodnie. Poczuj wszędzie naraz.",
+    "analogy": "Twój Love ID działa jak adres e-mail: jest tylko jeden, a poczta przychodzi jednocześnie na telefon i laptopa. Z sygnałem jest tak samo: trafia na wszystko, co podłączyłeś. Tylko nadawcy nigdy nie widać.",
+    "p1": "Wysyłaj, jak ci wygodnie",
+    "p1_text": "Z aplikacji na komputerze, przyciskiem na własnym urządzeniu albo na chybił trafił, „Komuś na świecie”.",
+    "p2": "Nikt się nie dowie, że to ty",
+    "p2_text": "Sygnał przychodzi bez imienia. Nie przechowujemy, kto do kogo wysyłał, więc odbiorca w żaden sposób się tego nie dowie.",
+    "p3": "Poczuj wszędzie naraz",
+    "p3_text": "Podłącz do Love ID tyle aplikacji i urządzeń, ile chcesz. Sygnał dotrze do wszystkich w tej samej chwili.",
+    "p4": "Otwarte dla wszystkich",
+    "p4_text": "API jest opisane, kod aplikacji jest otwarty. Każdy może zrobić własne urządzenie albo aplikację.",
+    "sender_tag": "Ola · w innym mieście",
+    "room_tag": "Kuba · w domu",
+    "mom": "Mama",
+    "to": "Kuba",
+    "third": "Lena",
+    "sender_alt": "Ola przy laptopie klika serduszko obok imienia Kuby",
+    "room_alt": "Wieczorny pokój Kuby: laptop na biurku, Heart i lampka na szafce nocnej, wisiorek na ścianie",
+    "laptop": "Laptop",
+    "lamp": "Lampka",
+    "pendant": "Wisiorek",
+    "devices_label": "Co jest podłączone do Love ID Kuby",
+    "hint": "Włączaj i wyłączaj urządzenia: sygnał dotrze tylko do włączonych.",
+    "bubble": "♥ Ktoś o tobie pomyślał",
+    "bubble_sub": "bez imienia",
+    "st_press": "Ola klika serduszko obok „Kuba”",
+    "st_fly": "Sygnał odlatuje. Imię nadawcy z nim nie leci",
+    "st_done": "Sygnał rozświetlił wszystko, co podłączone. Kuba nie dowie się, że to była Ola.",
+    "st_none": "Kuba nie ma nic podłączonego, sygnał nie ma dokąd trafić. Włącz choć jedno urządzenie."
+  },
   "how": {
-    "title": "Love ID — twój adres dla miłości",
-    "text": "Jeden osobisty identyfikator łączy cię z ludźmi i urządzeniami, przez które odbierasz sygnały troski.",
-    "s1": "Zdobądź swój Love ID",
+    "title": "Love ID — twój adres dla miłości",
+    "s1": "Zdobądź swój Love ID",
     "s1_text": "Pojawia się przy pierwszym logowaniu. Udostępnij swój link, żeby inni mogli wysyłać ci miłość.",
     "s2": "Wyślij znak troski",
     "s2_text": "Wybierz kogoś bliskiego albo „Komuś na świecie”. Jedno dotknięcie może sprawić, że czyjś dzień stanie się trochę jaśniejszy.",
     "s3": "Poczuj to <span style=\"white-space:nowrap\">po swojemu</span>",
-    "s3_text": "Odbieraj sygnały na komputerze lub podłączonym urządzeniu. Nie musisz odpowiadać.",
+    "s3_text": "Odbieraj sygnały na komputerze lub podłączonym urządzeniu. Po prostu poczuj, że ktoś o tobie pomyślał.",
     "s4": "Przekaż dalej",
     "s4_text": "Kiedy tylko zechcesz, wyślij własny sygnał komuś bliskiemu albo komuś nowemu."
   },
@@ -66,13 +81,11 @@
     "caption": "Heart to koncepcja urządzenia. Ostateczny wygląd może się różnić.",
     "h3": "Serce, które odpowiada na troskę.",
     "p1": "Gdy ktoś wysyła ci miłość, Heart łagodnie świeci i pulsuje. Za każdym światłem stoi człowiek — tuż obok albo tysiące kilometrów stąd. Ktoś wysłał trochę miłości, a ty czujesz ją właśnie tutaj. A potem możesz przekazać ją dalej.",
-    "p2": "Postaw je przy łóżku, na biurku albo tam, gdzie chcesz odrobiny ciepła. Połączone z twoim Love ID serce odbiera sygnały od bliskich, a jeśli zechcesz — także od kogoś na świecie.",
-    "strong": "Weź je dla siebie albo podaruj komuś, komu chcesz być bliżej.",
-    "cta": "Daj znać, gdy Heart będzie dostępne"
+    "p2": "Postaw je przy łóżku, na biurku albo tam, gdzie chcesz odrobiny ciepła. Połączone z twoim Love ID serce odbiera sygnały od bliskich, a jeśli zechcesz — także od kogoś na świecie.",
+    "strong": "Weź je dla siebie albo podaruj komuś, z kim chcesz być bliżej."
   },
   "devices": {
-    "kicker": "Twój Love ID jest zawsze z tobą",
-    "title": "Jeden Love ID.<br>Wiele sposobów, by poczuć troskę.",
+    "title": "Jeden Love ID.<br>Wiele sposobów, by poczuć troskę.",
     "lead": "Heart to pierwszy krok. Chcemy, żebyś mógł podłączać do lovearound także inne urządzenia i sam wybierać, jak sygnał miłości pojawia się w twoim świecie.",
     "tag": "W PLANACH",
     "lamp": "Lampka nocna",
@@ -84,13 +97,10 @@
     "screen": "Mały ekran na biurku",
     "screen_text": "Pokazuje serce w chwili, gdy dociera do ciebie sygnał.",
     "diy": "Nie chcesz czekać? Zbuduj własne urządzenie",
-    "diy_text": "Lampka, maskotka albo mały ekran na ESP32, które reagują na twój Love ID. Przewodnik krok po kroku — od pierwszych kabelków do pierwszego sygnału.",
-    "diy_go": "Jak to zbudować →",
-    "note": "Te połączenia są częścią naszych planów. Zgodne urządzenia i funkcje będziemy dodawać stopniowo.",
-    "closing": "To ty wybierasz, jak czuć miłość."
+    "diy_text": "lovearound to otwarta platforma: API jest opisane, kod aplikacji jest otwarty, a każdy może zrobić własne urządzenie albo aplikację dla Love ID. Lampka, maskotka albo mały ekran na ESP32, które reagują na twój Love ID. Przewodnik krok po kroku — od pierwszych kabelków do pierwszego sygnału.",
+    "diy_go": "Jak to zbudować →"
   },
   "moments": {
-    "kicker": "Małe chwile, które nas łączą",
     "title": "Kiedy chcesz podarować<br>trochę ciepła.",
     "m1": "Mamie, przy porannej kawie",
     "m1_text": "Mieszka w innym mieście. Dziś wysyłasz jej mały znak: „Myślę o tobie”.",
@@ -103,7 +113,7 @@
   },
   "app": {
     "title": "Troska pod ręką, gdy siedzisz przy komputerze",
-    "text": "Aplikacja na Maca i Windows mieszka na pasku menu lub w zasobniku systemowym. Wybierz osobę, wyślij sygnał i wróć do swoich spraw. Otrzymana miłość pojawia się jako łagodna poświata na ekranie.",
+    "text": "Aplikacja na Maca, Windows i Linuksa mieszka na pasku menu lub w zasobniku systemowym. Wybierz osobę, wyślij sygnał i wróć do swoich spraw. Otrzymana miłość pojawia się jako łagodna poświata na ekranie.",
     "menu_title": "O kim teraz myślisz?",
     "menu_close": "Bliscy",
     "menu_a": "M",
@@ -116,10 +126,18 @@
     "windows": "Windows 10 i 11",
     "windows_button": "Pobierz .exe",
     "smartscreen": "Windows pisze „System Windows ochronił ten komputer”",
-    "smartscreen_text": "Tak Windows wita nowe programy, które nie mają jeszcze podpisu wydawcy. Kliknij „Więcej informacji”, a potem „Uruchom mimo to”. Instalator konfiguruje aplikację tylko dla ciebie, bez uprawnień administratora. Serce pojawi się w zasobniku obok zegara; jeśli go nie widzisz, kliknij strzałkę „^” i przeciągnij je na pasek zadań."
+    "smartscreen_text": "Tak Windows wita nowe programy, które nie mają jeszcze podpisu wydawcy. Kliknij „Więcej informacji”, a potem „Uruchom mimo to”. Instalator konfiguruje aplikację tylko dla ciebie, bez uprawnień administratora. Serce pojawi się w zasobniku obok zegara; jeśli go nie widzisz, kliknij strzałkę „^” i przeciągnij je na pasek zadań.",
+    "linux": "Ubuntu 24.04 lub nowszy, GNOME i KDE",
+    "linux_button": "Pobierz .deb",
+    "source": "Aplikacje są open source: kod i wszystkie wersje są na <a href=\"https://github.com/lovearound-me\">GitHub</a>.",
+    "linux_help": "Instalacja na Linuksie",
+    "linux_help_text": "W Ubuntu otwórz pobrany plik i kliknij „Zainstaluj” albo uruchom w terminalu <code>sudo apt install ./LoveAround.deb</code>. Serduszko pojawi się w zasobniku. W GNOME po instalacji wyloguj się i zaloguj ponownie, żeby ekran mógł świecić; do tego czasu sygnały przychodzą jako powiadomienia.",
+    "support": "Nie udało się zainstalować? Napisz na <a href=\"https://t.me/lovearound_help\">grupie na Telegramie</a>, pomożemy.",
+    "web": "lovearound w przeglądarce",
+    "web_text": "Wersja internetowa działa na telefonie i komputerze. Nie trzeba niczego instalować.",
+    "web_go": "Otwórz →"
   },
   "faq": {
-    "kicker": "Prosty początek",
     "title": "Każdy ma trochę miłości, którą może się podzielić.",
     "q1": "Czy ta osoba dowie się, że to ja?",
     "a1": "Nie. Sygnał przychodzi bez imienia i bez słów — to tylko znak, że ktoś o niej pomyślał. Nie zapisujemy, kto komu co wysłał.",
@@ -130,19 +148,24 @@
     "q4": "Czy muszę odpowiadać na sygnał?",
     "a4": "Nie. Możesz po prostu przeżyć tę chwilę. A kiedy zechcesz, przekazać trochę miłości dalej.",
     "q5": "Czy mogę podłączyć dowolne urządzenie?",
-    "a5": "Nowe połączenia będą pojawiać się stopniowo. Lampki, opaski, maskotki i małe ekrany to przykłady kierunku, w którym zmierzamy.",
+    "a5": "Tak. Już teraz możesz zbudować własne urządzenie, na przykład na ESP32, i podłączyć je przez <a href=\"/docs\">otwarte API</a>. Gotowe urządzenia, takie jak lampki, opaski, maskotki i małe ekrany, są w naszych planach i będziemy je dodawać stopniowo.",
     "q6": "Ile to kosztuje?",
-    "a6": "Aplikacja jest bezpłatna. Cenę Heart podamy bliżej premiery."
+    "a6": "Aplikacja jest bezpłatna. Cenę Heart podamy bliżej premiery.",
+    "q7": "Co zrobić, jeśli aplikacja się nie instaluje?",
+    "a7": "Napisz na <a href=\"https://t.me/lovearound_help\">@lovearound_help</a> na Telegramie: jaki masz system i co poszło nie tak, zrzut ekranu bardzo pomoże. Odpowiadamy tam, a odpowiedź może już być w pytaniach innych."
   },
   "end": {
     "title": "Wnieśmy do świata trochę więcej troski.",
     "text": "Zacznij od jednej osoby. Albo wyślij trochę miłości komuś na świecie."
   },
+  "footer": {
+    "motto": "Dziel się miłością. Poczuj więź ze światem."
+  },
   "invite": {
-    "title": "Ktoś wysłał ci Love ID — lovearound",
-    "og_title": "Ktoś wysłał ci Love ID",
+    "title": "Ktoś wysłał ci Love ID — lovearound",
+    "og_title": "Ktoś wysłał ci Love ID",
     "description": "Dodaj go w lovearound i w każdej chwili daj tej osobie znać, że o niej myślisz. Nie dowie się, że to ty.",
-    "h1": "Ktoś wysłał ci <span style=\"white-space:nowrap\">Love ID</span>",
+    "h1": "Ktoś wysłał ci <span style=\"white-space:nowrap\">Love ID</span>",
     "lead": "Dodaj go w lovearound, a w każdej chwili dasz tej osobie znać, że o niej myślisz. Jedno dotknięcie, bez słów.",
     "copied": "Skopiowano ✓",
     "install": "Zainstaluj lovearound",
@@ -151,26 +174,30 @@
     "windows": "Pobierz na Windows",
     "alt_mac": "Masz Maca? <a href=\"/download/LoveAround.dmg\">Pobierz na Maca</a>",
     "alt_windows": "Masz Windows? <a href=\"/download/LoveAroundSetup.exe\">Pobierz na Windows</a>",
-    "add": "Dodaj Love ID",
+    "add": "Dodaj Love ID",
     "add_text": "Gdy aplikacja jest zainstalowana, otwórz w niej ten link.",
     "open_installed": "Już zainstalowana — otwórz w lovearound",
     "nothing": "Nic się nie otworzyło?",
     "nothing_text": "To znaczy, że lovearound nie jest jeszcze zainstalowany. Pobierz go (krok 1 powyżej), a potem znów naciśnij „Otwórz”.",
     "away": "Otwórz ten link na komputerze",
-    "away_text": "lovearound działa na Macu i Windows. Wyślij link sobie i otwórz go tam — ta strona podpowie, co zrobić.",
+    "away_text": "lovearound działa na Macu, Windows i Linuksie. Wyślij link sobie i otwórz go tam — ta strona podpowie, co zrobić.",
     "share": "Wyślij sobie",
     "copy": "Kopiuj link",
-    "away_alt": "Jednak przy komputerze? Pobierz na <a href=\"/download/LoveAround.dmg\">Maca</a> · <a href=\"/download/LoveAroundSetup.exe\">Windows</a>",
+    "away_alt": "Jednak przy komputerze? Pobierz na <a href=\"/download/LoveAround.dmg\">Maca</a> · <a href=\"/download/LoveAroundSetup.exe\">Windows</a> · <a href=\"/download/LoveAround.deb\">Linuksa</a>",
     "anon": "Sygnał przychodzi bez imienia: ta osoba nie dowie się, że to ty.",
-    "no_code": "W tym linku nie ma Love ID. Poproś o ponowne wysłanie.",
+    "no_code": "W tym linku nie ma Love ID. Poproś o ponowne wysłanie.",
     "installed_mac": "Otwórz LoveAround.dmg z Pobranych, przeciągnij lovearound do Aplikacji i uruchom.",
     "installed_windows": "Uruchom LoveAroundSetup.exe z Pobranych — lovearound pojawi się obok zegara.",
     "open": "Otwórz w lovearound",
     "add_after": "Gdy aplikacja się uruchomi, wróć tutaj i naciśnij przycisk. Link jest już skopiowany, więc możesz też po prostu wkleić go w okno „Dodaj” w aplikacji.",
-    "other": "Na razie są aplikacje na Maca i Windows",
-    "other_text": "lovearound nie jest jeszcze dostępny na twój system. Zapisz link i otwórz go na Macu albo komputerze z Windows.",
+    "other": "Na razie są aplikacje na Maca, Windows i Linuksa",
+    "other_text": "lovearound nie jest jeszcze dostępny na twój system. Zapisz link i otwórz go na komputerze z macOS, Windows albo Linuksem.",
     "share_text": "Otwórz na komputerze",
-    "copied_button": "Skopiowano ✓"
+    "copied_button": "Skopiowano ✓",
+    "telegram": "Otwórz w Telegramie",
+    "linux": "Pobierz na Linuksa",
+    "alt_linux": "Masz Linuksa? <a href=\"/download/LoveAround.deb\">Pobierz na Linuksa</a>",
+    "installed_linux": "Otwórz LoveAround.deb z Pobranych i kliknij „Zainstaluj” — lovearound pojawi się w zasobniku."
   },
   "signin": {
     "title": "Logowanie — lovearound",
@@ -183,6 +210,9 @@
     "done": "Gotowe!",
     "done_text": "Wracasz do aplikacji. Jeśli nic się nie dzieje, naciśnij przycisk poniżej.",
     "closed": "Okno logowania zostało zamknięte. Spróbuj ponownie.",
-    "failed": "Nie udało się zalogować. Spróbuj ponownie."
+    "failed": "Nie udało się zalogować. Spróbuj ponownie.",
+    "telegram_text": "Zaloguj się, a bot w Telegramie otworzy się już z twoim kontem.",
+    "telegram_back": "Wróć do Telegrama",
+    "telegram_done": "Wracasz do Telegrama. Jeśli nic się nie dzieje, naciśnij przycisk poniżej."
   }
 }
