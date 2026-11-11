@@ -63,7 +63,11 @@
 
   const app = initializeApp({
     apiKey: 'AIzaSyBZJfln_KXsxRxo3fvVaV1ePmiVUIn5YXY',
-    authDomain: 'needed-app-2026.firebaseapp.com',
+    // Sign in through the page's own host (Firebase Hosting serves /__/auth
+    // there): Google then says "continue to lovearound.me", and browsers that
+    // partition storage keep the sign-in state.
+    authDomain: ['lovearound.me', 'www.lovearound.me'].includes(location.hostname)
+      ? location.hostname : 'needed-app-2026.firebaseapp.com',
     projectId: 'needed-app-2026',
   });
   const auth = getAuth(app);
