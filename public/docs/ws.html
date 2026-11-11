@@ -45,11 +45,13 @@
     <pre><code>wss://api.lovearound.me/v1/stream
 Authorization: Bearer dev_…</code></pre>
     <p>The token goes in a header, as with REST. The browser’s built-in <code>WebSocket</code> can’t set headers, so connect from your own program: on a board, in Node, Python, on a phone.</p>
+    <p>A web page signed in to the account (like the web app) can use a ticket instead: <a href="/docs/rest#post-stream-ticket"><code>POST /v1/stream/ticket</code></a> with the app token, then open <code>wss://api.lovearound.me/v1/stream?ticket=…</code> without a header. A ticket works once, within 30 seconds; get a new one for every connection.</p>
     <div class="tbl"><table>
       <thead><tr><th>Parameter</th><th></th></tr></thead>
       <tbody>
         <tr><td><code>anyone=true</code></td><td>Receive “someone out there” signals from strangers. Off by default for devices, on for the apps. Nothing is stored: each connection decides for itself</td></tr>
         <tr><td><code>anyone=false</code></td><td>Don’t receive them</td></tr>
+        <tr><td><code>ticket=…</code></td><td>A one-time ticket in place of the <code>Authorization</code> header, for a browser</td></tr>
       </tbody>
     </table></div>
     <p>Responses to connecting:</p>

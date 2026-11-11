@@ -193,6 +193,14 @@
     <div class="ep"><span class="m ws">WS</span><code>/v1/stream</code><span class="who dev">device, receive permission</span></div>
     <p>Receiving signals. Described in <a href="/docs/ws">WebSocket</a>.</p>
 
+    <div class="ep" id="post-stream-ticket"><span class="m post">POST</span><code>/v1/stream/ticket</code><span class="who">app</span></div>
+    <p>A one-time ticket for opening the stream from a browser, which can’t put the token in a header there. No body.</p>
+    <pre><code>{
+  &quot;ticket&quot;: &quot;k3VqT9…&quot;,
+  &quot;expires_in&quot;: 30
+}</code></pre>
+    <p>Open <code>/v1/stream?ticket=…</code> within <code>expires_in</code> seconds. A ticket works once and only for the stream.</p>
+
     <h3>Health check</h3>
     <div class="ep" style="margin-top:12px"><span class="m get">GET</span><code>/</code><span class="who dev">no token</span></div>
     <p>Answers <code>200</code> with the text <code>needed</code>.</p>
