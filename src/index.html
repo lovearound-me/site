@@ -10,6 +10,15 @@
 <meta property="og:image" content="https://lovearound.me/img/heart.jpg">
 {{@head}}
 <link rel="icon" href="/heart.svg">
+<script>
+  // Phones and tablets get the web app instead of the downloads: decided by
+  // the device, not the window width, before the first paint. iPadOS reports
+  // itself as a Mac, but one with a touch screen. Without JS: the desktop page.
+  (function (h, n) {
+    h.classList.add('js');
+    if (/Android|iPhone|iPad|iPod/i.test(n.userAgent) || (/Macintosh/.test(n.userAgent) && n.maxTouchPoints > 1)) h.classList.add('mob');
+  })(document.documentElement, navigator);
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
@@ -17,7 +26,7 @@
 :root{
   --bg:#FCF8F4; --ink:#302A27; --body:#5B504B; --muted:#857A74;
   --accent:#AD4255; --accent-hover:#8F3344; --btn:#AD4255; --btn-hover:#8F3344; --heart:#AD4255;
-  --heart-bg:#F6EFE9; --dark-hover:#3D3531; --dark-link:#F2B8C0;
+  --band:#F3E8DF;--heart-bg:#F6EFE9; --dark-hover:#3D3531; --dark-link:#F2B8C0;
   --pink:#F8E5DE; --sage:#E6EEE7; --line:#E8DCD4; --card:#FFFFFF;
   --dark-body:#D8CEC8;
 }
@@ -45,6 +54,21 @@ p{line-height:1.6;color:var(--body)}
 .nav a:hover{color:var(--ink)}
 .nav a.btn,.nav a.btn:hover{color:#fff}
 @media (max-width:860px){.nav .nl{display:none}}
+html:not(.mob) .on-mob,.mob .on-desk{display:none}
+/* the menu below 860px */
+.burger-box{position:relative;display:none}
+@media (max-width:860px){.js .burger-box{display:block}}
+.burger{display:flex;align-items:center;justify-content:center;width:44px;height:44px;margin:-4px -6px;padding:0;border:0;border-radius:999px;background:none;color:var(--body);cursor:pointer}
+.burger:hover,.burger[aria-expanded="true"]{color:var(--ink)}
+.burger svg path{transition:transform .2s,opacity .2s;transform-origin:center}
+.burger[aria-expanded="true"] .b1{transform:rotate(45deg) translateY(5px)}
+.burger[aria-expanded="true"] .b2{opacity:0}
+.burger[aria-expanded="true"] .b3{transform:rotate(-45deg) translateY(-5px)}
+.m-menu{position:absolute;right:-6px;top:calc(100% + 12px);min-width:220px;padding:6px;border-radius:16px;background:var(--card);box-shadow:0 0 0 1px var(--line),0 16px 40px rgba(48,42,39,.14);display:flex;flex-direction:column;animation:m-in .16s ease-out}
+.nav .m-menu a{display:flex;align-items:center;min-height:44px;padding:10px 14px;border-radius:10px;color:var(--body)}
+.nav .m-menu a:hover{background:var(--heart-bg);color:var(--ink)}
+@keyframes m-in{from{opacity:0;transform:translateY(-6px)}}
+@media (prefers-reduced-motion:reduce){.m-menu{animation:none}.burger svg path{transition:none}}
 
 /* type */
 .kicker{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
@@ -57,7 +81,7 @@ p{line-height:1.6;color:var(--body)}
 .measure{max-width:38em}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 28px;border-radius:999px;background:var(--btn);color:#fff;text-decoration:none;font-size:16px;font-weight:700;border:0;cursor:pointer;font-family:inherit}
+.btn{transition:background .15s,box-shadow .15s,transform .1s;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:16px 28px;border-radius:999px;background:var(--btn);color:#fff;text-decoration:none;font-size:16px;font-weight:700;border:0;cursor:pointer;font-family:inherit}
 .btn:hover{background:var(--btn-hover);color:#fff}
 .btn.sm{padding:10px 18px;font-size:15px}
 .link{display:inline-flex;align-items:center;gap:8px;font-weight:700;text-decoration:none;font-size:16px}
@@ -71,26 +95,14 @@ section{padding:104px 0;scroll-margin-top:64px}
 @media (min-width:900px){.split{grid-template-columns:1fr 1fr}}
 
 /* hero */
-.hero{padding:88px 0 104px}
+.hero{padding:88px 0 64px}
 .hero .copy{display:flex;flex-direction:column;gap:28px}
-.ways{display:grid;gap:20px;margin-top:72px}
-@media (min-width:760px){.ways{grid-template-columns:1fr 1fr}}
-.way{padding:36px;border-radius:28px;display:flex;flex-direction:column;gap:18px;min-height:340px}
-.way .h3{font-size:clamp(30px,3.4vw,42px);line-height:1.1}
-.way p{flex:1}
-@media (max-width:520px){.way{padding:26px;min-height:0}}
-@media (min-width:760px){@supports (grid-template-rows:subgrid){.way{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:18px;justify-items:start}.way .link{align-self:end}}}
-.w-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
-.w-rot{display:inline-grid;justify-items:start}
-.w-rot>span{grid-area:1/1;white-space:nowrap;opacity:0;animation:w-rot 12.5s infinite}
-@keyframes w-rot{0%{opacity:1;transform:none}17%{opacity:1;transform:none}20%{opacity:0;transform:translateY(-.15em)}96%{opacity:0;transform:translateY(.15em)}100%{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){.w-rot>span{animation:none}.w-rot>span:first-child{opacity:1}}
 .pink{background:var(--pink)}.sage{background:var(--sage)}
 
 /* idea */
-.callout{padding:32px 36px;border-radius:24px;background:var(--ink);color:#fff;display:flex;flex-direction:column;gap:10px}
+.callout{padding:32px 36px;border-radius:24px;background:var(--card);color:var(--ink);display:flex;flex-direction:column;gap:10px}
 .callout b{font-size:19px}
-.callout p{color:var(--dark-body);font-size:17px}
+.callout p{font-size:17px}
 .steps{display:grid;gap:40px;margin-top:56px}
 @media (min-width:700px){.steps{grid-template-columns:1fr 1fr}}
 @media (min-width:1000px){.steps{grid-template-columns:repeat(4,1fr)}}
@@ -103,8 +115,76 @@ section{padding:104px 0;scroll-margin-top:64px}
 .loveid-head h2{flex:1 1 420px;min-width:0;font-size:clamp(32px,4vw,52px);line-height:1.04;font-weight:700;letter-spacing:-.035em}
 .loveid-head p{flex:0 1 400px;font-size:17px}
 
+/* platform: two rooms, one signal */
+.pf{margin-top:128px;scroll-margin-top:64px}
+.pf:first-child{margin-top:0}
+.pf-title{font-size:clamp(28px,3.5vw,40px);margin-bottom:40px}
+.pf .split{margin-bottom:48px}
+.pf-scenes{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:12px}
+@media (max-width:760px){.pf-scenes{grid-template-columns:1fr}}
+.pf-sender{position:relative;border-radius:28px;overflow:hidden;background:#EADFD6;display:flex;align-items:center;justify-content:center;padding:40px 20px 56px}
+.pf-win{position:absolute;top:22px;right:22px;width:64px;height:58px;border-radius:6px;background:#CFE3EC;box-shadow:inset 0 0 0 4px #C9B8AD}
+.pf-win::after{content:"";position:absolute;top:12px;right:12px;width:16px;height:16px;border-radius:50%;background:#F6D58E}
+.pf-laptop{position:relative;width:100%;max-width:290px;z-index:1}
+.pf-screen{padding:8px;border-radius:12px;background:#3A3330}
+.pf-app{padding:14px;border-radius:5px;background:#FCF8F4;display:flex;flex-direction:column;gap:6px}
+.pf-app b{font-size:13px;line-height:1.3;margin-bottom:4px}
+.pf-row{display:flex;align-items:center;gap:10px;padding:5px 6px;border-radius:9px;transition:background .3s}
+.pf-row i{flex:none;width:22px;height:22px;border-radius:50%}
+.pf-row span{flex:1;min-width:0;font-size:13px;font-weight:700;color:var(--body)}
+.pf-row.on{background:var(--pink)}
+.pf-hb{flex:none;width:26px;height:26px;border-radius:50%;background:var(--heart-bg);display:flex;align-items:center;justify-content:center;transition:background .2s,transform .12s}
+.pf-hb svg path{fill:var(--accent);transition:fill .2s}
+.pf-hb.down{transform:scale(.8)}
+.pf-hb.pressed{background:var(--accent)}
+.pf-hb.pressed svg path{fill:#fff}
+.pf-base{height:12px;margin:0 -16px;border-radius:0 0 10px 10px;background:#9A8E88}
+.pf-cursor{position:absolute;left:0;top:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .3s}
+.pf-cursor.show{opacity:1}
+.pf-tag{position:absolute;left:14px;bottom:14px;z-index:3;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.92);color:var(--ink);font-size:13px;font-weight:800}
+.pf-room{position:relative;border-radius:28px;overflow:hidden;background:#3A302D}
+.pf-room svg{display:block;width:100%;height:auto}
+.pf-bubble{position:absolute;left:50%;top:18px;z-index:3;transform:translate(-50%,-8px);display:flex;flex-direction:column;align-items:center;gap:2px;width:max-content;max-width:calc(100% - 32px);padding:10px 18px;border-radius:18px;background:var(--card);box-shadow:0 10px 30px rgba(0,0,0,.25);text-align:center;opacity:0;transition:opacity .4s,transform .4s;pointer-events:none}
+.pf-bubble.show{opacity:1;transform:translate(-50%,0)}
+.pf-bubble b{font-size:15px}
+.pf-bubble span{font-size:12px;font-weight:700;color:var(--muted)}
+.pf-fly{position:absolute;left:0;top:0;width:30px;height:30px;margin:-15px 0 0 -15px;z-index:5;pointer-events:none;filter:drop-shadow(0 0 10px rgba(245,154,174,.9))}
+.pf-dev{transition:opacity .4s}
+.pf-dev.off{opacity:.28}
+.pf-glow{opacity:0;transition:opacity .6s}
+.pf-lit .pf-glow{opacity:1}
+.pf-lap{fill:#1F1A19;transition:fill .5s}.pf-lit .pf-lap{fill:#F2B8C0}
+.pf-laph{opacity:0;transition:opacity .5s}.pf-lit .pf-laph{opacity:1}
+.pf-heart{fill:#E9E0DB;transition:fill .5s}.pf-lit .pf-heart{fill:#F59AAE}
+.pf-shade{fill:#BFB2AA;transition:fill .5s}.pf-lit .pf-shade{fill:#FFE4BC}
+.pf-pend{fill:#CFC3BC;transition:fill .5s}.pf-lit .pf-pend{fill:#F59AAE}
+.pf-buzz,.pf-pulse{transform-box:fill-box;transform-origin:center}
+.pf-lit .pf-buzz{animation:pf-buzz .12s linear 6}
+.pf-lit .pf-pulse{animation:pf-pulse 1.4s ease-in-out 2}
+@keyframes pf-buzz{0%,100%{transform:translateX(0)}25%{transform:translateX(-2px)}75%{transform:translateX(2px)}}
+@keyframes pf-pulse{50%{transform:scale(1.12)}}
+.pf-controls{margin-top:18px;display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px}
+.pf-toggles{display:flex;flex-wrap:wrap;gap:8px}
+.pf-tg{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;border:0;background:var(--heart-bg);color:var(--muted);font-family:inherit;font-weight:700;font-size:15px;line-height:1;cursor:pointer;box-shadow:0 0 0 1px var(--line)}
+.pf-tg .sw{width:28px;height:16px;border-radius:999px;background:var(--line);position:relative;transition:background .2s}
+.pf-tg .sw::after{content:"";position:absolute;top:2px;left:2px;width:12px;height:12px;border-radius:50%;background:#fff;transition:left .2s}
+.pf-tg[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 0 0 1.5px var(--accent)}
+.pf-tg[aria-pressed="true"] .sw{background:var(--accent)}
+.pf-tg[aria-pressed="true"] .sw::after{left:14px}
+.pf-hint{font-size:15px;color:var(--muted)}
+.pf-status{margin-top:12px;min-height:1.6em;font-size:17px;line-height:1.5;font-weight:700;color:var(--ink)}
+.pf-pillars{margin-top:48px;display:grid;gap:16px}
+@media (min-width:640px){.pf-pillars{grid-template-columns:1fr 1fr}}
+@media (min-width:1000px){.pf-pillars{grid-template-columns:repeat(4,1fr)}}
+.pf-pl{padding:26px 24px;border-radius:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.pf-pl h3{font-size:19px;line-height:1.25;font-weight:800;letter-spacing:-.01em}
+.pf-pl p{font-size:16px}
+@media (prefers-reduced-motion:reduce){.pf *{transition:none!important;animation:none!important}}
+
 /* heart */
-#w-heart{background:var(--heart-bg)}
+#w-heart{background:var(--band)}
+#w-idea{background:var(--sage)}
+#w-ex{background:var(--band)}
 .heart-fig{margin:0;display:flex;flex-direction:column;gap:12px}
 .heart-img{position:relative;border-radius:28px;overflow:hidden;background:#DFD2C6;aspect-ratio:3/2}
 .heart-img img{display:block;width:100%;height:100%;object-fit:cover}
@@ -116,20 +196,21 @@ section{padding:104px 0;scroll-margin-top:64px}
 /* devices */
 .cards{display:grid;gap:20px}
 @media (min-width:700px){.cards{grid-template-columns:1fr 1fr}}
-.dev{padding:32px;border-radius:24px;display:flex;flex-direction:column;gap:12px;min-height:220px}
+.dev{padding:28px 32px;border-radius:24px;display:flex;flex-direction:column;gap:10px}
 .dev .tag{font-size:12px;font-weight:800;letter-spacing:.08em;color:var(--accent)}
 .dev h3{font-size:22px;font-weight:800;letter-spacing:-.01em}
 .dev .ic{color:var(--accent);width:48px;height:48px;border-radius:14px;background:rgba(255,255,255,.7);display:flex;align-items:center;justify-content:center;margin-bottom:6px}
 @media (max-width:520px){.dev{padding:24px;min-height:0}}
-.diy{margin-top:20px;padding:28px 32px;border-radius:24px;background:var(--ink);color:#fff;text-decoration:none;display:flex;flex-wrap:wrap;align-items:center;gap:20px 28px}
-.diy:hover{color:#fff;background:var(--dark-hover)}
+.diy{margin-top:20px;padding:28px 32px;border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);color:var(--ink);transition:transform .2s,box-shadow .2s;text-decoration:none;display:flex;flex-wrap:wrap;align-items:center;gap:20px 28px}
+.diy:hover{color:var(--ink);transform:translateY(-2px);box-shadow:0 0 0 1.5px var(--accent),0 14px 32px rgba(48,42,39,.08)}
 .diy .ic{width:48px;height:48px;flex-shrink:0;border-radius:14px;background:var(--btn);display:flex;align-items:center;justify-content:center}
 .diy-text{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:6px}
 .diy-text b{font-size:20px;font-weight:800;letter-spacing:-.01em}
-.diy-text span{font-size:16px;line-height:1.55;color:var(--dark-body)}
-.diy-go{font-weight:700;font-size:16px;color:var(--dark-link);white-space:nowrap}
+.diy-text span{font-size:16px;line-height:1.55;color:var(--body)}
+.diy-go{font-weight:700;font-size:16px;color:var(--accent);white-space:nowrap}
 @media (max-width:520px){.diy{padding:24px}}
-.closing{font-size:clamp(22px,2.4vw,28px);font-weight:800;letter-spacing:-.02em;margin-top:40px}
+.dl .web{margin-top:0;grid-column:1/-1;order:1}
+.mob .dl .web{order:-2}
 
 /* scenarios */
 .moments{display:grid;gap:16px}
@@ -140,27 +221,39 @@ section{padding:104px 0;scroll-margin-top:64px}
 .moment p{font-size:16px}
 .app{margin-top:96px;display:grid;gap:40px 64px;align-items:center}
 @media (min-width:900px){.app{grid-template-columns:1fr 1fr}}
-.desk{border-radius:28px;background:#EFE4DA;min-height:340px;position:relative;overflow:hidden;box-shadow:inset 0 0 0 8px #E9A3A9,inset 0 0 70px 26px rgba(224,89,107,.32);display:flex;align-items:flex-start;justify-content:flex-end;padding:24px}
-.menu{width:100%;max-width:260px;background:#FFFBF6;border-radius:14px;box-shadow:0 20px 50px rgba(84,48,30,.22);padding:14px;display:flex;flex-direction:column;gap:12px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif}
+.desk{border-radius:28px;background:radial-gradient(120% 90% at 20% 80%,#F8E5DE 0,#F1E6DC 60%);min-height:340px;position:relative;overflow:hidden;box-shadow:inset 0 0 0 1px var(--line),inset 0 0 90px 10px rgba(224,89,107,.22);display:flex;align-items:flex-start;justify-content:flex-end;padding:24px}
+.menu{width:100%;max-width:260px;background:var(--card);border-radius:16px;box-shadow:0 0 0 1px var(--line),0 20px 50px rgba(84,48,30,.16);padding:16px;display:flex;flex-direction:column;gap:12px}
 .menu b{font-size:13px}
-.menu small{font-size:11px;font-weight:600;color:#7A6156}
+.menu small{font-size:12px;font-weight:700;color:var(--muted)}
 .dots{display:flex;gap:10px}
-.dots span{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
-.floating{position:absolute;left:12%;bottom:18%;font-size:34px;animation:float 4s ease-in-out infinite}
-.floating.b{left:30%;bottom:34%;font-size:26px;animation-delay:-1.6s}
-.floating.c{left:18%;bottom:52%;font-size:22px;animation-delay:-2.8s}
+.dots span{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:15px}
+.dots .d0{background:var(--heart-bg);color:var(--accent)}.dots .d1{background:var(--accent);color:#fff}.dots .d2{background:var(--pink);color:var(--ink)}.dots .d3{background:var(--sage);color:var(--ink)}
+.floating{position:absolute;left:12%;bottom:18%;width:44px;height:44px;animation:float 4s ease-in-out infinite}
+.floating.b{left:30%;bottom:36%;width:32px;height:32px;animation-delay:-1.6s}
+.floating.c{left:17%;bottom:56%;width:24px;height:24px;animation-delay:-2.8s}
 @keyframes float{50%{transform:translateY(-10px) rotate(6deg)}}
 @media (prefers-reduced-motion:reduce){.floating{animation:none}}
+@media (max-width:760px){.desk{min-height:250px;padding:18px}.floating{left:10%;bottom:10%}.floating.b{left:30%;bottom:22%}.floating.c{left:19%;bottom:38%}}
 
 /* download */
 .dl{margin-top:56px;display:grid;gap:16px}
-@media (min-width:760px){.dl{grid-template-columns:1fr 1fr}}
-.os{border-radius:24px;background:var(--ink);color:#fff;padding:28px 32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:20px}
-.os b{font-size:26px;font-weight:800;letter-spacing:-.02em;display:block}
-.os span{font-size:14px;color:var(--dark-body)}
+@media (min-width:760px){.dl{grid-template-columns:repeat(3,1fr)}}
+.os{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);color:var(--ink);padding:28px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:24px;transition:transform .2s,box-shadow .2s}
+.os b{font-size:24px;font-weight:800;letter-spacing:-.02em;display:block}
+.os span{font-size:14px;color:var(--muted)}
+.os .btn{padding:13px 22px;font-size:15px}
+.dl.pick .os:not(.mine) .btn{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.dl.pick .os:not(.mine) .btn:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.dl.pick .os.mine{order:-1;box-shadow:0 0 0 1.5px var(--accent)}
 .help{margin-top:24px;display:flex;flex-direction:column;gap:4px}
-.help details summary{cursor:pointer;font-size:15px;font-weight:700;color:var(--body);padding:6px 0}
+.help details summary{list-style:none;cursor:pointer;font-size:15px;font-weight:700;color:var(--body);padding:8px 0;display:flex;align-items:center;gap:10px}
+.help summary::-webkit-details-marker{display:none}
+.help summary::before{content:'+';flex:none;width:14px;font-size:18px;line-height:1;font-weight:600;color:var(--accent)}
+.help details[open] summary::before{content:'−'}
 .help details p{font-size:15px;padding:4px 0 12px;max-width:46em}
+.help .src{font-size:15px;color:var(--body);padding:6px 0}
+.help code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px;padding:2px 6px;border-radius:6px;background:var(--heart-bg);color:var(--ink);word-break:break-all}
+.help .src a,.help details a{color:var(--ink)}
 
 /* faq */
 .faq{display:flex;flex-direction:column;border-top:1px solid var(--line)}
@@ -172,9 +265,9 @@ section{padding:104px 0;scroll-margin-top:64px}
 .faq details p{padding:0 0 24px;font-size:17px;max-width:44em}
 
 /* end */
-.end{margin:0 0 104px;padding:64px 48px;border-radius:32px;background:var(--ink);color:#fff;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:32px}
-.end .h2{color:#fff;max-width:11em}
-.end p{color:var(--dark-body);font-size:18px;margin-top:18px;max-width:30em}
+.end{margin:0 0 104px;padding:72px 48px;border-radius:32px;background:var(--ink);color:#fff;display:flex;flex-direction:column;align-items:center;text-align:center;gap:32px}
+.end .h2{color:#fff;max-width:14em;margin:0 auto}
+.end p{color:var(--dark-body);font-size:18px;margin:18px auto 0;max-width:30em}
 @media (max-width:520px){.end{padding:36px 24px;border-radius:24px}}
 footer{border-top:1px solid var(--line)}
 footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 24px;padding-top:28px;padding-bottom:40px;font-size:14px;color:var(--muted)}
@@ -190,6 +283,45 @@ footer a{color:var(--muted)}
 .nav .lang-menu a:hover{background:var(--heart-bg);color:var(--ink)}
 .nav .lang-menu a[aria-current]{color:var(--ink);font-weight:800}
 @media (max-width:860px){.nav{gap:12px}}
+@media (max-width:420px){.top .wrap{gap:10px}.nav{gap:8px}.logo{gap:6px;font-size:18px}.logo svg{width:20px;height:20px}.btn.sm{padding:10px 14px;font-size:14px}.lang summary{padding:7px 10px;gap:4px}}
+
+/* revision: balance, alignment, phone layout, motion */
+.h1,.h2,.h3,h2,h3,h4{text-wrap:balance}
+p{text-wrap:pretty}
+.btn:active{transform:scale(.98)}
+.head .lead{max-width:34em}
+.lang summary{min-height:40px}
+.os:hover{transform:translateY(-2px);box-shadow:0 0 0 1px var(--line),0 14px 32px rgba(48,42,39,.08)}
+.dl.pick .os.mine:hover{box-shadow:0 0 0 1.5px var(--accent),0 14px 32px rgba(48,42,39,.08)}
+@supports (grid-template-rows:subgrid){
+ @media (min-width:640px){.pf-pillars{row-gap:16px}.pf-pl{display:grid;grid-row:span 2;grid-template-rows:subgrid;row-gap:10px;align-content:start}}
+ @media (min-width:700px){.step{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:12px;align-content:start}}
+}
+@media (max-width:760px){
+ section{padding:72px 0}
+ .head{margin-bottom:36px}
+ .loveid,.pf{margin-top:88px}
+ .pf-sender{padding:18px 16px 50px}
+ .pf-laptop{max-width:250px}
+ .pf-win{display:none}
+ .pf-status{font-size:15px;min-height:4.5em}
+ .app{margin-top:64px}
+ .end{margin-bottom:72px}
+}
+@media (max-width:520px){
+ .pf-toggles{display:grid;grid-template-columns:1fr 1fr;width:100%}
+ .pf-tg{justify-content:flex-start}
+ .steps{gap:28px}
+}
+@media (max-width:699px){
+ .swipe{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-left:16px;margin:0 -16px;padding:2px 16px 10px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+ .swipe::-webkit-scrollbar{display:none}
+ .swipe>*{flex:0 0 80%;scroll-snap-align:start}
+}
+@media (max-width:380px){html:not(.mob) .nav .btn.sm{padding:9px 11px;font-size:13px}}
+.js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease-out,transform .6s ease-out}
+.js .rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.os,.diy,.btn{transition:none}}
 </style>
 </head>
 <body>
@@ -201,19 +333,31 @@ footer a{color:var(--muted)}
       lovearound
     </a>
     <nav class="nav" aria-label="{{nav.label}}">
-      <a class="nl" href="#w-idea">{{nav.idea}}</a>
-      <a class="nl" href="#w-how">{{nav.how}}</a>
-      <a class="nl" href="#w-heart">Heart</a>
+      <a class="nl" href="#w-platform">{{nav.how}}</a>
       <a class="nl" href="#w-faq">{{nav.faq}}</a>
+      <a class="nl" href="/docs">{{nav.docs}}</a>
+      <a class="nl" href="https://t.me/lovearound_help">Telegram</a>
       {{@langmenu}}
-      <a class="btn sm" href="#w-get">{{nav.download}}</a>
+      <a class="btn sm on-desk" href="#w-get">{{nav.download}}</a>
+      <a class="btn sm on-mob" href="{{@app}}">{{nav.open}}</a>
+      <div class="burger-box">
+        <button class="burger" type="button" id="m-btn" aria-expanded="false" aria-controls="m-menu" aria-label="{{nav.menu}}">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path class="b1" d="M3 5h14"/><path class="b2" d="M3 10h14"/><path class="b3" d="M3 15h14"/></svg>
+        </button>
+        <div class="m-menu" id="m-menu" hidden>
+          <a href="#w-platform">{{nav.how}}</a>
+          <a href="#w-faq">{{nav.faq}}</a>
+          <a href="/docs">{{nav.docs}}</a>
+          <a href="https://t.me/lovearound_help">Telegram</a>
+        </div>
+      </div>
     </nav>
   </div>
 </header>
 
 <main>
 
-  <!-- 01 · first screen: two ways to send love -->
+  <!-- 01 · first screen -->
   <div class="hero">
     <div class="wrap">
       <div class="copy">
@@ -222,36 +366,127 @@ footer a{color:var(--muted)}
         <p class="lead measure">{{hero.lead}}</p>
         <p class="text measure">{{hero.text}}</p>
         <div class="cta" style="margin-top:8px">
-          <a class="btn" href="#w-get">{{hero.cta}}</a>
-          <a class="link" href="#w-how">{{hero.how}}
+          <a class="btn on-desk" href="#w-get">{{hero.cta}}</a>
+          <a class="btn on-mob" href="{{@app}}">{{hero.open}}</a>
+          <a class="link" href="#w-platform">{{hero.how}}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg>
           </a>
-        </div>
-      </div>
-
-      <div class="ways">
-        <div class="way pink">
-          <span class="kicker">{{close.kicker}}</span>
-          <h2 class="h3"><span class="w-sr">{{close.p1}}</span><span class="w-rot" aria-hidden="true"><span style="animation-delay:0s">{{close.p1}}</span><span style="animation-delay:-10s">{{close.p2}}</span><span style="animation-delay:-7.5s">{{close.p3}}</span><span style="animation-delay:-5s">{{close.p4}}</span><span style="animation-delay:-2.5s">{{close.p5}}</span></span></h2>
-          <p class="text">{{close.text}}</p>
-          <a class="link" href="#w-get">{{close.link}}</a>
-        </div>
-        <div class="way sage">
-          <span class="kicker">{{world.kicker}}</span>
-          <h2 class="h3">{{world.title}}</h2>
-          <p class="text">{{world.text}}</p>
-          <a class="link" href="#w-get">{{world.link}}</a>
         </div>
       </div>
     </div>
   </div>
 
   <!-- 02 · the idea and how it works -->
-  <section id="w-idea" style="padding-top:0">
+  <section id="w-platform" style="padding-top:0;scroll-margin-top:96px">
+    <div class="wrap">
+      <!-- the platform: one signal from one room to another -->
+      <div id="w-flow" class="pf">
+        <h2 class="h2 pf-title">{{platform.title}}</h2>
+
+        <div class="pf-scenes" id="pf-scenes">
+          <div class="pf-sender" id="pf-sender" role="img" aria-label="{{platform.sender_alt}}">
+            <span class="pf-tag">{{platform.sender_tag}}</span>
+            <div class="pf-win"></div>
+            <div class="pf-laptop" aria-hidden="true">
+              <div class="pf-screen"><div class="pf-app">
+                <b>{{app.menu_title}}</b>
+                <div class="pf-row"><i style="background:#F8E5DE"></i><span>{{platform.mom}}</span><em class="pf-hb"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.2 0 3.6 1.2 5.2 3 1.6-1.8 3-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg></em></div>
+                <div class="pf-row" id="pf-row"><i style="background:#E6EEE7"></i><span>{{platform.to}}</span><em class="pf-hb" id="pf-hb"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.2 0 3.6 1.2 5.2 3 1.6-1.8 3-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg></em></div>
+                <div class="pf-row"><i style="background:#F3D9C8"></i><span>{{platform.third}}</span><em class="pf-hb"><svg width="14" height="14" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.2 0 3.6 1.2 5.2 3 1.6-1.8 3-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg></em></div>
+              </div></div>
+              <div class="pf-base"></div>
+            </div>
+            <svg class="pf-cursor" id="pf-cursor" width="18" height="24" viewBox="-1 -1 17 23" aria-hidden="true"><path d="M0 0v18l5-4.5 3.5 7.5 3-1.4-3.5-7.1h6z" fill="#302A27" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/></svg>
+          </div>
+
+          <div class="pf-room" id="pf-room">
+            <span class="pf-tag">{{platform.room_tag}}</span>
+            <div class="pf-bubble" id="pf-bubble"><b>{{platform.bubble}}</b><span>{{platform.bubble_sub}}</span></div>
+            <svg viewBox="0 0 800 460" role="img" aria-label="{{platform.room_alt}}">
+              <defs>
+                <radialGradient id="pf-gp"><stop offset="0" stop-color="#F7A9B8" stop-opacity=".85"/><stop offset="1" stop-color="#F7A9B8" stop-opacity="0"/></radialGradient>
+                <radialGradient id="pf-gw"><stop offset="0" stop-color="#FFD9A8" stop-opacity=".8"/><stop offset="1" stop-color="#FFD9A8" stop-opacity="0"/></radialGradient>
+              </defs>
+              <rect width="800" height="460" fill="#3A302D"/>
+              <rect y="388" width="800" height="72" fill="#2C2422"/>
+              <ellipse cx="420" cy="420" rx="250" ry="22" fill="#352B28"/>
+              <rect x="84" y="56" width="164" height="150" rx="8" fill="#232B3D" stroke="#5A4A44" stroke-width="6"/>
+              <path d="M166 56v150M84 131h164" stroke="#5A4A44" stroke-width="5"/>
+              <circle cx="214" cy="88" r="12" fill="#EDE3C8"/><circle cx="219" cy="84" r="11" fill="#232B3D"/>
+              <circle cx="108" cy="80" r="1.6" fill="#EDE3C8"/><circle cx="140" cy="104" r="1.2" fill="#EDE3C8"/><circle cx="196" cy="160" r="1.4" fill="#EDE3C8"/><circle cx="118" cy="170" r="1.2" fill="#EDE3C8"/><circle cx="226" cy="186" r="1.1" fill="#EDE3C8"/>
+              <rect x="560" y="80" width="110" height="80" rx="4" fill="#4A3D39"/><path d="M572 148l26-30 18 18 14-12 28 24z" fill="#5E4D48"/>
+              <rect x="54" y="300" width="310" height="12" rx="3" fill="#6B5148"/>
+              <rect x="70" y="312" width="10" height="76" fill="#57423C"/><rect x="338" y="312" width="10" height="76" fill="#57423C"/>
+              <g class="pf-dev" data-dev="lap">
+                <circle class="pf-glow" cx="220" cy="250" r="120" fill="url(#pf-gp)"/>
+                <rect x="160" y="206" width="120" height="88" rx="7" fill="#2A2321" stroke="#9A8E88" stroke-width="4"/>
+                <rect class="pf-lap" x="167" y="213" width="106" height="74" rx="3"/>
+                <path class="pf-laph pf-pulse" fill="#AD4255" d="M220 266s-13-8-16-15c-2.4-6 1.4-12 7.4-12 3.8 0 6.2 2 8.6 5 2.4-3 4.8-5 8.6-5 6 0 9.8 6 7.4 12-3 7-16 15-16 15z"/>
+                <path d="M140 294h160l-8 7h-144z" fill="#9A8E88"/>
+              </g>
+              <rect x="310" y="276" width="22" height="24" rx="4" fill="#8F7A72"/><path d="M332 282c8 0 8 12 0 12" stroke="#8F7A72" stroke-width="4" fill="none"/>
+              <g class="pf-dev" data-dev="pend">
+                <circle class="pf-glow" cx="440" cy="246" r="80" fill="url(#pf-gp)"/>
+                <circle cx="440" cy="136" r="5" fill="#9A8E88"/>
+                <path d="M440 140c-30 40-26 80 0 96M440 140c30 40 26 80 0 96" stroke="#BFAFA6" stroke-width="2" fill="none"/>
+                <path class="pf-pend pf-buzz" d="M440 262s-11-6.6-13.4-12.6c-2-5 1.1-10 6.2-10 3.1 0 5.1 1.6 7.2 4.2 2.1-2.6 4.1-4.2 7.2-4.2 5.1 0 8.2 5 6.2 10C451 255.4 440 262 440 262z"/>
+              </g>
+              <rect x="520" y="312" width="210" height="76" rx="6" fill="#5A4540"/>
+              <rect x="534" y="336" width="182" height="2" fill="#4A3833"/><circle cx="625" cy="360" r="4" fill="#8F7A72"/>
+              <g class="pf-dev" data-dev="heart">
+                <circle class="pf-glow" cx="578" cy="284" r="90" fill="url(#pf-gp)"/>
+                <path class="pf-heart pf-pulse" d="M578 310s-22-13-26.5-24.5c-3.8-9.6 2.2-19.5 12.2-19.5 6 0 9.9 3.2 14.3 8.4 4.4-5.2 8.3-8.4 14.3-8.4 10 0 16 9.9 12.2 19.5C600 297 578 310 578 310z"/>
+              </g>
+              <g class="pf-dev" data-dev="lamp">
+                <circle class="pf-glow" cx="672" cy="230" r="130" fill="url(#pf-gw)"/>
+                <rect x="669" y="246" width="6" height="62" fill="#9A8E88"/>
+                <ellipse cx="672" cy="309" rx="22" ry="5" fill="#9A8E88"/>
+                <path class="pf-shade" d="M640 250h64l-12-50h-40z"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+
+        <div class="pf-controls">
+          <div class="pf-toggles" role="group" aria-label="{{platform.devices_label}}">
+            <button class="pf-tg" type="button" id="pf-tg-lap" data-dev="lap" aria-pressed="true"><span class="sw"></span>{{platform.laptop}}</button>
+            <button class="pf-tg" type="button" id="pf-tg-heart" data-dev="heart" aria-pressed="true"><span class="sw"></span>Heart</button>
+            <button class="pf-tg" type="button" id="pf-tg-lamp" data-dev="lamp" aria-pressed="true"><span class="sw"></span>{{platform.lamp}}</button>
+            <button class="pf-tg" type="button" id="pf-tg-pend" data-dev="pend" aria-pressed="false"><span class="sw"></span>{{platform.pendant}}</button>
+          </div>
+          <p class="pf-hint">{{platform.hint}}</p>
+        </div>
+        <p class="pf-status" id="pf-status" data-press="{{platform.st_press}}" data-fly="{{platform.st_fly}}" data-done="{{platform.st_done}}" data-none="{{platform.st_none}}">{{platform.st_done}}</p>
+
+        <div class="pf-pillars">
+          <div class="pf-pl pink"><h3>{{platform.p1}}</h3><p>{{platform.p1_text}}</p></div>
+          <div class="pf-pl sage"><h3>{{platform.p2}}</h3><p>{{platform.p2_text}}</p></div>
+          <div class="pf-pl pink"><h3>{{platform.p3}}</h3><p>{{platform.p3_text}}</p></div>
+          <div class="pf-pl sage"><h3>{{platform.p4}}</h3><p>{{platform.p4_text}}</p></div>
+        </div>
+      </div>
+
+      <div id="w-how" class="loveid" style="scroll-margin-top:64px">
+        <div class="loveid-head">
+          <h2>{{how.title}}</h2>
+          <p>{{platform.analogy}}</p>
+        </div>
+        <div class="steps">
+          <div class="step"><span class="n">01</span><h4>{{how.s1}}</h4><p>{{how.s1_text}}</p></div>
+          <div class="step"><span class="n">02</span><h4>{{how.s2}}</h4><p>{{how.s2_text}}</p></div>
+          <div class="step"><span class="n">03</span><h4>{{how.s3}}</h4><p>{{how.s3_text}}</p></div>
+          <div class="step"><span class="n">04</span><h4>{{how.s4}}</h4><p>{{how.s4_text}}</p></div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 02b · the idea -->
+  <section id="w-idea">
     <div class="wrap">
       <div class="split">
         <div class="stack">
-          <span class="kicker">{{idea.kicker}}</span>
           <h2 class="h2">{{idea.title}}</h2>
         </div>
         <div class="stack" style="justify-content:flex-end">
@@ -263,19 +498,6 @@ footer a{color:var(--muted)}
       <div class="callout" style="margin-top:56px">
         <b>{{idea.why}}</b>
         <p>{{idea.why_text}}</p>
-      </div>
-
-      <div id="w-how" class="loveid" style="scroll-margin-top:64px">
-        <div class="loveid-head">
-          <h2>{{how.title}}</h2>
-          <p>{{how.text}}</p>
-        </div>
-        <div class="steps">
-          <div class="step"><span class="n">01</span><h4>{{how.s1}}</h4><p>{{how.s1_text}}</p></div>
-          <div class="step"><span class="n">02</span><h4>{{how.s2}}</h4><p>{{how.s2_text}}</p></div>
-          <div class="step"><span class="n">03</span><h4>{{how.s3}}</h4><p>{{how.s3_text}}</p></div>
-          <div class="step"><span class="n">04</span><h4>{{how.s4}}</h4><p>{{how.s4_text}}</p></div>
-        </div>
       </div>
     </div>
   </section>
@@ -303,7 +525,6 @@ footer a{color:var(--muted)}
           <p class="text">{{heart.p1}}</p>
           <p class="text">{{heart.p2}}</p>
           <p class="strong">{{heart.strong}}</p>
-          <div><a class="btn" href="mailto:hello@lovearound.me?subject=Heart">{{heart.cta}}</a></div>
         </div>
       </div>
     </div>
@@ -312,14 +533,11 @@ footer a{color:var(--muted)}
   <!-- 04 · other devices, planned -->
   <section id="w-devices">
     <div class="wrap">
-      <div class="split" style="margin-bottom:56px">
-        <div class="stack">
-          <span class="kicker">{{devices.kicker}}</span>
-          <h2 class="h2">{{devices.title}}</h2>
-        </div>
-        <p class="lead" style="align-self:end">{{devices.lead}}</p>
+      <div class="head">
+        <h2 class="h2">{{devices.title}}</h2>
+        <p class="lead measure">{{devices.lead}}</p>
       </div>
-      <div class="cards">
+      <div class="cards swipe">
         <div class="dev pink">
           <span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3z"/></svg></span>
           <span class="tag">{{devices.tag}}</span>
@@ -345,7 +563,7 @@ footer a{color:var(--muted)}
           <p>{{devices.screen_text}}</p>
         </div>
       </div>
-      <a class="diy" href="/docs">
+      <a class="diy" id="w-open" href="/docs" style="scroll-margin-top:96px">
         <span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/></svg></span>
         <span class="diy-text">
           <b>{{devices.diy}}</b>
@@ -353,19 +571,16 @@ footer a{color:var(--muted)}
         </span>
         <span class="diy-go">{{devices.diy_go}}</span>
       </a>
-      <p class="small" style="margin-top:28px">{{devices.note}}</p>
-      <p class="closing">{{devices.closing}}</p>
     </div>
   </section>
 
   <!-- 05 · moments and the app -->
-  <section id="w-ex" style="padding-top:0">
+  <section id="w-ex">
     <div class="wrap">
       <div class="head">
-        <span class="kicker">{{moments.kicker}}</span>
         <h2 class="h2">{{moments.title}}</h2>
       </div>
-      <div class="moments">
+      <div class="moments swipe">
         <div class="moment"><h3>{{moments.m1}}</h3><p>{{moments.m1_text}}</p></div>
         <div class="moment"><h3>{{moments.m2}}</h3><p>{{moments.m2_text}}</p></div>
         <div class="moment"><h3>{{moments.m3}}</h3><p>{{moments.m3_text}}</p></div>
@@ -378,50 +593,67 @@ footer a{color:var(--muted)}
           <p class="text">{{app.text}}</p>
         </div>
         <div class="desk" aria-hidden="true">
-          <span class="floating">❤️</span><span class="floating b">🧡</span><span class="floating c">💗</span>
+          <svg class="floating" viewBox="0 0 24 24" aria-hidden="true"><path fill="#AD4255" d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg><svg class="floating b" viewBox="0 0 24 24" aria-hidden="true"><path fill="#F59AAE" d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg><svg class="floating c" viewBox="0 0 24 24" aria-hidden="true"><path fill="#F2B8C0" d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>
           <div class="menu">
             <b>{{app.menu_title}}</b>
             <small>{{app.menu_close}}</small>
             <div class="dots">
-              <span style="background:#F8EFE6;color:#8A6B2B">✦</span>
-              <span style="background:#F07A62;color:#fff">{{app.menu_a}}</span>
-              <span style="box-shadow:inset 0 0 0 2px #4E9BD8;color:#22679E">{{app.menu_b}}</span>
-              <span style="box-shadow:inset 0 0 0 2px #6FAE7C;color:#39744A">{{app.menu_c}}</span>
+              <span class="d0">✦</span>
+              <span class="d1">{{app.menu_a}}</span>
+              <span class="d2">{{app.menu_b}}</span>
+              <span class="d3">{{app.menu_c}}</span>
             </div>
           </div>
         </div>
       </div>
 
       <div id="w-get" style="scroll-margin-top:80px">
-        <div class="dl">
-          <div class="os">
+        <div class="dl" id="dl">
+          <div class="os" data-os="mac">
             <div><b>macOS</b><span>{{get.mac}}</span></div>
             <a class="btn" href="https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
               {{get.mac_button}}
             </a>
           </div>
-          <div class="os">
+          <div class="os" data-os="win">
             <div><b>Windows</b><span>{{get.windows}}</span></div>
             <a class="btn" href="https://github.com/lovearound-me/windows/releases/latest/download/LoveAroundSetup.exe">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
               {{get.windows_button}}
             </a>
           </div>
+          <div class="os" data-os="linux">
+            <div><b>Linux</b><span>{{get.linux}}</span></div>
+            <a class="btn" href="https://github.com/lovearound-me/linux/releases/latest/download/LoveAround.deb">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+              {{get.linux_button}}
+            </a>
+          </div>
+          <a class="diy web" href="{{@app}}">
+            <span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/></svg></span>
+            <span class="diy-text">
+              <b>{{get.web}}</b>
+              <span>{{get.web_text}}</span>
+            </span>
+            <span class="diy-go">{{get.web_go}}</span>
+          </a>
         </div>
         <div class="help">
+          <p class="src">{{get.source}}</p>
+          <p class="src">{{get.support}}</p>
           <details id="windows"><summary>{{get.smartscreen}}</summary><p>{{get.smartscreen_text}}</p></details>
+          <details id="linux"><summary>{{get.linux_help}}</summary><p>{{get.linux_help_text}}</p></details>
         </div>
       </div>
     </div>
   </section>
 
   <!-- 06 · questions and the end -->
-  <section id="w-faq" style="padding-top:0">
+  <section id="w-faq">
     <div class="wrap">
       <div class="split">
         <div class="stack">
-          <span class="kicker">{{faq.kicker}}</span>
           <h2 class="h2">{{faq.title}}</h2>
         </div>
         <div class="faq">
@@ -431,6 +663,7 @@ footer a{color:var(--muted)}
           <details><summary>{{faq.q4}}</summary><p>{{faq.a4}}</p></details>
           <details><summary>{{faq.q5}}</summary><p>{{faq.a5}}</p></details>
           <details><summary>{{faq.q6}}</summary><p>{{faq.a6}}</p></details>
+          <details id="help"><summary>{{faq.q7}}</summary><p>{{faq.a7}}</p></details>
         </div>
       </div>
     </div>
@@ -442,7 +675,8 @@ footer a{color:var(--muted)}
         <h2 class="h2">{{end.title}}</h2>
         <p>{{end.text}}</p>
       </div>
-      <a class="btn" href="#w-get">{{hero.cta}}</a>
+      <a class="btn on-desk" href="#w-get">{{hero.cta}}</a>
+      <a class="btn on-mob" href="{{@app}}">{{hero.open}}</a>
     </div>
   </div>
 
@@ -450,8 +684,8 @@ footer a{color:var(--muted)}
 
 <footer>
   <div class="wrap">
-    <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
-    <span>© 2026 lovearound</span>
+    <span class="motto">{{footer.motto}}</span>
+    <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · © 2026 lovearound</span>
   </div>
 </footer>
 
@@ -474,6 +708,162 @@ footer a{color:var(--muted)}
   // The language menu closes on a click elsewhere.
   var menu = document.querySelector('.lang');
   document.addEventListener('click', function (e) { if (menu && !menu.contains(e.target)) menu.open = false; });
+
+  // The menu below 860px: opens from its button, closes on a link, on Escape
+  // and on a click elsewhere.
+  (function () {
+    var btn = document.getElementById('m-btn'), panel = document.getElementById('m-menu');
+    if (!btn || !panel) return;
+    var box = btn.parentNode;
+    function set(open) { btn.setAttribute('aria-expanded', open ? 'true' : 'false'); panel.hidden = !open; }
+    btn.addEventListener('click', function () { set(panel.hidden); });
+    panel.addEventListener('click', function (e) { if (e.target.closest('a')) set(false); });
+    document.addEventListener('click', function (e) { if (!panel.hidden && !box.contains(e.target)) set(false); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); }
+    });
+  })();
+
+  // The download for this computer comes first; the others stay as quieter buttons.
+  (function () {
+    var dl = document.getElementById('dl');
+    if (!dl || document.documentElement.classList.contains('mob')) return;
+    var p = (navigator.userAgentData && navigator.userAgentData.platform || navigator.platform || '') + ' ' + navigator.userAgent;
+    var os = /Mac/i.test(p) ? 'mac' : /Win/i.test(p) ? 'win' : /Linux|X11/i.test(p) ? 'linux' : '';
+    var card = os && dl.querySelector('[data-os="' + os + '"]');
+    if (card) { card.classList.add('mine'); dl.classList.add('pick'); }
+  })();
+
+  // Blocks ease in as they scroll into view.
+  (function () {
+    if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    var els = document.querySelectorAll('.pf-pl,.step,.loveid-head,#w-idea .split,.callout,#w-heart .head,.heart-grid>*,#w-devices .head,.cards,.diy,#w-ex .head,.moments,.app>*,.os,#w-faq .split,.end');
+    var vh = innerHeight;
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {rootMargin: '0px 0px -8% 0px'});
+    [].forEach.call(els, function (el) {
+      if (el.getBoundingClientRect().top < vh) return;   // already on screen: leave it alone
+      var i = [].indexOf.call(el.parentNode.children, el);
+      if (el.matches('.pf-pl,.step,.os')) el.style.transitionDelay = Math.min(i, 3) * 70 + 'ms';
+      el.classList.add('rv'); io.observe(el);
+    });
+  })();
+</script>
+<script>
+  // The platform block: Mia taps a heart, the signal flies to Sam's room and
+  // lights whatever is switched on there. Loops while the block is on screen.
+  (function () {
+    var scenes = document.getElementById('pf-scenes');
+    if (!scenes) return;
+    var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var sender = document.getElementById('pf-sender');
+    var room = document.getElementById('pf-room');
+    var svg = room.querySelector('svg');
+    var bubble = document.getElementById('pf-bubble');
+    var status = document.getElementById('pf-status');
+    var hb = document.getElementById('pf-hb');
+    var row = document.getElementById('pf-row');
+    var cursor = document.getElementById('pf-cursor');
+    var toggles = [].slice.call(document.querySelectorAll('.pf-tg'));
+    var groups = {};
+    [].forEach.call(svg.querySelectorAll('.pf-dev'), function (g) { groups[g.dataset.dev] = g; });
+    var targets = {lap: [220, 250], heart: [578, 288], lamp: [672, 225], pend: [440, 250]};
+    var HEART = 'M0 9s-11-6.6-13.4-12.6c-2-5 1.1-10 6.2-10 3.1 0 5.1 1.6 7.2 4.2 2.1-2.6 4.1-4.2 7.2-4.2 5.1 0 8.2 5 6.2 10C11 2.4 0 9 0 9z';
+    var visible = false;
+    function wait(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
+    function isOn(d) { return document.getElementById('pf-tg-' + d).getAttribute('aria-pressed') === 'true'; }
+    function onList() { return toggles.map(function (t) { return t.dataset.dev; }).filter(isOn); }
+    function say(key) { status.textContent = status.dataset[key]; }
+    function light(list) {
+      Object.keys(groups).forEach(function (d) { groups[d].classList.toggle('pf-lit', list.indexOf(d) >= 0); });
+    }
+    function syncOff() {
+      Object.keys(groups).forEach(function (d) {
+        groups[d].classList.toggle('off', !isOn(d));
+        if (!isOn(d)) groups[d].classList.remove('pf-lit');
+      });
+    }
+    toggles.forEach(function (t) {
+      t.addEventListener('click', function () {
+        t.setAttribute('aria-pressed', isOn(t.dataset.dev) ? 'false' : 'true');
+        syncOff();
+        if (reduce) { light(onList()); say(onList().length ? 'done' : 'none'); }
+      });
+    });
+    syncOff();
+
+    if (reduce) { hb.classList.add('pressed'); row.classList.add('on'); light(onList()); return; }
+
+    function rel(el, box) {
+      var r = el.getBoundingClientRect();
+      return [r.left + r.width / 2 - box.left, r.top + r.height / 2 - box.top];
+    }
+
+    async function cycle() {
+      light([]);
+      hb.classList.remove('pressed'); row.classList.remove('on');
+      say('press');
+      // the cursor walks to Sam's heart and taps it
+      var s = sender.getBoundingClientRect(), to = rel(hb, s);
+      var from = [s.width * .78, s.height * .86];
+      cursor.classList.add('show');
+      await cursor.animate(
+        [{transform: 'translate(' + from[0] + 'px,' + from[1] + 'px)'}, {transform: 'translate(' + (to[0] - 2) + 'px,' + (to[1] - 2) + 'px)'}],
+        {duration: 1000, easing: 'cubic-bezier(.4,0,.2,1)', fill: 'forwards'}).finished;
+      hb.classList.add('down'); await wait(150);
+      hb.classList.remove('down'); hb.classList.add('pressed'); row.classList.add('on');
+      await wait(300);
+      // the heart leaves Mia's screen for Sam's room
+      say('fly');
+      var c = scenes.getBoundingClientRect(), a = rel(hb, c), r = room.getBoundingClientRect();
+      var e = [r.left + r.width / 2 - c.left, r.top + r.height * (40 / 460) - c.top];
+      var m = [(a[0] + e[0]) / 2, Math.min(a[1], e[1]) - 50];
+      var fly = document.createElement('div');
+      fly.className = 'pf-fly';
+      fly.innerHTML = '<svg width="30" height="30" viewBox="0 0 24 24"><path fill="#F59AAE" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.2 0 3.6 1.2 5.2 3 1.6-1.8 3-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg>';
+      scenes.appendChild(fly);
+      await fly.animate([
+        {transform: 'translate(' + a[0] + 'px,' + a[1] + 'px) scale(.4)', opacity: 0},
+        {transform: 'translate(' + a[0] + 'px,' + (a[1] - 20) + 'px) scale(1)', opacity: 1, offset: .15},
+        {transform: 'translate(' + m[0] + 'px,' + m[1] + 'px) scale(1.3)', opacity: 1, offset: .55},
+        {transform: 'translate(' + e[0] + 'px,' + e[1] + 'px) scale(.9)', opacity: 1}],
+        {duration: 1500, easing: 'ease-in-out'}).finished;
+      fly.remove();
+      cursor.classList.remove('show');
+      // it arrives without a name and splits to whatever is switched on
+      bubble.classList.add('show');
+      var on = onList();
+      await Promise.all(on.map(function (d) {
+        var h = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        h.setAttribute('d', HEART); h.setAttribute('fill', '#F59AAE');
+        svg.appendChild(h);
+        var t = targets[d];
+        return h.animate([
+          {transform: 'translate(400px,40px) scale(.6)', opacity: 0},
+          {transform: 'translate(400px,90px) scale(1)', opacity: 1, offset: .25},
+          {transform: 'translate(' + t[0] + 'px,' + t[1] + 'px) scale(.5)', opacity: .2}],
+          {duration: 1300, easing: 'cubic-bezier(.5,0,.4,1)'}).finished.then(function () { h.remove(); });
+      }));
+      light(onList());
+      say(onList().length ? 'done' : 'none');
+      await wait(2400);
+      bubble.classList.remove('show');
+      await wait(1800);
+    }
+
+    async function loop() {
+      for (;;) {
+        if (!visible || document.hidden) { await wait(400); continue; }
+        await cycle();
+        await wait(600);
+      }
+    }
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (es) { visible = es[0].isIntersecting; }, {threshold: .25}).observe(scenes);
+    } else visible = true;
+    loop();
+  })();
 </script>
 </body>
 </html>

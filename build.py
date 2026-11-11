@@ -32,6 +32,7 @@ from pathlib import Path
 SITE = Path(__file__).resolve().parent
 SRC, I18N, OUT = SITE / "src", SITE / "i18n", SITE / "public"
 ORIGIN = "https://lovearound.me"
+APP = "https://app.lovearound.me"  # the web app; phones and tablets get it instead of the downloads
 
 LANGS = ["es", "en", "pt", "de", "fr", "it", "pl", "tr", "uk", "ru", "id", "ko", "zh"]  # the first one is the default
 NAMES = {"es": "Español", "en": "English", "pt": "Português", "de": "Deutsch", "fr": "Français",
@@ -79,7 +80,57 @@ def load():
     return dicts
 
 
-def render(template, strings, specials, used, where):
+# Typography for the landing page: no line break after a short preposition or
+# conjunction, before a dash, inside a hyphenated word, or inside French
+# quotes and before ; : ! ?. Only characters are added (NBSP, and WORD JOINER
+# after a hyphen: Manrope has no U+2011, and a span would pick up the CSS of
+# spans it lands in), so the text stays safe in attributes. Nothing is changed
+# in <head> (title, link previews), inside tags in the text, or in <code>.
+NBSP, WJ = "\u00a0", "\u2060"
+SHORT_WORDS = {
+    "ru": "а в во и к ко о об от до за из на не ни но по со с у".split(),
+    "uk": "а в во і й к о об от до за із з зі на не ні але по у та".split(),
+    "pl": "a i o u w z we ze na do od po za że ku to nie dla".split(),
+}
+HYPHEN_LANGS = {"ru", "uk"}
+
+
+def typo_rules(lang):
+    rules = [(re.compile(r" (?=[\u2014\u2013] )"), NBSP)]  # word<NBSP>— rest
+    words = SHORT_WORDS.get(lang)
+    if words:
+        alt = "|".join(sorted(map(re.escape, words), key=len, reverse=True))
+        rules.append((re.compile(rf"(?<![\w\u2060-])({alt}) (?=[\w«\"“(])", re.I), rf"\1{NBSP}"))
+    if lang in HYPHEN_LANGS:
+        rules.append((re.compile(r"(?<=\w)-(?=\w)"), "-" + WJ))
+    if lang == "fr":
+        rules.append((re.compile(r" (?=[;:!?»])"), NBSP))
+        rules.append((re.compile(r"(?<=«) "), NBSP))
+    def apply(text):
+        for rx, rep in rules:
+            text = rx.sub(rep, text)
+        return text
+    return apply
+
+
+def typeset(value, apply, in_tag):
+    if in_tag:
+        return apply(value)
+    out, code = [], 0
+    for part in re.split(r"(<[^>]*>)", value):
+        if part.startswith("<"):
+            name = part[1:].split()[0].lower() if len(part) > 2 else ""
+            code += name == "code"
+            code -= name == "/code"
+            out.append(part)
+        else:
+            out.append(part if code > 0 else apply(part))
+    return "".join(out)
+
+
+def render(template, strings, specials, used, where, typo=None):
+    body = template.find("</head>")
+
     def sub(m):
         key = m.group(1)
         if key.startswith("@"):
@@ -89,7 +140,10 @@ def render(template, strings, specials, used, where):
         if key not in strings:
             sys.exit(f"{where}: no text for {{{{{key}}}}}")
         used.add(key)
-        return strings[key]
+        if typo is None or m.start() < body:
+            return strings[key]
+        before = template[:m.start()]
+        return typeset(strings[key], typo, before.rfind("<") > before.rfind(">"))
     return PLACEHOLDER.sub(sub, template)
 
 
@@ -151,9 +205,10 @@ def main():
         page = render(template, strings, {
             "lang": lang,
             "home": f"/{lang}",
+            "app": APP,
             "head": head(lang),
             "langmenu": lang_menu(lang, strings["lang.label"]),
-        }, used, f"src/index.html ({lang})")
+        }, used, f"src/index.html ({lang})", typo_rules(lang))
         write(OUT / lang / "index.html", page)
         if lang == default:
             write(OUT / "index.html", page)

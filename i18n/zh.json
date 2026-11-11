@@ -9,52 +9,67 @@
   },
   "nav": {
     "label": "栏目",
-    "idea": "理念",
+    "menu": "菜单",
     "how": "如何使用",
     "faq": "常见问题",
-    "download": "下载"
+    "docs": "文档",
+    "download": "下载",
+    "open": "打开"
   },
   "hero": {
-    "kicker": "一个小小的关心，一份与世界的联系。",
+    "kicker": "让爱找到通往人们之路的平台",
     "title": "分享爱，<br>感受与世界相连。",
     "lead": "一个小小的关心，可以跨越任何距离。把它送给你珍视的人，或是一个你还未曾谋面的人。",
-    "text": "lovearound 是一种发送和接收爱的信号的方式。每个人都有自己的 Love ID。信号会到达已连接的电脑或设备，轻轻提醒你：有人在想你。不需要言语，也不需要回复。",
+    "text": "lovearound 是一种发送和接收爱的信号的方式。每个人都有自己的 Love ID。匿名信号会到达已连接的电脑或设备，轻轻提醒你：有人在想你。不需要言语，也不需要回复。",
     "cta": "下载应用",
+    "open": "打开应用",
     "how": "如何使用"
   },
-  "close": {
-    "kicker": "01 / 给身边人的爱",
-    "p1": "“我在想你”",
-    "p2": "“我需要你”",
-    "p3": "“我在这里”",
-    "p4": "“你并不孤单”",
-    "p5": "“我爱你”",
-    "text": "给朋友，给妈妈，给那个你想念的人。轻轻一点，让对方感受到你的关心。不需要言语，也不需要回复。",
-    "link": "发送给身边的人 →"
-  },
-  "world": {
-    "kicker": "02 / 给世界的爱",
-    "title": "世界上的某个人",
-    "text": "把一点爱送给一位随机的、愿意接收这类信号的用户。你们也许永远不会见面——却依然能送给彼此一个温暖的瞬间。",
-    "link": "把爱送向世界 →"
-  },
   "idea": {
-    "kicker": "爱在传递中生长",
     "title": "更多的爱，<br>更多的联结。",
     "lead": "一个小小的关心，可以穿过一个房间、一座城市，甚至一片海洋。它可以到达身边的人，也可以到达素未谋面的人，让对方感到自己并不孤单。",
     "text": "收到了爱，就可以把它传下去。传给朋友，传给家人，或是地球另一端的某个人。一个小举动，就这样成为一条链的开端，把越来越多的人连在一起。",
     "why": "这就是我们打造 lovearound 的原因：",
     "why_text": "让爱在世界上更自由地流动，让我们更常感受到彼此相连。"
   },
+  "platform": {
+    "title": "用你喜欢的方式发送。在每个地方同时感受。",
+    "analogy": "Love ID 就像邮箱地址：只有一个，邮件却能同时到达手机和电脑。信号也一样：会到达你连接的所有设备。只是发送者永远不会显示。",
+    "p1": "用你喜欢的方式发送",
+    "p1_text": "通过电脑上的应用、你自己设备上的按钮，或者随机发给“世界上的某个人”。",
+    "p2": "没人会知道是你",
+    "p2_text": "信号到达时不带名字。我们不保存谁给谁发过信号，所以接收者无论如何都无法知道。",
+    "p3": "在每个地方同时感受",
+    "p3_text": "把任意多的应用和设备连接到你的 Love ID。信号会在同一时刻到达所有设备。",
+    "p4": "向所有人开放",
+    "p4_text": "API 有完整文档，应用代码开源。任何人都可以制作自己的设备或应用。",
+    "sender_tag": "小雨 · 在另一座城市",
+    "room_tag": "小林 · 在家",
+    "mom": "妈妈",
+    "to": "小林",
+    "third": "小美",
+    "sender_alt": "小雨在电脑前点了小林名字旁边的爱心",
+    "room_alt": "小林傍晚的房间：桌上的笔记本电脑，床头柜上的 Heart 和台灯，墙上的吊坠",
+    "laptop": "笔记本",
+    "lamp": "台灯",
+    "pendant": "吊坠",
+    "devices_label": "连接到小林 Love ID 的设备",
+    "hint": "打开或关闭设备：信号只会到达开着的设备。",
+    "bubble": "♥ 有人想到了你",
+    "bubble_sub": "不显示名字",
+    "st_press": "小雨点了“小林”旁边的爱心",
+    "st_fly": "信号飞走了。发送者的名字留在原地",
+    "st_done": "所有连接的设备都亮了。小林永远不会知道是小雨。",
+    "st_none": "小林没有连接任何设备，信号无处可去。请至少打开一个设备。"
+  },
   "how": {
-    "title": "Love ID — 你接收爱的地址",
-    "text": "一个专属 ID，把你和那些传递关心信号的人与设备连在一起。",
-    "s1": "获取你的 Love ID",
+    "title": "Love ID — 你接收爱的地址",
+    "s1": "获取你的 Love ID",
     "s1_text": "首次登录时自动生成。分享你的链接，别人就能给你送来爱。",
     "s2": "发送一个关心的信号",
     "s2_text": "选择一位身边的人，或“世界上的某个人”。轻轻一点，就能让别人的一天更明亮一些。",
     "s3": "用<span style=\"white-space:nowrap\">你的方式</span>感受",
-    "s3_text": "在电脑或已连接的设备上接收信号。无需回复。",
+    "s3_text": "在电脑或已连接的设备上接收信号。感受到有人正想着你。",
     "s4": "传递下去",
     "s4_text": "想到的时候，就给身边的人或新认识的人发一个你自己的信号。"
   },
@@ -66,13 +81,11 @@
     "caption": "Heart 是一款设备概念，最终设计可能有所不同。",
     "h3": "一颗回应关心的心。",
     "p1": "当有人给你送来爱，Heart 会柔和地亮起并轻轻跳动。每一次亮光背后都有一个人——也许就在身边，也许远在千里之外。有人送来了一点爱，此刻你就在这里感受到它。然后，你也可以把它传下去。",
-    "p2": "把它放在床边、书桌上，或任何你想要一点温暖的地方。连接你的 Love ID 后，它会接收来自身边人的信号；如果你愿意，也会接收来自世界上某个人的信号。",
-    "strong": "留给自己，或送给一个你想更亲近的人。",
-    "cta": "Heart 上市时通知我"
+    "p2": "把它放在床边、书桌上，或任何你想要一点温暖的地方。连接你的 Love ID 后，它会接收来自身边人的信号；如果你愿意，也会接收来自世界上某个人的信号。",
+    "strong": "留给自己，或送给一个你想更亲近的人。"
   },
   "devices": {
-    "kicker": "你的 Love ID 始终伴随你",
-    "title": "一个 Love ID，<br>多种感受关心的方式。",
+    "title": "一个 Love ID，<br>多种感受关心的方式。",
     "lead": "Heart 只是第一步。我们希望你也能把其他设备连接到 lovearound，并自己选择爱的信号以什么方式出现在你的生活里。",
     "tag": "规划中",
     "lamp": "床头灯",
@@ -84,13 +97,10 @@
     "screen": "桌上的小屏幕",
     "screen_text": "信号到达的那一刻，显示一颗心。",
     "diy": "不想等？自己动手做一个",
-    "diy_text": "用 ESP32 做一盏灯、一个玩偶或一块小屏幕，让它回应你的 Love ID。分步指南——从第一根导线到第一个信号。",
-    "diy_go": "动手制作 →",
-    "note": "这些连接是我们的计划。我们会逐步加入兼容的设备和功能。",
-    "closing": "如何感受爱，由你决定。"
+    "diy_text": "lovearound 是一个开放平台：API 有完整文档，应用代码开源，任何人都可以为 Love ID 制作自己的设备或应用。用 ESP32 做一盏灯、一个玩偶或一块小屏幕，让它回应你的 Love ID。分步指南——从第一根导线到第一个信号。",
+    "diy_go": "动手制作 →"
   },
   "moments": {
-    "kicker": "把我们连在一起的小瞬间",
     "title": "当你想给别人<br>一点温暖的时候。",
     "m1": "给妈妈，在早晨的咖啡时光",
     "m1_text": "她住在另一座城市。今天你给她发去一个小信号：“我在想你。”",
@@ -103,7 +113,7 @@
   },
   "app": {
     "title": "坐在电脑前，关心触手可及",
-    "text": "适用于 Mac 和 Windows 的应用常驻在菜单栏或系统托盘。选一个人，发一个信号，然后继续你的一天。收到的爱会以柔和的光芒出现在屏幕上。",
+    "text": "适用于 Mac、Windows 和 Linux 的应用常驻在菜单栏或系统托盘。选一个人，发一个信号，然后继续你的一天。收到的爱会以柔和的光芒出现在屏幕上。",
     "menu_title": "你现在在想谁？",
     "menu_close": "身边的人",
     "menu_a": "妈",
@@ -116,10 +126,18 @@
     "windows": "Windows 10 和 11",
     "windows_button": "下载 .exe",
     "smartscreen": "Windows 提示“Windows 已保护你的电脑”",
-    "smartscreen_text": "这是 Windows 对尚无发布者签名的新程序的提示。点击“更多信息”，然后点击“仍要运行”。安装程序只为你一个人安装应用，不需要管理员权限。心形图标会出现在时钟旁的托盘里；如果看不到，点击“^”箭头，把它拖到任务栏上。"
+    "smartscreen_text": "这是 Windows 对尚无发布者签名的新程序的提示。点击“更多信息”，然后点击“仍要运行”。安装程序只为你一个人安装应用，不需要管理员权限。心形图标会出现在时钟旁的托盘里；如果看不到，点击“^”箭头，把它拖到任务栏上。",
+    "linux": "Ubuntu 24.04 及以上，GNOME 和 KDE",
+    "linux_button": "下载 .deb",
+    "source": "应用是开源的：代码和所有版本都在 <a href=\"https://github.com/lovearound-me\">GitHub</a> 上。",
+    "linux_help": "在 Linux 上安装",
+    "linux_help_text": "在 Ubuntu 上，打开下载的文件并点击“安装”，或在终端运行 <code>sudo apt install ./LoveAround.deb</code>。爱心会出现在托盘中。在 GNOME 上，安装后请注销并重新登录一次，屏幕才能发光；在此之前，信号会以通知的形式到达。",
+    "support": "安装不成功？到 <a href=\"https://t.me/lovearound_help\">Telegram 群</a>里告诉我们，我们来帮忙。",
+    "web": "浏览器里的 lovearound",
+    "web_text": "网页版在手机和电脑上都能用，无需安装。",
+    "web_go": "打开 →"
   },
   "faq": {
-    "kicker": "简单开始",
     "title": "每个人都有一点爱可以分享。",
     "q1": "对方会知道是我吗？",
     "a1": "不会。信号到达时没有名字，也没有文字——只是一个有人想着对方的信号。我们不会记录谁给谁发了什么。",
@@ -130,19 +148,24 @@
     "q4": "收到信号需要回复吗？",
     "a4": "不需要。你只需感受这一刻。等你想的时候，再把一点爱传下去。",
     "q5": "任何设备都能连接吗？",
-    "a5": "新的连接方式会逐步加入。灯、手环、玩偶和小屏幕，都是我们想去的方向。",
+    "a5": "可以。你现在就能自己动手做设备，比如用 ESP32，并通过<a href=\"/docs\">开放 API</a> 连接。灯、手环、玩偶和小屏幕这类现成设备在我们的计划中，会逐步推出。",
     "q6": "需要多少钱？",
-    "a6": "应用免费。Heart 的价格会在临近上市时公布。"
+    "a6": "应用免费。Heart 的价格会在临近上市时公布。",
+    "q7": "应用装不上怎么办？",
+    "a7": "在 Telegram 上给 <a href=\"https://t.me/lovearound_help\">@lovearound_help</a> 留言：说明你用的是什么系统、哪里出了问题，附上截图会很有帮助。我们会在那里回复，别人的提问里也许已经有你要的答案。"
   },
   "end": {
     "title": "让世界多一点关心。",
     "text": "从一个人开始。或者，把一点爱送给世界上的某个人。"
   },
+  "footer": {
+    "motto": "分享爱， 感受与世界相连。"
+  },
   "invite": {
-    "title": "有人给你发来了 Love ID — lovearound",
-    "og_title": "有人给你发来了 Love ID",
+    "title": "有人给你发来了 Love ID — lovearound",
+    "og_title": "有人给你发来了 Love ID",
     "description": "把它添加到 lovearound，随时让这个人知道你在想着他。对方不会知道是你。",
-    "h1": "有人给你发来了 <span style=\"white-space:nowrap\">Love ID</span>",
+    "h1": "有人给你发来了 <span style=\"white-space:nowrap\">Love ID</span>",
     "lead": "把它添加到 lovearound，你就能随时让这个人知道你在想着他。轻轻一点，无需言语。",
     "copied": "已复制 ✓",
     "install": "安装 lovearound",
@@ -151,26 +174,30 @@
     "windows": "下载 Windows 版",
     "alt_mac": "用的是 Mac？<a href=\"/download/LoveAround.dmg\">下载 Mac 版</a>",
     "alt_windows": "用的是 Windows？<a href=\"/download/LoveAroundSetup.exe\">下载 Windows 版</a>",
-    "add": "添加 Love ID",
+    "add": "添加 Love ID",
     "add_text": "安装好应用后，在应用中打开这个链接。",
     "open_installed": "已经安装 — 在 lovearound 中打开",
     "nothing": "什么都没打开？",
     "nothing_text": "说明 lovearound 还没有安装。先下载应用（上面的第 1 步），然后再点一次“打开”。",
     "away": "请在电脑上打开这个链接",
-    "away_text": "lovearound 支持 Mac 和 Windows。把链接发给自己，在电脑上打开——这个页面会告诉你怎么做。",
+    "away_text": "lovearound 支持 Mac、Windows 和 Linux。把链接发给自己，在电脑上打开——这个页面会告诉你怎么做。",
     "share": "发送给自己",
     "copy": "复制链接",
-    "away_alt": "其实在用电脑？下载 <a href=\"/download/LoveAround.dmg\">Mac 版</a> · <a href=\"/download/LoveAroundSetup.exe\">Windows 版</a>",
+    "away_alt": "其实在用电脑？下载 <a href=\"/download/LoveAround.dmg\">Mac 版</a> · <a href=\"/download/LoveAroundSetup.exe\">Windows 版</a> · <a href=\"/download/LoveAround.deb\">Linux 版</a>",
     "anon": "信号没有署名：对方不会知道是你发的。",
-    "no_code": "这个链接里没有 Love ID。请对方重新发送。",
+    "no_code": "这个链接里没有 Love ID。请对方重新发送。",
     "installed_mac": "从“下载”文件夹打开 LoveAround.dmg，把 lovearound 拖进“应用程序”，然后启动它。",
     "installed_windows": "从“下载”文件夹运行 LoveAroundSetup.exe——lovearound 会出现在时钟旁边。",
     "open": "在 lovearound 中打开",
     "add_after": "应用启动后，回到这里点击按钮。链接已经复制好了，你也可以直接粘贴到应用的“添加”窗口里。",
-    "other": "目前提供 Mac 和 Windows 应用",
-    "other_text": "lovearound 暂不支持你的系统。请保存链接，在 Mac 或 Windows 电脑上打开。",
+    "other": "目前提供 Mac、Windows 和 Linux 应用",
+    "other_text": "lovearound 暂不支持你的系统。请保存链接，在 Mac、Windows 或 Linux 电脑上打开。",
     "share_text": "在电脑上打开",
-    "copied_button": "已复制 ✓"
+    "copied_button": "已复制 ✓",
+    "telegram": "在 Telegram 中打开",
+    "linux": "下载 Linux 版",
+    "alt_linux": "用的是 Linux？<a href=\"/download/LoveAround.deb\">下载 Linux 版</a>",
+    "installed_linux": "从“下载”文件夹打开 LoveAround.deb 并点击“安装”——lovearound 会出现在托盘中。"
   },
   "signin": {
     "title": "登录 — lovearound",
@@ -183,6 +210,9 @@
     "done": "完成！",
     "done_text": "正在返回应用。如果没有反应，请点击下方按钮。",
     "closed": "登录窗口已关闭，请重试。",
-    "failed": "登录失败，请重试。"
+    "failed": "登录失败，请重试。",
+    "telegram_text": "登录后，Telegram 中的机器人会以你的账户打开。",
+    "telegram_back": "返回 Telegram",
+    "telegram_done": "正在返回 Telegram。如果没有反应，请点按下方按钮。"
   }
 }

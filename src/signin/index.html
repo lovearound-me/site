@@ -30,6 +30,12 @@
   Builds older than the key open the page without key=; they know only the
   codename's scheme, so they get needed://signin?state=…&uid=…&email=…&rt=…
   in the clear, as before. Drop that branch once those builds have updated.
+
+  The Telegram bot opens /signin?telegram=1, with nothing about the chat: this
+  page gets a one-time link from the server with the Firebase ID token and
+  goes there, and whichever Telegram opens it joins this account. Nothing
+  comes from the chat, so a link from someone else's can't sign a stranger's
+  account in to it.
 -->
 <div class="page">
 <header class="top"><div class="wrap"><a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a></div></header>
@@ -45,7 +51,7 @@
 <footer>
   <div class="wrap">
     <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
-    <span>© 2026 lovearound</span>
+    <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · © 2026 lovearound</span>
   </div>
 </footer>
 </div>
@@ -66,6 +72,7 @@
   const key = params.get('key') || '';
   const $ = (id) => document.getElementById(id);
   const T = lovearoundLang.apply({{@strings}});
+  const telegram = params.get('telegram') === '1';
 
   const b64url = (bytes) => btoa(String.fromCharCode(...new Uint8Array(bytes)))
     .replaceAll('+', '-').replaceAll('/', '_').replace(/=+$/, '');
@@ -92,7 +99,20 @@
     return { epk: b64url(await crypto.subtle.exportKey('raw', mine.publicKey)), box: b64url(box) };
   }
 
-  if (!/^[A-Za-z0-9-]{8,64}$/.test(state) || (key && !/^[A-Za-z0-9_-]{87}$/.test(key))) {
+  // Where a sign-in for the Telegram bot goes next: see the comment at the top.
+  async function telegramLink(user) {
+    const resp = await fetch('https://api.lovearound.me/v1/telegram/link', {
+      method: 'POST',
+      headers: { authorization: 'Bearer ' + await user.getIdToken() },
+    });
+    if (!resp.ok) throw new Error('telegram link: ' + resp.status);
+    return (await resp.json()).url;
+  }
+
+  if (telegram) {
+    $('text').textContent = T.telegram_text;
+    $('back').textContent = T.telegram_back;
+  } else if (!/^[A-Za-z0-9-]{8,64}$/.test(state) || (key && !/^[A-Za-z0-9_-]{87}$/.test(key))) {
     $('title').textContent = T.from_app;
     $('text').textContent = T.from_app_text;
     $('go').hidden = true;
@@ -105,12 +125,14 @@
       await setPersistence(auth, inMemoryPersistence);
       const { user } = await signInWithPopup(auth, new GoogleAuthProvider());
       const session = { uid: user.uid, email: user.email || '', rt: user.refreshToken };
-      const back = key
+      const back = telegram
+        ? await telegramLink(user)
+        : key
         ? 'lovearound://signin?' + new URLSearchParams({ state, ...await seal(session) })
         : 'needed://signin?' + new URLSearchParams({ state, ...session });
       await signOut(auth);
       $('title').textContent = T.done;
-      $('text').textContent = T.done_text;
+      $('text').textContent = telegram ? T.telegram_done : T.done_text;
       $('go').hidden = true;
       $('back').href = back;
       $('back').hidden = false;

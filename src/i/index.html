@@ -59,7 +59,10 @@
       <span id="copied" data-t="copied" hidden></span>
     </div>
 
-    <!-- Mac and Windows: install first, then add -->
+    <!-- Anywhere: the Telegram bot needs nothing installed -->
+    <a class="btn" id="tg" data-t="telegram" hidden></a>
+
+    <!-- Mac, Windows and Linux: install first, then add -->
     <ol class="steps-i" id="desk" hidden>
       <li class="on" id="s1">
         <span class="n" id="n1">1</span>
@@ -103,7 +106,7 @@
 <footer>
   <div class="wrap">
     <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
-    <span>© 2026 lovearound</span>
+    <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · © 2026 lovearound</span>
   </div>
 </footer>
 </div>
@@ -122,9 +125,28 @@
   var ipad = /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
   var os = /iPhone|iPad|iPod|Android/.test(ua) || ipad ? 'phone'
     : /Macintosh|Mac OS X/.test(ua) ? 'mac'
-    : /Windows/.test(ua) ? 'win' : 'other';
+    : /Windows/.test(ua) ? 'win'
+    : /CrOS/.test(ua) ? 'other'
+    : /Linux|X11/.test(ua) ? 'linux' : 'other';
+  var desk = os === 'mac' || os === 'win' || os === 'linux';
+  var DL = {
+    mac: 'https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg',
+    win: 'https://github.com/lovearound-me/windows/releases/latest/download/LoveAroundSetup.exe',
+    linux: 'https://github.com/lovearound-me/linux/releases/latest/download/LoveAround.deb'
+  };
 
-  if (valid) { $('code').textContent = code.toUpperCase(); $('lid').hidden = false; }
+  // The Telegram bot isn't live yet: set to true once it is.
+  var BOT_LIVE = false;
+
+  if (valid) {
+    $('code').textContent = code.toUpperCase();
+    $('lid').hidden = false;
+    if (BOT_LIVE) {
+      $('tg').href = 'https://t.me/LoveAroundMeBot?start=' + code.replace(/-/g, '').toUpperCase();
+      $('tg').hidden = false;
+      if (desk) $('tg').className = 'btn ghost';
+    }
+  }
 
   function copy(then) {
     try {
@@ -132,12 +154,13 @@
     } catch (e) { then && then(false); }
   }
 
-  if (os === 'mac' || os === 'win') {
+  if (desk) {
     $('desk').hidden = false;
-    var mac = os === 'mac';
-    $('dl').href = mac ? 'https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg' : 'https://github.com/lovearound-me/windows/releases/latest/download/LoveAroundSetup.exe';
-    $('dl').textContent = mac ? T.mac : T.windows;
-    $('alt').innerHTML = mac ? T.alt_windows : T.alt_mac;
+    var name = { mac: 'mac', win: 'windows', linux: 'linux' };
+    $('dl').href = DL[os];
+    $('dl').textContent = T[name[os]];
+    $('alt').innerHTML = ['mac', 'win', 'linux'].filter(function (o) { return o !== os; })
+      .map(function (o) { return T['alt_' + name[o]]; }).join('<br>');
 
     if (valid) $('open').href = 'lovearound://add/' + code;
     else {
@@ -150,7 +173,7 @@
     $('dl').addEventListener('click', function () {
       if (valid) copy();
       $('s1').className = 'done'; $('n1').textContent = '✓';
-      $('s1-text').textContent = mac ? T.installed_mac : T.installed_windows;
+      $('s1-text').textContent = T['installed_' + name[os]];
       $('s2').className = 'on';
       $('open').className = 'btn';
       $('open').textContent = T.open;
