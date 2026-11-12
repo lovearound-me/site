@@ -213,6 +213,26 @@
     "failed": "Não foi possível entrar. Tente de novo.",
     "telegram_text": "Entre, e o bot no Telegram vai abrir já com a sua conta.",
     "telegram_back": "Voltar ao Telegram",
-    "telegram_done": "Voltando ao Telegram. Se nada acontecer, toque no botão abaixo."
+    "telegram_done": "Voltando ao Telegram. Se nada acontecer, toque no botão abaixo.",
+    "hello": "Oi!",
+    "email_button": "Entrar com e-mail",
+    "email": "E-mail",
+    "password": "Senha",
+    "password_hint": "Pelo menos 8 caracteres",
+    "submit": "Entre ou crie uma conta",
+    "busy": "Entrando…",
+    "forgot": "Esqueceu a senha?",
+    "form_back": "← Voltar",
+    "need_email": "Digite seu e-mail",
+    "bad_email": "Confira seu endereço de e-mail",
+    "short_password": "A senha precisa ter pelo menos 8 caracteres",
+    "reset_first": "Primeiro digite seu e-mail",
+    "reset_sent": "Enviamos um e-mail para criar uma nova senha",
+    "wrong_password": "Senha incorreta. Se antes você entrava com o Google, toque em “Voltar” e depois em “Entrar com o Google”",
+    "weak_password": "A senha é simples demais",
+    "need_password": "Digite sua senha",
+    "too_many": "Tentativas demais, tente de novo daqui a pouco",
+    "disabled": "Esta conta está desativada",
+    "offline": "Sem conexão, confira sua internet"
   }
 }

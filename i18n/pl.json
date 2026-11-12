@@ -213,6 +213,26 @@
     "failed": "Nie udało się zalogować. Spróbuj ponownie.",
     "telegram_text": "Zaloguj się, a bot w Telegramie otworzy się już z twoim kontem.",
     "telegram_back": "Wróć do Telegrama",
-    "telegram_done": "Wracasz do Telegrama. Jeśli nic się nie dzieje, naciśnij przycisk poniżej."
+    "telegram_done": "Wracasz do Telegrama. Jeśli nic się nie dzieje, naciśnij przycisk poniżej.",
+    "hello": "Cześć!",
+    "email_button": "Zaloguj się e-mailem",
+    "email": "E-mail",
+    "password": "Hasło",
+    "password_hint": "Co najmniej 8 znaków",
+    "submit": "Zaloguj się lub załóż konto",
+    "busy": "Logowanie…",
+    "forgot": "Nie pamiętasz hasła?",
+    "form_back": "← Wstecz",
+    "need_email": "Wpisz e-mail",
+    "bad_email": "Sprawdź adres e-mail",
+    "short_password": "Hasło musi mieć co najmniej 8 znaków",
+    "reset_first": "Najpierw wpisz e-mail",
+    "reset_sent": "Wysłaliśmy e-mail do ustawienia nowego hasła",
+    "wrong_password": "Nieprawidłowe hasło. Jeśli wcześniej logowałeś się przez Google, kliknij „Wstecz”, a potem „Zaloguj się przez Google”",
+    "weak_password": "Hasło jest zbyt proste",
+    "need_password": "Wpisz hasło",
+    "too_many": "Za dużo prób, spróbuj za chwilę",
+    "disabled": "To konto jest wyłączone",
+    "offline": "Brak połączenia, sprawdź internet"
   }
 }

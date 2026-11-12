@@ -213,6 +213,26 @@
     "failed": "Anmeldung fehlgeschlagen. Bitte versuch es noch einmal.",
     "telegram_text": "Melde dich an, dann öffnet sich der Bot in Telegram mit deinem Konto.",
     "telegram_back": "Zurück zu Telegram",
-    "telegram_done": "Es geht zurück zu Telegram. Falls nichts passiert, drück unten auf den Button."
+    "telegram_done": "Es geht zurück zu Telegram. Falls nichts passiert, drück unten auf den Button.",
+    "hello": "Hallo!",
+    "email_button": "Mit E-Mail anmelden",
+    "email": "E-Mail",
+    "password": "Passwort",
+    "password_hint": "Mindestens 8 Zeichen",
+    "submit": "Anmelden oder Konto erstellen",
+    "busy": "Anmelden…",
+    "forgot": "Passwort vergessen?",
+    "form_back": "← Zurück",
+    "need_email": "Gib deine E-Mail ein",
+    "bad_email": "Prüf deine E-Mail-Adresse",
+    "short_password": "Das Passwort braucht mindestens 8 Zeichen",
+    "reset_first": "Gib zuerst deine E-Mail ein",
+    "reset_sent": "Wir haben dir eine E-Mail für ein neues Passwort geschickt",
+    "wrong_password": "Falsches Passwort. Wenn du dich bisher mit Google angemeldet hast, tipp auf „Zurück“ und dann auf „Mit Google anmelden“",
+    "weak_password": "Das Passwort ist zu einfach",
+    "need_password": "Gib dein Passwort ein",
+    "too_many": "Zu viele Versuche, versuch es gleich noch einmal",
+    "disabled": "Dieses Konto ist deaktiviert",
+    "offline": "Keine Verbindung, prüf dein Internet"
   }
 }

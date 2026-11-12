@@ -116,4 +116,15 @@ footer a{color:var(--muted)}
 .more{display:flex;flex-direction:column;gap:6px;font-size:16px}
 .more b{font-size:17px}
 .more a{margin-top:6px;font-weight:700;text-decoration:none}
+.btn.ghost{background:var(--well);color:var(--ink)}
+.btn.ghost:hover{background:var(--code);color:var(--ink)}
+.signin-form{width:100%;max-width:340px;display:flex;flex-direction:column;gap:14px;text-align:left}
+.signin-form label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700;color:var(--body)}
+.signin-form input{padding:14px 16px;border-radius:14px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font-family:inherit;font-size:16px;font-weight:500;line-height:1.3}
+.signin-form input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.signin-form .btn{max-width:none}
+.signin-form .links{display:flex;justify-content:space-between;gap:12px}
+.signin-form .links button{background:none;border:0;padding:4px 0;font-family:inherit;font-size:15px;font-weight:700;color:var(--accent);cursor:pointer}
+.signin-form .links button:first-child{color:var(--muted)}
+.card .form-msg{font-size:15px;line-height:1.5;color:var(--accent);max-width:340px;margin:0}
 @media (max-width:520px){.card{padding:36px 22px;border-radius:24px}}

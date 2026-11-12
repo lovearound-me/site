@@ -213,6 +213,26 @@
     "failed": "Accesso non riuscito. Riprova.",
     "telegram_text": "Accedi e il bot su Telegram si aprirà con il tuo account.",
     "telegram_back": "Torna a Telegram",
-    "telegram_done": "Stai tornando a Telegram. Se non succede nulla, premi il pulsante qui sotto."
+    "telegram_done": "Stai tornando a Telegram. Se non succede nulla, premi il pulsante qui sotto.",
+    "hello": "Ciao!",
+    "email_button": "Accedi con email",
+    "email": "Email",
+    "password": "Password",
+    "password_hint": "Almeno 8 caratteri",
+    "submit": "Accedi o crea un account",
+    "busy": "Accesso in corso…",
+    "forgot": "Password dimenticata?",
+    "form_back": "← Indietro",
+    "need_email": "Inserisci la tua email",
+    "bad_email": "Controlla l’indirizzo email",
+    "short_password": "La password deve avere almeno 8 caratteri",
+    "reset_first": "Prima inserisci la tua email",
+    "reset_sent": "Ti abbiamo mandato un’email per impostare una nuova password",
+    "wrong_password": "Password errata. Se prima accedevi con Google, tocca «Indietro» e poi «Accedi con Google»",
+    "weak_password": "La password è troppo semplice",
+    "need_password": "Inserisci la password",
+    "too_many": "Troppi tentativi, riprova tra poco",
+    "disabled": "Questo account è disattivato",
+    "offline": "Nessuna connessione, controlla internet"
   }
 }

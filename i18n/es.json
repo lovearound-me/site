@@ -213,6 +213,26 @@
     "failed": "No se ha podido iniciar sesión. Inténtalo de nuevo.",
     "telegram_text": "Inicia sesión y el bot de Telegram se abrirá con tu cuenta.",
     "telegram_back": "Volver a Telegram",
-    "telegram_done": "Volviendo a Telegram. Si no pasa nada, pulsa el botón de abajo."
+    "telegram_done": "Volviendo a Telegram. Si no pasa nada, pulsa el botón de abajo.",
+    "hello": "¡Hola!",
+    "email_button": "Iniciar sesión con correo",
+    "email": "Correo",
+    "password": "Contraseña",
+    "password_hint": "Al menos 8 caracteres",
+    "submit": "Inicia sesión o crea una cuenta",
+    "busy": "Iniciando sesión…",
+    "forgot": "¿Olvidaste tu contraseña?",
+    "form_back": "← Atrás",
+    "need_email": "Escribe tu correo",
+    "bad_email": "Revisa tu dirección de correo",
+    "short_password": "La contraseña necesita al menos 8 caracteres",
+    "reset_first": "Primero escribe tu correo",
+    "reset_sent": "Te enviamos un correo para crear una nueva contraseña",
+    "wrong_password": "Contraseña incorrecta. Si antes iniciabas sesión con Google, toca «Atrás» y luego «Iniciar sesión con Google»",
+    "weak_password": "La contraseña es demasiado sencilla",
+    "need_password": "Escribe tu contraseña",
+    "too_many": "Demasiados intentos, inténtalo en un rato",
+    "disabled": "Esta cuenta está desactivada",
+    "offline": "Sin conexión, revisa tu internet"
   }
 }

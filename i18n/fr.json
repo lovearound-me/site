@@ -213,6 +213,26 @@
     "failed": "La connexion a échoué. Réessaie.",
     "telegram_text": "Connecte-toi, et le bot Telegram s'ouvrira avec ton compte.",
     "telegram_back": "Retour à Telegram",
-    "telegram_done": "Retour à Telegram. Si rien ne se passe, appuie sur le bouton ci-dessous."
+    "telegram_done": "Retour à Telegram. Si rien ne se passe, appuie sur le bouton ci-dessous.",
+    "hello": "Salut !",
+    "email_button": "Se connecter avec un e-mail",
+    "email": "E-mail",
+    "password": "Mot de passe",
+    "password_hint": "Au moins 8 caractères",
+    "submit": "Se connecter ou créer un compte",
+    "busy": "Connexion…",
+    "forgot": "Mot de passe oublié ?",
+    "form_back": "← Retour",
+    "need_email": "Saisis ton e-mail",
+    "bad_email": "Vérifie ton adresse e-mail",
+    "short_password": "Le mot de passe doit faire au moins 8 caractères",
+    "reset_first": "Saisis d’abord ton e-mail",
+    "reset_sent": "On t’a envoyé un e-mail pour choisir un nouveau mot de passe",
+    "wrong_password": "Mot de passe incorrect. Si tu te connectais avec Google, touche « Retour » puis « Se connecter avec Google »",
+    "weak_password": "Le mot de passe est trop simple",
+    "need_password": "Saisis ton mot de passe",
+    "too_many": "Trop de tentatives, réessaie un peu plus tard",
+    "disabled": "Ce compte est désactivé",
+    "offline": "Pas de connexion, vérifie ton internet"
   }
 }

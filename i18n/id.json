@@ -213,6 +213,26 @@
     "failed": "Gagal masuk. Coba lagi.",
     "telegram_text": "Masuk, lalu bot di Telegram akan terbuka dengan akunmu.",
     "telegram_back": "Kembali ke Telegram",
-    "telegram_done": "Kembali ke Telegram. Jika tidak terjadi apa-apa, tekan tombol di bawah."
+    "telegram_done": "Kembali ke Telegram. Jika tidak terjadi apa-apa, tekan tombol di bawah.",
+    "hello": "Halo!",
+    "email_button": "Masuk dengan email",
+    "email": "Email",
+    "password": "Kata sandi",
+    "password_hint": "Minimal 8 karakter",
+    "submit": "Masuk atau buat akun",
+    "busy": "Sedang masuk…",
+    "forgot": "Lupa kata sandi?",
+    "form_back": "← Kembali",
+    "need_email": "Masukkan email",
+    "bad_email": "Cek alamat emailmu",
+    "short_password": "Kata sandi minimal 8 karakter",
+    "reset_first": "Masukkan email dulu",
+    "reset_sent": "Email untuk membuat kata sandi baru sudah dikirim",
+    "wrong_password": "Kata sandi salah. Kalau sebelumnya kamu masuk dengan Google, ketuk “Kembali” lalu “Masuk dengan Google”",
+    "weak_password": "Kata sandi terlalu sederhana",
+    "need_password": "Masukkan kata sandi",
+    "too_many": "Terlalu banyak percobaan, coba lagi sebentar lagi",
+    "disabled": "Akun ini dinonaktifkan",
+    "offline": "Tidak ada koneksi, cek internet"
   }
 }

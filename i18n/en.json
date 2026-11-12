@@ -213,6 +213,26 @@
     "failed": "Couldn’t sign in. Please try again.",
     "telegram_text": "Sign in, and the bot in Telegram will open with your account.",
     "telegram_back": "Back to Telegram",
-    "telegram_done": "Taking you back to Telegram. If nothing happens, press the button below."
+    "telegram_done": "Taking you back to Telegram. If nothing happens, press the button below.",
+    "hello": "Hi!",
+    "email_button": "Sign in with email",
+    "email": "Email",
+    "password": "Password",
+    "password_hint": "At least 8 characters",
+    "submit": "Sign in or create an account",
+    "busy": "Signing in…",
+    "forgot": "Forgot your password?",
+    "form_back": "← Back",
+    "need_email": "Enter your email",
+    "bad_email": "Check your email address",
+    "short_password": "The password needs at least 8 characters",
+    "reset_first": "Enter your email first",
+    "reset_sent": "We’ve sent you an email to set a new password",
+    "wrong_password": "Wrong password. If you signed in with Google before, press “Back” and then “Sign in with Google”",
+    "weak_password": "The password is too simple",
+    "need_password": "Enter your password",
+    "too_many": "Too many attempts, try again a bit later",
+    "disabled": "This account is disabled",
+    "offline": "No connection, check your internet"
   }
 }

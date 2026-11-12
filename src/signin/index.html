@@ -47,6 +47,14 @@
     <h1 id="title" data-t="heading"></h1>
     <p class="lead" id="text" data-t="text"></p>
     <button class="btn" id="go" type="button" data-t="button"></button>
+    <button class="btn ghost" id="mail" type="button" data-t="email_button" hidden></button>
+    <form class="signin-form" id="form" novalidate hidden>
+      <label><span data-t="email"></span><input id="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"></label>
+      <label><span data-t="password"></span><input id="password" type="password" autocomplete="current-password"></label>
+      <button class="btn" id="submit" type="submit" data-t="submit"></button>
+      <div class="links"><button type="button" id="formback" data-t="form_back"></button><button type="button" id="forgot" data-t="forgot"></button></div>
+    </form>
+    <p class="form-msg" id="note" role="status" hidden></p>
     <a class="btn" id="back" href="#" data-t="back" hidden></a>
   </div>
 </main>
@@ -60,7 +68,8 @@
 <script src="/lang.js"></script>
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, inMemoryPersistence, setPersistence }
+  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, inMemoryPersistence, setPersistence,
+    signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail }
     from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 
   const app = initializeApp({
@@ -116,38 +125,121 @@
   }
 
   if (telegram) {
+    // The bot has no accounts of its own: a new person makes one here, with
+    // Google or with an email and a password, as in the web app.
+    $('title').textContent = T.hello;
     $('text').textContent = T.telegram_text;
     $('back').textContent = T.telegram_back;
+    $('mail').hidden = false;
+    $('password').placeholder = T.password_hint;
   } else if (!/^[A-Za-z0-9-]{8,64}$/.test(state) || (key && !/^[A-Za-z0-9_-]{87}$/.test(key))) {
     $('title').textContent = T.from_app;
     $('text').textContent = T.from_app_text;
     $('go').hidden = true;
   }
 
+  // Signed in: hand the session over (see the comment at the top).
+  async function finish(user) {
+    const session = { uid: user.uid, email: user.email || '', rt: user.refreshToken };
+    const back = telegram
+      ? await telegramLink(user)
+      : key
+      ? 'lovearound://signin?' + new URLSearchParams({ state, ...await seal(session) })
+      : 'needed://signin?' + new URLSearchParams({ state, ...session });
+    await signOut(auth);
+    $('title').textContent = T.done;
+    $('text').textContent = telegram ? T.telegram_done : T.done_text;
+    $('text').hidden = false;
+    $('go').hidden = $('mail').hidden = $('form').hidden = $('note').hidden = true;
+    $('back').href = back;
+    $('back').hidden = false;
+    location.href = back;
+  }
+
+  // The browser keeps nothing: the session goes to the app only.
+  const ready = setPersistence(auth, inMemoryPersistence);
+
   $('go').addEventListener('click', async () => {
     $('go').disabled = true;
     try {
-      // The browser keeps nothing: the session goes to the app only.
-      await setPersistence(auth, inMemoryPersistence);
+      await ready;
       const { user } = await signInWithPopup(auth, new GoogleAuthProvider());
-      const session = { uid: user.uid, email: user.email || '', rt: user.refreshToken };
-      const back = telegram
-        ? await telegramLink(user)
-        : key
-        ? 'lovearound://signin?' + new URLSearchParams({ state, ...await seal(session) })
-        : 'needed://signin?' + new URLSearchParams({ state, ...session });
-      await signOut(auth);
-      $('title').textContent = T.done;
-      $('text').textContent = telegram ? T.telegram_done : T.done_text;
-      $('go').hidden = true;
-      $('back').href = back;
-      $('back').hidden = false;
-      location.href = back;
+      await finish(user);
     } catch (e) {
       $('go').disabled = false;
       $('text').textContent = e && e.code === 'auth/popup-closed-by-user'
         ? T.closed
         : T.failed;
+    }
+  });
+
+  // Email and password, Telegram only (the apps have their own form). As in
+  // the web app: sign in, or make the account if this email has none.
+  const note = (text) => { $('note').textContent = text || ''; $('note').hidden = !text; };
+  const showForm = (on) => {
+    $('go').hidden = $('mail').hidden = on;
+    $('form').hidden = !on;
+    $('text').hidden = on;
+    note('');
+    if (on) $('email').focus();
+  };
+  function authText(e) {
+    switch (String(e && e.code || '').replace(/^auth\//, '')) {
+      case 'wrong-password': case 'invalid-credential': case 'invalid-login-credentials': return T.wrong_password;
+      case 'weak-password': return T.weak_password;
+      case 'invalid-email': case 'missing-email': return T.bad_email;
+      case 'missing-password': return T.need_password;
+      case 'too-many-requests': return T.too_many;
+      case 'user-disabled': return T.disabled;
+      case 'network-request-failed': return T.offline;
+      default: return T.failed;
+    }
+  }
+  async function withEmail(email, password) {
+    try {
+      return (await signInWithEmailAndPassword(auth, email, password)).user;
+    } catch (e) {
+      // With email enumeration protection on, a wrong password and a missing
+      // account look the same: try to make it.
+      if (!['auth/user-not-found', 'auth/invalid-credential', 'auth/invalid-login-credentials'].includes(e.code)) throw e;
+      try {
+        return (await createUserWithEmailAndPassword(auth, email, password)).user;
+      } catch (made) {
+        // The account is there, so it was the password.
+        throw made.code === 'auth/email-already-in-use' ? Object.assign(new Error(), { code: 'auth/wrong-password' }) : made;
+      }
+    }
+  }
+
+  $('mail').addEventListener('click', () => showForm(true));
+  $('formback').addEventListener('click', () => showForm(false));
+  $('form').addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const email = $('email').value.trim(), password = $('password').value;
+    if (!email) return note(T.need_email);
+    if (!email.includes('@')) return note(T.bad_email);
+    if (password.length < 8) return note(T.short_password);
+    note('');
+    $('submit').disabled = true;
+    $('submit').textContent = T.busy;
+    try {
+      await ready;
+      await finish(await withEmail(email, password));
+    } catch (e) {
+      note(authText(e));
+    } finally {
+      $('submit').disabled = false;
+      $('submit').textContent = T.submit;
+    }
+  });
+  $('forgot').addEventListener('click', async () => {
+    const email = $('email').value.trim();
+    if (!email) return note(T.reset_first);
+    try {
+      await sendPasswordResetEmail(auth, email);
+      note(T.reset_sent);
+    } catch (e) {
+      note(authText(e));
     }
   });
 </script>

@@ -213,6 +213,26 @@
     "failed": "Giriş yapılamadı. Lütfen tekrar dene.",
     "telegram_text": "Giriş yap, Telegram'daki bot hesabınla açılsın.",
     "telegram_back": "Telegram'a dön",
-    "telegram_done": "Telegram'a dönülüyor. Bir şey olmazsa aşağıdaki düğmeye bas."
+    "telegram_done": "Telegram'a dönülüyor. Bir şey olmazsa aşağıdaki düğmeye bas.",
+    "hello": "Merhaba!",
+    "email_button": "E-postayla giriş yap",
+    "email": "E-posta",
+    "password": "Şifre",
+    "password_hint": "En az 8 karakter",
+    "submit": "Giriş yap veya hesap oluştur",
+    "busy": "Giriş yapılıyor…",
+    "forgot": "Şifreni mi unuttun?",
+    "form_back": "← Geri",
+    "need_email": "E-postanı gir",
+    "bad_email": "E-posta adresini kontrol et",
+    "short_password": "Şifre en az 8 karakter olmalı",
+    "reset_first": "Önce e-postanı gir",
+    "reset_sent": "Yeni şifre için e-posta gönderildi",
+    "wrong_password": "Şifre yanlış. Daha önce Google ile giriş yaptıysan “Geri”ye, sonra “Google ile giriş yap”a dokun",
+    "weak_password": "Şifre çok basit",
+    "need_password": "Şifreni gir",
+    "too_many": "Çok fazla deneme, birazdan tekrar dene",
+    "disabled": "Bu hesap devre dışı",
+    "offline": "Bağlantı yok, internetini kontrol et"
   }
 }

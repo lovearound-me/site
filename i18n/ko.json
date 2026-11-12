@@ -213,6 +213,26 @@
     "failed": "로그인하지 못했어요. 다시 시도해 주세요.",
     "telegram_text": "로그인하면 Telegram 봇이 내 계정으로 열려요.",
     "telegram_back": "Telegram으로 돌아가기",
-    "telegram_done": "Telegram으로 돌아가는 중이에요. 아무 일도 없으면 아래 버튼을 눌러 주세요."
+    "telegram_done": "Telegram으로 돌아가는 중이에요. 아무 일도 없으면 아래 버튼을 눌러 주세요.",
+    "hello": "안녕하세요!",
+    "email_button": "이메일로 로그인",
+    "email": "이메일",
+    "password": "비밀번호",
+    "password_hint": "8자 이상",
+    "submit": "로그인 또는 계정 만들기",
+    "busy": "로그인 중…",
+    "forgot": "비밀번호를 잊으셨나요?",
+    "form_back": "← 뒤로",
+    "need_email": "이메일을 입력하세요",
+    "bad_email": "이메일 주소를 확인하세요",
+    "short_password": "비밀번호는 8자 이상이어야 해요",
+    "reset_first": "먼저 이메일을 입력하세요",
+    "reset_sent": "새 비밀번호 설정 메일을 보냈어요",
+    "wrong_password": "비밀번호가 틀렸어요. 전에 Google로 로그인했다면 ‘뒤로’를 누른 뒤 ‘Google로 로그인’을 누르세요",
+    "weak_password": "비밀번호가 너무 단순해요",
+    "need_password": "비밀번호를 입력하세요",
+    "too_many": "시도가 너무 많아요. 잠시 후 다시 시도해 주세요",
+    "disabled": "이 계정은 비활성화되었어요",
+    "offline": "연결 없음, 인터넷을 확인하세요"
   }
 }
