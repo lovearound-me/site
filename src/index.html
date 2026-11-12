@@ -242,7 +242,6 @@
               <h3>{{get.desk}}</h3>
             </div>
             <p class="grow">{{get.desk_text}}</p>
-{{>can.html}}
             <!-- Every system; on a computer the script keeps its own and moves the rest to the line below. -->
             <details class="dls" id="dls" open>
               <summary>Mac · Windows · Linux</summary>
@@ -258,8 +257,8 @@
               <h3>{{get.web}}</h3>
               <span class="tag">{{get.no_install}}</span>
             </div>
-            <p class="grow">{{get.web_text}}</p>
-{{>can_tab.html}}
+            <p>{{get.web_text}}</p>
+            <p class="grow tabnote">{{get.web_note}}</p>
             <a class="btn" href="{{@app}}">{{get.web_go}}</a>
           </div>
           <div class="way" id="tg">
@@ -269,7 +268,6 @@
               <span class="tag">{{get.no_install}}</span>
             </div>
             <p class="grow">{{get.tg_text}}</p>
-{{>can.html}}
             <a class="btn" href="https://t.me/LoveAroundMeBot">{{get.tg_go}}</a>
           </div>
         </div>

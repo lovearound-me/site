@@ -121,7 +121,6 @@
             <h3>{{invite.desk}}</h3>
           </div>
           <p>{{invite.desk_text}}</p>
-{{>can.html}}
           <!-- Mac, Windows, Linux: download, then open the link in the app -->
           <div class="grow" id="desk-here" hidden>
             <ol>
@@ -147,8 +146,8 @@
             <h3>{{invite.web}}</h3>
             <span class="tag">{{invite.no_install}}</span>
           </div>
-          <p class="grow">{{invite.web_text}}</p>
-{{>can_tab.html}}
+          <p>{{invite.web_text}}</p>
+          <p class="grow tabnote">{{invite.web_note}}</p>
           <a class="btn" id="web-go" href="{{@app}}">{{invite.web_go}}</a>
         </div>
 
@@ -159,7 +158,6 @@
             <span class="tag">{{invite.no_install}}</span>
           </div>
           <p class="grow">{{invite.tg_text}}</p>
-{{>can.html}}
           <a class="btn" id="tg-go" href="https://t.me/LoveAroundMeBot">{{invite.telegram}}</a>
         </div>
 
