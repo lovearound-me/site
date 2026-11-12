@@ -4,6 +4,22 @@
 <meta charset="utf-8">
 <!-- lovearound.web.app and lovearound.firebaseapp.com serve this same site: send them to the real address. -->
 <script>if (/\.(web\.app|firebaseapp\.com)$/.test(location.hostname)) location.replace('https://lovearound.me' + location.pathname + location.search + location.hash);</script>
+<script>
+  // /i/<code> carries no language: a person (not a link preview, which runs
+  // no JS) goes on to /<lang>/i/<code> in the one they picked on the site,
+  // or else their browser's.
+  (function (langs, page) {
+    if (!/^\/i\//.test(location.pathname)) return;
+    var picked = (document.cookie.match(/(?:^|; )firebase-language-override=([a-z]+)/) || [])[1];
+    var wanted = [picked].concat(navigator.languages || [navigator.language]);
+    for (var i = 0; i < wanted.length; i++) {
+      var lang = String(wanted[i] || '').toLowerCase().split('-')[0];
+      if (langs.indexOf(lang) < 0) continue;
+      if (lang !== page) location.replace('/' + lang + location.pathname + location.search + location.hash);
+      return;
+    }
+  })({{@langs}}, '{{@lang}}');
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{invite.title}}</title>
 <meta name="description" content="{{invite.description}}">
@@ -12,181 +28,243 @@
 <meta property="og:image" content="https://lovearound.me/img/heart.jpg">
 <meta name="robots" content="noindex">
 <link rel="icon" href="/heart.svg">
+<script>
+  // Phones and tablets: decided by the device, as on the landing page.
+  (function (h, n) {
+    h.classList.add('js');
+    if (/Android|iPhone|iPad|iPod/i.test(n.userAgent) || (/Macintosh/.test(n.userAgent) && n.maxTouchPoints > 1)) h.classList.add('mob');
+  })(document.documentElement, navigator);
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
-<link rel="stylesheet" href="/style.css">
 <style>
-.card{align-items:stretch;text-align:left;max-width:600px}
-.card .btn{max-width:none;margin-top:0}
-.intro{display:flex;flex-direction:column;gap:14px}
-.intro h1{font-size:clamp(32px,6vw,42px)}
-.lid{padding:18px 22px;border-radius:18px;background:var(--well);display:flex;align-items:center;justify-content:space-between;gap:12px}
-.lid small{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;color:var(--muted)}
-.lid b{display:block;margin-top:2px;font-size:24px;font-weight:700;letter-spacing:.08em;color:var(--accent)}
-.lid span{font-size:13px;font-weight:700;color:#5E8C6A;white-space:nowrap}
-.steps-i{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:12px}
-.steps-i li{display:flex;gap:16px;padding:22px;border-radius:20px;background:#FFFCFA;box-shadow:0 0 0 1px var(--line)}
-.steps-i li.on{background:var(--pink);box-shadow:none}
-.steps-i .n{width:32px;height:32px;flex-shrink:0;border-radius:50%;background:#fff;color:var(--accent);box-shadow:0 0 0 1px var(--line);font-weight:800;font-size:15px;display:flex;align-items:center;justify-content:center}
-.steps-i li.on .n{box-shadow:none}
-.steps-i li.done .n{background:var(--sage);color:#4E7A5B;box-shadow:none}
-.steps-i .b{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
-.steps-i h2{font-size:19px;font-weight:700;letter-spacing:-.01em}
-.steps-i p{font-size:15px}
-.btn.ghost{background:#fff;color:var(--accent);box-shadow:inset 0 0 0 1.5px #E3C3C6}
-.btn.ghost:hover{background:var(--pink);color:var(--accent-hover);box-shadow:inset 0 0 0 1.5px #D9AEB3}
-.alt{font-size:14px;color:var(--muted)}
-.alt a{font-weight:700;text-decoration:none}
-.warn{padding:16px 18px;border-radius:14px;background:#FCEFD9;display:flex;flex-direction:column;gap:6px}
-.warn b{font-size:15px}
-.warn p{font-size:14px;color:var(--ink)}
-.row2{display:flex;flex-wrap:wrap;gap:10px}
-.row2 .btn{flex:1 1 200px}
-.anon{font-size:14px;color:var(--muted);text-align:center}
+{{>landing.css}}
+.inv-hero{padding:72px 0 40px}
+.inv-hero .copy{display:flex;flex-direction:column;gap:22px;max-width:760px}
+.inv-hero .h1{font-size:clamp(36px,5.6vw,64px)}
+.inv-demo{padding:0 0 24px}
+.inv-demo .pf{margin-top:24px}
+.inv-id{margin-top:72px;border-radius:28px;background:var(--pink);padding:36px 40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 40px}
+.inv-id .t{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.inv-id small{font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--accent)}
+.inv-id .code{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:.08em;color:var(--ink);line-height:1.1;word-break:break-all}
+.inv-id p{font-size:16px;color:var(--body);max-width:520px}
+.inv-id .btn{background:#fff;color:var(--accent);box-shadow:inset 0 0 0 1.5px #E3C3C6}
+.inv-id .btn:hover{background:#fff;color:var(--accent-hover);box-shadow:inset 0 0 0 1.5px var(--accent)}
+@media (max-width:520px){.inv-id{padding:28px 24px}}
+.inv-add{padding:72px 0 96px}
+.inv-add .h2{font-size:clamp(30px,4vw,44px)}
+.inv-add .sub{margin-top:12px;font-size:17px;color:var(--body);max-width:640px}
+.ways{margin-top:36px;display:grid;gap:16px}
+@media (min-width:900px){.ways{grid-template-columns:repeat(3,1fr)}}
+.way{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:28px;display:flex;flex-direction:column;gap:14px}
+.way.mine{box-shadow:0 0 0 2px var(--accent);order:-1}
+.way .head-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.way .ic{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:var(--pink);color:var(--accent);flex-shrink:0}
+.way h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
+.way .tag{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#4E7A5B;background:var(--sage);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.way p{font-size:15px;line-height:1.55;color:var(--body)}
+.way .grow{flex:1}
+.way .btn{width:100%;padding:14px 22px;font-size:15px}
+.way:not(.mine) .btn,.way .btn.ghost{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.way:not(.mine) .btn:hover,.way .btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.way .more{font-size:13px;color:var(--muted)}
+.way .more a{font-weight:700;text-decoration:none}
+.way ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--body)}
+.way ol li{display:flex;gap:10px}
+.way ol li i{font-style:normal;width:22px;height:22px;border-radius:50%;flex-shrink:0;background:var(--heart-bg);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;color:var(--accent)}
+.way ol li.done i{background:var(--sage);color:#4E7A5B}
+.way .warn{padding:14px 16px;border-radius:14px;background:#FCEFD9;display:flex;flex-direction:column;gap:4px;font-size:14px}
+.way .row{display:flex;flex-wrap:wrap;gap:10px}
+.way .row .btn{flex:1 1 160px;width:auto}
+.note{margin-top:28px;font-size:14px;color:var(--muted);text-align:center}
 </style>
 </head>
 <body>
-<div class="page">
-<header class="top"><div class="wrap"><a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a></div></header>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="{{@home}}">
+      <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path style="fill:var(--heart)" d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>
+      lovearound
+    </a>
+    <nav class="nav"><a href="{{@home}}">{{invite.about}}</a></nav>
+  </div>
+</header>
+
 <main>
-  <div class="card">
-    <div class="intro">
-      <h1 data-t="h1"></h1>
-      <p class="lead" data-t="lead"></p>
+  <!-- 01 · what this is -->
+  <div class="inv-hero">
+    <div class="wrap">
+      <div class="copy">
+        <span class="kicker">{{invite.kicker}}</span>
+        <h1 class="h1">{{invite.h1}}</h1>
+        <p class="lead">{{invite.lead}}</p>
+      </div>
     </div>
+  </div>
 
-    <div class="lid" id="lid" hidden>
-      <div><small>LOVE ID</small><b id="code"></b></div>
-      <span id="copied" data-t="copied" hidden></span>
-    </div>
+  <!-- 02 · the platform animation, as on the landing page, and the Love ID -->
+  <section class="inv-demo" style="padding-top:0">
+    <div class="wrap">
+      <div id="w-flow" class="pf">
+{{>platform.html}}
+      </div>
 
-    <!-- Anywhere: the Telegram bot needs nothing installed -->
-    <a class="btn" id="tg" data-t="telegram" hidden></a>
-
-    <!-- Mac, Windows and Linux: install first, then add -->
-    <ol class="steps-i" id="desk" hidden>
-      <li class="on" id="s1">
-        <span class="n" id="n1">1</span>
-        <div class="b">
-          <h2 data-t="install"></h2>
-          <p id="s1-text" data-t="install_text"></p>
-          <a class="btn" id="dl" href="https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg"></a>
-          <span class="alt" id="alt"></span>
+      <div class="inv-id">
+        <div class="t">
+          <small>LOVE ID</small>
+          <div class="code" id="code" hidden></div>
+          <p id="id-text">{{invite.id_text}}</p>
         </div>
-      </li>
-      <li id="s2">
-        <span class="n">2</span>
-        <div class="b">
-          <h2 data-t="add"></h2>
-          <p id="s2-text" data-t="add_text"></p>
-          <a class="btn ghost" id="open" href="/" data-t="open_installed"></a>
-          <div class="warn" id="warn" hidden>
-            <b data-t="nothing"></b>
-            <p data-t="nothing_text"></p>
+        <button class="btn" id="copy-id" type="button" hidden>{{invite.copy}}</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · where to add it: one account, so any of the three -->
+  <section class="inv-add">
+    <div class="wrap">
+      <h2 class="h2">{{invite.where}}</h2>
+      <p class="sub">{{invite.where_text}}</p>
+      <div class="ways">
+
+        <div class="way" id="desk">
+          <div class="head-row">
+            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>
+            <h3>{{invite.desk}}</h3>
+          </div>
+          <p>{{invite.desk_text}}</p>
+          <!-- Mac, Windows, Linux: download, then open the link in the app -->
+          <div class="grow" id="desk-here" hidden>
+            <ol>
+              <li id="s1"><i id="n1">1</i><span id="s1-text">{{invite.desk_s1}}</span></li>
+              <li id="s2"><i>2</i><span id="s2-text">{{invite.desk_s2}}</span></li>
+            </ol>
+          </div>
+          <a class="btn" id="dl" href="#" hidden></a>
+          <a class="btn ghost" id="open" href="{{@home}}" hidden>{{invite.open_installed}}</a>
+          <div class="warn" id="warn" hidden><b>{{invite.nothing}}</b><span>{{invite.nothing_text}}</span></div>
+          <span class="more" id="alt" hidden></span>
+          <!-- Phones and the rest: open the link on a computer -->
+          <div class="grow" id="desk-away" hidden><p>{{invite.desk_away}}</p></div>
+          <div class="row" id="away-row" hidden>
+            <button class="btn" id="share" type="button" hidden>{{invite.share}}</button>
+            <button class="btn ghost" id="copy" type="button">{{invite.copy}}</button>
           </div>
         </div>
-      </li>
-    </ol>
 
-    <!-- Phone, tablet and other systems: open on a computer -->
-    <div class="steps-i" id="away" hidden>
-      <div class="warn" style="background:var(--well)">
-        <b id="away-title" data-t="away"></b>
-        <p id="away-text" data-t="away_text"></p>
+        <div class="way" id="web">
+          <div class="head-row">
+            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/></svg></span>
+            <h3>{{invite.web}}</h3>
+            <span class="tag">{{invite.no_install}}</span>
+          </div>
+          <p class="grow">{{invite.web_text}}</p>
+          <a class="btn" id="web-go" href="{{@app}}">{{invite.web_go}}</a>
+        </div>
+
+        <div class="way" id="tg">
+          <div class="head-row">
+            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.2 2.9 11.4c-1.2.5-1.2 1.2 0 1.6l4.7 1.5 1.8 5.6c.2.6.6.7 1.1.3l2.6-2.2 5 3.7c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.3zM9.4 14.3l8.7-5.5c.4-.3.8-.1.5.2l-7.2 6.5-.3 3.1-1.7-4.3z"/></svg></span>
+            <h3>{{invite.tg}}</h3>
+            <span class="tag">{{invite.no_install}}</span>
+          </div>
+          <p class="grow">{{invite.tg_text}}</p>
+          <a class="btn" id="tg-go" href="https://t.me/LoveAroundMeBot">{{invite.telegram}}</a>
+        </div>
+
       </div>
-      <div class="row2">
-        <button class="btn" id="share" type="button" data-t="share" hidden></button>
-        <button class="btn ghost" id="copy" type="button" data-t="copy"></button>
-      </div>
-      <span class="alt" id="away-alt" data-t="away_alt" hidden></span>
+      <p class="note">{{invite.anon}}</p>
     </div>
-
-    <p class="anon" data-t="anon"></p>
-  </div>
+  </section>
 </main>
+
 <footer>
   <div class="wrap">
-    <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
-    <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · © 2026 lovearound</span>
+    <span class="motto">{{footer.motto}}</span>
+    <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · <a href="/privacy">Privacy</a> · © 2026 lovearound</span>
   </div>
 </footer>
-</div>
-<script src="/lang.js"></script>
+
+<script>
+{{>platform.js}}
+</script>
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
-  var T = lovearoundLang.apply({{@strings}});
+  var T = {{@strings}};
 
-  // /i/<code> → lovearound://add/<code>
-  var code = decodeURIComponent(location.pathname.replace(/^\/i\/?/, '').split('/')[0] || '');
+  // /i/<code> or /<lang>/i/<code>
+  var code = decodeURIComponent((location.pathname.match(/^(?:\/[a-z]{2})?\/i\/([^\/]*)/) || [])[1] || '');
   var valid = /^[A-Za-z0-9-]{10,12}$/.test(code);
-  var link = location.origin + '/i/' + code;
+  var link = location.origin + location.pathname.replace(/\/+$/, '');
 
   var ua = navigator.userAgent;
-  var ipad = /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
-  var os = /iPhone|iPad|iPod|Android/.test(ua) || ipad ? 'phone'
+  var phone = document.documentElement.classList.contains('mob');
+  var os = phone ? 'phone'
     : /Macintosh|Mac OS X/.test(ua) ? 'mac'
-    : /Windows/.test(ua) ? 'win'
+    : /Windows/.test(ua) ? 'windows'
     : /CrOS/.test(ua) ? 'other'
     : /Linux|X11/.test(ua) ? 'linux' : 'other';
-  var desk = os === 'mac' || os === 'win' || os === 'linux';
-  var DL = {
-    mac: 'https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg',
-    win: 'https://github.com/lovearound-me/windows/releases/latest/download/LoveAroundSetup.exe',
-    linux: 'https://github.com/lovearound-me/linux/releases/latest/download/LoveAround.deb'
-  };
+  var desk = os === 'mac' || os === 'windows' || os === 'linux';
+  var GH = 'https://github.com/lovearound-me/';
+  var DL = { mac: GH + 'mac/releases/latest/download/LoveAround.dmg', windows: GH + 'windows/releases/latest/download/LoveAroundSetup.exe', linux: GH + 'linux/releases/latest/download/LoveAround.deb' };
 
-  // The Telegram bot isn't live yet: set to true once it is.
-  var BOT_LIVE = false;
-
+  // The Love ID, and where each way takes it.
   if (valid) {
     $('code').textContent = code.toUpperCase();
-    $('lid').hidden = false;
-    if (BOT_LIVE) {
-      $('tg').href = 'https://t.me/LoveAroundMeBot?start=' + code.replace(/-/g, '').toUpperCase();
-      $('tg').hidden = false;
-      if (desk) $('tg').className = 'btn ghost';
-    }
+    $('code').hidden = false;
+    $('copy-id').hidden = false;
+    $('web-go').href = '{{@app}}/?add=' + encodeURIComponent(code);
+    $('tg-go').href = 'https://t.me/LoveAroundMeBot?start=' + code.replace(/-/g, '').toUpperCase();
+  } else {
+    $('id-text').textContent = T.no_code;
   }
 
-  function copy(then) {
-    try {
-      navigator.clipboard.writeText(link).then(function () { $('copied').hidden = false; then && then(true); }, function () { then && then(false); });
-    } catch (e) { then && then(false); }
+  // The way that fits this device comes first.
+  $(desk ? 'desk' : phone ? 'tg' : 'web').classList.add('mine');
+
+  function copy(button) {
+    var done = function (ok) { if (button) button.textContent = ok ? T.copied_button : link; };
+    try { navigator.clipboard.writeText(link).then(function () { done(true); }, function () { done(false); }); }
+    catch (e) { done(false); }
   }
+  $('copy-id').addEventListener('click', function () { copy($('copy-id')); });
 
   if (desk) {
-    $('desk').hidden = false;
-    var name = { mac: 'mac', win: 'windows', linux: 'linux' };
+    $('desk-here').hidden = false;
+    $('dl').hidden = false;
     $('dl').href = DL[os];
-    $('dl').textContent = T[name[os]];
-    $('alt').innerHTML = ['mac', 'win', 'linux'].filter(function (o) { return o !== os; })
-      .map(function (o) { return T['alt_' + name[o]]; }).join('<br>');
-
-    if (valid) $('open').href = 'lovearound://add/' + code;
-    else {
-      $('s2-text').textContent = T.no_code;
-      $('open').hidden = true;
+    $('dl').textContent = T[os];
+    $('alt').innerHTML = T.other_os + ' ' + ['mac', 'windows', 'linux'].filter(function (o) { return o !== os; })
+      .map(function (o) { return '<a href="' + DL[o] + '">' + { mac: 'Mac', windows: 'Windows', linux: 'Linux' }[o] + '</a>'; }).join(' · ');
+    $('alt').hidden = false;
+    if (valid) {
+      $('open').href = 'lovearound://add/' + code;
+      $('open').hidden = false;
+    } else {
+      $('s2').hidden = true;
     }
 
-    // Download: step 1 is done, step 2 is next. The link goes to the clipboard:
-    // the app's "Add" window picks it up from there.
+    // Download: step 1 is done, step 2 is next. The link goes to the
+    // clipboard too: the app's "Add" window picks it up from there.
     $('dl').addEventListener('click', function () {
-      if (valid) copy();
       $('s1').className = 'done'; $('n1').textContent = '✓';
-      $('s1-text').textContent = T['installed_' + name[os]];
-      $('s2').className = 'on';
+      $('s1-text').textContent = T['installed_' + os];
+      if (!valid) return;
+      copy();
+      $('s2-text').textContent = T.add_after;
+      $('dl').className = 'btn ghost';
       $('open').className = 'btn';
       $('open').textContent = T.open;
-      if (valid) $('s2-text').textContent = T.add_after;
       $('warn').hidden = true;
     });
 
     // Open: the browser can't tell whether the app is there. If the page is
-    // still in front a moment later, say so and point at step 1.
+    // still in front a moment later, say so.
     $('open').addEventListener('click', function () {
-      if (!valid) return;
       var left = false;
       var gone = function () { left = true; };
       window.addEventListener('blur', gone, { once: true });
@@ -194,22 +272,18 @@
       setTimeout(function () { if (!left && !document.hidden) $('warn').hidden = false; }, 1500);
     });
   } else {
-    $('away').hidden = false;
-    if (os === 'other') {
-      $('away-title').textContent = T.other;
-      $('away-text').textContent = T.other_text;
+    $('desk-away').hidden = false;
+    if (valid) {
+      $('away-row').hidden = false;
+      if (navigator.share) {
+        $('share').hidden = false;
+        $('copy').className = 'btn ghost';
+        $('share').addEventListener('click', function () {
+          navigator.share({ title: 'Love ID', text: T.share_text, url: link }).catch(function () {});
+        });
+      }
+      $('copy').addEventListener('click', function () { copy($('copy')); });
     }
-    $('away-alt').hidden = false;
-    if (!valid) { $('copy').hidden = true; }
-    if (valid && navigator.share) {
-      $('share').hidden = false;
-      $('share').addEventListener('click', function () {
-        navigator.share({ title: 'Love ID', text: T.share_text, url: link }).catch(function () {});
-      });
-    }
-    $('copy').addEventListener('click', function () {
-      copy(function (ok) { $('copy').textContent = ok ? T.copied_button : link; });
-    });
   }
 })();
 </script>

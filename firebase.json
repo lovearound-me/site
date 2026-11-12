@@ -10,6 +10,58 @@
       },
       "rewrites": [
         {
+          "source": "/es/i/**",
+          "destination": "/es/i/index.html"
+        },
+        {
+          "source": "/en/i/**",
+          "destination": "/en/i/index.html"
+        },
+        {
+          "source": "/pt/i/**",
+          "destination": "/pt/i/index.html"
+        },
+        {
+          "source": "/de/i/**",
+          "destination": "/de/i/index.html"
+        },
+        {
+          "source": "/fr/i/**",
+          "destination": "/fr/i/index.html"
+        },
+        {
+          "source": "/it/i/**",
+          "destination": "/it/i/index.html"
+        },
+        {
+          "source": "/pl/i/**",
+          "destination": "/pl/i/index.html"
+        },
+        {
+          "source": "/tr/i/**",
+          "destination": "/tr/i/index.html"
+        },
+        {
+          "source": "/uk/i/**",
+          "destination": "/uk/i/index.html"
+        },
+        {
+          "source": "/ru/i/**",
+          "destination": "/ru/i/index.html"
+        },
+        {
+          "source": "/id/i/**",
+          "destination": "/id/i/index.html"
+        },
+        {
+          "source": "/ko/i/**",
+          "destination": "/ko/i/index.html"
+        },
+        {
+          "source": "/zh/i/**",
+          "destination": "/zh/i/index.html"
+        },
+        {
           "source": "/i/**",
           "destination": "/i/index.html"
         }

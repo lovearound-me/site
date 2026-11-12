@@ -13,12 +13,18 @@ same keys, and every key must be used: the build stops otherwise.
                         from localized/ by the browser's Accept-Language, or
                         by the firebase-language-override cookie the language
                         menu sets; anyone else gets the default.
-  src/i/index.html,   → public/i/index.html, public/signin/index.html: one
-  src/signin/...        page for all languages. {{@strings}} embeds the
-                        page's section of every dictionary and /lang.js picks
-                        one in the browser, because /i/<code> is a rewrite
-                        and links to it carry no language. Text in the static
-                        HTML (title, link previews) is the default language.
+  src/i/index.html    → public/<lang>/i/index.html for every language and
+                        public/i/index.html (INVITE_DEFAULT). /<lang>/i/<code>
+                        and /i/<code> are rewrites (firebase.json); the
+                        language is in the link so that link previews, which
+                        run no JS, come out in it. A person on /i/ is sent to
+                        their browser's language by the page itself.
+  src/signin/...      → public/signin/index.html: one page for all languages.
+                        {{@strings}} embeds the page's section of every
+                        dictionary and /lang.js picks one in the browser.
+
+{{>name}} in a template is src/_name, put in before the texts: the landing
+page and the invite share their styles and the platform animation this way.
 
 Docs (public/docs) are English only and not built. No dependencies; the
 publish script runs this before every deploy.
@@ -43,12 +49,32 @@ LOCALES = {"es": "es_ES", "en": "en_US", "pt": "pt_BR", "de": "de_DE", "fr": "fr
            "zh": "zh_CN"}
 
 # Sections that belong to the client-side pages, and the page each one is for.
-CLIENT_PAGES = {"invite": "i/index.html", "signin": "signin/index.html"}
+CLIENT_PAGES = {"signin": "signin/index.html"}
+
+# The invite page: once per language, and at /i/ in this one.
+INVITE, INVITE_DEFAULT = "i/index.html", "en"
+
 
 # Everything build.py writes, removed first so a dropped language leaves nothing.
 GENERATED = ["index.html", "localized", "i", "signin", *LANGS]
 
 PLACEHOLDER = re.compile(r"\{\{\s*([@\w.]+)\s*\}\}")
+PARTIAL = re.compile(r"\{\{>\s*([\w.-]+)\s*\}\}")
+
+
+def template(rel):
+    """A page from src/, with its {{>name}} partials put in."""
+    def part(m):
+        path = SRC / f"_{m.group(1)}"
+        if not path.exists():
+            sys.exit(f"src/{rel}: no src/_{m.group(1)}")
+        return path.read_text(encoding="utf-8").rstrip("\n")
+    return PARTIAL.sub(part, (SRC / rel).read_text(encoding="utf-8"))
+
+
+def script_json(value):
+    """JSON to put inside <script>: nothing in it can close the tag."""
+    return json.dumps(value, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 
 
 def flatten(d, prefix=""):
@@ -198,11 +224,11 @@ def main():
             p.unlink()
 
     # The landing page, once per language.
-    template = (SRC / "index.html").read_text(encoding="utf-8")
+    page_src = template("index.html")
     for lang in LANGS:
         strings = {k: v for k, v in flat[lang].items() if k.split(".")[0] not in CLIENT_PAGES}
         used.add("lang.label")
-        page = render(template, strings, {
+        page = render(page_src, strings, {
             "lang": lang,
             "home": f"/{lang}",
             "app": APP,
@@ -215,12 +241,28 @@ def main():
         else:
             write(OUT / "localized" / lang / "index.html", page)
 
-    # The invite and sign-in pages: every language in one page.
+    # The invite page, once per language, and at /i/ in INVITE_DEFAULT.
+    page_src = template(INVITE)
+    for lang in LANGS:
+        strings = {k: v for k, v in flat[lang].items() if k.split(".")[0] not in CLIENT_PAGES}
+        page = render(page_src, strings, {
+            "lang": lang,
+            "home": f"/{lang}",
+            "app": APP,
+            "langs": script_json(LANGS),
+            "strings": script_json(dicts[lang]["invite"]),
+        }, used, f"src/{INVITE} ({lang})", typo_rules(lang))
+        write(OUT / lang / INVITE, page)
+        if lang == INVITE_DEFAULT:
+            write(OUT / INVITE, page)
+    used.update(k for k in flat[default] if k.startswith("invite."))
+
+    # The sign-in page: every language in one page.
     for section, rel in CLIENT_PAGES.items():
-        template = (SRC / rel).read_text(encoding="utf-8")
+        page_src = template(rel)
         table = {lang: dicts[lang][section] for lang in LANGS}
         strings = {k: v for k, v in flat[default].items() if k.startswith(section + ".")}
-        page = render(template, strings, {
+        page = render(page_src, strings, {
             "lang": default,
             "strings": json.dumps(table, ensure_ascii=False, separators=(",", ":")),
         }, set(), f"src/{rel}")
