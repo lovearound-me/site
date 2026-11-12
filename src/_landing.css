@@ -184,8 +184,6 @@ section{padding:104px 0;scroll-margin-top:64px}
 .diy-text span{font-size:16px;line-height:1.55;color:var(--body)}
 .diy-go{font-weight:700;font-size:16px;color:var(--accent);white-space:nowrap}
 @media (max-width:520px){.diy{padding:24px}}
-.dl .web{margin-top:0;grid-column:1/-1;order:1}
-.mob .dl .web{order:-2}
 
 /* scenarios */
 .moments{display:grid;gap:16px}
@@ -211,15 +209,42 @@ section{padding:104px 0;scroll-margin-top:64px}
 @media (max-width:760px){.desk{min-height:250px;padding:18px}.floating{left:10%;bottom:10%}.floating.b{left:30%;bottom:22%}.floating.c{left:19%;bottom:38%}}
 
 /* download */
-.dl{margin-top:56px;display:grid;gap:16px}
-@media (min-width:760px){.dl{grid-template-columns:repeat(3,1fr)}}
-.os{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);color:var(--ink);padding:28px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:24px;transition:transform .2s,box-shadow .2s}
-.os b{font-size:24px;font-weight:800;letter-spacing:-.02em;display:block}
-.os span{font-size:14px;color:var(--muted)}
-.os .btn{padding:13px 22px;font-size:15px}
-.dl.pick .os:not(.mine) .btn{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
-.dl.pick .os:not(.mine) .btn:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
-.dl.pick .os.mine{order:-1;box-shadow:0 0 0 1.5px var(--accent)}
+/* ways in: the app, the browser, Telegram (the landing page and the invite) */
+.ways-head{margin-top:72px;display:flex;flex-direction:column;gap:12px}
+.ways-head .sub{font-size:17px;color:var(--body);max-width:640px}
+.ways{margin-top:36px;display:grid;gap:16px}
+@media (min-width:900px){.ways{grid-template-columns:repeat(3,1fr)}}
+.way{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:28px;display:flex;flex-direction:column;gap:14px}
+.way.mine{box-shadow:0 0 0 2px var(--accent);order:-1}
+.way .head-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.way .ic{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:var(--pink);color:var(--accent);flex-shrink:0}
+.way h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
+.way .tag{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#4E7A5B;background:var(--sage);padding:5px 10px;border-radius:999px;white-space:nowrap}
+.way p{font-size:15px;line-height:1.55;color:var(--body)}
+.way .grow{flex:1}
+.way .btn{width:100%;padding:14px 22px;font-size:15px}
+.way:not(.mine) .btn,.way .btn.ghost{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.way:not(.mine) .btn:hover,.way .btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.way .more{font-size:13px;color:var(--muted)}
+.way .more a{font-weight:700;text-decoration:none}
+.way .o{display:flex;flex-direction:column;gap:6px}
+.way .o small{font-size:13px;color:var(--muted);text-align:center}
+.way .alts a+a::before{content:' · ';color:var(--muted);font-weight:400}
+.way .can{display:grid;grid-template-columns:1fr 1fr;border-radius:16px;background:var(--heart-bg)}
+.way .can .c{display:flex;align-items:center;gap:10px;min-width:0;padding:12px 14px}
+.way .can .c+.c{box-shadow:inset 1px 0 0 var(--line)}
+.way .can .ci{width:28px;height:28px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;background:#fff;color:#4E7A5B}
+.way .can b{display:block;font-size:14px;font-weight:700;line-height:1.25;color:var(--ink)}
+.way .can small{display:block;margin-top:1px;font-size:12px;line-height:1.3;color:#9A6B2F}
+.way .can .part .ci{color:#B07A1F}
+.mob .way#desk{order:1}
+.way .dls .o+.o{margin-top:14px}
+.way .dls > summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--line);font-weight:700;font-size:15px;color:var(--ink)}
+.way .dls > summary::-webkit-details-marker{display:none}
+.way .dls > summary::after{content:'';width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg)}
+.way .dls[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
+.way .dls[open] > summary{margin-bottom:14px}
+html:not(.mob) .way .dls > summary{display:none}
 .help{margin-top:24px;display:flex;flex-direction:column;gap:4px}
 .help details summary{list-style:none;cursor:pointer;font-size:15px;font-weight:700;color:var(--body);padding:8px 0;display:flex;align-items:center;gap:10px}
 .help summary::-webkit-details-marker{display:none}
@@ -266,8 +291,6 @@ p{text-wrap:pretty}
 .btn:active{transform:scale(.98)}
 .head .lead{max-width:34em}
 .lang summary{min-height:40px}
-.os:hover{transform:translateY(-2px);box-shadow:0 0 0 1px var(--line),0 14px 32px rgba(48,42,39,.08)}
-.dl.pick .os.mine:hover{box-shadow:0 0 0 1.5px var(--accent),0 14px 32px rgba(48,42,39,.08)}
 @supports (grid-template-rows:subgrid){
  @media (min-width:640px){.pf-pillars{row-gap:16px}.pf-pl{display:grid;grid-row:span 2;grid-template-rows:subgrid;row-gap:10px;align-content:start}}
  @media (min-width:700px){.step{display:grid;grid-row:span 3;grid-template-rows:subgrid;row-gap:12px;align-content:start}}
@@ -296,4 +319,4 @@ p{text-wrap:pretty}
 @media (max-width:380px){html:not(.mob) .nav .btn.sm{padding:9px 11px;font-size:13px}}
 .js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease-out,transform .6s ease-out}
 .js .rv.in{opacity:1;transform:none}
-@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.os,.diy,.btn{transition:none}}
+@media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.diy,.btn{transition:none}}

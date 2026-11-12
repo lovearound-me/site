@@ -56,21 +56,6 @@
 .inv-add{padding:72px 0 96px}
 .inv-add .h2{font-size:clamp(30px,4vw,44px)}
 .inv-add .sub{margin-top:12px;font-size:17px;color:var(--body);max-width:640px}
-.ways{margin-top:36px;display:grid;gap:16px}
-@media (min-width:900px){.ways{grid-template-columns:repeat(3,1fr)}}
-.way{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:28px;display:flex;flex-direction:column;gap:14px}
-.way.mine{box-shadow:0 0 0 2px var(--accent);order:-1}
-.way .head-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
-.way .ic{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:var(--pink);color:var(--accent);flex-shrink:0}
-.way h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
-.way .tag{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#4E7A5B;background:var(--sage);padding:5px 10px;border-radius:999px;white-space:nowrap}
-.way p{font-size:15px;line-height:1.55;color:var(--body)}
-.way .grow{flex:1}
-.way .btn{width:100%;padding:14px 22px;font-size:15px}
-.way:not(.mine) .btn,.way .btn.ghost{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
-.way:not(.mine) .btn:hover,.way .btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
-.way .more{font-size:13px;color:var(--muted)}
-.way .more a{font-weight:700;text-decoration:none}
 .way ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--body)}
 .way ol li{display:flex;gap:10px}
 .way ol li i{font-style:normal;width:22px;height:22px;border-radius:50%;flex-shrink:0;background:var(--heart-bg);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;color:var(--accent)}
@@ -136,6 +121,7 @@
             <h3>{{invite.desk}}</h3>
           </div>
           <p>{{invite.desk_text}}</p>
+{{>can.html}}
           <!-- Mac, Windows, Linux: download, then open the link in the app -->
           <div class="grow" id="desk-here" hidden>
             <ol>
@@ -162,6 +148,7 @@
             <span class="tag">{{invite.no_install}}</span>
           </div>
           <p class="grow">{{invite.web_text}}</p>
+{{>can_tab.html}}
           <a class="btn" id="web-go" href="{{@app}}">{{invite.web_go}}</a>
         </div>
 
@@ -172,6 +159,7 @@
             <span class="tag">{{invite.no_install}}</span>
           </div>
           <p class="grow">{{invite.tg_text}}</p>
+{{>can.html}}
           <a class="btn" id="tg-go" href="https://t.me/LoveAroundMeBot">{{invite.telegram}}</a>
         </div>
 

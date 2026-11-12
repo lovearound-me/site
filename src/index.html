@@ -239,36 +239,48 @@
       </div>
 
       <div id="w-get" style="scroll-margin-top:80px">
-        <div class="dl" id="dl">
-          <div class="os" data-os="mac">
-            <div><b>macOS</b><span>{{get.mac}}</span></div>
-            <a class="btn" href="https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
-              {{get.mac_button}}
-            </a>
+        <div class="ways-head">
+          <h2 class="h2">{{get.title}}</h2>
+          <p class="sub">{{get.sub}}</p>
+        </div>
+        <!-- One account, three ways in, as on the invite page (src/i). -->
+        <div class="ways" id="dl">
+          <div class="way" id="desk">
+            <div class="head-row">
+              <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>
+              <h3>{{get.desk}}</h3>
+            </div>
+            <p class="grow">{{get.desk_text}}</p>
+{{>can.html}}
+            <!-- Every system; on a computer the script keeps its own and moves the rest to the line below. -->
+            <details class="dls" id="dls" open>
+              <summary>Mac · Windows · Linux</summary>
+              <div class="o" data-os="mac"><a class="btn" href="https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>{{get.mac_go}}</a><small>{{get.mac}}</small></div>
+              <div class="o" data-os="windows"><a class="btn" href="https://github.com/lovearound-me/windows/releases/latest/download/LoveAroundSetup.exe"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>{{get.windows_go}}</a><small>{{get.windows}}</small></div>
+              <div class="o" data-os="linux"><a class="btn" href="https://github.com/lovearound-me/linux/releases/latest/download/LoveAround.deb"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>{{get.linux_go}}</a><small>{{get.linux}}</small></div>
+            </details>
+            <span class="more alts" id="alt" hidden>{{get.other_os}} <a data-os="mac" href="https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg">Mac</a><a data-os="windows" href="https://github.com/lovearound-me/windows/releases/latest/download/LoveAroundSetup.exe">Windows</a><a data-os="linux" href="https://github.com/lovearound-me/linux/releases/latest/download/LoveAround.deb">Linux</a></span>
           </div>
-          <div class="os" data-os="win">
-            <div><b>Windows</b><span>{{get.windows}}</span></div>
-            <a class="btn" href="https://github.com/lovearound-me/windows/releases/latest/download/LoveAroundSetup.exe">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
-              {{get.windows_button}}
-            </a>
+          <div class="way" id="web">
+            <div class="head-row">
+              <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/></svg></span>
+              <h3>{{get.web}}</h3>
+              <span class="tag">{{get.no_install}}</span>
+            </div>
+            <p class="grow">{{get.web_text}}</p>
+{{>can_tab.html}}
+            <a class="btn" href="{{@app}}">{{get.web_go}}</a>
           </div>
-          <div class="os" data-os="linux">
-            <div><b>Linux</b><span>{{get.linux}}</span></div>
-            <a class="btn" href="https://github.com/lovearound-me/linux/releases/latest/download/LoveAround.deb">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
-              {{get.linux_button}}
-            </a>
+          <div class="way" id="tg">
+            <div class="head-row">
+              <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.2 2.9 11.4c-1.2.5-1.2 1.2 0 1.6l4.7 1.5 1.8 5.6c.2.6.6.7 1.1.3l2.6-2.2 5 3.7c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.3zM9.4 14.3l8.7-5.5c.4-.3.8-.1.5.2l-7.2 6.5-.3 3.1-1.7-4.3z"/></svg></span>
+              <h3>{{get.tg}}</h3>
+              <span class="tag">{{get.no_install}}</span>
+            </div>
+            <p class="grow">{{get.tg_text}}</p>
+{{>can.html}}
+            <a class="btn" href="https://t.me/LoveAroundMeBot">{{get.tg_go}}</a>
           </div>
-          <a class="diy web" href="{{@app}}">
-            <span class="ic"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/></svg></span>
-            <span class="diy-text">
-              <b>{{get.web}}</b>
-              <span>{{get.web_text}}</span>
-            </span>
-            <span class="diy-go">{{get.web_go}}</span>
-          </a>
         </div>
         <div class="help">
           <p class="src">{{get.source}}</p>
@@ -355,20 +367,28 @@
     });
   })();
 
-  // The download for this computer comes first; the others stay as quieter buttons.
+  // The way that fits this device comes first: the app on a computer (only
+  // its own download, the others on a quieter line), Telegram on a phone.
   (function () {
-    var dl = document.getElementById('dl');
-    if (!dl || document.documentElement.classList.contains('mob')) return;
+    var ways = document.getElementById('dl');
+    if (!ways) return;
+    var h = document.documentElement;
     var p = (navigator.userAgentData && navigator.userAgentData.platform || navigator.platform || '') + ' ' + navigator.userAgent;
-    var os = /Mac/i.test(p) ? 'mac' : /Win/i.test(p) ? 'win' : /Linux|X11/i.test(p) ? 'linux' : '';
-    var card = os && dl.querySelector('[data-os="' + os + '"]');
-    if (card) { card.classList.add('mine'); dl.classList.add('pick'); }
+    var os = h.classList.contains('mob') || /CrOS/.test(p) ? ''
+      : /Mac/i.test(p) ? 'mac' : /Win/i.test(p) ? 'windows' : /Linux|X11/i.test(p) ? 'linux' : '';
+    document.getElementById(os ? 'desk' : h.classList.contains('mob') ? 'tg' : 'web').classList.add('mine');
+    // A phone can't install the app: its downloads fold away.
+    if (h.classList.contains('mob')) document.getElementById('dls').open = false;
+    if (!os) return;
+    ways.querySelectorAll('#desk .o').forEach(function (o) { o.hidden = o.dataset.os !== os; });
+    document.querySelector('#alt [data-os="' + os + '"]').remove();
+    document.getElementById('alt').hidden = false;
   })();
 
   // Blocks ease in as they scroll into view.
   (function () {
     if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var els = document.querySelectorAll('.pf-pl,.step,.loveid-head,#w-idea .split,.callout,#w-heart .head,.heart-grid>*,#w-devices .head,.cards,.diy,#w-ex .head,.moments,.app>*,.os,#w-faq .split,.end');
+    var els = document.querySelectorAll('.pf-pl,.step,.loveid-head,#w-idea .split,.callout,#w-heart .head,.heart-grid>*,#w-devices .head,.cards,.diy,#w-ex .head,.moments,.app>*,.ways-head,.way,#w-faq .split,.end');
     var vh = innerHeight;
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -376,7 +396,7 @@
     [].forEach.call(els, function (el) {
       if (el.getBoundingClientRect().top < vh) return;   // already on screen: leave it alone
       var i = [].indexOf.call(el.parentNode.children, el);
-      if (el.matches('.pf-pl,.step,.os')) el.style.transitionDelay = Math.min(i, 3) * 70 + 'ms';
+      if (el.matches('.pf-pl,.step,.way')) el.style.transitionDelay = Math.min(i, 3) * 70 + 'ms';
       el.classList.add('rv'); io.observe(el);
     });
   })();
