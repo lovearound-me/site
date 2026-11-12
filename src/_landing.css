@@ -157,7 +157,6 @@ section{padding:104px 0;scroll-margin-top:64px}
 @media (prefers-reduced-motion:reduce){.pf *{transition:none!important;animation:none!important}}
 
 /* heart */
-#w-heart{background:var(--band)}
 #w-idea{background:var(--sage)}
 #w-ex{background:var(--band)}
 .heart-img{position:relative;border-radius:24px;overflow:hidden;background:#DFD2C6;aspect-ratio:3/2;margin-bottom:10px}
