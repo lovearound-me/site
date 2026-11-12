@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — lovearound</title>
+<meta name="description" content="What lovearound keeps about you, what it doesn't, and how to delete it.">
+<link rel="icon" href="/heart.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a>
+    <nav class="nav" aria-label="Site">
+      <a class="btn sm" href="/#w-get">Download</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+
+  <div class="doc-hero">
+    <span class="kicker">Privacy</span>
+    <h1>What we know about you</h1>
+    <p class="lead">lovearound lets you send a heart to someone close: their screen glows, and that’s all. It is built to know as little about you as it can.</p>
+  </div>
+
+  <article class="doc">
+
+    <h2 id="keep">What we keep</h2>
+    <ul>
+      <li><b>Your account.</b> When you sign in with Google or with email, Firebase Authentication (by Google) keeps your email address, and for Google sign-in also your name and photo as Google gives them. We use them only to let you in.</li>
+      <li><b>Your address book.</b> The people you added and the names you gave them. Those names are yours: the people themselves never see them, and nobody is told that you added them.</li>
+      <li><b>Your devices.</b> The apps and devices you connected, their names, and when each one last connected. A device’s token is kept only as a hash.</li>
+      <li><b>Your invite code</b>, so others can add you.</li>
+    </ul>
+
+    <h2 id="dont">What we don’t keep</h2>
+    <ul>
+      <li><b>Hearts.</b> A heart carries nothing: no text, and never who sent it. It goes straight to the screens of the person it is for and is not stored. Our logs note that a heart was sent and how many screens got it, but never who sent it or to whom.</li>
+      <li><b>Your settings:</b> colors, pauses, how the glow looks. They stay on your device.</li>
+      <li>No analytics, no ads, no tracking.</li>
+    </ul>
+
+    <h2 id="who">Who else sees it</h2>
+    <p>Nobody but us and Google Cloud, where lovearound runs (Firebase, Firestore and Cloud Run, in the US). Google’s servers keep ordinary request logs, with IP addresses, for about 30 days. We never sell or share your data.</p>
+
+    <h2 id="delete">Deleting it</h2>
+    <p>Settings → delete account, in any of our apps or at <a href="https://app.lovearound.me">app.lovearound.me</a>, removes your account, address book and devices at once. Hearts that others send you after that simply go nowhere.</p>
+
+    <h2 id="questions">Questions</h2>
+    <p>Write to <a href="mailto:hlebalbau@gmail.com">hlebalbau@gmail.com</a>.</p>
+
+    <p><small>Last updated: 12 November 2026.</small></p>
+  </article>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
+    <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · <a href="/privacy">Privacy</a> · © 2026 lovearound</span>
+  </div>
+</footer>
+</body>
+</html>
