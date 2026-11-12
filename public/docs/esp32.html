@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<!-- lovearound.web.app and lovearound.firebaseapp.com serve this same site: send them to the real address. -->
+<script>if (/\.(web\.app|firebaseapp\.com)$/.test(location.hostname)) location.replace('https://lovearound.me' + location.pathname + location.search + location.hash);</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ESP32 toy — lovearound</title>
 <meta name="description" content="An ESP32 toy that glows when someone thinks of you and sends a heart at the press of a button: parts, wiring and sketch.">
