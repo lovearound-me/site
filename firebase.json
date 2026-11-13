@@ -107,6 +107,16 @@
           "source": "/download/LoveAround.deb",
           "destination": "https://github.com/lovearound-me/linux/releases/latest/download/LoveAround.deb",
           "type": 302
+        },
+        {
+          "regex": "^/apt/(?:\\./)?pool/(?P<version>[^/]+)/(?P<deb>[^/]+\\.deb)$",
+          "destination": "https://github.com/lovearound-me/linux/releases/download/v:version/:deb",
+          "type": 302
+        },
+        {
+          "regex": "^/apt/(?:\\./)?(?P<file>InRelease|Release|Release\\.gpg|Packages|Packages\\.gz|lovearound\\.gpg)$",
+          "destination": "https://github.com/lovearound-me/linux/releases/latest/download/:file",
+          "type": 302
         }
       ]
     },
