@@ -12,8 +12,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/docs/docs.css">
 </head>
-<body>
+<body class="docs">
 <header class="top">
   <div class="wrap">
     <a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a>
@@ -26,7 +27,30 @@
     </nav>
   </div>
 </header>
-<main class="wrap">
+<div class="dnav-bar"><div class="wrap"><button class="dnav-toggle" type="button" aria-expanded="false" aria-controls="dnav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span class="dnav-label">Contents</span><span class="dnav-page">ESP32 toy</span><span class="dnav-now"></span></button></div></div>
+<div class="wrap docs-shell">
+  <aside class="dnav" id="dnav">
+    <div class="dnav-head"><b>Docs</b><button class="dnav-close" type="button" aria-label="Close the menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <nav aria-label="Docs pages and sections">
+      <ul class="dnav-pages">
+        <li><a href="/docs">Overview</a></li>
+        <li><a href="/docs/rest">REST API</a></li>
+        <li><a href="/docs/ws">WebSocket</a></li>
+        <li class="here"><a href="/docs/esp32" aria-current="page">ESP32 toy</a>
+          <ul class="dnav-sub">
+            <li><a href="#token">1. Get a device token</a></li>
+            <li><a href="#whom">2. Find out whom to send to</a></li>
+            <li><a href="#parts">3. What you’ll need</a></li>
+            <li><a href="#sketch">4. The sketch</a></li>
+            <li><a href="#more">Where to take it</a></li>
+            <li><a href="#security">Security</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+  <div class="dnav-scrim" hidden></div>
+<main class="docs-main">
 
   <div class="doc-hero">
     <span class="kicker">Your own device</span>
@@ -36,33 +60,27 @@
       <div class="pink"><b>Receive</b><p>The toy keeps a <a href="/docs/ws">WebSocket</a> open, and the server tells it about every heart.</p></div>
       <div class="sage"><b>Send</b><p>The button makes one <a href="/docs/rest#post-events">HTTP request</a> and sends a heart to a person in your list.</p></div>
     </div>
-    <nav class="tabs" aria-label="Docs sections">
-      <a href="/docs">Overview</a>
-      <a href="/docs/rest">REST API</a>
-      <a href="/docs/ws">WebSocket</a>
-      <a href="/docs/esp32" aria-current="page">ESP32 toy</a>
-    </nav>
   </div>
 
   <article class="doc">
     <div class="note"><p>A device can only send and receive signals. One that sends sees your contact list, to pick whom to send to; one that only receives doesn’t see it. No device can change the list, delete the account or find out who sent a signal: nobody knows that.</p></div>
 
-    <h2><span class="n">1</span>Get a device token</h2>
-    <p>Click the heart in the menu bar (on Windows, in the tray next to the clock) → <b>Settings → Devices</b> (<b>Настройки → Устройства</b>). Give the device a name, for example “Kitty on the shelf”, tick what it can do — receive, send or both — and click <b>Connect device</b> (<b>Подключить устройство</b>).</p>
+    <h2 id="token"><span class="n">1</span>Get a device token</h2>
+    <p>Open <b>Settings → Devices</b> in any lovearound app: on a Mac from the heart in the menu bar, on Windows and Linux from the heart in the tray, or on the web at <a href="https://app.lovearound.me">app.lovearound.me</a>. Give the device a name, for example “Kitty on the shelf”, choose what it can do with <b>Receives hearts</b> and <b>Sends hearts</b>, and click <b>Connect a device</b>.</p>
     <p>The app shows the token once:</p>
     <pre><code>dev_4kq9XbT2mWc7RfLp8sHn3vYzAe6uJd5G</code></pre>
     <p>Copy it and keep it to yourself: anyone with it can send hearts in your name. If the token leaks or the device gets lost, disconnect the device in the same place and the token stops working at once.</p>
-    <div class="note"><p>The app speaks only Russian for now, so the menu names are given in both languages.</p></div>
 
-    <h2><span class="n">2</span>Find out whom to send to</h2>
-    <p>The easiest way is the menu: right-click a person → <b>Copy id for a device</b> (<b>Скопировать id для устройства</b>). Or ask the server for the list:</p>
-    <pre><code>GET /v1/contacts</code></pre>
+    <h2 id="whom"><span class="n">2</span>Find out whom to send to</h2>
+    <p>Ask the server for your list with the device token:</p>
+    <pre><code>curl -H &quot;Authorization: Bearer dev_…&quot; https://api.lovearound.me/v1/contacts</code></pre>
     <pre><code>{
   &quot;contacts&quot;: [
-    { &quot;id&quot;: &quot;DXEjjB91rJYQvgaGGdsx&quot;, &quot;label&quot;: &quot;Mom&quot;, &quot;position&quot;: 0, &quot;close&quot;: true, … },
-    { &quot;id&quot;: &quot;Qm3LkT0pZ8aW2vRcN5yE&quot;, &quot;label&quot;: &quot;Anna&quot;, &quot;position&quot;: 1, &quot;close&quot;: false, … }
+    { &quot;id&quot;: &quot;DXEjjB91rJYQvgaGGdsx&quot;, &quot;label&quot;: &quot;Mom&quot;, &quot;position&quot;: 0, &quot;close&quot;: true, &quot;color&quot;: 3, … },
+    { &quot;id&quot;: &quot;Qm3LkT0pZ8aW2vRcN5yE&quot;, &quot;label&quot;: &quot;Anna&quot;, &quot;position&quot;: 1, &quot;close&quot;: false, &quot;color&quot;: 7, … }
   ]
 }</code></pre>
+    <p>This needs a token that may send (<b>Sends hearts</b>); one that only receives gets <code>403</code>.</p>
     <p>More about the fields in <a href="/docs/rest#contacts">REST API</a>. <code>id</code> is the person’s identifier in your list. Map the buttons on your device to the <code>id</code>s you want, for example “left paw — Mom”.</p>
 
     <h2 id="parts"><span class="n">3</span>What you’ll need</h2>
@@ -165,11 +183,12 @@ void loop() {
 
     <h2 id="more">Where to take it</h2>
     <ul>
-      <li><b>Several buttons.</b> Each with its own contact and color: the mapping lives on the device; the server knows nothing about colors.</li>
+      <li><b>Several buttons.</b> Each with its own contact. Light each one in the color you gave that person in the app: the list carries it as <code>color</code>, see <a href="/docs/rest#colors">colors</a>. A signal you receive never says whose it is, so it glows in a color of the toy’s own.</li>
       <li><b>A vibration motor or a buzzer</b> instead of LEDs.</li>
       <li><b>Quiet at night.</b> The ESP32 can get the time over NTP and stay dark from 23:00 to 8:00.</li>
       <li><b>Wi‑Fi and token without reflashing.</b> Through a setup access point, for example with the WiFiManager library.</li>
       <li><b>A screen and choosing a person.</b> A board with a screen, for example the LilyGO T‑Display‑S3 AMOLED: two buttons scroll the list, after 3 seconds the heart flies to the chosen person, and the last item is “Someone out there”. The list comes from <code>GET /v1/contacts</code> and refreshes on <code>{&quot;type&quot;:&quot;sync&quot;}</code>.</li>
+      <li><b>No token in the firmware.</b> A board with a screen can show a code instead, and you confirm it from your phone: see <a href="/docs/rest#pairing">Pairing by code</a>.</li>
     </ul>
 
     <h2 id="security">Security</h2>
@@ -182,6 +201,7 @@ void loop() {
     <div class="next"><a href="/docs/ws">← WebSocket</a><a href="/docs">Overview →</a></div>
   </article>
 </main>
+</div>
 
 <footer>
   <div class="wrap">
@@ -189,5 +209,6 @@ void loop() {
     <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · © 2026 lovearound</span>
   </div>
 </footer>
+<script src="/docs/nav.js" defer></script>
 </body>
 </html>

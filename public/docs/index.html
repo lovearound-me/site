@@ -12,8 +12,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/docs/docs.css">
 </head>
-<body>
+<body class="docs">
 <header class="top">
   <div class="wrap">
     <a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a>
@@ -26,36 +27,56 @@
     </nav>
   </div>
 </header>
-<main class="wrap">
+<div class="dnav-bar"><div class="wrap"><button class="dnav-toggle" type="button" aria-expanded="false" aria-controls="dnav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span class="dnav-label">Contents</span><span class="dnav-page">Overview</span><span class="dnav-now"></span></button></div></div>
+<div class="wrap docs-shell">
+  <aside class="dnav" id="dnav">
+    <div class="dnav-head"><b>Docs</b><button class="dnav-close" type="button" aria-label="Close the menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <nav aria-label="Docs pages and sections">
+      <ul class="dnav-pages">
+        <li class="here"><a href="/docs" aria-current="page">Overview</a>
+          <ul class="dnav-sub">
+            <li><a href="#what">What a signal is</a></li>
+            <li><a href="#terms">Key terms</a></li>
+            <li><a href="#flow">How a signal travels</a></li>
+            <li><a href="#principles">What the server doesn’t do</a></li>
+            <li><a href="#access">Access and tokens</a></li>
+            <li><a href="#compat">Compatibility</a></li>
+            <li><a href="#next">Where next</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/rest">REST API</a></li>
+        <li><a href="/docs/ws">WebSocket</a></li>
+        <li><a href="/docs/esp32">ESP32 toy</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <div class="dnav-scrim" hidden></div>
+<main class="docs-main">
 
   <div class="doc-hero">
     <span class="kicker">Docs</span>
     <h1>How lovearound works</h1>
     <p class="lead">Signals can be sent and received by more than the app. A lamp, a soft toy, a small screen or your own script will do. This is how it all works and how to connect to it.</p>
-    <nav class="tabs" aria-label="Docs sections">
-      <a href="/docs" aria-current="page">Overview</a>
-      <a href="/docs/rest">REST API</a>
-      <a href="/docs/ws">WebSocket</a>
-      <a href="/docs/esp32">ESP32 toy</a>
-    </nav>
   </div>
 
   <article class="doc">
 
     <h2 id="what">What a signal is</h2>
     <p>A signal is a heart someone sends to a person they’re thinking of. It carries nothing: no text, no sender’s name, not even the time it was pressed. All the recipient sees is that someone thought of them.</p>
-    <p>A signal only lives in the moment. It reaches the devices that are online right now. If the person is offline, the signal isn’t queued and won’t arrive later — by design.</p>
+    <p>A signal only lives in the moment. It reaches the devices that are online right now. If the person is offline, the signal isn’t queued and won’t arrive later — by design. The one place it stays is a chat with the Telegram bot: there it’s a message, like any other.</p>
 
     <h2 id="terms">Key terms</h2>
     <div class="tbl"><table>
       <thead><tr><th>Term</th><th>What it is</th></tr></thead>
       <tbody>
-        <tr><td><b>Account</b></td><td>Google sign-in in the Mac or Windows app. Created the first time you sign in.</td></tr>
+        <tr><td><b>Account</b></td><td>Created the first time you sign in to a lovearound app — on a Mac, Windows, Linux or the web at <a href="https://app.lovearound.me">app.lovearound.me</a> — with Google, Apple or an email and password. Starting the Telegram bot makes one too. One account can have several ways to sign in.</td></tr>
         <tr><td><b>Love ID</b></td><td>Your 10-character code, for example <code>GSSV7-A33HN</code>, and the link with it: <code>lovearound.me/i/GSSV7-A33HN</code>. People add you to their list with it.</td></tr>
-        <tr><td><b>Contact</b></td><td>A person in your list. It has an <code>id</code> and a label only you can see. The person isn’t told they were added.</td></tr>
+        <tr><td><b>Contact</b></td><td>A person in your list. It has an <code>id</code>, plus a label and a color only you can see. The person isn’t told they were added.</td></tr>
+        <tr><td><b>Close one</b></td><td>A contact marked as close: a circle at the top of the apps. Up to 12.</td></tr>
         <tr><td><b>Device</b></td><td>A toy, lamp or script connected to your account with its own token. It can receive signals, send them, or both.</td></tr>
         <tr><td><b>Event</b></td><td>What the server delivers to online devices. There is one type for now: <code>signal</code>.</td></tr>
         <tr><td><b>Stream</b></td><td>The WebSocket a device keeps open to receive events.</td></tr>
+        <tr><td><b>Telegram bot</b></td><td><a href="https://t.me/LoveAroundMeBot">@LoveAroundMeBot</a>, one more app of the same account. Signals to you also show up in your chat with it.</td></tr>
       </tbody>
     </table></div>
 
@@ -86,7 +107,7 @@
     <ol>
       <li>The sender makes a single HTTP request, <code>POST /v1/events</code>, with the <code>id</code> of a contact from their list.</li>
       <li>The server finds who is behind that contact and answers <code>202</code>: the signal is accepted.</li>
-      <li>Every device of the recipient that has a <code>/v1/stream</code> open right now gets the same event and lights up.</li>
+      <li>Every device of the recipient that has a <code>/v1/stream</code> open right now gets the same event and lights up. If the recipient has a chat with the Telegram bot, a heart shows up there too.</li>
     </ol>
     <p>Signals are sent only over REST and received only over WebSocket. The stream is one-way: the server ignores anything a client writes to it. That way sending has one path and one place for every check.</p>
 
@@ -94,7 +115,7 @@
     <ul>
       <li><b>It doesn’t say who a signal is from.</b> No event has a <code>from</code> field, and none ever will. Not even the server log records the sender.</li>
       <li><b>It doesn’t store signals.</b> There is no history and no queue for people who are offline. That’s why <code>202</code> means “accepted”, not “delivered”.</li>
-      <li><b>It doesn’t reveal who is who.</b> Clients only see the <code>id</code>s of contacts in their own list. People’s internal identifiers never leave the server.</li>
+      <li><b>It doesn’t reveal who is who.</b> Clients only see the <code>id</code>s of contacts in their own list. Nobody else’s internal identifier ever leaves the server.</li>
       <li><b>It doesn’t confirm that a Love ID exists.</b> A wrong code is added just like a right one; signals to it simply go nowhere. Guessing codes gets you nothing.</li>
       <li><b>It doesn’t tell anyone they were added or removed.</b></li>
     </ul>
@@ -102,15 +123,16 @@
     <h2 id="access">Access and tokens</h2>
     <p>The server’s address:</p>
     <pre><code>https://api.lovearound.me</code></pre>
-    <p>Every request, including opening the WebSocket, carries a token in the <code>Authorization: Bearer …</code> header. There are two kinds of token:</p>
+    <p>Every request, opening the WebSocket included, carries a token in the <code>Authorization: Bearer …</code> header. A web page opens the stream with a one-time <a href="/docs/ws#connect">ticket</a> instead. There are two kinds of token:</p>
     <div class="tbl"><table>
       <thead><tr><th>Who</th><th>Token</th><th>What it can do</th></tr></thead>
       <tbody>
-        <tr><td><b>App</b></td><td>A Firebase ID token after Google sign-in</td><td>Everything: account, contact list, devices, signals</td></tr>
-        <tr><td><b>Device</b></td><td><code>dev_</code> followed by 32 letters and digits. Created in the app: <b>Settings → Devices</b></td><td>Read the contact list, send signals (if allowed to <code>send</code>), receive them (if allowed to <code>receive</code>). Anything else is <code>403</code></td></tr>
+        <tr><td><b>App</b></td><td>A Firebase ID token from signing in to lovearound</td><td>Everything: account, contact list, devices, signals</td></tr>
+        <tr><td><b>Device</b></td><td><code>dev_</code> followed by 32 letters and digits. Made in any lovearound app: <b>Settings → Devices → Connect a device</b>, or by <a href="/docs/rest#pairing">pairing by code</a></td><td>Send signals and read the contact list (if allowed to <code>send</code>), receive signals (if allowed to <code>receive</code>). Anything else is <code>403</code></td></tr>
       </tbody>
     </table></div>
     <p>Your own device or script only needs a device token. It is shown once. If it leaks, disconnect the device in the same place: the token and every connection opened with it stop working at once.</p>
+    <p>A device with a screen can do without a pasted token: it shows a code, and you confirm it at <a href="https://lovearound.me/login/devices">lovearound.me/login/devices</a>. How it works is in <a href="/docs/rest#pairing">Pairing by code</a>.</p>
 
     <h2 id="compat">Compatibility</h2>
     <ul>
@@ -121,13 +143,14 @@
 
     <h2 id="next">Where next</h2>
     <div class="cards">
-      <a href="/docs/rest"><b>REST API</b><span>Every request: account, contacts, devices, sending a signal. Status codes and limits.</span><em>Open →</em></a>
+      <a href="/docs/rest"><b>REST API</b><span>Every request: signals, contacts, devices, the account. Status codes and limits.</span><em>Open →</em></a>
       <a href="/docs/ws"><b>WebSocket</b><span>The event stream: connecting, messages, reconnecting, examples in Node and Python.</span><em>Open →</em></a>
       <a href="/docs/esp32"><b>ESP32 toy</b><span>Glows when someone thinks of you and sends a heart at the press of a button. Wiring and sketch.</span><em>Build it →</em></a>
     </div>
-    <p>The lovearound apps for <a href="https://github.com/lovearound-me/mac">macOS</a>, <a href="https://github.com/lovearound-me/windows">Windows</a> and <a href="https://github.com/lovearound-me/linux">Linux</a> are open source and talk to the server through this same API. Their code is on <a href="https://github.com/lovearound-me">GitHub</a>.</p>
+    <p>The lovearound apps for <a href="https://github.com/lovearound-me/mac">macOS</a>, <a href="https://github.com/lovearound-me/windows">Windows</a> and <a href="https://github.com/lovearound-me/linux">Linux</a> and the <a href="https://github.com/lovearound-me/web">web app</a> are open source and talk to the server through this same API. Their code is on <a href="https://github.com/lovearound-me">GitHub</a>.</p>
   </article>
 </main>
+</div>
 
 <footer>
   <div class="wrap">
@@ -135,5 +158,6 @@
     <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · © 2026 lovearound</span>
   </div>
 </footer>
+<script src="/docs/nav.js" defer></script>
 </body>
 </html>

@@ -1,0 +1,51 @@
+/* /docs: the menu on the left (the pages, and the sections of this one).
+   Wide screen: it sticks at the left. Phone: a bar under the header names the
+   section on screen and opens the menu from the left. */
+.docs .top{z-index:20}
+.docs-main{min-width:0}
+.doc h3[id]{scroll-margin-top:84px}
+
+.dnav-pages,.dnav-pages ul{list-style:none;margin:0;padding:0}
+.dnav a{display:flex;align-items:center;gap:8px;min-width:0;text-decoration:none;color:var(--body);border-radius:10px}
+@media (hover:hover){.dnav a:hover{background:var(--well);color:var(--ink)}}
+.dnav-pages > li > a{padding:8px 12px;font-size:15px;font-weight:700;color:var(--ink)}
+.dnav-pages > li > a[aria-current="page"]{color:var(--accent)}
+.dnav-sub{margin:2px 0 12px}
+.dnav-sub a{padding:6px 12px;font-size:14px;font-weight:600;line-height:1.35}
+.dnav-sub > li.grp > a{margin-top:10px;font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.dnav small{font-size:12px;font-weight:600;color:var(--muted)}
+.dnav code{font:600 13px/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ink);overflow-wrap:anywhere}
+.dm{flex:none;min-width:46px;padding:2px 0;border-radius:6px;text-align:center;font:800 10px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.02em;color:#fff;background:var(--muted)}
+.dm.get{background:#4F7A5C}.dm.post{background:var(--accent)}.dm.patch{background:#9A6B2F}.dm.delete{background:#6B4A6E}.dm.ws{background:#3F6487}
+.dnav a.on{background:var(--pink);color:var(--ink)}
+.dnav-sub > li.grp > a.on{color:var(--accent)}
+.dnav a.on code{color:var(--accent-hover)}
+
+.dnav-toggle,.dnav-close{font-family:inherit;cursor:pointer;color:var(--ink)}
+.dnav-toggle svg,.dnav-close svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
+.dnav-label{display:none}
+
+/* colors table */
+.doc table.colors td i{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:10px;vertical-align:-2px}
+
+@media (min-width:960px){
+  .docs-shell{display:grid;grid-template-columns:248px minmax(0,1fr);gap:56px}
+  .dnav{position:sticky;top:var(--top-h,67px);align-self:start;max-height:calc(100vh - var(--top-h,67px));overflow-y:auto;overscroll-behavior:contain;padding:28px 12px 40px 0;margin-left:-12px;border-right:1px solid var(--line)}
+  .dnav-bar,.dnav-head,.dnav-scrim{display:none!important}
+}
+
+@media (max-width:959px){
+  .dnav-bar{position:sticky;top:var(--top-h,67px);z-index:15;background:rgba(252,248,244,.92);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+  .dnav-toggle{display:flex;align-items:center;gap:10px;width:100%;min-width:0;min-height:48px;padding:0;background:none;border:0;font-size:15px;font-weight:700;text-align:left}
+  .dnav-page{flex:none}
+  .dnav-now:not(:empty)::before{content:"›";margin-right:8px;color:var(--muted);font-family:'Manrope',sans-serif}
+  .dnav-now{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--accent);font:700 14px/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+  .dnav{position:fixed;top:0;bottom:0;left:0;z-index:40;width:min(340px,86vw);overflow-y:auto;overscroll-behavior:contain;padding:0 12px 32px;background:var(--bg);box-shadow:0 0 0 1px var(--line),0 20px 60px rgba(48,42,39,.18);transform:translateX(-105%);visibility:hidden;transition:transform .25s ease,visibility 0s .25s}
+  .dnav-open .dnav{transform:none;visibility:visible;transition:transform .25s ease}
+  .dnav-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;justify-content:space-between;padding:10px 0 8px 12px;background:var(--bg);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+  .dnav-close{display:flex;align-items:center;justify-content:center;width:44px;height:44px;border:0;border-radius:50%;background:var(--well)}
+  .dnav-scrim{position:fixed;inset:0;z-index:30;background:rgba(48,42,39,.35)}
+  .dnav-open{overflow:hidden}
+  .doc h2,.doc h3[id],.ep{scroll-margin-top:calc(var(--top-h,67px) + 64px)}
+}
+@media (prefers-reduced-motion:reduce){.dnav,.dnav-open .dnav{transition:none}}

@@ -12,8 +12,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
 <link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/docs/docs.css">
 </head>
-<body>
+<body class="docs">
 <header class="top">
   <div class="wrap">
     <a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a>
@@ -26,28 +27,73 @@
     </nav>
   </div>
 </header>
-<main class="wrap">
+<div class="dnav-bar"><div class="wrap"><button class="dnav-toggle" type="button" aria-expanded="false" aria-controls="dnav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span class="dnav-label">Contents</span><span class="dnav-page">WebSocket</span><span class="dnav-now"></span></button></div></div>
+<div class="wrap docs-shell">
+  <aside class="dnav" id="dnav">
+    <div class="dnav-head"><b>Docs</b><button class="dnav-close" type="button" aria-label="Close the menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <nav aria-label="Docs pages and sections">
+      <ul class="dnav-pages">
+        <li><a href="/docs">Overview</a></li>
+        <li><a href="/docs/rest">REST API</a></li>
+        <li class="here"><a href="/docs/ws" aria-current="page">WebSocket</a>
+          <ul class="dnav-sub">
+            <li class="grp"><a href="#connect">Connecting</a>
+              <ul>
+                <li><a href="#ws-stream"><span class="dm ws">WS</span><code>/v1/stream</code></a></li>
+                <li><a href="#params">Parameters</a></li>
+                <li><a href="#responses">Responses</a></li>
+              </ul>
+            </li>
+            <li class="grp"><a href="#messages">From the server</a>
+              <ul>
+                <li><a href="#ready"><code>ready</code></a></li>
+                <li><a href="#event"><code>event</code></a></li>
+                <li><a href="#sync"><code>sync</code></a></li>
+                <li><a href="#ping"><code>ping</code> <small>frame</small></a></li>
+                <li><a href="#close"><code>close</code> <small>frame</small></a></li>
+              </ul>
+            </li>
+            <li class="grp"><a href="#client">From the client</a>
+              <ul>
+                <li><a href="#pong"><code>pong</code> <small>frame</small></a></li>
+                <li><a href="#client-ping"><code>ping</code> <small>frame</small></a></li>
+                <li><a href="#client-other">Anything else</a></li>
+              </ul>
+            </li>
+            <li><a href="#alive">Keeping the connection alive</a></li>
+            <li><a href="#many">Several connections</a></li>
+            <li class="grp"><a href="#examples">Examples</a>
+              <ul>
+                <li><a href="#ex-terminal">From a terminal</a></li>
+                <li><a href="#ex-node">Node.js</a></li>
+                <li><a href="#ex-python">Python</a></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><a href="/docs/esp32">ESP32 toy</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <div class="dnav-scrim" hidden></div>
+<main class="docs-main">
 
   <div class="doc-hero short">
     <span class="kicker">Docs</span>
     <h1>WebSocket</h1>
     <p class="lead">The event stream: a device keeps the connection open, and the server pushes signals into it the moment they’re sent.</p>
-    <nav class="tabs" aria-label="Docs sections">
-      <a href="/docs">Overview</a>
-      <a href="/docs/rest">REST API</a>
-      <a href="/docs/ws" aria-current="page">WebSocket</a>
-      <a href="/docs/esp32">ESP32 toy</a>
-    </nav>
   </div>
 
   <article class="doc">
 
     <h2 id="connect">Connecting</h2>
-    <div class="ep" style="margin-top:0"><span class="m ws">WS</span><code>/v1/stream</code><span class="who dev">device, receive permission</span></div>
+    <div class="ep" id="ws-stream" style="margin-top:0"><span class="m ws">WS</span><code>/v1/stream</code><span class="who dev">device, receive permission</span></div>
     <pre><code>wss://api.lovearound.me/v1/stream
 Authorization: Bearer dev_…</code></pre>
     <p>The token goes in a header, as with REST. The browser’s built-in <code>WebSocket</code> can’t set headers, so connect from your own program: on a board, in Node, Python, on a phone.</p>
     <p>A web page signed in to the account (like the web app) can use a ticket instead: <a href="/docs/rest#post-stream-ticket"><code>POST /v1/stream/ticket</code></a> with the app token, then open <code>wss://api.lovearound.me/v1/stream?ticket=…</code> without a header. A ticket works once, within 30 seconds; get a new one for every connection.</p>
+
+    <h3 id="params">Parameters</h3>
     <div class="tbl"><table>
       <thead><tr><th>Parameter</th><th></th></tr></thead>
       <tbody>
@@ -56,19 +102,20 @@ Authorization: Bearer dev_…</code></pre>
         <tr><td><code>ticket=…</code></td><td>A one-time ticket in place of the <code>Authorization</code> header, for a browser</td></tr>
       </tbody>
     </table></div>
-    <p>Responses to connecting:</p>
+
+    <h3 id="responses">Responses</h3>
     <div class="tbl"><table>
       <thead><tr><th>Code</th><th>What to do</th></tr></thead>
       <tbody>
         <tr><td><code>101</code></td><td>The connection is open; <code>ready</code> comes next</td></tr>
-        <tr><td><code>401</code></td><td>The token is wrong, or the device was disconnected. Reconnecting won’t help</td></tr>
-        <tr><td><code>403</code></td><td>The device doesn’t have the <code>receive</code> permission</td></tr>
+        <tr><td><code>401</code></td><td>The token is wrong, the device was disconnected, or the ticket was already used or ran out. Reconnecting with the same token won’t help</td></tr>
+        <tr><td><code>403</code></td><td>The device doesn’t have the <code>receive</code> permission. Reconnecting won’t help either</td></tr>
         <tr><td><code>503</code></td><td>The server is updating. Connect again in a couple of seconds</td></tr>
       </tbody>
     </table></div>
 
-    <h2 id="messages">Messages from the server</h2>
-    <p>Each message is a text frame with one JSON object. The <code>type</code> field says what kind of message it is.</p>
+    <h2 id="messages">From the server</h2>
+    <p>Each message is a text frame with one JSON object. The <code>type</code> field says what kind of message it is. Besides them the server sends two WebSocket control frames, <code>ping</code> and <code>close</code>.</p>
 
     <h3 id="ready"><code>ready</code></h3>
     <pre><code>{ &quot;type&quot;: &quot;ready&quot; }</code></pre>
@@ -97,33 +144,54 @@ Authorization: Bearer dev_…</code></pre>
 
     <h3 id="sync"><code>sync</code></h3>
     <pre><code>{ &quot;type&quot;: &quot;sync&quot;, &quot;what&quot;: &quot;contacts&quot; }</code></pre>
-    <p>The contact list changed: someone was added, renamed, moved or removed. If your device shows the list, reload it with <a href="/docs/rest#get-contacts"><code>GET /v1/contacts</code></a>. If it doesn’t, you can skip this message.</p>
+    <p>The contact list changed: someone was added, renamed, recolored, moved or removed, or another account was merged into this one. If your device shows the list, reload it with <a href="/docs/rest#get-contacts"><code>GET /v1/contacts</code></a>. If it doesn’t, you can skip this message.</p>
+    <p>A device without the <code>send</code> permission gets <code>sync</code> too, but can’t read the list: just skip it.</p>
+
+    <h3 id="ping"><code>ping</code> <small>frame</small></h3>
+    <p>Every 25 seconds. WebSocket libraries answer it with <code>pong</code> on their own.</p>
+
+    <h3 id="close"><code>close</code> <small>frame</small></h3>
+    <p>The server closes the stream itself, with no code or reason, when:</p>
+    <ul>
+      <li>the device was disconnected in the app;</li>
+      <li>the account was deleted, or merged into another (the devices move there and reconnect);</li>
+      <li>the server is updating: everyone moves to the new version.</li>
+    </ul>
+    <p>Reconnect with the usual pause. If the device was disconnected or the account deleted, the next attempt gets <code>401</code>.</p>
 
     <div class="note"><p><b>Skip what you don’t know.</b> If you don’t recognise the <code>type</code>, <code>event.type</code>, <code>event.v</code> or <code>what</code>, do nothing. The server will add new messages, and older devices should quietly ignore them.</p></div>
 
-    <h2 id="client">From client to server</h2>
-    <p>Nothing. The stream is one-way; the server ignores anything you write to it. Send signals with <a href="/docs/rest#post-events"><code>POST /v1/events</code></a>: sending has one path, and every check and limit lives in one place.</p>
+    <h2 id="client">From the client</h2>
+    <p>The stream is one-way: there are no messages for the client to send. Send signals with <a href="/docs/rest#post-events"><code>POST /v1/events</code></a>: sending has one path, and every check and limit lives in one place.</p>
+
+    <h3 id="pong"><code>pong</code> <small>frame</small></h3>
+    <p>The answer to the server’s <code>ping</code>. Your library sends it for you.</p>
+
+    <h3 id="client-ping"><code>ping</code> <small>frame</small></h3>
+    <p>Send your own every 30 seconds, and the server answers with <code>pong</code>. No <code>pong</code> within a few seconds means the connection is dead, even if the socket doesn’t know it yet: close it and reconnect.</p>
+
+    <h3 id="client-other">Anything else</h3>
+    <p>Text and binary messages are ignored. A <code>close</code> frame closes the stream.</p>
 
     <h2 id="alive">Keeping the connection alive</h2>
     <ul>
-      <li><b>Ping.</b> The server pings every 25 seconds; well-behaved clients answer with pong on their own. Send your own ping too, every 30 seconds: if no pong comes back within a few seconds, the connection is dead, even if the socket doesn’t know it yet.</li>
-      <li><b>Reconnecting.</b> Connections drop: Wi‑Fi goes away, the server updates. On an update the server closes old connections itself so everyone moves to the new version. Reconnect with a pause: start at one second and double it up to a minute; after <code>ready</code>, reset it to one second.</li>
-      <li><b>When not to reconnect.</b> If connecting returns <code>401</code>, the device was disconnected or the token is wrong. Tell the owner instead of hammering the server.</li>
-      <li><b>The server closes the stream itself</b> when the device is disconnected in the app or the account is deleted.</li>
+      <li><b>Ping.</b> Answer the server’s <a href="#ping"><code>ping</code></a> and send <a href="#client-ping">your own</a> every 30 seconds.</li>
+      <li><b>Reconnecting.</b> Connections drop: Wi‑Fi goes away, the server updates. Reconnect with a pause: start at one second and double it up to a minute; after <code>ready</code>, reset it to one second.</li>
+      <li><b>When not to reconnect.</b> If connecting returns <code>401</code> or <code>403</code>, the device was disconnected, the token is wrong or it may not receive. Tell the owner instead of hammering the server.</li>
     </ul>
 
     <h2 id="many">Several connections</h2>
-    <p>One account can have any number of open streams: Mac, Windows, a toy, a lamp. Every event reaches each of them. One device can also hold several connections, but one is usually enough.</p>
-    <p>Only streams with <code>anyone=true</code> get “anyone” signals. One person gets such a signal at most once an hour.</p>
+    <p>One account can have any number of open streams: a Mac, Windows, Linux, the web app, a toy, a lamp. Every event reaches each of them. One device can also hold several connections, but one is usually enough.</p>
+    <p>Only streams with <code>anyone=true</code> get “anyone” signals, along with Telegram chats that take them. Such a signal goes to one person, and one person gets at most one an hour.</p>
 
     <h2 id="examples">Examples</h2>
-    <h3>From a terminal</h3>
+    <h3 id="ex-terminal">From a terminal</h3>
     <p>With <a href="https://github.com/vi/websocat">websocat</a>:</p>
     <pre><code>websocat -H &quot;Authorization: Bearer dev_…&quot; \
   wss://api.lovearound.me/v1/stream</code></pre>
 
-    <h3>Node.js</h3>
-    <p>With the <code>ws</code> package (<code>npm i ws</code>):</p>
+    <h3 id="ex-node">Node.js</h3>
+    <p>With the <code>ws</code> package (<code>npm i ws</code>). Save it as <code>stream.mjs</code> and run <code>LOVEAROUND_TOKEN=dev_… node stream.mjs</code>:</p>
     <pre><code>import WebSocket from &quot;ws&quot;;
 
 const URL = &quot;wss://api.lovearound.me/v1/stream&quot;;
@@ -132,6 +200,18 @@ let delay = 1000;
 
 function connect() {
   const ws = new WebSocket(URL, { headers: { Authorization: `Bearer ${TOKEN}` } });
+  let ping;
+
+  ws.on(&quot;open&quot;, () =&gt; {
+    // ping every 30 s; no pong by the next one means the connection is dead
+    let alive = true;
+    ws.on(&quot;pong&quot;, () =&gt; { alive = true; });
+    ping = setInterval(() =&gt; {
+      if (!alive) return ws.terminate();
+      alive = false;
+      ws.ping();
+    }, 30_000);
+  });
 
   ws.on(&quot;message&quot;, (data) =&gt; {
     let msg;
@@ -143,18 +223,9 @@ function connect() {
     // skip everything else
   });
 
-  // ping every 30 s; no pong by the next one means the connection is dead
-  let alive = true;
-  ws.on(&quot;pong&quot;, () =&gt; { alive = true; });
-  const ping = setInterval(() =&gt; {
-    if (!alive) return ws.terminate();
-    alive = false;
-    ws.ping();
-  }, 30_000);
-
   ws.on(&quot;error&quot;, (err) =&gt; {
-    if (err.message.includes(&quot;Unexpected server response: 401&quot;)) {
-      console.error(&quot;the token doesn't work&quot;);
+    if (/Unexpected server response: 40[13]/.test(err.message)) {
+      console.error(&quot;the token doesn't work, or the device may not receive&quot;);
       process.exit(1);
     }
     // an error is always followed by close
@@ -169,7 +240,7 @@ function connect() {
 
 connect();</code></pre>
 
-    <h3>Python</h3>
+    <h3 id="ex-python">Python</h3>
     <p>With the <code>websockets</code> package, version 14 or later (<code>pip install websockets</code>):</p>
     <pre><code>import asyncio, json, os
 import websockets
@@ -196,8 +267,8 @@ async def main():
                     if msg.get(&quot;type&quot;) == &quot;event&quot; and ev.get(&quot;type&quot;) == &quot;signal&quot; and ev.get(&quot;v&quot;) == 1:
                         print(&quot;💗 someone thought of you&quot;)
         except InvalidStatus as e:
-            if e.response.status_code == 401:
-                raise SystemExit(&quot;the token doesn't work&quot;)
+            if e.response.status_code in (401, 403):
+                raise SystemExit(&quot;the token doesn't work, or the device may not receive&quot;)
         except (OSError, websockets.WebSocketException):
             pass  # dropped, 503, no network: just reconnect
         await asyncio.sleep(delay)
@@ -209,6 +280,7 @@ asyncio.run(main())</code></pre>
     <div class="next"><a href="/docs/rest">← REST API</a><a href="/docs/esp32">ESP32 toy →</a></div>
   </article>
 </main>
+</div>
 
 <footer>
   <div class="wrap">
@@ -216,5 +288,6 @@ asyncio.run(main())</code></pre>
     <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · © 2026 lovearound</span>
   </div>
 </footer>
+<script src="/docs/nav.js" defer></script>
 </body>
 </html>
