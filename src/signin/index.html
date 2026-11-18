@@ -16,7 +16,7 @@
 </head>
 <body>
 <!--
-  Google sign-in for the apps. The app opens /signin/?state=<random>&key=<its
+  Sign-in for the apps (Apple, Google or email). The app opens /signin/?state=<random>&key=<its
   one-time public key>; this page signs in with the Firebase JS SDK, seals
   the session (uid, email, refresh token) to that key and hands it back as
   lovearound://signin?state=…&epk=…&box=…, then signs the browser out. Only
@@ -46,8 +46,11 @@
     <div class="badge"><svg aria-hidden="true" width="44" height="44" viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg></div>
     <h1 id="title" data-t="heading"></h1>
     <p class="lead" id="text" data-t="text"></p>
-    <button class="btn" id="go" type="button" data-t="button"></button>
-    <button class="btn ghost" id="mail" type="button" data-t="email_button" hidden></button>
+    <div class="choices" id="choices">
+      <button class="btn apple" id="apple" type="button"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M16.37 12.6c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.47.83-.72 0-1.82-.81-2.99-.79-1.54.02-2.96.9-3.75 2.27-1.6 2.78-.41 6.88 1.15 9.13.76 1.1 1.67 2.33 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.38 0 1.78.74 2.99.72 1.24-.02 2.02-1.12 2.77-2.22.87-1.28 1.23-2.52 1.25-2.58-.03-.01-2.4-.92-2.42-3.65zM14.1 5.86c.63-.77 1.06-1.83.94-2.89-.91.04-2.02.61-2.67 1.37-.58.67-1.1 1.76-.96 2.8 1.02.08 2.06-.52 2.69-1.28z"/></svg><span data-t="apple_button"></span></button>
+      <button class="btn white" id="go" type="button"><svg aria-hidden="true" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg><span data-t="button"></span></button>
+      <button class="btn white" id="mail" type="button"><svg class="line" aria-hidden="true" viewBox="0 0 24 24"><rect x="3" y="5.5" width="18" height="13" rx="2.5"/><path d="M3.8 7l8.2 6 8.2-6"/></svg><span data-t="email_button"></span></button>
+    </div>
     <form class="signin-form" id="form" novalidate hidden>
       <label><span data-t="email"></span><input id="email" type="email" autocomplete="email" inputmode="email" autocapitalize="off" spellcheck="false"></label>
       <label><span data-t="password"></span><input id="password" type="password" autocomplete="current-password"></label>
@@ -68,7 +71,7 @@
 <script src="/lang.js"></script>
 <script type="module">
   import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-  import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, inMemoryPersistence, setPersistence,
+  import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithPopup, signOut, inMemoryPersistence, setPersistence,
     signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail }
     from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
 
@@ -126,17 +129,16 @@
 
   if (telegram) {
     // The bot has no accounts of its own: a new person makes one here, with
-    // Google or with an email and a password, as in the web app.
+    // Apple, Google or an email and a password, as in the web app.
     $('title').textContent = T.hello;
     $('text').textContent = T.telegram_text;
     $('back').textContent = T.telegram_back;
-    $('mail').hidden = false;
-    $('password').placeholder = T.password_hint;
   } else if (!/^[A-Za-z0-9-]{8,64}$/.test(state) || (key && !/^[A-Za-z0-9_-]{87}$/.test(key))) {
     $('title').textContent = T.from_app;
     $('text').textContent = T.from_app_text;
-    $('go').hidden = true;
+    $('choices').hidden = true;
   }
+  $('password').placeholder = T.password_hint;
 
   // Signed in: hand the session over (see the comment at the top).
   async function finish(user) {
@@ -150,7 +152,7 @@
     $('title').textContent = T.done;
     $('text').textContent = telegram ? T.telegram_done : T.done_text;
     $('text').hidden = false;
-    $('go').hidden = $('mail').hidden = $('form').hidden = $('note').hidden = true;
+    $('choices').hidden = $('form').hidden = $('note').hidden = true;
     $('back').href = back;
     $('back').hidden = false;
     location.href = back;
@@ -159,25 +161,39 @@
   // The browser keeps nothing: the session goes to the app only.
   const ready = setPersistence(auth, inMemoryPersistence);
 
-  $('go').addEventListener('click', async () => {
-    $('go').disabled = true;
+  // Apple and Google, in a popup. One account per email: when the email
+  // already has an account made another way, Firebase refuses and the person
+  // signs in the way they did before.
+  async function withPopup(button, provider) {
+    const buttons = $('choices').querySelectorAll('button');
+    buttons.forEach((b) => { b.disabled = true; });
     try {
       await ready;
-      const { user } = await signInWithPopup(auth, new GoogleAuthProvider());
+      const { user } = await signInWithPopup(auth, provider);
       await finish(user);
     } catch (e) {
-      $('go').disabled = false;
-      $('text').textContent = e && e.code === 'auth/popup-closed-by-user'
+      buttons.forEach((b) => { b.disabled = false; });
+      const code = e && e.code;
+      $('text').textContent = code === 'auth/popup-closed-by-user' || code === 'auth/cancelled-popup-request'
         ? T.closed
+        : code === 'auth/account-exists-with-different-credential'
+        ? T.exists
         : T.failed;
     }
+  }
+  $('go').addEventListener('click', () => withPopup($('go'), new GoogleAuthProvider()));
+  $('apple').addEventListener('click', () => {
+    const apple = new OAuthProvider('apple.com');
+    apple.addScope('email');
+    apple.setCustomParameters({ locale: document.documentElement.lang });
+    withPopup($('apple'), apple);
   });
 
-  // Email and password, Telegram only (the apps have their own form). As in
-  // the web app: sign in, or make the account if this email has none.
+  // Email and password. As in the web app: sign in, or make the account if
+  // this email has none.
   const note = (text) => { $('note').textContent = text || ''; $('note').hidden = !text; };
   const showForm = (on) => {
-    $('go').hidden = $('mail').hidden = on;
+    $('choices').hidden = on;
     $('form').hidden = !on;
     $('text').hidden = on;
     note('');

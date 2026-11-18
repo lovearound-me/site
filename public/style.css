@@ -128,3 +128,12 @@ footer a{color:var(--muted)}
 .signin-form .links button:first-child{color:var(--muted)}
 .card .form-msg{font-size:15px;line-height:1.5;color:var(--accent);max-width:340px;margin:0}
 @media (max-width:520px){.card{padding:36px 22px;border-radius:24px}}
+.choices{width:100%;max-width:340px;display:flex;flex-direction:column;gap:10px;margin-top:8px}
+.card .choices .btn{max-width:none;margin-top:0}
+.btn svg{width:20px;height:20px;flex:none}
+.btn.apple{background:#000;color:#fff}
+.btn.apple:hover{background:#2E2A28;color:#fff}
+.btn.apple svg{fill:#fff}
+.btn.white{background:var(--card);color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.btn.white:hover{background:var(--well);color:var(--ink)}
+.btn.white svg.line{fill:none;stroke:currentColor;stroke-width:1.8}
