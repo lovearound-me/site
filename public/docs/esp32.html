@@ -69,7 +69,7 @@
     <p>Open <b>Settings → Devices</b> in any lovearound app: on a Mac from the heart in the menu bar, on Windows and Linux from the heart in the tray, or on the web at <a href="https://app.lovearound.me">app.lovearound.me</a>. Give the device a name, for example “Kitty on the shelf”, choose what it can do with <b>Receives hearts</b> and <b>Sends hearts</b>, and click <b>Connect a device</b>.</p>
     <p>The app shows the token once:</p>
     <pre><code>dev_4kq9XbT2mWc7RfLp8sHn3vYzAe6uJd5G</code></pre>
-    <p>Copy it and keep it to yourself: anyone with it can send hearts in your name. If the token leaks or the device gets lost, disconnect the device in the same place and the token stops working at once.</p>
+    <p>Copy it and keep it to yourself: anyone with it can send hearts in your name. If the token leaks, get a <a href="/docs/rest#post-device-token">new one</a>; if the device gets lost, disconnect it in the same place. Either way the old token stops working at once.</p>
 
     <h2 id="whom"><span class="n">2</span>Find out whom to send to</h2>
     <p>Ask the server for your list with the device token:</p>
@@ -179,13 +179,13 @@ void loop() {
     <p>The sketch takes up almost all of the default program memory. If you extend it, choose <b>Tools → Partition Scheme → Huge APP</b> in the Arduino IDE.</p>
 
     <p>What the sketch does: the toy opens the <code>/v1/stream</code> stream, glows on every <code>signal</code> event and skips anything it doesn’t know. The button sends <code>POST /v1/events</code>. The library handles drops on its own: it reconnects after 5 seconds and pings every 30 seconds. All messages and status codes are described in <a href="/docs/ws">WebSocket</a> and <a href="/docs/rest">REST API</a>.</p>
-    <p>For the toy to also get “someone out there” hearts from strangers, connect to <code>/v1/stream?anyone=true</code>. Such a signal arrives at most once an hour.</p>
+    <p>For the toy to also get “someone out there” hearts from strangers, connect to <code>/v1/stream?anyone=true</code>, or give the device <a href="/docs/rest#patch-device"><code>accept_anyone</code></a>. Such a signal arrives at most once an hour.</p>
 
     <h2 id="more">Where to take it</h2>
     <ul>
       <li><b>Several buttons.</b> Each with its own contact. Light each one in the color you gave that person in the app: the list carries it as <code>color</code>, see <a href="/docs/rest#colors">colors</a>. A signal you receive never says whose it is, so it glows in a color of the toy’s own.</li>
       <li><b>A vibration motor or a buzzer</b> instead of LEDs.</li>
-      <li><b>Quiet at night.</b> The ESP32 can get the time over NTP and stay dark from 23:00 to 8:00.</li>
+      <li><b>Quiet at night.</b> Give the device quiet hours (<a href="/docs/rest#patch-device"><code>quiet_hours</code></a>): the server sends it nothing from 23:00 to 8:00, with no code on the board.</li>
       <li><b>Wi‑Fi and token without reflashing.</b> Through a setup access point, for example with the WiFiManager library.</li>
       <li><b>A screen and choosing a person.</b> A board with a screen, for example the LilyGO T‑Display‑S3 AMOLED: two buttons scroll the list, after 3 seconds the heart flies to the chosen person, and the last item is “Someone out there”. The list comes from <code>GET /v1/contacts</code> and refreshes on <code>{&quot;type&quot;:&quot;sync&quot;}</code>.</li>
       <li><b>No token in the firmware.</b> A board with a screen can show a code instead, and you confirm it from your phone: see <a href="/docs/rest#pairing">Pairing by code</a>.</li>

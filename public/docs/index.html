@@ -131,7 +131,7 @@
         <tr><td><b>Device</b></td><td><code>dev_</code> followed by 32 letters and digits. Made in any lovearound app: <b>Settings → Devices → Connect a device</b>, or by <a href="/docs/rest#pairing">pairing by code</a></td><td>Send signals and read the contact list (if allowed to <code>send</code>), receive signals (if allowed to <code>receive</code>). Anything else is <code>403</code></td></tr>
       </tbody>
     </table></div>
-    <p>Your own device or script only needs a device token. It is shown once. If it leaks, disconnect the device in the same place: the token and every connection opened with it stop working at once.</p>
+    <p>Your own device or script only needs a device token. It is shown once. If it leaks, get a <a href="/docs/rest#post-device-token">new one</a>, or disconnect the device in the same place: the old token and every connection opened with it stop working at once.</p>
     <p>A device with a screen can do without a pasted token: it shows a code, and you confirm it at <a href="https://lovearound.me/login/devices">lovearound.me/login/devices</a>. How it works is in <a href="/docs/rest#pairing">Pairing by code</a>.</p>
 
     <h2 id="compat">Compatibility</h2>
