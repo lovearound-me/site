@@ -1,0 +1,15 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": ["CY8GRX7426.me.lovearound.ios"],
+        "components": [
+          { "/": "/login/devices", "comment": "The QR on a watch or a lamp: #<six digits>, opens pairing" },
+          { "/": "/login/devices/" },
+          { "/": "/i/*", "comment": "A Love ID: opens «Добавить»" },
+          { "/": "/*/i/*", "comment": "A Love ID on a language's page" }
+        ]
+      }
+    ]
+  }
+}
