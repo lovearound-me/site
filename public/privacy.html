@@ -36,7 +36,7 @@
     <ul>
       <li><b>Your account.</b> When you sign in with Google, Apple or email, Firebase Authentication (by Google) keeps your email address, and for Google sign-in also your name and photo as Google gives them. From Apple we ask only for the email address, and if you choose to hide it, we get just the relay address Apple makes for us. We use them only to let you in.</li>
       <li><b>Your address book.</b> The people you added and the names you gave them. Those names are yours: the people themselves never see them, and nobody is told that you added them.</li>
-      <li><b>Your devices.</b> The apps and devices you connected, their names, and when each one last connected. A device’s token is kept only as a hash.</li>
+      <li><b>Your devices.</b> The apps and devices you connected, their names, what each one may do, and when each one last connected. A device’s token is kept only as a hash. A device you connect with a code (a watch, a lamp) is told the email of the account it joined, so it can show it; the code itself lives in memory for 10 minutes and is never stored.</li>
       <li><b>Your invite code</b>, so others can add you.</li>
     </ul>
 

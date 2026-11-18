@@ -127,6 +127,9 @@ footer a{color:var(--muted)}
 .signin-form .links button{background:none;border:0;padding:4px 0;font-family:inherit;font-size:15px;font-weight:700;color:var(--accent);cursor:pointer}
 .signin-form .links button:first-child{color:var(--muted)}
 .card .form-msg{font-size:15px;line-height:1.5;color:var(--accent);max-width:340px;margin:0}
+.choices .all-ways{background:none;border:0;padding:6px 0 0;font-family:inherit;font-size:15px;font-weight:700;color:var(--muted);cursor:pointer}
+.card .way-hint{font-size:15px;line-height:1.5;color:var(--body);max-width:340px;margin:0}
+.card .way-hint a{font-weight:700;color:var(--accent);text-decoration:none;white-space:nowrap}
 @media (max-width:520px){.card{padding:36px 22px;border-radius:24px}}
 .choices{width:100%;max-width:340px;display:flex;flex-direction:column;gap:10px;margin-top:8px}
 .card .choices .btn{max-width:none;margin-top:0}

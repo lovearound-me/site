@@ -1,5 +1,5 @@
 // Language for the pages that serve every language at one address (/i/…,
-// /signin). Chooses the way Firebase Hosting does for "/": the
+// /login). Chooses the way Firebase Hosting does for "/": the
 // firebase-language-override cookie set by the site's language menu first,
 // then the browser's languages; the first of the page's languages otherwise.
 // apply() fills every [data-t] element and the title, and returns the

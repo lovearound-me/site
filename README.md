@@ -1,8 +1,9 @@
 # lovearound.me
 
 The site of Love Around: the landing page in 13 languages, invite links
-(`/i/<code>`), the Google sign-in bridge for the apps (`/signin`) and the
-public API docs (`/docs`).
+(`/i/<code>`), the sign-in bridge for the apps (`/login`; `/signin` for the
+builds already out), `/login/devices` (a device's code, redirected to the web
+app) and the public API docs (`/docs`).
 
 | Path | What |
 |---|---|

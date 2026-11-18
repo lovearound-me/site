@@ -22,7 +22,7 @@ ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
 [[ -f "$ADC" ]] || { echo ">> no ADC at $ADC — run 'gcloud auth application-default login'"; exit 1; }
 
-# The translated pages (public/<lang>, /i, /signin) are built from src/.
+# The translated pages (public/<lang>, /i, /signin, /login) are built from src/.
 python3 "$ROOT/build.py"
 
 STAGE="$(mktemp -d)"

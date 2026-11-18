@@ -19,9 +19,13 @@ same keys, and every key must be used: the build stops otherwise.
                         language is in the link so that link previews, which
                         run no JS, come out in it. A person on /i/ is sent to
                         their browser's language by the page itself.
-  src/signin/...      → public/signin/index.html: one page for all languages.
+  src/signin/...      → public/login/index.html, the sign-in's address, and
+                        public/signin/index.html, the same page for the apps
+                        already out: one page for all languages.
                         {{@strings}} embeds the page's section of every
                         dictionary and /lang.js picks one in the browser.
+                        /login/devices (a device's code) is a redirect to the
+                        web app (firebase.json).
 
 {{>name}} in a template is src/_name, put in before the texts: the landing
 page and the invite share their styles and the platform animation this way.
@@ -50,13 +54,15 @@ LOCALES = {"es": "es_ES", "en": "en_US", "pt": "pt_BR", "de": "de_DE", "fr": "fr
 
 # Sections that belong to the client-side pages, and the page each one is for.
 CLIENT_PAGES = {"signin": "signin/index.html"}
+# Where else a client-side page is served: /signin stays for the apps already out.
+CLIENT_ALSO = {"signin/index.html": ["login/index.html"]}
 
 # The invite page: once per language, and at /i/ in this one.
 INVITE, INVITE_DEFAULT = "i/index.html", "en"
 
 
 # Everything build.py writes, removed first so a dropped language leaves nothing.
-GENERATED = ["index.html", "localized", "i", "signin", *LANGS]
+GENERATED = ["index.html", "localized", "i", "signin", "login", *LANGS]
 
 PLACEHOLDER = re.compile(r"\{\{\s*([@\w.]+)\s*\}\}")
 PARTIAL = re.compile(r"\{\{>\s*([\w.-]+)\s*\}\}")
@@ -266,7 +272,8 @@ def main():
             "lang": default,
             "strings": json.dumps(table, ensure_ascii=False, separators=(",", ":")),
         }, set(), f"src/{rel}")
-        write(OUT / rel, page)
+        for out in [rel, *CLIENT_ALSO.get(rel, [])]:
+            write(OUT / out, page)
         used.update(k for k in flat[default] if k.startswith(section + "."))
 
     unused = sorted(set(flat[default]) - used)

@@ -79,6 +79,11 @@
       ],
       "redirects": [
         {
+          "regex": "^/login/devices/?$",
+          "destination": "https://app.lovearound.me/pair",
+          "type": 302
+        },
+        {
           "source": "/download/Needed.dmg",
           "destination": "https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg",
           "type": 302
