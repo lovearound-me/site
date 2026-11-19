@@ -257,7 +257,14 @@
         : T.failed;
     }
   }
-  $('go').addEventListener('click', () => withPopup($('go'), new GoogleAuthProvider()));
+  // Always Google's account chooser, as in the web app: with a second Google
+  // account signed in to the browser, it would otherwise go straight in with
+  // whichever Google used last and quietly make a new, empty account.
+  $('go').addEventListener('click', () => {
+    const google = new GoogleAuthProvider();
+    google.setCustomParameters({ prompt: 'select_account' });
+    withPopup($('go'), google);
+  });
   $('apple').addEventListener('click', () => {
     const apple = new OAuthProvider('apple.com');
     apple.addScope('email');
