@@ -35,35 +35,40 @@
     <h2 id="keep">What we keep</h2>
     <ul>
       <li><b>Your account.</b> When you sign in with Google, Apple or email, Firebase Authentication (by Google) keeps your email address, and for Google sign-in also your name and photo as Google gives them. From Apple we ask only for the email address, and if you choose to hide it, we get just the relay address Apple makes for us. We use them only to let you in.</li>
-      <li><b>Your address book.</b> The people you added and the names you gave them. Those names are yours: the people themselves never see them, and nobody is told that you added them.</li>
-      <li><b>Your devices.</b> The apps and devices you connected, their names, what each one may do, and when each one last connected. A device’s token is kept only as a hash. A device you connect with a code (a watch, a lamp) is told the email of the account it joined, so it can show it; the code itself lives in memory for 10 minutes and is never stored.</li>
+      <li><b>Your address book.</b> The people you added, and the names and colors you gave them. Those names are yours: the people themselves never see them, and nobody is told that you added them.</li>
+      <li><b>Your devices.</b> The apps and devices you connected, their names, what each one may do, its quiet hours if you set them, and when each one last connected. A device’s token is kept only as a hash. A device you connect with a code (a watch, a lamp) is told the email of the account it joined, so it can show it; the code itself lives in memory for 10 minutes and is never stored.</li>
       <li><b>Your invite code</b>, so others can add you.</li>
+      <li><b>Notifications on your iPhone.</b> If you allow them, we keep the address Apple gives us for the app on that iPhone (a push token), along with its pause, its quiet hours and whether it takes hearts from someone out there. A notification can’t be stopped once it is on its way, so the server has to know when you asked for silence. All of it is forgotten when you turn notifications off, sign out or delete your account.</li>
+      <li><b>Your chat with the Telegram bot,</b> if you use it: which chat is yours, its language and its settings.</li>
     </ul>
 
     <h2 id="dont">What we don’t keep</h2>
     <ul>
       <li><b>Hearts.</b> A heart carries nothing: no text, and never who sent it. It goes straight to the screens of the person it is for and is not stored. Our logs note that a heart was sent and how many screens got it, but never who sent it or to whom.</li>
-      <li><b>Your settings:</b> colors, pauses, how the glow looks. They stay on your device.</li>
+      <li><b>Your other settings:</b> your own color, how the glow looks, a pause on your computer or in the browser. They stay on your device.</li>
       <li>No analytics, no ads, no tracking.</li>
     </ul>
 
     <h2 id="who">Who else sees it</h2>
-    <p>Nobody but us and Google Cloud, where lovearound runs (Firebase, Firestore and Cloud Run, in the US). Google’s servers keep ordinary request logs, with IP addresses, for about 30 days. We never sell or share your data.</p>
+    <p>Google Cloud, where lovearound runs (Firebase, Firestore and Cloud Run, in the US). Google’s servers keep ordinary request logs, with IP addresses, for about 30 days.</p>
+    <p>Apple, if you take notifications on an iPhone: each one travels through Apple’s push service and says only “♥”. Who sent it isn’t in it, because we don’t put it there.</p>
+    <p>Telegram, if you use the bot: the names you gave your people there, and the moment a heart arrived, pass through Telegram like any chat with a bot.</p>
+    <p>Nobody else. We never sell or share your data.</p>
 
     <h2 id="delete">Deleting it</h2>
-    <p>Settings → delete account, in any of our apps or at <a href="https://app.lovearound.me">app.lovearound.me</a>, removes your account, address book and devices at once. Hearts that others send you after that simply go nowhere.</p>
+    <p>Settings → delete account, in any of our apps or at <a href="https://app.lovearound.me">app.lovearound.me</a>, removes your account, address book and devices at once. If you signed in with Apple, the iPhone and watch apps also take back the permission you gave Apple for it. Hearts that others send you after that simply go nowhere.</p>
 
     <h2 id="questions">Questions</h2>
-    <p>Write to <a href="mailto:hlebalbau@gmail.com">hlebalbau@gmail.com</a>.</p>
+    <p>Write to <a href="mailto:hlebalbau@gmail.com">hlebalbau@gmail.com</a>, or see <a href="/support">Help</a>.</p>
 
-    <p><small>Last updated: 18 November 2026.</small></p>
+    <p><small>Last updated: 19 November 2026.</small></p>
   </article>
 </main>
 
 <footer>
   <div class="wrap">
     <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
-    <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · <a href="/privacy">Privacy</a> · © 2026 lovearound</span>
+    <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · <a href="/support">Help</a> · <a href="/privacy">Privacy</a> · © 2026 lovearound</span>
   </div>
 </footer>
 </body>

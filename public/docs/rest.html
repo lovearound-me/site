@@ -63,6 +63,7 @@
                 <li><a href="#patch-device"><span class="dm patch">PATCH</span><code>/v1/devices/{id}</code></a></li>
                 <li><a href="#post-device-token"><span class="dm post">POST</span><code>/v1/devices/{id}/token</code></a></li>
                 <li><a href="#delete-device"><span class="dm delete">DELETE</span><code>/v1/devices/{id}</code></a></li>
+                <li><a href="#delete-device-self"><span class="dm delete">DELETE</span><code>/v1/devices/self</code></a></li>
               </ul>
             </li>
             <li class="grp"><a href="#pairing">Pairing by code</a>
@@ -303,6 +304,9 @@
 
     <div class="ep" id="delete-device"><span class="m delete">DELETE</span><code>/v1/devices/{id}</code><span class="who">app</span></div>
     <p>Disconnect a device. Its token stops working at once and the streams it opened are closed. The response is <code>204</code>, or <code>404</code> if there is no such device.</p>
+
+    <div class="ep" id="delete-device-self"><span class="m delete">DELETE</span><code>/v1/devices/self</code><span class="who dev">device</span></div>
+    <p>A device leaves its account on its own, with its device token: what “Sign out” on a watch does. The same as being disconnected in the app: <code>204</code>, the token stops working at once. An app’s sign-in gets <code>403</code>: it names the device by id.</p>
 
     <h2 id="pairing">Pairing a device by code</h2>
     <p>For a device with a screen and no way to sign in, like a watch or a lamp with a display. Instead of a token pasted into its firmware, it shows a code, and the person confirms it while signed in. The device then gets a device token of its own, as if it had been made in <b>Settings → Devices</b>.</p>
