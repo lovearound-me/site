@@ -38,7 +38,7 @@
       <li><b>Your address book.</b> The people you added, and the names and colors you gave them. Those names are yours: the people themselves never see them, and nobody is told that you added them.</li>
       <li><b>Your devices.</b> The apps and devices you connected, their names, what each one may do, its quiet hours if you set them, and when each one last connected. A device’s token is kept only as a hash. A device you connect with a code (a watch, a lamp) is told the email of the account it joined, so it can show it; the code itself lives in memory for 10 minutes and is never stored.</li>
       <li><b>Your invite code</b>, so others can add you.</li>
-      <li><b>Notifications on your iPhone.</b> If you allow them, we keep the address Apple gives us for the app on that iPhone (a push token), along with its pause, its quiet hours and whether it takes hearts from someone out there. A notification can’t be stopped once it is on its way, so the server has to know when you asked for silence. All of it is forgotten when you turn notifications off, sign out or delete your account.</li>
+      <li><b>Notifications on your iPhone and Apple Watch.</b> If you allow them, we keep the address Apple gives us for the app on that iPhone or watch (a push token), along with its pause, its quiet hours and whether it takes hearts from someone out there. A notification can’t be stopped once it is on its way, so the server has to know when you asked for silence. All of it is forgotten when you turn notifications off, sign out, remove the watch from your devices or delete your account.</li>
       <li><b>Your chat with the Telegram bot,</b> if you use it: which chat is yours, its language and its settings.</li>
     </ul>
 
@@ -51,7 +51,7 @@
 
     <h2 id="who">Who else sees it</h2>
     <p>Google Cloud, where lovearound runs (Firebase, Firestore and Cloud Run, in the US). Google’s servers keep ordinary request logs, with IP addresses, for about 30 days.</p>
-    <p>Apple, if you take notifications on an iPhone: each one travels through Apple’s push service and says only “♥”. Who sent it isn’t in it, because we don’t put it there.</p>
+    <p>Apple, if you take notifications on an iPhone or an Apple Watch: each one travels through Apple’s push service and says only “♥”. Who sent it isn’t in it, because we don’t put it there.</p>
     <p>Telegram, if you use the bot: the names you gave your people there, and the moment a heart arrived, pass through Telegram like any chat with a bot.</p>
     <p>Nobody else. We never sell or share your data.</p>
 
