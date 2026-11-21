@@ -13,12 +13,15 @@
 {{@head}}
 <link rel="icon" href="/heart.svg">
 <script>
-  // Phones and tablets get the web app instead of the downloads: decided by
+  // Phones and tablets get the web app instead of the downloads (an iPhone or
+  // iPad: the downloads, where its own app comes first): decided by
   // the device, not the window width, before the first paint. iPadOS reports
   // itself as a Mac, but one with a touch screen. Without JS: the desktop page.
   (function (h, n) {
     h.classList.add('js');
     if (/Android|iPhone|iPad|iPod/i.test(n.userAgent) || (/Macintosh/.test(n.userAgent) && n.maxTouchPoints > 1)) h.classList.add('mob');
+    // An iPhone or iPad has its own app: its buttons lead to the downloads, as on a computer.
+    if (/iPhone|iPad|iPod/.test(n.userAgent) || (/Macintosh/.test(n.userAgent) && n.maxTouchPoints > 1)) h.classList.add('apple');
   })(document.documentElement, navigator);
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">

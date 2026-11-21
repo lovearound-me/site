@@ -30,6 +30,7 @@ p{line-height:1.6;color:var(--body)}
 .nav a.btn,.nav a.btn:hover{color:#fff}
 @media (max-width:860px){.nav .nl{display:none}}
 html:not(.mob) .on-mob,.mob .on-desk{display:none}
+.mob.apple .on-mob{display:none}.mob.apple .on-desk{display:inline-flex}
 /* the menu below 860px */
 .burger-box{position:relative;display:none}
 @media (max-width:860px){.js .burger-box{display:block}}
