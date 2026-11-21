@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "me.lovearound.android",
+      "sha256_cert_fingerprints": [
+        "3A:C0:90:15:23:55:B6:57:E9:D8:1D:A6:06:8F:65:41:BC:46:05:95:55:DD:4B:E3:5D:47:64:BD:69:FF:5A:7D"
+      ]
+    }
+  }
+]
