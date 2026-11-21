@@ -216,7 +216,6 @@ section{padding:104px 0;scroll-margin-top:64px}
 @media (min-width:900px){.ways{grid-template-columns:repeat(2,1fr)}}
 .way{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:28px;display:flex;flex-direction:column;gap:14px}
 .way.mine{box-shadow:0 0 0 2px var(--accent);order:-1}
-#ios{order:-2}#ios.later{order:2}
 .way .btn .tf{flex-shrink:0;border-radius:5px}
 .ways-head .combo{align-self:flex-start;max-width:640px;font-size:15px;line-height:1.5;color:var(--ink);background:var(--pink);padding:12px 18px;border-radius:16px}
 .way .head-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
@@ -317,3 +316,13 @@ p{text-wrap:pretty}
 .js .rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease-out,transform .6s ease-out}
 .js .rv.in{opacity:1;transform:none}
 @media (prefers-reduced-motion:reduce){.js .rv{opacity:1;transform:none;transition:none}.diy,.btn{transition:none}}
+/* The Love ID bar (index.html #ibar) */
+.ibar{position:fixed;z-index:20;left:50%;bottom:16px;transform:translateX(-50%);width:min(680px,calc(100% - 32px));box-sizing:border-box;display:flex;align-items:center;gap:10px 14px;padding:10px 10px 10px 18px;border-radius:20px;background:var(--pink);box-shadow:0 0 0 1px #E3C3C6,0 14px 36px rgba(48,42,39,.16)}
+.ibar[hidden]{display:none}
+.ibar-t{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;font-size:15px;color:var(--ink)}
+.ibar-t b{letter-spacing:.06em}
+@media (max-width:560px){.ibar{gap:8px;padding:10px 6px 10px 16px}.ibar-t{flex-direction:column;align-items:flex-start;gap:2px}.ibar-t svg{display:none}.ibar-t span{font-size:13px;line-height:1.35;color:var(--body)}.ibar .btn{padding:10px 16px}.ibar-x{width:34px;height:34px}}
+.ibar .btn{padding:11px 20px;font-size:15px}
+.ibar-x{width:40px;height:40px;flex-shrink:0;border:0;border-radius:50%;background:none;color:var(--body);cursor:pointer;display:flex;align-items:center;justify-content:center}
+.ibar-x:hover{background:rgba(255,255,255,.6);color:var(--ink)}
+body.has-ibar footer{padding-bottom:96px}

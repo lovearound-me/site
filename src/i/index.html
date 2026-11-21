@@ -40,34 +40,43 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
 <style>
 {{>landing.css}}
-.inv-hero{padding:72px 0 40px}
-.inv-hero .copy{display:flex;flex-direction:column;gap:22px;max-width:760px}
-.inv-hero .h1{font-size:clamp(36px,5.6vw,64px)}
-.inv-demo{padding:0 0 24px}
-.inv-demo .pf{margin-top:24px}
-.inv-id{margin-top:72px;border-radius:28px;background:var(--pink);padding:36px 40px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px 40px}
-.inv-id .t{flex:1 1 360px;min-width:0;display:flex;flex-direction:column;gap:10px}
-.inv-id small{font-size:13px;font-weight:800;letter-spacing:.1em;color:var(--accent)}
-.inv-id .code{font-size:clamp(30px,5vw,46px);font-weight:800;letter-spacing:.08em;color:var(--ink);line-height:1.1;word-break:break-all}
-.inv-id p{font-size:16px;color:var(--body);max-width:520px}
-.inv-id .btn{background:#fff;color:var(--accent);box-shadow:inset 0 0 0 1.5px #E3C3C6}
+.inv{padding:40px 0 72px}
+.inv-id{border-radius:28px;background:var(--pink);padding:28px 32px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px 32px}
+.inv-id .t{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:8px}
+.inv-id small{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--accent)}
+.inv-id .code{font-size:clamp(28px,5vw,42px);font-weight:800;letter-spacing:.08em;color:var(--ink);line-height:1.1;word-break:break-all}
+.inv-id p{font-size:15px;color:var(--body);max-width:520px}
+.inv-id .btn{background:#fff;color:var(--accent);box-shadow:inset 0 0 0 1.5px #E3C3C6;padding:12px 20px;font-size:15px}
 .inv-id .btn:hover{background:#fff;color:var(--accent-hover);box-shadow:inset 0 0 0 1.5px var(--accent)}
-@media (max-width:520px){.inv-id{padding:28px 24px}}
-.inv-add{padding:72px 0 96px}
-.inv-add .h2{font-size:clamp(30px,4vw,44px)}
-.inv-add .sub{margin-top:12px;font-size:17px;color:var(--body);max-width:640px}
-.way ol{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:8px;font-size:14px;color:var(--body)}
-.way ol li{display:flex;gap:10px}
-.way ol li i{font-style:normal;width:22px;height:22px;border-radius:50%;flex-shrink:0;background:var(--heart-bg);font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center;color:var(--accent)}
-.way ol li.done i{background:var(--sage);color:#4E7A5B}
-.way .warn{padding:14px 16px;border-radius:14px;background:#FCEFD9;display:flex;flex-direction:column;gap:4px;font-size:14px}
-.way .row{display:flex;flex-wrap:wrap;gap:10px}
-.way .row .btn{flex:1 1 160px;width:auto}
-.note{margin-top:28px;font-size:14px;color:var(--muted);text-align:center}
+@media (max-width:520px){.inv-id{padding:22px 20px}}
+.inv .lbl{display:block;margin:32px 0 14px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tiles{display:grid;gap:14px}
+@media (min-width:900px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.tile{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:22px;display:flex;flex-direction:column;gap:12px}
+.tile.mine{box-shadow:0 0 0 2px var(--accent)}
+.tile .hd{display:flex;align-items:center;gap:12px}
+.tile .ic{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:var(--pink);color:var(--accent);flex-shrink:0}
+.tile h3{font-size:18px;font-weight:800;letter-spacing:-.01em}
+.tile h3 span{display:block;font-size:13px;color:var(--muted);font-weight:500}
+.tile .grow{flex:1}
+.tile .btn{width:100%;padding:13px 18px;font-size:15px}
+.tile:not(.mine) .btn{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
+.tile:not(.mine) .btn:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
+.tile .btn .tf{flex-shrink:0;border-radius:5px}
+.tile small{font-size:13px;color:var(--muted);text-align:center}
+.tile small a{font-weight:700;text-decoration:none}
+.tile small a+a::before{content:' · ';color:var(--muted);font-weight:400}
+.qr{display:flex;justify-content:center}
+.qr svg{width:120px;height:120px}
+.warn{padding:12px 14px;border-radius:14px;background:#FCEFD9;display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--body)}
+.one{margin-top:18px;font-size:14px;color:var(--body)}
+.about{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:18px 22px;border-radius:18px;background:var(--sage);color:var(--ink);text-decoration:none;font-size:15px}
+.about:hover{color:var(--ink)}
+.about b{color:#4E7A5B;white-space:nowrap}
+.note{margin-top:18px;font-size:13px;color:var(--muted);text-align:center}
 </style>
 </head>
 <body>
-
 <header class="top">
   <div class="wrap">
     <a class="logo" href="{{@home}}">
@@ -78,93 +87,56 @@
   </div>
 </header>
 
-<main>
-  <!-- 01 · what this is -->
-  <div class="inv-hero">
-    <div class="wrap">
-      <div class="copy">
-        <span class="kicker">{{invite.kicker}}</span>
-        <h1 class="h1">{{invite.h1}}</h1>
-        <p class="lead">{{invite.lead}}</p>
+<main class="inv">
+  <div class="wrap">
+    <div class="inv-id">
+      <div class="t">
+        <small>{{invite.kicker}}</small>
+        <div class="code" id="code" hidden></div>
+        <p id="id-text">{{invite.short}}</p>
+      </div>
+      <button class="btn" id="copy-id" type="button" hidden>{{invite.copy}}</button>
+    </div>
+
+    <!-- Where to add it. One account: added in one place, it is everywhere,
+         the watch included. The tile of this device comes first. -->
+    <span class="lbl">{{invite.where}}</span>
+    <div class="tiles">
+      <div class="tile" id="ios">
+        <div class="hd"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span><h3>{{invite.ios}}<span>{{invite.ios_sub}}</span></h3></div>
+        <!-- on a phone: install, or open the app if it's there; elsewhere: a QR for the phone -->
+        <div class="qr" id="qr" hidden></div>
+        <small id="qr-text" hidden>{{invite.qr}}</small>
+        <div class="grow"></div>
+        <a class="btn" id="ios-go" href="https://testflight.apple.com/join/WpbcxCJ7" hidden><svg class="tf" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="tfg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2BC0FF"/><stop offset="1" stop-color="#1673E6"/></linearGradient></defs><rect width="24" height="24" rx="5.5" fill="url(#tfg)"/><g fill="#fff"><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6"/><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6" transform="rotate(120 12 12)"/><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6" transform="rotate(240 12 12)"/></g><circle cx="12" cy="12" r="2.3" fill="#1A86EE" stroke="#fff" stroke-width="1.2"/></svg>{{invite.ios_go}}</a>
+        <small id="ios-open" hidden>{{invite.ios_have}} <a class="app-open" href="#">{{invite.open_short}}</a></small>
+      </div>
+      <div class="tile" id="desk">
+        <div class="hd"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span><h3>{{invite.desk}}<span>Mac · Windows · Linux</span></h3></div>
+        <div class="grow"></div>
+        <a class="btn app-open" id="open" href="#" hidden>{{invite.open}}</a>
+        <div class="warn" id="warn" hidden><b>{{invite.nothing}}</b><span>{{invite.nothing_text}}</span></div>
+        <small id="dl" hidden>{{invite.no_app}} <a id="dl-mine" href="#"></a></small>
+        <small id="alt" hidden></small>
+        <button class="btn" id="share" type="button" hidden>{{invite.share}}</button>
+        <button class="btn" id="copy" type="button" hidden>{{invite.copy}}</button>
+      </div>
+      <div class="tile" id="web">
+        <div class="hd"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/></svg></span><h3>{{invite.web}}<span>{{invite.web_sub}}</span></h3></div>
+        <div class="grow"></div>
+        <a class="btn" id="web-go" href="{{@app}}">{{invite.open_short}}</a>
+      </div>
+      <div class="tile" id="tg">
+        <div class="hd"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.2 2.9 11.4c-1.2.5-1.2 1.2 0 1.6l4.7 1.5 1.8 5.6c.2.6.6.7 1.1.3l2.6-2.2 5 3.7c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.3zM9.4 14.3l8.7-5.5c.4-.3.8-.1.5.2l-7.2 6.5-.3 3.1-1.7-4.3z"/></svg></span><h3>{{invite.tg}}<span>{{invite.no_install}}</span></h3></div>
+        <div class="grow"></div>
+        <a class="btn" id="tg-go" href="https://t.me/LoveAroundMeBot">{{invite.open_short}}</a>
       </div>
     </div>
+    <p class="one">{{invite.one_account}}</p>
+
+    <a class="about" id="about" href="{{@home}}"><span>{{invite.about_q}}</span><b>{{invite.about_go}} →</b></a>
+    <p class="note">{{invite.anon}}</p>
   </div>
-
-  <!-- 02 · the platform animation, as on the landing page, and the Love ID -->
-  <section class="inv-demo" style="padding-top:0">
-    <div class="wrap">
-      <div id="w-flow" class="pf">
-{{>platform.html}}
-      </div>
-
-      <div class="inv-id">
-        <div class="t">
-          <small>LOVE ID</small>
-          <div class="code" id="code" hidden></div>
-          <p id="id-text">{{invite.id_text}}</p>
-        </div>
-        <button class="btn" id="copy-id" type="button" hidden>{{invite.copy}}</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- 03 · where to add it: one account, so any of the three -->
-  <section class="inv-add">
-    <div class="wrap">
-      <h2 class="h2">{{invite.where}}</h2>
-      <p class="sub">{{invite.where_text}}</p>
-      <div class="ways">
-
-        <div class="way" id="desk">
-          <div class="head-row">
-            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>
-            <h3>{{invite.desk}}</h3>
-          </div>
-          <p>{{invite.desk_text}}</p>
-          <!-- Mac, Windows, Linux: download, then open the link in the app -->
-          <div class="grow" id="desk-here" hidden>
-            <ol>
-              <li id="s1"><i id="n1">1</i><span id="s1-text">{{invite.desk_s1}}</span></li>
-              <li id="s2"><i>2</i><span id="s2-text">{{invite.desk_s2}}</span></li>
-            </ol>
-          </div>
-          <a class="btn" id="dl" href="#" hidden></a>
-          <a class="btn ghost" id="open" href="{{@home}}" hidden>{{invite.open_installed}}</a>
-          <div class="warn" id="warn" hidden><b>{{invite.nothing}}</b><span>{{invite.nothing_text}}</span></div>
-          <span class="more" id="alt" hidden></span>
-          <!-- Phones and the rest: open the link on a computer -->
-          <div class="grow" id="desk-away" hidden><p>{{invite.desk_away}}</p></div>
-          <div class="row" id="away-row" hidden>
-            <button class="btn" id="share" type="button" hidden>{{invite.share}}</button>
-            <button class="btn ghost" id="copy" type="button">{{invite.copy}}</button>
-          </div>
-        </div>
-
-        <div class="way" id="web">
-          <div class="head-row">
-            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/></svg></span>
-            <h3>{{invite.web}}</h3>
-            <span class="tag">{{invite.no_install}}</span>
-          </div>
-          <p>{{invite.web_text}}</p>
-          <p class="grow tabnote">{{invite.web_note}}</p>
-          <a class="btn" id="web-go" href="{{@app}}">{{invite.web_go}}</a>
-        </div>
-
-        <div class="way" id="tg">
-          <div class="head-row">
-            <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.2 2.9 11.4c-1.2.5-1.2 1.2 0 1.6l4.7 1.5 1.8 5.6c.2.6.6.7 1.1.3l2.6-2.2 5 3.7c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.3zM9.4 14.3l8.7-5.5c.4-.3.8-.1.5.2l-7.2 6.5-.3 3.1-1.7-4.3z"/></svg></span>
-            <h3>{{invite.tg}}</h3>
-            <span class="tag">{{invite.no_install}}</span>
-          </div>
-          <p class="grow">{{invite.tg_text}}</p>
-          <a class="btn" id="tg-go" href="https://t.me/LoveAroundMeBot">{{invite.telegram}}</a>
-        </div>
-
-      </div>
-      <p class="note">{{invite.anon}}</p>
-    </div>
-  </section>
 </main>
 
 <footer>
@@ -173,22 +145,18 @@
     <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · <a href="/privacy">Privacy</a> · © 2026 lovearound</span>
   </div>
 </footer>
-
-<script>
-{{>platform.js}}
-</script>
+<script src="/js/qrcode.js"></script>
 <script>
 (function () {
   var $ = function (id) { return document.getElementById(id); };
   var T = {{@strings}};
-
   // /i/<code> or /<lang>/i/<code>
   var code = decodeURIComponent((location.pathname.match(/^(?:\/[a-z]{2})?\/i\/([^\/]*)/) || [])[1] || '');
   var valid = /^[A-Za-z0-9-]{10,12}$/.test(code);
   var link = location.origin + location.pathname.replace(/\/+$/, '');
-
   var ua = navigator.userAgent;
   var phone = document.documentElement.classList.contains('mob');
+  var iphone = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
   var os = phone ? 'phone'
     : /Macintosh|Mac OS X/.test(ua) ? 'mac'
     : /Windows/.test(ua) ? 'windows'
@@ -197,57 +165,69 @@
   var desk = os === 'mac' || os === 'windows' || os === 'linux';
   var GH = 'https://github.com/lovearound-me/';
   var DL = { mac: GH + 'mac/releases/latest/download/LoveAround.dmg', windows: GH + 'windows/releases/latest/download/LoveAroundSetup.exe', linux: GH + 'linux/releases/latest/download/LoveAround.deb' };
+  var NAME = { mac: 'Mac', windows: 'Windows', linux: 'Linux' };
+  var app = 'lovearound://add/' + code;
+  // The landing page shows a "come back and add it" bar while this is set
+  // (the "what is this?" link goes there); adding it anywhere clears it.
+  var KEY = 'lovearound-invite';
+  function done() { try { localStorage.removeItem(KEY); } catch (e) {} }
 
-  // The Love ID, and where each way takes it.
   if (valid) {
     $('code').textContent = code.toUpperCase();
     $('code').hidden = false;
     $('copy-id').hidden = false;
     $('web-go').href = '{{@app}}/?add=' + encodeURIComponent(code);
     $('tg-go').href = 'https://t.me/LoveAroundMeBot?start=' + code.replace(/-/g, '').toUpperCase();
+    $('about').href = '{{@home}}/?i=' + encodeURIComponent(code);
+    document.querySelectorAll('.app-open').forEach(function (a) { a.href = app; });
+    ['web-go', 'tg-go', 'open'].forEach(function (id) { $(id).addEventListener('click', done); });
   } else {
     $('id-text').textContent = T.no_code;
   }
 
-  // The way that fits this device comes first.
-  $(desk ? 'desk' : phone ? 'tg' : 'web').classList.add('mine');
+  // The order fits the device, as on the landing page: a computer, its app
+  // then iPhone and Apple Watch; an iPhone, the other way round; anything
+  // else (Android, for now without an app of its own), the web app first.
+  // Telegram always last.
+  var order = desk ? ['desk', 'ios', 'web', 'tg'] : iphone ? ['ios', 'desk', 'web', 'tg'] : ['web', 'desk', 'ios', 'tg'];
+  order.forEach(function (id, i) { $(id).style.order = i; });
+  $(order[0]).classList.add('mine');
 
   function copy(button) {
-    var done = function (ok) { if (button) button.textContent = ok ? T.copied_button : link; };
-    try { navigator.clipboard.writeText(link).then(function () { done(true); }, function () { done(false); }); }
-    catch (e) { done(false); }
+    var ok = function (yes) { if (button) button.textContent = yes ? T.copied_button : link; };
+    try { navigator.clipboard.writeText(link).then(function () { ok(true); }, function () { ok(false); }); }
+    catch (e) { ok(false); }
   }
   $('copy-id').addEventListener('click', function () { copy($('copy-id')); });
 
+  // iPhone and watch: on a phone, install (or open the app if it's there:
+  // a link opened inside Telegram may not reach the app by itself);
+  // on a computer, a QR to open this link on the phone.
+  if (phone) {
+    $('ios-go').hidden = false;
+    if (valid) $('ios-open').hidden = false;
+  } else if (valid && window.qrcode) {
+    var qr = qrcode(0, 'M');
+    qr.addData(link);
+    qr.make();
+    $('qr').innerHTML = qr.createSvgTag({ cellSize: 4, margin: 0, scalable: true, alt: T.qr });
+    $('qr').hidden = false;
+    $('qr-text').hidden = false;
+  } else {
+    $('ios-go').hidden = false;
+  }
+
   if (desk) {
-    $('desk-here').hidden = false;
+    // The app: open it, or download it. A download also copies the link:
+    // the app's "Add" window picks it up from the clipboard.
+    if (valid) $('open').hidden = false;
     $('dl').hidden = false;
-    $('dl').href = DL[os];
-    $('dl').textContent = T[os];
+    $('dl-mine').href = DL[os];
+    $('dl-mine').textContent = T[os];
+    $('dl-mine').addEventListener('click', function () { if (valid) copy(); });
     $('alt').innerHTML = T.other_os + ' ' + ['mac', 'windows', 'linux'].filter(function (o) { return o !== os; })
-      .map(function (o) { return '<a href="' + DL[o] + '">' + { mac: 'Mac', windows: 'Windows', linux: 'Linux' }[o] + '</a>'; }).join(' · ');
+      .map(function (o) { return '<a href="' + DL[o] + '">' + NAME[o] + '</a>'; }).join('');
     $('alt').hidden = false;
-    if (valid) {
-      $('open').href = 'lovearound://add/' + code;
-      $('open').hidden = false;
-    } else {
-      $('s2').hidden = true;
-    }
-
-    // Download: step 1 is done, step 2 is next. The link goes to the
-    // clipboard too: the app's "Add" window picks it up from there.
-    $('dl').addEventListener('click', function () {
-      $('s1').className = 'done'; $('n1').textContent = '✓';
-      $('s1-text').textContent = T['installed_' + os];
-      if (!valid) return;
-      copy();
-      $('s2-text').textContent = T.add_after;
-      $('dl').className = 'btn ghost';
-      $('open').className = 'btn';
-      $('open').textContent = T.open;
-      $('warn').hidden = true;
-    });
-
     // Open: the browser can't tell whether the app is there. If the page is
     // still in front a moment later, say so.
     $('open').addEventListener('click', function () {
@@ -257,17 +237,21 @@
       document.addEventListener('visibilitychange', gone, { once: true });
       setTimeout(function () { if (!left && !document.hidden) $('warn').hidden = false; }, 1500);
     });
-  } else {
-    $('desk-away').hidden = false;
-    if (valid) {
-      $('away-row').hidden = false;
-      if (navigator.share) {
-        $('share').hidden = false;
-        $('copy').className = 'btn ghost';
-        $('share').addEventListener('click', function () {
-          navigator.share({ title: 'Love ID', text: T.share_text, url: link }).catch(function () {});
-        });
-      }
+    // Try the app at once where a missing app is silent: Chrome and Edge on
+    // a Mac or Windows ask "Open LoveAround?" only when it's installed.
+    // Safari and Firefox show an error instead, and Chrome on Linux always
+    // asks about xdg-open, so there it waits for the button.
+    var chromium = /Chrome\//.test(ua) && !/Firefox|OPR\//.test(ua);
+    if (valid && chromium && (os === 'mac' || os === 'windows')) location.href = app;
+  } else if (valid) {
+    // A phone: send the link to the computer.
+    if (navigator.share) {
+      $('share').hidden = false;
+      $('share').addEventListener('click', function () {
+        navigator.share({ title: 'Love ID', text: T.share_text, url: link }).catch(function () {});
+      });
+    } else {
+      $('copy').hidden = false;
       $('copy').addEventListener('click', function () { copy($('copy')); });
     }
   }

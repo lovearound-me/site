@@ -9,6 +9,13 @@
           { "/": "/i/*", "comment": "A Love ID: opens «Добавить»" },
           { "/": "/*/i/*", "comment": "A Love ID on a language's page" }
         ]
+      },
+      {
+        "appIDs": ["CY8GRX7426.me.lovearound.mac"],
+        "components": [
+          { "/": "/i/*", "comment": "A Love ID: the Mac app opens «Добавить»" },
+          { "/": "/*/i/*", "comment": "A Love ID on a language's page" }
+        ]
       }
     ]
   }
