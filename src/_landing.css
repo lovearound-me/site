@@ -213,9 +213,12 @@ section{padding:104px 0;scroll-margin-top:64px}
 .ways-head{margin-top:72px;display:flex;flex-direction:column;gap:12px}
 .ways-head .sub{font-size:17px;color:var(--body);max-width:640px}
 .ways{margin-top:36px;display:grid;gap:16px}
-@media (min-width:900px){.ways{grid-template-columns:repeat(3,1fr)}}
+@media (min-width:900px){.ways{grid-template-columns:repeat(2,1fr)}}
 .way{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:28px;display:flex;flex-direction:column;gap:14px}
 .way.mine{box-shadow:0 0 0 2px var(--accent);order:-1}
+#ios{order:-2}#ios.later{order:2}
+.way .btn .tf{flex-shrink:0;border-radius:5px}
+.ways-head .combo{align-self:flex-start;max-width:640px;font-size:15px;line-height:1.5;color:var(--ink);background:var(--pink);padding:12px 18px;border-radius:16px}
 .way .head-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
 .way .ic{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:var(--pink);color:var(--accent);flex-shrink:0}
 .way h3{font-size:21px;font-weight:800;letter-spacing:-.01em}
