@@ -247,10 +247,20 @@ html:not(.mob) .way .dls > summary{display:none}
 .way .seg button{--seg-eye:var(--band);display:flex;align-items:center;gap:7px;border:0;background:none;padding:8px 16px;border-radius:999px;font:inherit;font-size:14px;font-weight:700;color:var(--body);cursor:pointer}
 .way .seg button:hover{color:var(--ink)}
 .way .seg button[aria-pressed="true"]{--seg-eye:var(--card);background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(48,42,39,.16)}
-.way .tsteps{gap:10px}
-.way .tsteps .btn{gap:10px}
-.way .tsteps .n{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:var(--pink);color:var(--accent);flex-shrink:0}
-.way.mine .tsteps .btn:not(.ghost) .n{background:rgba(255,255,255,.22);color:#fff}
+.way .st{display:flex;flex-direction:column}
+.way .st .s{position:relative;display:grid;grid-template-columns:28px minmax(0,1fr);column-gap:12px;padding-bottom:18px;transition:opacity .2s}
+.way .st .s:last-of-type{padding-bottom:4px}
+.way .st .s:not(:last-of-type)::before{content:"";position:absolute;left:13px;top:32px;bottom:4px;width:2px;border-radius:1px;background:var(--line)}
+.way .st .k{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;background:var(--pink);color:var(--accent)}
+.way .st b{display:block;font-size:16px;line-height:28px;color:var(--ink)}
+.way .st p{font-size:14px;line-height:1.45;color:var(--body);margin:2px 0 10px}
+.way .st .btn{grid-column:2;width:100%;padding:12px 20px;font-size:15px}
+.way .st > small{font-size:13px;color:var(--muted);text-align:center;margin-top:6px}
+.way .st .s.off{opacity:.45}
+.way .st .s.off .btn{pointer-events:none}
+.way .st .s.done .k{background:#3BA55C;color:#fff;font-size:0}
+.way .st .s.done .k::after{content:"✓";font-size:15px}
+.way .st .s.done .btn,.way .st .s.off .btn{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
 /* no install: the web app and Telegram, as quieter rows under the apps */
 .lite-l{display:block;margin:32px 0 14px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .lite{display:grid;gap:12px}

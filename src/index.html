@@ -275,9 +275,9 @@
             <div class="plat" id="android" hidden>
               <p class="grow">{{get.android_text}}</p>
               <p class="tabnote">{{get.android_note}}</p>
-              <div class="o tsteps">
-                <a class="btn ghost" href="https://groups.google.com/g/lovearound-testers"><span class="n">1</span>{{get.android_join}}</a>
-                <a class="btn" href="https://play.google.com/apps/testing/me.lovearound.android"><span class="n">2</span>{{get.android_go}}</a>
+              <div class="st">
+                <div class="s"><span class="k">1</span><div><b>{{get.android_s1}}</b><p>{{get.android_s1_hint}}</p></div><a class="btn" href="https://groups.google.com/g/lovearound-testers">{{get.android_join}}</a></div>
+                <div class="s"><span class="k">2</span><div><b>{{get.android_s2}}</b><p>{{get.android_s2_hint}}</p></div><a class="btn" href="https://play.google.com/apps/testing/me.lovearound.android">{{get.android_go}}</a></div>
                 <small>{{get.android_req}}</small>
               </div>
             </div>
@@ -463,6 +463,20 @@
       a.addEventListener('click', function () { try { navigator.clipboard.writeText(link); } catch (e) {} });
     });
   })();
+
+  // Google Play's closed test: step 2 says "not available" to anyone not yet
+  // in the group, so it waits, pale, until the group link is opened (once,
+  // remembered on this site).
+  function steps(st) {
+    var s = st.querySelectorAll('.s'), go = s[1].querySelector('a');
+    function done() { s[0].classList.add('done'); s[1].classList.remove('off'); go.removeAttribute('aria-disabled'); go.removeAttribute('tabindex'); }
+    var joined = false;
+    try { joined = localStorage.getItem('playGroup') === '1'; } catch (e) {}
+    if (joined) done();
+    else { s[1].classList.add('off'); go.setAttribute('aria-disabled', 'true'); go.setAttribute('tabindex', '-1'); }
+    s[0].querySelector('a').addEventListener('click', function () { try { localStorage.setItem('playGroup', '1'); } catch (e) {} done(); });
+  }
+  steps(document.querySelector('#android .st'));
 
   // Blocks ease in as they scroll into view.
   (function () {

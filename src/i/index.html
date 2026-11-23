@@ -63,10 +63,20 @@
 .tile:not(.mine) .btn{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
 .tile:not(.mine) .btn:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
 .tile .btn .tf{flex-shrink:0;border-radius:5px}
-.tile .btn.ghost{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
-.tile .btn.ghost:hover{box-shadow:inset 0 0 0 1.5px var(--ink)}
-.tile .btn .n{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:var(--pink);color:var(--accent);flex-shrink:0}
-.tile.mine .btn:not(.ghost) .n{background:rgba(255,255,255,.22);color:#fff}
+.tile .st{display:flex;flex-direction:column}
+.tile .st .s{position:relative;display:grid;grid-template-columns:28px minmax(0,1fr);column-gap:12px;padding-bottom:18px;transition:opacity .2s}
+.tile .st .s:last-of-type{padding-bottom:4px}
+.tile .st .s:not(:last-of-type)::before{content:"";position:absolute;left:13px;top:32px;bottom:4px;width:2px;border-radius:1px;background:var(--line)}
+.tile .st .k{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;background:var(--pink);color:var(--accent)}
+.tile .st b{display:block;font-size:16px;line-height:28px;color:var(--ink)}
+.tile .st p{font-size:14px;line-height:1.45;color:var(--body);margin:2px 0 10px}
+.tile .st .btn{grid-column:2;width:100%;padding:12px 20px;font-size:15px}
+.tile .st > small{font-size:13px;color:var(--muted);text-align:center;margin-top:6px}
+.tile .st .s.off{opacity:.45}
+.tile .st .s.off .btn{pointer-events:none}
+.tile .st .s.done .k{background:#3BA55C;color:#fff;font-size:0}
+.tile .st .s.done .k::after{content:"✓";font-size:15px}
+.tile .st .s.done .btn,.tile .st .s.off .btn{background:none;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line)}
 .tile small{font-size:13px;color:var(--muted);text-align:center}
 .tile small a{font-weight:700;text-decoration:none}
 .tile small a+a::before{content:' · ';color:var(--muted);font-weight:400}
@@ -125,8 +135,10 @@
         <small id="qr-text" hidden>{{invite.qr}}</small>
         <div class="grow"></div>
         <a class="btn" id="ios-go" href="https://testflight.apple.com/join/WpbcxCJ7" hidden><svg class="tf" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="tfg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2BC0FF"/><stop offset="1" stop-color="#1673E6"/></linearGradient></defs><rect width="24" height="24" rx="5.5" fill="url(#tfg)"/><g fill="#fff"><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6"/><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6" transform="rotate(120 12 12)"/><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6" transform="rotate(240 12 12)"/></g><circle cx="12" cy="12" r="2.3" fill="#1A86EE" stroke="#fff" stroke-width="1.2"/></svg>{{invite.ios_go}}</a>
-        <a class="btn ghost" id="and-join" href="https://groups.google.com/g/lovearound-testers" hidden><span class="n">1</span>{{invite.android_join}}</a>
-        <a class="btn" id="and-go" href="https://play.google.com/apps/testing/me.lovearound.android" hidden><span class="n">2</span>{{invite.android_go}}</a>
+        <div class="st" id="and-steps" hidden>
+          <div class="s"><span class="k">1</span><div><b>{{invite.android_s1}}</b><p>{{invite.android_s1_hint}}</p></div><a class="btn" id="and-join" href="https://groups.google.com/g/lovearound-testers">{{invite.android_join}}</a></div>
+          <div class="s"><span class="k">2</span><div><b>{{invite.android_s2}}</b><p>{{invite.android_s2_hint}}</p></div><a class="btn" id="and-go" href="https://play.google.com/apps/testing/me.lovearound.android">{{invite.android_go}}</a></div>
+        </div>
         <small id="phone-open" hidden>{{invite.ios_have}} <a class="app-open" href="#">{{invite.open_short}}</a></small>
       </div>
       <div class="tile" id="desk">
@@ -217,12 +229,26 @@
   }
   $('copy-id').addEventListener('click', function () { copy($('copy-id')); });
 
+  // Google Play's closed test: step 2 says "not available" to anyone not yet
+  // in the group, so it waits, pale, until the group link is opened (once,
+  // remembered on this site).
+  function steps(st) {
+    var s = st.querySelectorAll('.s'), go = s[1].querySelector('a');
+    function done() { s[0].classList.add('done'); s[1].classList.remove('off'); go.removeAttribute('aria-disabled'); go.removeAttribute('tabindex'); }
+    var joined = false;
+    try { joined = localStorage.getItem('playGroup') === '1'; } catch (e) {}
+    if (joined) done();
+    else { s[1].classList.add('off'); go.setAttribute('aria-disabled', 'true'); go.setAttribute('tabindex', '-1'); }
+    s[0].querySelector('a').addEventListener('click', function () { try { localStorage.setItem('playGroup', '1'); } catch (e) {} done(); });
+  }
+
   // Phone and watch: on an iPhone, TestFlight; on Android, the two steps of
   // Google Play's closed test, which copy the link on the way: the app offers
   // to add it on its first launch. Either can open the app if it's there.
   // On a computer, a QR to open this link on the phone.
   function showAndroid() {
-    $('and-join').hidden = $('and-go').hidden = false;
+    $('and-steps').hidden = false;
+    steps($('and-steps'));
     ['and-join', 'and-go'].forEach(function (id) { $(id).addEventListener('click', function () { if (valid) copy(); }); });
   }
   if (phone) {
