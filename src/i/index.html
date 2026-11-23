@@ -70,9 +70,16 @@
 .qr svg{width:120px;height:120px}
 .warn{padding:12px 14px;border-radius:14px;background:#FCEFD9;display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--body)}
 .one{margin-top:18px;font-size:14px;color:var(--body)}
-.about{margin-top:28px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;padding:18px 22px;border-radius:18px;background:var(--sage);color:var(--ink);text-decoration:none;font-size:15px}
+.about{margin-top:14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px 24px;padding:24px 28px;border-radius:24px;background:var(--sage);color:var(--ink);text-decoration:none}
 .about:hover{color:var(--ink)}
-.about b{color:#4E7A5B;white-space:nowrap}
+.about .q{display:flex;align-items:center;gap:16px}
+.about .q svg{flex-shrink:0}
+.about .q span{display:flex;flex-direction:column;gap:2px}
+.about .q b{font-size:21px;font-weight:800;color:var(--ink)}
+.about .q small{font-size:15px;color:var(--body)}
+.about .go{background:#fff;color:#4E7A5B;padding:12px 20px;border-radius:999px;font-size:15px;font-weight:700;white-space:nowrap}
+.about:hover .go{box-shadow:inset 0 0 0 1.5px #4E7A5B}
+@media (max-width:520px){.about{padding:22px 20px}.about .go{width:100%;text-align:center}}
 .note{margin-top:18px;font-size:13px;color:var(--muted);text-align:center}
 </style>
 </head>
@@ -97,6 +104,9 @@
       </div>
       <button class="btn" id="copy-id" type="button" hidden>{{invite.copy}}</button>
     </div>
+
+    <!-- Right under the Love ID: on a phone it is on the first screen. -->
+    <a class="about" id="about" href="{{@home}}"><span class="q"><svg width="26" height="26" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4E7A5B" d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg><span><b>{{invite.about_q}}</b><small>{{invite.about_sub}}</small></span></span><span class="go">{{invite.about_go}} →</span></a>
 
     <!-- Where to add it. One account: added in one place, it is everywhere,
          the watch included. The tile of this device comes first. -->
@@ -134,7 +144,6 @@
     </div>
     <p class="one">{{invite.one_account}}</p>
 
-    <a class="about" id="about" href="{{@home}}"><span>{{invite.about_q}}</span><b>{{invite.about_go}} →</b></a>
     <p class="note">{{invite.anon}}</p>
   </div>
 </main>
