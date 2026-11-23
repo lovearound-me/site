@@ -236,20 +236,12 @@
         <div class="ways-head">
           <h2 class="h2">{{get.title}}</h2>
           <p class="sub">{{get.sub}}</p>
-          <p class="combo">{{get.combo}}</p>
+          <p class="combo" id="combo" data-ios="{{get.combo}}" data-android="{{get.combo_android}}">{{get.combo}}</p>
         </div>
-        <!-- One account, four ways in, Apple first; the invite page (src/i) has three. -->
+        <!-- The apps: a computer and a phone with its watch. This device's comes
+             first; the phone card shows iPhone or Android by the device, and the
+             switch shows the other. The invite page (src/i) has the same. -->
         <div class="ways" id="dl">
-          <div class="way" id="ios">
-            <div class="head-row">
-              <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg></span>
-              <h3>{{get.ios}}</h3>
-              <span class="tag">{{get.beta}}</span>
-            </div>
-            <p>{{get.ios_text}}</p>
-            <p class="grow tabnote">{{get.ios_note}}</p>
-            <div class="o"><a class="btn" href="https://testflight.apple.com/join/WpbcxCJ7"><svg class="tf" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="tfg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2BC0FF"/><stop offset="1" stop-color="#1673E6"/></linearGradient></defs><rect width="24" height="24" rx="5.5" fill="url(#tfg)"/><g fill="#fff"><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6"/><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6" transform="rotate(120 12 12)"/><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6" transform="rotate(240 12 12)"/></g><circle cx="12" cy="12" r="2.3" fill="#1A86EE" stroke="#fff" stroke-width="1.2"/></svg>{{get.ios_go}}</a><small>{{get.ios_req}}</small></div>
-          </div>
           <div class="way" id="desk">
             <div class="head-row">
               <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg></span>
@@ -265,25 +257,36 @@
             </details>
             <span class="more alts" id="alt" hidden>{{get.other_os}} <a data-os="mac" href="https://github.com/lovearound-me/mac/releases/latest/download/LoveAround.dmg">Mac</a><a data-os="windows" href="https://github.com/lovearound-me/windows/releases/latest/download/LoveAroundSetup.exe">Windows</a><a data-os="linux" href="https://github.com/lovearound-me/linux/releases/latest/download/LoveAround.deb">Linux</a></span>
           </div>
-          <div class="way" id="web">
+          <div class="way" id="phone">
             <div class="head-row">
-              <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/></svg></span>
-              <h3>{{get.web}}</h3>
-              <span class="tag">{{get.no_install}}</span>
+              <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="6" y="2.5" width="12" height="19" rx="3"/><path d="M10.5 18.5h3"/></svg></span>
+              <h3>{{get.phone}}</h3>
+              <span class="tag" id="phone-tag" data-ios="{{get.beta}}" data-android="{{get.test}}">{{get.beta}}</span>
             </div>
-            <p>{{get.web_text}}</p>
-            <p class="grow tabnote">{{get.web_note}}</p>
-            <a class="btn" href="{{@app}}">{{get.web_go}}</a>
-          </div>
-          <div class="way" id="tg">
-            <div class="head-row">
-              <span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.2 2.9 11.4c-1.2.5-1.2 1.2 0 1.6l4.7 1.5 1.8 5.6c.2.6.6.7 1.1.3l2.6-2.2 5 3.7c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.3zM9.4 14.3l8.7-5.5c.4-.3.8-.1.5.2l-7.2 6.5-.3 3.1-1.7-4.3z"/></svg></span>
-              <h3>{{get.tg}}</h3>
-              <span class="tag">{{get.no_install}}</span>
+            <div class="seg" role="group" aria-label="{{get.platform}}">
+              <button type="button" data-plat="ios" aria-pressed="true"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>iPhone</button>
+              <button type="button" data-plat="android" aria-pressed="false"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.5 17.5a8.5 8.5 0 0 1 17 0zM6.2 9.6 4.6 6.9a.6.6 0 0 1 1-.6l1.7 2.8zm11.6 0 1.6-2.7a.6.6 0 0 0-1-.6l-1.7 2.8z"/><circle cx="8.6" cy="13.9" r="1.05" style="fill:var(--seg-eye)"/><circle cx="15.4" cy="13.9" r="1.05" style="fill:var(--seg-eye)"/></svg>Android</button>
             </div>
-            <p class="grow">{{get.tg_text}}</p>
-            <a class="btn" href="https://t.me/LoveAroundMeBot">{{get.tg_go}}</a>
+            <div class="plat" id="ios">
+              <p class="grow">{{get.ios_text}}</p>
+              <p class="tabnote">{{get.ios_note}}</p>
+              <div class="o"><a class="btn" href="https://testflight.apple.com/join/WpbcxCJ7"><svg class="tf" width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><defs><linearGradient id="tfg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2BC0FF"/><stop offset="1" stop-color="#1673E6"/></linearGradient></defs><rect width="24" height="24" rx="5.5" fill="url(#tfg)"/><g fill="#fff"><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6"/><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6" transform="rotate(120 12 12)"/><ellipse cx="12" cy="7.2" rx="1.9" ry="4.6" transform="rotate(240 12 12)"/></g><circle cx="12" cy="12" r="2.3" fill="#1A86EE" stroke="#fff" stroke-width="1.2"/></svg>{{get.ios_go}}</a><small>{{get.ios_req}}</small></div>
+            </div>
+            <div class="plat" id="android" hidden>
+              <p class="grow">{{get.android_text}}</p>
+              <p class="tabnote">{{get.android_note}}</p>
+              <div class="o tsteps">
+                <a class="btn ghost" href="https://groups.google.com/g/lovearound-testers"><span class="n">1</span>{{get.android_join}}</a>
+                <a class="btn" href="https://play.google.com/apps/testing/me.lovearound.android"><span class="n">2</span>{{get.android_go}}</a>
+                <small>{{get.android_req}}</small>
+              </div>
+            </div>
           </div>
+        </div>
+        <span class="lite-l">{{get.no_install}}</span>
+        <div class="lite">
+          <a class="row" id="web" href="{{@app}}"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.8 2.6 15.2 0 18M12 3c-2.6 2.8-2.6 15.2 0 18"/></svg></span><span class="t"><b>{{get.web}}</b><small>{{get.web_short}}</small></span><span class="go">{{get.open}}</span></a>
+          <a class="row" id="tg" href="https://t.me/LoveAroundMeBot"><span class="ic"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21.5 4.2 2.9 11.4c-1.2.5-1.2 1.2 0 1.6l4.7 1.5 1.8 5.6c.2.6.6.7 1.1.3l2.6-2.2 5 3.7c.9.5 1.5.2 1.7-.8l3.1-14.6c.3-1.3-.5-1.8-1.4-1.3zM9.4 14.3l8.7-5.5c.4-.3.8-.1.5.2l-7.2 6.5-.3 3.1-1.7-4.3z"/></svg></span><span class="t"><b>{{get.tg}}</b><small>{{get.tg_short}}</small></span><span class="go">{{get.open}}</span></a>
         </div>
         <div class="help">
           <p class="src">{{get.source}}</p>
@@ -377,27 +380,60 @@
     });
   })();
 
-  // The order fits the device. A computer: its app (only its own download,
-  // the others on a quieter line), then iPhone and Apple Watch. An iPhone:
-  // iPhone and Apple Watch, then the computer. Anything else (Android, for
-  // now without an app of its own): the web app first. Telegram always last.
+  // The order fits the device: a computer, its app first (only its own
+  // download, the others on a quieter line); a phone, the phone and watch
+  // card first. The phone card shows the device's own system, iPhone or
+  // Android (a computer: iPhone beside a Mac, Android beside the rest), and
+  // the switch shows the other; the best pair under the title follows it.
   (function () {
     var ways = document.getElementById('dl');
     if (!ways) return;
-    var h = document.documentElement;
-    var p = (navigator.userAgentData && navigator.userAgentData.platform || navigator.platform || '') + ' ' + navigator.userAgent;
-    var iphone = /iPhone|iPad|iPod/.test(navigator.userAgent) || /Mac/.test(p) && navigator.maxTouchPoints > 1;
-    var os = h.classList.contains('mob') || /CrOS/.test(p) ? ''
+    var h = document.documentElement, ua = navigator.userAgent;
+    var p = (navigator.userAgentData && navigator.userAgentData.platform || navigator.platform || '') + ' ' + ua;
+    var iphone = /iPhone|iPad|iPod/.test(ua) || /Mac/.test(p) && navigator.maxTouchPoints > 1;
+    var mob = h.classList.contains('mob');
+    var os = mob || /CrOS/.test(p) ? ''
       : /Mac/i.test(p) ? 'mac' : /Win/i.test(p) ? 'windows' : /Linux|X11/i.test(p) ? 'linux' : '';
-    var order = os ? ['desk', 'ios', 'web', 'tg'] : iphone ? ['ios', 'desk', 'web', 'tg'] : ['web', 'desk', 'ios', 'tg'];
-    order.forEach(function (id, i) { document.getElementById(id).style.order = i; });
-    document.getElementById(order[0]).classList.add('mine');
-    // A phone can't install the app: its downloads fold away.
-    if (h.classList.contains('mob')) document.getElementById('dls').open = false;
+    var first = mob ? 'phone' : 'desk';
+    document.getElementById(first).classList.add('mine');
+    document.getElementById(first === 'desk' ? 'phone' : 'desk').style.order = 1;
+
+    var combo = document.getElementById('combo'), tag = document.getElementById('phone-tag');
+    var buttons = ways.querySelectorAll('.seg button');
+    function show(plat) {
+      buttons.forEach(function (b) { b.setAttribute('aria-pressed', b.dataset.plat === plat ? 'true' : 'false'); });
+      ways.querySelectorAll('.plat').forEach(function (el) { el.hidden = el.id !== plat; });
+      combo.textContent = combo.dataset[plat];
+      tag.textContent = tag.dataset[plat];
+    }
+    buttons.forEach(function (b) { b.addEventListener('click', function () { show(b.dataset.plat); }); });
+    show(iphone || os === 'mac' ? 'ios' : 'android');
+
+    // A phone can't install the computer app: its downloads fold away.
+    if (mob) document.getElementById('dls').open = false;
     if (!os) return;
     ways.querySelectorAll('#desk .o').forEach(function (o) { o.hidden = o.dataset.os !== os; });
     document.querySelector('#alt [data-os="' + os + '"]').remove();
     document.getElementById('alt').hidden = false;
+  })();
+
+  // Short links to a part of the page: lovearound.me/#install, or
+  // lovearound.me/install (a redirect in firebase.json). #iphone and #android
+  // also switch the phone card. On load and on a hash change.
+  (function () {
+    var to = { install: 'w-get', iphone: 'w-get', android: 'w-get', computer: 'desk', how: 'w-how', faq: 'w-faq' };
+    function jump() {
+      var h = location.hash.slice(1), el = to[h] && document.getElementById(to[h]);
+      if (!el) return;
+      var b = document.querySelector('#phone .seg [data-plat="' + (h === 'iphone' ? 'ios' : h) + '"]');
+      if (b) b.click();
+      if (h === 'computer') document.getElementById('dls').open = true;
+      el.scrollIntoView();
+    }
+    addEventListener('hashchange', jump);
+    jump();
+    // Fonts and pictures that load later move the page: once more after them.
+    addEventListener('load', function () { if (to[location.hash.slice(1)]) setTimeout(jump, 50); });
   })();
 
   // The Love ID bar (see #ibar). Kept for 30 days in this browser only.
@@ -421,8 +457,9 @@
       bar.hidden = true;
       document.body.classList.remove('has-ibar');
     });
-    // A download copies the link too: the app's "Add" window picks it up.
-    document.querySelectorAll('#dl a[href*="/releases/"]').forEach(function (a) {
+    // A download (or the way to Google Play) copies the link too: the app
+    // offers to add it on its first launch, or its "Add" window picks it up.
+    document.querySelectorAll('#dl a[href*="/releases/"], #android a').forEach(function (a) {
       a.addEventListener('click', function () { try { navigator.clipboard.writeText(link); } catch (e) {} });
     });
   })();
@@ -430,7 +467,7 @@
   // Blocks ease in as they scroll into view.
   (function () {
     if (!('IntersectionObserver' in window) || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    var els = document.querySelectorAll('.pf-pl,.step,.loveid-head,#w-idea .split,.callout,#w-heart .head,.hcol,.diy,#w-ex .head,.moments,.app>*,.ways-head,.way,#w-faq .split,.end');
+    var els = document.querySelectorAll('.pf-pl,.step,.loveid-head,#w-idea .split,.callout,#w-heart .head,.hcol,.diy,#w-ex .head,.moments,.app>*,.ways-head,.way,.lite-l,.lite .row,#w-faq .split,.end');
     var vh = innerHeight;
     var io = new IntersectionObserver(function (es) {
       es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -438,7 +475,7 @@
     [].forEach.call(els, function (el) {
       if (el.getBoundingClientRect().top < vh) return;   // already on screen: leave it alone
       var i = [].indexOf.call(el.parentNode.children, el);
-      if (el.matches('.pf-pl,.step,.way')) el.style.transitionDelay = Math.min(i, 3) * 70 + 'ms';
+      if (el.matches('.pf-pl,.step,.way,.lite .row')) el.style.transitionDelay = Math.min(i, 3) * 70 + 'ms';
       el.classList.add('rv'); io.observe(el);
     });
   })();

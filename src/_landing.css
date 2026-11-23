@@ -215,7 +215,7 @@ section{padding:104px 0;scroll-margin-top:64px}
 .ways-head .sub{font-size:17px;color:var(--body);max-width:640px}
 .ways{margin-top:36px;display:grid;gap:16px}
 @media (min-width:900px){.ways{grid-template-columns:repeat(2,1fr)}}
-.way{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:28px;display:flex;flex-direction:column;gap:14px}
+.way{border-radius:24px;background:var(--card);box-shadow:0 0 0 1px var(--line);padding:28px;display:flex;flex-direction:column;gap:14px;scroll-margin-top:88px}
 .way.mine{box-shadow:0 0 0 2px var(--accent);order:-1}
 .way .btn .tf{flex-shrink:0;border-radius:5px}
 .ways-head .combo{align-self:flex-start;max-width:640px;font-size:15px;line-height:1.5;color:var(--ink);background:var(--pink);padding:12px 18px;border-radius:16px}
@@ -234,7 +234,6 @@ section{padding:104px 0;scroll-margin-top:64px}
 .way .o{display:flex;flex-direction:column;gap:6px}
 .way .o small{font-size:13px;color:var(--muted);text-align:center}
 .way .alts a+a::before{content:' · ';color:var(--muted);font-weight:400}
-.mob .way#desk{order:1}
 .way .dls .o+.o{margin-top:14px}
 .way .dls > summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 22px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--line);font-weight:700;font-size:15px;color:var(--ink)}
 .way .dls > summary::-webkit-details-marker{display:none}
@@ -242,6 +241,28 @@ section{padding:104px 0;scroll-margin-top:64px}
 .way .dls[open] > summary::after{transform:translateY(2px) rotate(-135deg)}
 .way .dls[open] > summary{margin-bottom:14px}
 html:not(.mob) .way .dls > summary{display:none}
+/* the phone and watch card: iPhone or Android, by the device or the switch */
+.way .plat{display:contents}
+.way .seg{align-self:flex-start;display:flex;gap:2px;padding:4px;border-radius:999px;background:var(--band)}
+.way .seg button{--seg-eye:var(--band);display:flex;align-items:center;gap:7px;border:0;background:none;padding:8px 16px;border-radius:999px;font:inherit;font-size:14px;font-weight:700;color:var(--body);cursor:pointer}
+.way .seg button:hover{color:var(--ink)}
+.way .seg button[aria-pressed="true"]{--seg-eye:var(--card);background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(48,42,39,.16)}
+.way .tsteps{gap:10px}
+.way .tsteps .btn{gap:10px}
+.way .tsteps .n{width:22px;height:22px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;background:var(--pink);color:var(--accent);flex-shrink:0}
+.way.mine .tsteps .btn:not(.ghost) .n{background:rgba(255,255,255,.22);color:#fff}
+/* no install: the web app and Telegram, as quieter rows under the apps */
+.lite-l{display:block;margin:32px 0 14px;font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lite{display:grid;gap:12px}
+@media (min-width:900px){.lite{grid-template-columns:repeat(2,1fr)}}
+.lite .row{display:flex;align-items:center;gap:16px;padding:18px 20px;border-radius:20px;background:var(--card);box-shadow:0 0 0 1px var(--line);color:var(--ink);text-decoration:none}
+.lite .row:hover{color:var(--ink);box-shadow:0 0 0 1.5px var(--ink)}
+.lite .ic{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;background:var(--pink);color:var(--accent);flex-shrink:0}
+.lite .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.lite .t b{font-size:17px;font-weight:800;letter-spacing:-.01em}
+.lite .t small{font-size:14px;line-height:1.45;color:var(--muted)}
+.lite .go{font-size:14px;font-weight:700;padding:9px 16px;border-radius:999px;box-shadow:inset 0 0 0 1.5px var(--line);white-space:nowrap}
+@media (max-width:520px){.lite .row{flex-wrap:wrap}.lite .go{width:100%;text-align:center}}
 .help{margin-top:24px;display:flex;flex-direction:column;gap:4px}
 .help details summary{list-style:none;cursor:pointer;font-size:15px;font-weight:700;color:var(--body);padding:8px 0;display:flex;align-items:center;gap:10px}
 .help summary::-webkit-details-marker{display:none}

@@ -88,6 +88,36 @@
       ],
       "redirects": [
         {
+          "regex": "^/install/?$",
+          "destination": "/#install",
+          "type": 302
+        },
+        {
+          "regex": "^/iphone/?$",
+          "destination": "/#iphone",
+          "type": 302
+        },
+        {
+          "regex": "^/android/?$",
+          "destination": "/#android",
+          "type": 302
+        },
+        {
+          "regex": "^/computer/?$",
+          "destination": "/#computer",
+          "type": 302
+        },
+        {
+          "regex": "^/how/?$",
+          "destination": "/#how",
+          "type": 302
+        },
+        {
+          "regex": "^/faq/?$",
+          "destination": "/#faq",
+          "type": 302
+        },
+        {
           "regex": "^/login/devices/?$",
           "destination": "https://app.lovearound.me/pair",
           "type": 302
