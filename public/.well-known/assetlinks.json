@@ -1,11 +1,16 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "me.lovearound.android",
       "sha256_cert_fingerprints": [
-        "3A:C0:90:15:23:55:B6:57:E9:D8:1D:A6:06:8F:65:41:BC:46:05:95:55:DD:4B:E3:5D:47:64:BD:69:FF:5A:7D"
+        "3A:C0:90:15:23:55:B6:57:E9:D8:1D:A6:06:8F:65:41:BC:46:05:95:55:DD:4B:E3:5D:47:64:BD:69:FF:5A:7D",
+        "62:80:6B:F0:15:82:4C:AF:5C:92:B4:D9:23:3E:4B:3C:CA:8B:A8:DE:C6:BA:51:89:3D:66:6E:3E:7F:5C:49:9E",
+        "C0:89:06:DF:61:E0:3D:E8:42:77:17:90:25:BC:9D:4C:3A:9A:76:59:E9:77:5C:CF:12:17:35:FF:22:F1:CC:F6",
+        "EC:32:85:CF:8C:C0:11:86:51:21:C9:16:BB:AA:42:15:89:20:89:6C:B2:B7:2E:DE:FF:55:E0:15:F0:03:18:99"
       ]
     }
   }
