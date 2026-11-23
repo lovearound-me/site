@@ -159,7 +159,7 @@
     "android_s2": "Then become a tester",
     "android_s2_hint": "A couple of minutes later, with the same Google account: become a tester, then get the app from Google Play.",
     "android_go": "Open Google Play",
-    "android_req": "Android 9 and Wear OS 3 or newer",
+    "android_req": "Android 8 and Wear OS 3 or newer",
     "web_short": "Send and change settings in the browser. Signals arrive only while the tab is open.",
     "tg_short": "The @LoveAroundMeBot bot: send from the chat, get signals as notifications.",
     "open": "Open"

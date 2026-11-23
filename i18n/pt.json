@@ -159,7 +159,7 @@
     "android_s2": "Depois, torna-te testador",
     "android_s2_hint": "Uns minutos depois, com a mesma conta Google: torna-te testador e descarrega a app do Google Play.",
     "android_go": "Abrir o Google Play",
-    "android_req": "Android 9 e Wear OS 3 ou mais recente",
+    "android_req": "Android 8 e Wear OS 3 ou mais recente",
     "web_short": "Envia e muda as definições no navegador. Os sinais só chegam com a aba aberta.",
     "tg_short": "O bot @LoveAroundMeBot: envia pelo chat e recebe os sinais como notificações.",
     "open": "Abrir"

@@ -159,7 +159,7 @@
     "android_s2": "Потом стань тестером",
     "android_s2_hint": "Через пару минут, с тем же аккаунтом Google: стань тестером, затем скачай приложение из Google Play.",
     "android_go": "Открыть Google Play",
-    "android_req": "Android 9 и Wear OS 3 или новее",
+    "android_req": "Android 8 и Wear OS 3 или новее",
     "web_short": "Отправка и настройки в браузере. Сигналы приходят, только пока вкладка открыта.",
     "tg_short": "Бот @LoveAroundMeBot: отправка из чата, сигналы — уведомлениями.",
     "open": "Открыть"

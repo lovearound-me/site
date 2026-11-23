@@ -159,7 +159,7 @@
     "android_s2": "然后成为测试者",
     "android_s2_hint": "几分钟后，用同一个 Google 账号：成为测试者，然后从 Google Play 下载应用。",
     "android_go": "打开 Google Play",
-    "android_req": "Android 9 和 Wear OS 3 或更高版本",
+    "android_req": "Android 8 和 Wear OS 3 或更高版本",
     "web_short": "在浏览器中发送和更改设置。只有标签页打开时才能收到信号。",
     "tg_short": "@LoveAroundMeBot 机器人：在聊天中发送，以通知接收信号。",
     "open": "打开"

@@ -159,7 +159,7 @@
     "android_s2": "Puis deviens testeur",
     "android_s2_hint": "Quelques minutes plus tard, avec le même compte Google : deviens testeur, puis télécharge l’app sur Google Play.",
     "android_go": "Ouvrir Google Play",
-    "android_req": "Android 9 et Wear OS 3 ou plus récent",
+    "android_req": "Android 8 et Wear OS 3 ou plus récent",
     "web_short": "Envoyer et régler dans le navigateur. Les signaux n’arrivent que tant que l’onglet est ouvert.",
     "tg_short": "Le bot @LoveAroundMeBot : envoie depuis le chat, reçois les signaux en notifications.",
     "open": "Ouvrir"

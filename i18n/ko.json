@@ -159,7 +159,7 @@
     "android_s2": "그다음 테스터 되기",
     "android_s2_hint": "몇 분 뒤 같은 Google 계정으로 테스터가 된 다음 Google Play에서 앱을 받으세요.",
     "android_go": "Google Play 열기",
-    "android_req": "Android 9 및 Wear OS 3 이상",
+    "android_req": "Android 8 및 Wear OS 3 이상",
     "web_short": "브라우저에서 보내고 설정을 바꿔요. 신호는 탭이 열려 있을 때만 와요.",
     "tg_short": "@LoveAroundMeBot 봇: 채팅에서 보내고 신호는 알림으로 받아요.",
     "open": "열기"

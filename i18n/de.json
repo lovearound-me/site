@@ -159,7 +159,7 @@
     "android_s2": "Dann werde Tester",
     "android_s2_hint": "Ein paar Minuten später, mit demselben Google-Konto: Werde Tester und lade die App dann aus Google Play.",
     "android_go": "Google Play öffnen",
-    "android_req": "Android 9 und Wear OS 3 oder neuer",
+    "android_req": "Android 8 und Wear OS 3 oder neuer",
     "web_short": "Senden und Einstellungen im Browser. Signale kommen nur, solange der Tab offen ist.",
     "tg_short": "Der Bot @LoveAroundMeBot: aus dem Chat senden, Signale als Benachrichtigungen.",
     "open": "Öffnen"

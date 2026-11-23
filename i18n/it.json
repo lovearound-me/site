@@ -159,7 +159,7 @@
     "android_s2": "Poi diventa tester",
     "android_s2_hint": "Un paio di minuti dopo, con lo stesso account Google: diventa tester, poi scarica l’app da Google Play.",
     "android_go": "Apri Google Play",
-    "android_req": "Android 9 e Wear OS 3 o successivi",
+    "android_req": "Android 8 e Wear OS 3 o successivi",
     "web_short": "Invia e cambia le impostazioni nel browser. I segnali arrivano solo mentre la scheda è aperta.",
     "tg_short": "Il bot @LoveAroundMeBot: invia dalla chat, ricevi i segnali come notifiche.",
     "open": "Apri"

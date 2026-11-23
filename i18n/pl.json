@@ -159,7 +159,7 @@
     "android_s2": "Potem zostań testerem",
     "android_s2_hint": "Kilka minut później, na tym samym koncie Google: zostań testerem, a potem pobierz aplikację z Google Play.",
     "android_go": "Otwórz Google Play",
-    "android_req": "Android 9 i Wear OS 3 lub nowszy",
+    "android_req": "Android 8 i Wear OS 3 lub nowszy",
     "web_short": "Wysyłanie i ustawienia w przeglądarce. Sygnały przychodzą tylko, gdy karta jest otwarta.",
     "tg_short": "Bot @LoveAroundMeBot: wysyłaj z czatu, sygnały dostajesz jako powiadomienia.",
     "open": "Otwórz"

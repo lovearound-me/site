@@ -159,7 +159,7 @@
     "android_s2": "Sonra test kullanıcısı ol",
     "android_s2_hint": "Birkaç dakika sonra, aynı Google hesabıyla: test kullanıcısı ol, sonra uygulamayı Google Play'den indir.",
     "android_go": "Google Play'i aç",
-    "android_req": "Android 9 ve Wear OS 3 veya daha yeni",
+    "android_req": "Android 8 ve Wear OS 3 veya daha yeni",
     "web_short": "Tarayıcıda gönder ve ayarları değiştir. Sinyaller yalnızca sekme açıkken gelir.",
     "tg_short": "@LoveAroundMeBot botu: sohbetten gönder, sinyalleri bildirim olarak al.",
     "open": "Aç"
