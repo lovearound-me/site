@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "lovearound — compartilhe amor",
+    "title": "lovearound — compartilhe amor e carinho",
     "description": "Um pequeno gesto de carinho atravessa qualquer distância. Envie para a família e os amigos, e deixe que saibam que você pensa neles.",
-    "og_title": "lovearound — compartilhe amor. Sinta-se conectado ao mundo."
+    "og_title": "lovearound — compartilhe amor e carinho. Sinta-se conectado a quem você ama."
   },
   "lang": {
     "label": "Idioma"
@@ -18,7 +18,7 @@
   },
   "hero": {
     "kicker": "Um jeito tranquilo de mostrar aos seus que eles são importantes para você",
-    "title": "Compartilhe amor.<br>Sinta-se conectado ao mundo.",
+    "title": "Compartilhe amor e carinho.<br>Sinta-se conectado a quem você ama.",
     "lead": "Um pequeno gesto de carinho atravessa qualquer distância. Envie para a família e os amigos, e deixe que saibam que você pensa neles.",
     "text": "lovearound é um jeito de enviar e receber sinais de amor. Cada pessoa tem seu próprio Love ID. O sinal chega a um computador ou dispositivo conectado e lembra com delicadeza: alguém pensou em você. Sem palavras, e sem precisar responder.",
     "cta": "Baixar o app",
@@ -186,7 +186,7 @@
     "text": "Comece com uma pessoa. Ou envie um pouco de amor para alguém por aí."
   },
   "footer": {
-    "motto": "Compartilhe amor. Sinta-se conectado ao mundo."
+    "motto": "Compartilhe amor e carinho. Sinta-se conectado a quem você ama."
   },
   "invite": {
     "title": "Te enviaram um Love ID — lovearound",

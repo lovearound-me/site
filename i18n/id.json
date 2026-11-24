@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "lovearound — bagikan cinta",
+    "title": "lovearound — bagikan cinta dan perhatian",
     "description": "Satu tanda perhatian kecil bisa menembus jarak apa pun. Kirimkan untuk keluarga dan sahabatmu, agar mereka tahu kamu memikirkan mereka.",
-    "og_title": "lovearound — bagikan cinta. Rasakan terhubung dengan dunia."
+    "og_title": "lovearound — bagikan cinta dan perhatian. Rasakan dekat dengan orang tersayang."
   },
   "lang": {
     "label": "Bahasa"
@@ -18,7 +18,7 @@
   },
   "hero": {
     "kicker": "Cara tenang untuk memberi tahu orang-orang terdekatmu bahwa mereka berarti bagimu",
-    "title": "Bagikan cinta.<br>Rasakan terhubung dengan dunia.",
+    "title": "Bagikan cinta dan perhatian.<br>Rasakan dekat dengan orang tersayang.",
     "lead": "Satu tanda perhatian kecil bisa menembus jarak apa pun. Kirimkan untuk keluarga dan sahabatmu, agar mereka tahu kamu memikirkan mereka.",
     "text": "lovearound adalah cara untuk mengirim dan menerima sinyal cinta. Setiap orang punya Love ID sendiri. Sinyal tiba di komputer atau perangkat yang terhubung dan dengan lembut mengingatkan: ada yang memikirkanmu. Tanpa kata-kata, dan tanpa perlu membalas.",
     "cta": "Unduh aplikasinya",
@@ -186,7 +186,7 @@
     "text": "Mulailah dari satu orang. Atau kirim sedikit cinta untuk seseorang di luar sana."
   },
   "footer": {
-    "motto": "Bagikan cinta. Rasakan terhubung dengan dunia."
+    "motto": "Bagikan cinta dan perhatian. Rasakan dekat dengan orang tersayang."
   },
   "invite": {
     "title": "Kamu dikirimi Love ID — lovearound",

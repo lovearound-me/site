@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "lovearound — teile Liebe",
+    "title": "lovearound — teile Liebe und Fürsorge",
     "description": "Eine kleine Geste der Fürsorge überwindet jede Entfernung. Schick sie deiner Familie und deinen Freunden, damit sie wissen, dass du an sie denkst.",
-    "og_title": "lovearound — teile Liebe. Fühl dich mit der Welt verbunden."
+    "og_title": "lovearound — teile Liebe und Fürsorge. Fühl dich deinen Liebsten verbunden."
   },
   "lang": {
     "label": "Sprache"
@@ -18,7 +18,7 @@
   },
   "hero": {
     "kicker": "Eine leise Art, deinen Liebsten zu zeigen, dass sie dir wichtig sind",
-    "title": "Teile Liebe.<br>Fühl dich mit der Welt verbunden.",
+    "title": "Teile Liebe und Fürsorge.<br>Fühl dich deinen Liebsten verbunden.",
     "lead": "Eine kleine Geste der Fürsorge überwindet jede Entfernung. Schick sie deiner Familie und deinen Freunden, damit sie wissen, dass du an sie denkst.",
     "text": "lovearound ist eine Möglichkeit, Signale der Liebe zu senden und zu empfangen. Jeder hat eine eigene Love ID. Ein Signal kommt auf einem verbundenen Computer oder Gerät an und erinnert dich sanft daran: Jemand hat an dich gedacht. Ohne Worte, und du musst nicht antworten.",
     "cta": "App herunterladen",
@@ -186,7 +186,7 @@
     "text": "Fang mit einem Menschen an. Oder schick ein bisschen Liebe an irgendwen da draußen."
   },
   "footer": {
-    "motto": "Teile Liebe. Fühl dich mit der Welt verbunden."
+    "motto": "Teile Liebe und Fürsorge. Fühl dich deinen Liebsten verbunden."
   },
   "invite": {
     "title": "Du hast eine Love ID bekommen — lovearound",

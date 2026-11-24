@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "lovearound — dziel się miłością",
+    "title": "lovearound — dziel się miłością i troską",
     "description": "Mały gest troski pokona każdą odległość. Wyślij go rodzinie i przyjaciołom — niech wiedzą, że o nich myślisz.",
-    "og_title": "lovearound — dziel się miłością. Poczuj więź ze światem."
+    "og_title": "lovearound — dziel się miłością i troską. Poczuj więź z bliskimi."
   },
   "lang": {
     "label": "Język"
@@ -18,7 +18,7 @@
   },
   "hero": {
     "kicker": "Cichy sposób, by pokazać bliskim, że są dla ciebie ważni",
-    "title": "Dziel się miłością.<br>Poczuj więź ze światem.",
+    "title": "Dziel się miłością i troską.<br>Poczuj więź z bliskimi.",
     "lead": "Mały gest troski pokona każdą odległość. Wyślij go rodzinie i przyjaciołom — niech wiedzą, że o nich myślisz.",
     "text": "lovearound to sposób na wysyłanie i odbieranie sygnałów miłości. Każdy ma własny Love ID. Sygnał trafia na podłączony komputer lub urządzenie i delikatnie przypomina: ktoś o tobie pomyślał. Bez słów i bez potrzeby odpowiadania.",
     "cta": "Pobierz aplikację",
@@ -186,7 +186,7 @@
     "text": "Zacznij od jednej osoby. Albo wyślij trochę miłości komuś na świecie."
   },
   "footer": {
-    "motto": "Dziel się miłością. Poczuj więź ze światem."
+    "motto": "Dziel się miłością i troską. Poczuj więź z bliskimi."
   },
   "invite": {
     "title": "Ktoś wysłał ci Love ID — lovearound",

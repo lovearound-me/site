@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "lovearound — sevgini paylaş",
+    "title": "lovearound — sevgini ve ilgini paylaş",
     "description": "Küçük bir ilgi göstergesi her mesafeyi aşar. Onu ailene ve arkadaşlarına gönder; onları düşündüğünü bilsinler.",
-    "og_title": "lovearound — sevgini paylaş. Dünyayla bağ kur."
+    "og_title": "lovearound — sevgini ve ilgini paylaş. Sevdiklerinle bağ kur."
   },
   "lang": {
     "label": "Dil"
@@ -18,7 +18,7 @@
   },
   "hero": {
     "kicker": "Sevdiklerine senin için değerli olduklarını söylemenin sessiz bir yolu",
-    "title": "Sevgini paylaş.<br>Dünyayla bağ kur.",
+    "title": "Sevgini ve ilgini paylaş.<br>Sevdiklerinle bağ kur.",
     "lead": "Küçük bir ilgi göstergesi her mesafeyi aşar. Onu ailene ve arkadaşlarına gönder; onları düşündüğünü bilsinler.",
     "text": "lovearound, sevgi sinyalleri gönderip almanın bir yolu. Herkesin kendine ait bir Love ID’si var. Sinyal bağlı bir bilgisayara ya da cihaza ulaşır ve nazikçe hatırlatır: biri seni düşündü. Söze gerek yok, cevap vermene de.",
     "cta": "Uygulamayı indir",
@@ -186,7 +186,7 @@
     "text": "Bir kişiyle başla. Ya da dünyadaki birine biraz sevgi gönder."
   },
   "footer": {
-    "motto": "Sevgini paylaş. Dünyayla bağ kur."
+    "motto": "Sevgini ve ilgini paylaş. Sevdiklerinle bağ kur."
   },
   "invite": {
     "title": "Sana bir Love ID gönderildi — lovearound",

@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "lovearound — share love",
+    "title": "lovearound — share love and care",
     "description": "A small gesture of care can cross any distance. Send it to your family and friends, and let them know they’re on your mind.",
-    "og_title": "lovearound — share love. Feel connected to the world."
+    "og_title": "lovearound — share love and care. Feel close to your people."
   },
   "lang": {
     "label": "Language"
@@ -18,7 +18,7 @@
   },
   "hero": {
     "kicker": "A quiet way to tell your people they matter to you",
-    "title": "Share love.<br>Feel connected to the world.",
+    "title": "Share love and care.<br>Feel close to your people.",
     "lead": "A small gesture of care can cross any distance. Send it to your family and friends, and let them know they’re on your mind.",
     "text": "lovearound is a way to send and receive signals of love. Everyone has their own Love ID. A signal arrives on a connected computer or device and gently reminds you: someone thought of you. No words, and no need to reply.",
     "cta": "Download the app",
@@ -186,7 +186,7 @@
     "text": "Start with one person. Or send a little love to someone out there."
   },
   "footer": {
-    "motto": "Share love. Feel connected to the world."
+    "motto": "Share love and care. Feel close to your people."
   },
   "invite": {
     "title": "You’ve been sent a Love ID — lovearound",

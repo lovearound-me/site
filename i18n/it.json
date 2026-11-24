@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "lovearound — condividi amore",
+    "title": "lovearound — condividi amore e cura",
     "description": "Un piccolo gesto di cura supera ogni distanza. Mandalo alla tua famiglia e ai tuoi amici, per far sapere loro che li pensi.",
-    "og_title": "lovearound — condividi amore. Sentiti in contatto con il mondo."
+    "og_title": "lovearound — condividi amore e cura. Sentiti vicino ai tuoi cari."
   },
   "lang": {
     "label": "Lingua"
@@ -18,7 +18,7 @@
   },
   "hero": {
     "kicker": "Un modo discreto per dire ai tuoi cari che sono importanti per te",
-    "title": "Condividi amore.<br>Sentiti in contatto con il mondo.",
+    "title": "Condividi amore e cura.<br>Sentiti vicino ai tuoi cari.",
     "lead": "Un piccolo gesto di cura supera ogni distanza. Mandalo alla tua famiglia e ai tuoi amici, per far sapere loro che li pensi.",
     "text": "lovearound è un modo per inviare e ricevere segnali d’amore. Ognuno ha il suo Love ID. Il segnale arriva su un computer o un dispositivo collegato e ti ricorda con dolcezza: qualcuno ha pensato a te. Senza parole, e senza bisogno di rispondere.",
     "cta": "Scarica l’app",
@@ -186,7 +186,7 @@
     "text": "Inizia da una persona. Oppure manda un po’ d’amore a qualcuno nel mondo."
   },
   "footer": {
-    "motto": "Condividi amore. Sentiti in contatto con il mondo."
+    "motto": "Condividi amore e cura. Sentiti vicino ai tuoi cari."
   },
   "invite": {
     "title": "Ti hanno mandato un Love ID — lovearound",

@@ -1,8 +1,8 @@
 {
   "meta": {
-    "title": "lovearound — partage l’amour",
+    "title": "lovearound — partage l’amour et l’attention",
     "description": "Un petit geste d’attention peut traverser toutes les distances. Envoie-le à ta famille et à tes amis, pour qu’ils sachent que tu penses à eux.",
-    "og_title": "lovearound — partage l’amour. Sens-toi lié au monde."
+    "og_title": "lovearound — partage l’amour et l’attention. Sens-toi proche des tiens."
   },
   "lang": {
     "label": "Langue"
@@ -18,7 +18,7 @@
   },
   "hero": {
     "kicker": "Une façon douce de dire à tes proches qu’ils comptent pour toi",
-    "title": "Partage l’amour.<br>Sens-toi lié au monde.",
+    "title": "Partage l’amour et l’attention.<br>Sens-toi proche des tiens.",
     "lead": "Un petit geste d’attention peut traverser toutes les distances. Envoie-le à ta famille et à tes amis, pour qu’ils sachent que tu penses à eux.",
     "text": "lovearound permet d’envoyer et de recevoir des signaux d’amour. Chacun a son propre Love ID. Un signal arrive sur un ordinateur ou un objet connecté et te rappelle doucement : quelqu’un a pensé à toi. Sans mots, et sans avoir à répondre.",
     "cta": "Télécharger l’app",
@@ -186,7 +186,7 @@
     "text": "Commence par une personne. Ou envoie un peu d’amour à quelqu’un, quelque part."
   },
   "footer": {
-    "motto": "Partage l’amour. Sens-toi lié au monde."
+    "motto": "Partage l’amour et l’attention. Sens-toi proche des tiens."
   },
   "invite": {
     "title": "On t’a envoyé un Love ID — lovearound",
