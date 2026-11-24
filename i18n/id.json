@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "lovearound — bagikan cinta",
-    "description": "Satu tanda perhatian kecil bisa menembus jarak apa pun. Kirimkan untuk orang tersayang, atau untuk seseorang yang belum pernah kamu temui.",
+    "description": "Satu tanda perhatian kecil bisa menembus jarak apa pun. Kirimkan untuk keluarga dan sahabatmu, agar mereka tahu kamu memikirkan mereka.",
     "og_title": "lovearound — bagikan cinta. Rasakan terhubung dengan dunia."
   },
   "lang": {
@@ -17,28 +17,28 @@
     "open": "Buka"
   },
   "hero": {
-    "kicker": "Platform tempat cinta menemukan jalan menuju orang-orang",
+    "kicker": "Cara tenang untuk memberi tahu orang-orang terdekatmu bahwa mereka berarti bagimu",
     "title": "Bagikan cinta.<br>Rasakan terhubung dengan dunia.",
-    "lead": "Satu tanda perhatian kecil bisa menembus jarak apa pun. Kirimkan untuk orang tersayang, atau untuk seseorang yang belum pernah kamu temui.",
-    "text": "lovearound adalah cara untuk mengirim dan menerima sinyal cinta. Setiap orang punya Love ID sendiri. Sinyal anonim tiba di komputer atau perangkat yang terhubung dan dengan lembut mengingatkan: ada yang memikirkanmu. Tanpa kata-kata, dan tanpa perlu membalas.",
+    "lead": "Satu tanda perhatian kecil bisa menembus jarak apa pun. Kirimkan untuk keluarga dan sahabatmu, agar mereka tahu kamu memikirkan mereka.",
+    "text": "lovearound adalah cara untuk mengirim dan menerima sinyal cinta. Setiap orang punya Love ID sendiri. Sinyal tiba di komputer atau perangkat yang terhubung dan dengan lembut mengingatkan: ada yang memikirkanmu. Tanpa kata-kata, dan tanpa perlu membalas.",
     "cta": "Unduh aplikasinya",
     "open": "Buka aplikasinya",
     "how": "Cara kerja"
   },
   "idea": {
     "title": "Lebih banyak cinta.<br>Lebih banyak ikatan di antara kita.",
-    "lead": "Satu tanda perhatian kecil bisa melintasi ruangan, kota, atau samudra. Ia bisa sampai ke orang terdekat atau seseorang yang belum pernah kamu temui, dan membuatnya merasa tidak sendiri.",
-    "text": "Siapa pun yang pernah menerima cinta bisa meneruskannya. Ke sahabat, ke keluarga, atau ke seseorang di belahan dunia lain. Begitulah satu gestur menjadi awal rantai yang menghubungkan semakin banyak orang.",
+    "lead": "Satu tanda perhatian kecil bisa melintasi ruangan, kota, atau samudra. Ia sampai ke orang terdekat dan membuatnya merasa tidak sendiri.",
+    "text": "Siapa pun yang pernah menerima cinta bisa meneruskannya. Ke sahabat, ke keluarga, ke siapa pun yang berarti bagimu. Begitulah satu gestur menjadi awal rantai yang menghubungkan semakin banyak orang.",
     "why": "Karena itu kami membangun lovearound:",
     "why_text": "agar cinta bisa berkelana lebih bebas ke seluruh dunia, dan kita lebih sering merasa saling terhubung."
   },
   "platform": {
     "title": "Kirim sesukamu. Rasakan di mana saja sekaligus.",
-    "analogy": "Love ID-mu seperti alamat email: hanya satu, tapi pesan masuk bersamaan ke ponsel dan laptop. Begitu juga sinyal: sampai ke semua yang kamu hubungkan. Hanya saja pengirimnya tak pernah terlihat.",
+    "analogy": "Love ID-mu seperti alamat email: hanya satu, tapi pesan masuk bersamaan ke ponsel dan laptop. Begitu juga sinyal: sampai ke semua yang kamu hubungkan. Sinyal tidak berisi kata-kata: hanya tanda bahwa orang terdekat sedang memikirkanmu.",
     "p1": "Kirim sesukamu",
     "p1_text": "Dari aplikasi di komputer, lewat tombol di perangkatmu sendiri, atau secara acak, ke “Seseorang di luar sana”.",
-    "p2": "Tak ada yang tahu itu kamu",
-    "p2_text": "Sinyal tiba tanpa nama. Kami tidak menyimpan siapa mengirim apa kepada siapa, jadi penerima tak akan pernah bisa tahu.",
+    "p2": "Tanpa perlu kata-kata",
+    "p2_text": "Sinyal tidak berisi teks maupun nama: hanya tanda bahwa orang terdekat sedang memikirkanmu. Tak ada yang perlu dibaca, tak ada yang perlu dibalas.",
     "p3": "Rasakan di mana saja sekaligus",
     "p3_text": "Hubungkan aplikasi dan perangkat sebanyak yang kamu mau ke Love ID-mu. Sinyal sampai ke semuanya pada saat yang sama.",
     "p4": "Terbuka untuk semua",
@@ -56,22 +56,22 @@
     "devices_label": "Yang terhubung ke Love ID Dimas",
     "hint": "Nyalakan dan matikan perangkat: sinyal hanya sampai ke yang menyala.",
     "bubble": "♥ Seseorang memikirkanmu",
-    "bubble_sub": "tanpa nama",
+    "bubble_sub": "tanpa kata-kata",
     "st_press": "Sari mengetuk hati di samping “Dimas”",
-    "st_fly": "Sinyal terbang. Nama pengirim tertinggal",
-    "st_done": "Sinyal menyalakan semua yang terhubung. Dimas tak akan tahu itu dari Sari.",
+    "st_fly": "Sinyal terbang: tanpa kata, hanya sebuah hati",
+    "st_done": "Sinyal menyalakan semua yang terhubung. Dimas merasakan perhatian dari orang terdekatnya.",
     "st_none": "Dimas tidak menghubungkan apa pun, sinyal tak punya tempat tujuan. Nyalakan setidaknya satu perangkat."
   },
   "how": {
-    "title": "Love ID — alamatmu untuk cinta",
+    "title": "Love ID — tautan pribadimu",
     "s1": "Dapatkan Love ID-mu",
-    "s1_text": "Love ID muncul saat pertama kali kamu masuk. Bagikan tautanmu agar orang lain bisa mengirimimu cinta.",
+    "s1_text": "Love ID muncul saat pertama kali kamu masuk. Bagikan tautanmu kepada keluarga dan sahabat agar mereka bisa menambahkanmu.",
     "s2": "Kirim tanda perhatian",
     "s2_text": "Pilih orang terdekat, atau “Seseorang di luar sana”. Satu ketukan bisa membuat hari seseorang sedikit lebih cerah.",
     "s3": "Rasakan dengan <span style=\"white-space:nowrap\">caramu sendiri</span>",
     "s3_text": "Terima sinyal di komputer atau perangkat yang terhubung. Rasakan saja bahwa seseorang memikirkanmu.",
     "s4": "Teruskan",
-    "s4_text": "Kapan pun kamu mau, kirim sinyalmu sendiri ke orang terdekat atau seseorang yang baru."
+    "s4_text": "Kapan pun kamu mau, kirim sinyalmu sendiri ke orang yang berarti bagimu."
   },
   "heart": {
     "kicker": "Rasakan cinta dari dekat",
@@ -81,10 +81,10 @@
     "badge": "SEGERA",
     "h_name": "Heart",
     "h_h3": "Hati di mejamu",
-    "h_text": "Hati hangat yang nyaman disentuh, tanpa perlu ponsel atau komputer — cukup Wi‑Fi dan Love ID-mu. Saat seseorang mengirimimu cinta, ia menyala dan berdenyut lembut. Sentuh, dan cinta itu berlanjut.",
-    "h_li1": "Di samping tempat tidur atau di meja kerja",
+    "h_text": "Lampu kecil berbentuk hati, tanpa perlu ponsel atau komputer — cukup Wi‑Fi dan Love ID-mu. Saat orang terdekat memikirkanmu, ia menyala lembut. Tekan, dan perhatian itu berlanjut.",
+    "h_li1": "Diletakkan di meja atau di rak",
     "h_li2": "Bekerja sendiri, tanpa ponsel",
-    "h_li3": "Menerima cinta dan mengirimnya dengan sentuhan",
+    "h_li3": "Menerima sinyal dan mengirimnya dengan satu tekanan",
     "p_name": "Liontin",
     "p_alt": "Liontin hati pada rantai tipis",
     "p_h3": "Hati yang kamu bawa",
@@ -108,8 +108,8 @@
     "m2_text": "Sebelum ujian, wawancara kerja, atau pentas. Tanda dukungan yang tenang, tanpa perlu balasan.",
     "m3": "Untuk dirimu sendiri, saat butuh dukungan",
     "m3_text": "Bagikan tautanmu kepada teman-teman. Mereka tak perlu mencari kata yang tepat agar kamu merasa diperhatikan.",
-    "m4": "Untuk seseorang di belahan dunia lain",
-    "m4_text": "Kalian belum saling kenal. Tapi satu gestur bisa menghubungkan kalian sejenak dan membuat hari seseorang sedikit lebih cerah."
+    "m4": "Untuk nenek, tanpa alasan khusus",
+    "m4_text": "Tak perlu momen khusus atau telepon panjang. Satu tanda kecil bahwa kamu mengingatnya bisa membuat harinya sedikit lebih cerah."
   },
   "app": {
     "title": "Perhatian dalam jangkauan, selagi kamu di depan komputer",
@@ -167,7 +167,7 @@
   "faq": {
     "title": "Setiap orang punya sedikit cinta untuk dibagikan.",
     "q1": "Apakah orang itu akan tahu kalau itu aku?",
-    "a1": "Tidak. Sinyal tiba tanpa nama dan tanpa kata — hanya tanda bahwa seseorang memikirkannya. Kami tidak menyimpan catatan siapa mengirim apa kepada siapa.",
+    "a1": "Sinyal tiba tanpa nama dan tanpa kata — hanya tanda bahwa orang terdekat memikirkannya. Dan yang bisa mengirimnya hanyalah orang yang ia beri Love ID-nya.",
     "q2": "Apakah aku harus membeli hatinya?",
     "a2": "Kamu bisa mulai dengan aplikasi komputer. Heart akan menjadi cara tambahan yang nyata untuk menerima sinyal.",
     "q3": "Siapa yang menerima sinyal “Seseorang di luar sana”?",
@@ -191,7 +191,7 @@
   "invite": {
     "title": "Kamu dikirimi Love ID — lovearound",
     "og_title": "Kamu dikirimi Love ID di lovearound",
-    "description": "lovearound adalah cara tenang untuk bilang “aku memikirkanmu”: satu ketukan, dan sinyal hangat sampai ke orang itu. Tambahkan Love ID ini untuk mengirimnya. Dia tidak akan tahu itu kamu.",
+    "description": "lovearound adalah cara tenang untuk bilang “aku memikirkanmu”: satu ketukan, dan sinyal hangat sampai ke orang itu. Tambahkan Love ID ini untuk mengirimnya.",
     "kicker": "Kamu dikirimi Love ID",
     "no_code": "Tautan ini tidak berisi Love ID. Minta dikirim ulang.",
     "copy": "Salin tautan",
@@ -210,8 +210,8 @@
     "share_text": "Buka di komputer",
     "web": "Aplikasi web",
     "tg": "Di Telegram",
-    "anon": "Sinyal tiba tanpa nama: orang itu tidak akan tahu itu darimu.",
-    "short": "Tambahkan, lalu kamu bisa mengirim hati ke orang ini. Dia tidak akan tahu itu kamu.",
+    "anon": "Sinyal tiba tanpa kata: hanya tanda bahwa orang terdekat sedang memikirkannya.",
+    "short": "Tambahkan, lalu kamu bisa mengirim hati ke orang ini.",
     "ios_sub": "beta, lewat TestFlight",
     "ios_go": "Pasang",
     "ios_have": "Sudah terpasang?",

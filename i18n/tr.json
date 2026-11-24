@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "lovearound — sevgini paylaş",
-    "description": "Küçük bir ilgi göstergesi her mesafeyi aşar. Onu değer verdiğin birine ya da henüz tanışmadığın birine gönder.",
+    "description": "Küçük bir ilgi göstergesi her mesafeyi aşar. Onu ailene ve arkadaşlarına gönder; onları düşündüğünü bilsinler.",
     "og_title": "lovearound — sevgini paylaş. Dünyayla bağ kur."
   },
   "lang": {
@@ -17,28 +17,28 @@
     "open": "Aç"
   },
   "hero": {
-    "kicker": "Sevginin insanlara yolunu bulduğu bir platform",
+    "kicker": "Sevdiklerine senin için değerli olduklarını söylemenin sessiz bir yolu",
     "title": "Sevgini paylaş.<br>Dünyayla bağ kur.",
-    "lead": "Küçük bir ilgi göstergesi her mesafeyi aşar. Onu değer verdiğin birine ya da henüz tanışmadığın birine gönder.",
-    "text": "lovearound, sevgi sinyalleri gönderip almanın bir yolu. Herkesin kendine ait bir Love ID’si var. Anonim sinyal bağlı bir bilgisayara ya da cihaza ulaşır ve nazikçe hatırlatır: biri seni düşündü. Söze gerek yok, cevap vermene de.",
+    "lead": "Küçük bir ilgi göstergesi her mesafeyi aşar. Onu ailene ve arkadaşlarına gönder; onları düşündüğünü bilsinler.",
+    "text": "lovearound, sevgi sinyalleri gönderip almanın bir yolu. Herkesin kendine ait bir Love ID’si var. Sinyal bağlı bir bilgisayara ya da cihaza ulaşır ve nazikçe hatırlatır: biri seni düşündü. Söze gerek yok, cevap vermene de.",
     "cta": "Uygulamayı indir",
     "open": "Uygulamayı aç",
     "how": "Nasıl çalışır"
   },
   "idea": {
     "title": "Daha çok sevgi.<br>Aramızda daha çok bağ.",
-    "lead": "Küçük bir ilgi göstergesi bir odayı, bir şehri ya da bir okyanusu aşabilir. Yakınındaki birine ya da hiç tanımadığın birine ulaşıp yalnız olmadığını hissettirebilir.",
-    "text": "Sevgi alan, onu başkasına aktarabilir. Bir arkadaşa, aileye ya da dünyanın öbür ucundaki birine. Böylece tek bir jest, giderek daha çok insanı birbirine bağlayan bir zincirin başlangıcı olur.",
+    "lead": "Küçük bir ilgi göstergesi bir odayı, bir şehri ya da bir okyanusu aşabilir. Yakınındaki birine ulaşıp yalnız olmadığını hissettirebilir.",
+    "text": "Sevgi alan, onu başkasına aktarabilir. Bir arkadaşa, aileye, senin için değerli olan herkese. Böylece tek bir jest, giderek daha çok insanı birbirine bağlayan bir zincirin başlangıcı olur.",
     "why": "lovearound’u bu yüzden yapıyoruz:",
     "why_text": "sevgi dünyada daha özgürce dolaşsın, biz de birbirimize bağlı olduğumuzu daha sık hissedelim diye."
   },
   "platform": {
     "title": "Nasıl istersen gönder. Her yerde aynı anda hisset.",
-    "analogy": "Love ID’n bir e-posta adresi gibi: tek bir tane var ama postalar aynı anda hem telefonuna hem dizüstüne gelir. Sinyaller de öyle: bağladığın her şeye ulaşır. Sadece gönderen asla görünmez.",
+    "analogy": "Love ID’n bir e-posta adresi gibi: tek bir tane var ama postalar aynı anda hem telefonuna hem dizüstüne gelir. Sinyaller de öyle: bağladığın her şeye ulaşır. Sinyalde söz yoktur: yalnızca bir yakınının seni düşündüğünün işareti.",
     "p1": "Nasıl istersen gönder",
     "p1_text": "Bilgisayarındaki uygulamadan, kendi cihazındaki bir düğmeyle ya da rastgele, “Dünyada biri”ne.",
-    "p2": "Senin olduğunu kimse bilmez",
-    "p2_text": "Sinyal isimsiz gelir. Kimin kime ne gönderdiğini saklamayız, bu yüzden alıcı bunu hiçbir şekilde öğrenemez.",
+    "p2": "Söze gerek yok",
+    "p2_text": "Sinyalde ne metin ne de isim vardır: yalnızca bir yakınının seni düşündüğünün işareti. Okunacak bir şey yok, cevap vermek de gerekmez.",
     "p3": "Her yerde aynı anda hisset",
     "p3_text": "Love ID’ne istediğin kadar uygulama ve cihaz bağla. Sinyal hepsine aynı anda ulaşır.",
     "p4": "Herkese açık",
@@ -56,22 +56,22 @@
     "devices_label": "Can’ın Love ID’sine bağlı olanlar",
     "hint": "Cihazları aç ve kapat: sinyal yalnızca açık olanlara ulaşır.",
     "bubble": "♥ Biri seni düşündü",
-    "bubble_sub": "isimsiz",
+    "bubble_sub": "söze gerek yok",
     "st_press": "Elif “Can”ın yanındaki kalbe dokunuyor",
-    "st_fly": "Sinyal uçup gidiyor. Gönderenin adı geride kalıyor",
-    "st_done": "Sinyal bağlı olan her şeyi yaktı. Can, bunun Elif olduğunu asla bilmeyecek.",
+    "st_fly": "Sinyal uçup gidiyor: söz yok, sadece bir kalp",
+    "st_done": "Sinyal bağlı olan her şeyi yaktı. Can, bir yakınının onu düşündüğünü hissediyor.",
     "st_none": "Can’ın bağlı hiçbir şeyi yok, sinyalin gidecek yeri yok. En az bir cihazı aç."
   },
   "how": {
-    "title": "Love ID — sevgi için adresin",
+    "title": "Love ID — kişisel bağlantın",
     "s1": "Love ID’ni al",
-    "s1_text": "İlk girişte oluşur. Başkaları sana sevgi gönderebilsin diye bağlantını paylaş.",
+    "s1_text": "İlk girişte oluşur. Ailen ve arkadaşların seni ekleyebilsin diye bağlantını onlarla paylaş.",
     "s2": "Bir ilgi işareti gönder",
     "s2_text": "Bir yakınını ya da “Dünyada biri”ni seç. Tek dokunuş birinin gününü biraz daha aydınlık yapabilir.",
     "s3": "<span style=\"white-space:nowrap\">Kendi tarzınla</span> hisset",
     "s3_text": "Sinyalleri bilgisayarında ya da bağlı bir cihazda al. Sadece birinin seni düşündüğünü hisset.",
     "s4": "Sen de aktar",
-    "s4_text": "İçinden geldiğinde kendi sinyalini bir yakınına ya da yeni birine gönder."
+    "s4_text": "İçinden geldiğinde kendi sinyalini değer verdiğin birine gönder."
   },
   "heart": {
     "kicker": "Sevgiyi yanında hisset",
@@ -81,10 +81,10 @@
     "badge": "YAKINDA",
     "h_name": "Heart",
     "h_h3": "Masandaki kalp",
-    "h_text": "Dokunması keyifli, sıcacık bir kalp; telefona da bilgisayara da ihtiyaç duymaz, yalnızca Wi‑Fi ve Love ID’n yeter. Biri sana sevgi gönderdiğinde yumuşakça parlar ve atar. Ona dokun, sevgi yoluna devam etsin.",
-    "h_li1": "Yatağının yanında ya da çalışma masanda durur",
+    "h_text": "Kalp şeklinde küçük bir lamba; telefon ya da bilgisayar gerekmez, yalnızca Wi‑Fi ve Love ID’n yeter. Bir yakının seni düşündüğünde hafifçe ışıldar. Üstüne bas, ilgi yoluna devam etsin.",
+    "h_li1": "Masanda ya da rafta durur",
     "h_li2": "Kendi başına çalışır, telefona gerek yok",
-    "h_li3": "Sevgiyi alır, dokununca gönderir",
+    "h_li3": "Sinyal alır ve tek basışla gönderir",
     "p_name": "Kolye",
     "p_alt": "İnce bir zincirde kalp kolye",
     "p_h3": "Yanında taşıdığın kalp",
@@ -97,7 +97,7 @@
   },
   "devices": {
     "diy": "Beklemek istemiyor musun? Kendi cihazını yap",
-    "diy_text": "lovearound açık bir platform: API belgelenmiş, uygulamaların kodu açık ve herkes Love ID için kendi cihazını ya da uygulamasını yapabilir. Love ID’ne karşılık veren ESP32’li bir lamba, oyuncak ya da küçük ekran. İlk kablolardan ilk sinyale adım adım bir rehber.",
+    "diy_text": "lovearound açık bir platform: API belgelenmiş, uygulamaların kodu açık ve herkes Love ID için kendi cihazını ya da uygulamasını yapabilir. Love ID’ne karşılık veren ESP32’li bir lamba ya da küçük ekran. İlk kablolardan ilk sinyale adım adım bir rehber.",
     "diy_go": "Nasıl yapılır →"
   },
   "moments": {
@@ -108,8 +108,8 @@
     "m2_text": "Bir sınavdan, iş görüşmesinden ya da sahneden önce. Cevap beklemeyen sessiz bir destek işareti.",
     "m3": "Desteğe ihtiyacın olduğunda kendine",
     "m3_text": "Bağlantını arkadaşlarınla paylaş. Değer gördüğünü hissetmen için doğru kelimeleri bulmaları gerekmez.",
-    "m4": "Dünyanın öbür ucundaki birine",
-    "m4_text": "Henüz tanışmıyorsunuz. Ama tek bir jest sizi bir anlığına bağlayabilir ve birinin gününü biraz daha aydınlık yapabilir."
+    "m4": "Babaanneye, öylesine",
+    "m4_text": "Bir bahaneye ya da uzun bir telefona gerek yok. Onu hatırladığını gösteren küçük bir işaret gününü biraz daha aydınlık yapabilir."
   },
   "app": {
     "title": "Bilgisayar başındayken ilgi elinin altında",
@@ -167,7 +167,7 @@
   "faq": {
     "title": "Herkesin paylaşacak biraz sevgisi var.",
     "q1": "Karşımdaki kişi benim olduğumu anlar mı?",
-    "a1": "Hayır. Sinyal isimsiz ve sözsüz gelir — yalnızca birinin onu düşündüğünün işareti olarak. Kimin kime ne gönderdiğini kaydetmiyoruz.",
+    "a1": "Sinyal isimsiz ve sözsüz gelir — yalnızca bir yakınının onu düşündüğünün işareti olarak. Ve onu yalnızca Love ID’sini paylaştığı kişiler gönderebilir.",
     "q2": "Kalbi satın almam gerekiyor mu?",
     "a2": "Bilgisayar uygulamasıyla başlayabilirsin. Heart, sinyalleri almanın ek ve dokunulabilir bir yolu olacak.",
     "q3": "“Dünyada biri” sinyalini kim alır?",
@@ -175,7 +175,7 @@
     "q4": "Bir sinyale cevap vermem gerekir mi?",
     "a4": "Hayır. O anın tadını çıkarman yeterli. İçinden geldiğinde biraz sevgiyi sen de aktarırsın.",
     "q5": "Herhangi bir cihaz bağlayabilir miyim?",
-    "a5": "Evet. Kendi cihazını, örneğin bir ESP32 ile, şimdiden yapıp <a href=\"/docs\">açık API</a> üzerinden bağlayabilirsin. Lamba, bileklik, oyuncak ve küçük ekran gibi hazır cihazlar planlarımızda; onları adım adım ekleyeceğiz.",
+    "a5": "Evet. Kendi cihazını, örneğin bir ESP32 ile, şimdiden yapıp <a href=\"/docs\">açık API</a> üzerinden bağlayabilirsin. Lamba, bileklik ve küçük ekran gibi hazır cihazlar planlarımızda; onları adım adım ekleyeceğiz.",
     "q6": "Ücreti ne kadar?",
     "a6": "Uygulama ücretsiz. Heart’ın fiyatını çıkışa yakın paylaşacağız.",
     "q7": "Uygulama kurulmazsa ne yapmalı?",
@@ -191,7 +191,7 @@
   "invite": {
     "title": "Sana bir Love ID gönderildi — lovearound",
     "og_title": "Sana lovearound’da bir Love ID gönderildi",
-    "description": "lovearound, “seni düşünüyorum” demenin sessiz bir yolu: tek dokunuş ve o kişiye sıcak bir sinyal ulaşır. Ona sinyal göndermek için bu Love ID’yi ekle. Senin olduğunu bilmeyecek.",
+    "description": "lovearound, “seni düşünüyorum” demenin sessiz bir yolu: tek dokunuş ve o kişiye sıcak bir sinyal ulaşır. Ona sinyal göndermek için bu Love ID’yi ekle.",
     "kicker": "Sana bir Love ID gönderildi",
     "no_code": "Bu bağlantıda Love ID yok. Tekrar göndermelerini iste.",
     "copy": "Bağlantıyı kopyala",
@@ -210,8 +210,8 @@
     "share_text": "Bilgisayarda aç",
     "web": "Web uygulaması",
     "tg": "Telegram’da",
-    "anon": "Sinyal isimsiz gelir: karşındaki kişi senin olduğunu bilmeyecek.",
-    "short": "Ekle, bu kişiye kalp gönderebilirsin. Senin olduğunu bilmeyecek.",
+    "anon": "Sinyal sözsüz gelir: yalnızca bir yakınının o kişiyi düşündüğünün işareti.",
+    "short": "Ekle, bu kişiye kalp gönderebilirsin.",
     "ios_sub": "beta, TestFlight ile",
     "ios_go": "Yükle",
     "ios_have": "Zaten var mı?",

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "lovearound — compartilhe amor",
-    "description": "Um pequeno gesto de carinho atravessa qualquer distância. Envie para alguém querido, ou para alguém que você ainda não conhece.",
+    "description": "Um pequeno gesto de carinho atravessa qualquer distância. Envie para a família e os amigos, e deixe que saibam que você pensa neles.",
     "og_title": "lovearound — compartilhe amor. Sinta-se conectado ao mundo."
   },
   "lang": {
@@ -17,28 +17,28 @@
     "open": "Abrir"
   },
   "hero": {
-    "kicker": "Uma plataforma por onde o amor encontra o caminho até as pessoas",
+    "kicker": "Um jeito tranquilo de mostrar aos seus que eles são importantes para você",
     "title": "Compartilhe amor.<br>Sinta-se conectado ao mundo.",
-    "lead": "Um pequeno gesto de carinho atravessa qualquer distância. Envie para alguém querido, ou para alguém que você ainda não conhece.",
-    "text": "lovearound é um jeito de enviar e receber sinais de amor. Cada pessoa tem seu próprio Love ID. O sinal anônimo chega a um computador ou dispositivo conectado e lembra com delicadeza: alguém pensou em você. Sem palavras, e sem precisar responder.",
+    "lead": "Um pequeno gesto de carinho atravessa qualquer distância. Envie para a família e os amigos, e deixe que saibam que você pensa neles.",
+    "text": "lovearound é um jeito de enviar e receber sinais de amor. Cada pessoa tem seu próprio Love ID. O sinal chega a um computador ou dispositivo conectado e lembra com delicadeza: alguém pensou em você. Sem palavras, e sem precisar responder.",
     "cta": "Baixar o app",
     "open": "Abrir o app",
     "how": "Como funciona"
   },
   "idea": {
     "title": "Mais amor.<br>Mais conexão entre nós.",
-    "lead": "Um pequeno gesto de carinho pode atravessar um quarto, uma cidade ou um oceano. Pode chegar a alguém próximo ou a alguém que você nunca viu, e fazer essa pessoa sentir que não está sozinha.",
-    "text": "Quem recebeu amor pode passá-lo adiante. Para um amigo, para a família, ou para alguém do outro lado do mundo. É assim que um gesto vira o começo de uma corrente que une cada vez mais pessoas.",
+    "lead": "Um pequeno gesto de carinho pode atravessar um quarto, uma cidade ou um oceano. Pode chegar a alguém próximo e fazer essa pessoa sentir que não está sozinha.",
+    "text": "Quem recebeu amor pode passá-lo adiante. Para um amigo, para a família, para qualquer pessoa que seja importante para você. É assim que um gesto vira o começo de uma corrente que une cada vez mais pessoas.",
     "why": "Por isso criamos o lovearound:",
     "why_text": "para que o amor viaje mais livremente pelo mundo, e a gente se sinta conectado com mais frequência."
   },
   "platform": {
     "title": "Envie do seu jeito. Sinta em todo lugar ao mesmo tempo.",
-    "analogy": "Seu Love ID funciona como um endereço de e-mail: é um só, mas as mensagens chegam ao mesmo tempo no celular e no notebook. Com os sinais é igual: chegam a tudo o que você conectou. Só que quem enviou nunca aparece.",
+    "analogy": "Seu Love ID funciona como um endereço de e-mail: é um só, mas as mensagens chegam ao mesmo tempo no celular e no notebook. Com os sinais é igual: chegam a tudo o que você conectou. O sinal não leva palavras: só um aviso de que alguém próximo está pensando em você.",
     "p1": "Envie do seu jeito",
     "p1_text": "Pelo app no computador, com um botão no seu próprio dispositivo ou ao acaso, para “Alguém por aí”.",
-    "p2": "Ninguém vai saber que foi você",
-    "p2_text": "O sinal chega sem nome. Não guardamos quem enviou o quê para quem, então quem recebe não tem como descobrir.",
+    "p2": "Sem palavras",
+    "p2_text": "O sinal não leva texto nem nome: só um aviso de que alguém próximo está pensando em você. Nada para ler, nada para responder.",
     "p3": "Sinta em todo lugar ao mesmo tempo",
     "p3_text": "Conecte ao seu Love ID quantos apps e dispositivos quiser. O sinal chega a todos no mesmo instante.",
     "p4": "Aberto para todos",
@@ -56,22 +56,22 @@
     "devices_label": "O que está conectado ao Love ID do Léo",
     "hint": "Ligue e desligue dispositivos: o sinal só chega aos que estão ligados.",
     "bubble": "♥ Alguém pensou em você",
-    "bubble_sub": "sem nome",
+    "bubble_sub": "sem palavras",
     "st_press": "Ana toca o coração ao lado de “Léo”",
-    "st_fly": "O sinal sai voando. O nome de quem enviou fica para trás",
-    "st_done": "O sinal acendeu tudo o que está conectado. O Léo nunca vai saber que foi a Ana.",
+    "st_fly": "O sinal sai voando: sem palavras, só um coração",
+    "st_done": "O sinal acendeu tudo o que está conectado. O Léo sente o carinho de alguém próximo.",
     "st_none": "O Léo não tem nada conectado, então o sinal não tem onde chegar. Ligue pelo menos um dispositivo."
   },
   "how": {
-    "title": "Love ID — seu endereço para o amor",
+    "title": "Love ID — seu link pessoal",
     "s1": "Pegue seu Love ID",
-    "s1_text": "Ele aparece no seu primeiro login. Compartilhe seu link para que outras pessoas possam te enviar amor.",
+    "s1_text": "Ele aparece no seu primeiro login. Compartilhe seu link com a família e os amigos para que possam adicionar você.",
     "s2": "Envie um sinal de carinho",
     "s2_text": "Escolha alguém próximo, ou “Alguém por aí”. Um toque pode deixar o dia de alguém um pouco mais leve.",
     "s3": "Sinta do <span style=\"white-space:nowrap\">seu jeito</span>",
     "s3_text": "Receba sinais no computador ou em um dispositivo conectado. Só sinta que alguém pensou em você.",
     "s4": "Passe adiante",
-    "s4_text": "Quando der vontade, envie seu próprio sinal para alguém próximo ou para alguém novo."
+    "s4_text": "Quando der vontade, envie seu próprio sinal para alguém que é importante para você."
   },
   "heart": {
     "kicker": "Sinta o amor bem perto",
@@ -81,10 +81,10 @@
     "badge": "EM BREVE",
     "h_name": "Heart",
     "h_h3": "Um coração na sua mesa",
-    "h_text": "Um coração aconchegante de tocar, sem celular nem computador: só Wi‑Fi e seu Love ID. Quando alguém te envia amor, ele brilha e pulsa suavemente. Toque nele, e o amor segue adiante.",
-    "h_li1": "Fica ao lado da cama ou na mesa de trabalho",
+    "h_text": "Uma pequena luminária em forma de coração, sem celular nem computador: só Wi‑Fi e seu Love ID. Quando alguém próximo pensa em você, ela brilha suavemente. Toque nela, e o carinho segue adiante.",
+    "h_li1": "Fica na sua mesa ou numa prateleira",
     "h_li2": "Funciona sozinho, sem celular",
-    "h_li3": "Recebe amor e envia com um toque",
+    "h_li3": "Recebe um sinal e envia outro com um toque",
     "p_name": "Pingente",
     "p_alt": "Um pingente de coração numa corrente fina",
     "p_h3": "Um coração para levar com você",
@@ -108,8 +108,8 @@
     "m2_text": "Antes de uma prova, uma entrevista ou uma apresentação. Um sinal discreto de apoio que não precisa de resposta.",
     "m3": "Para você mesmo, quando precisar de apoio",
     "m3_text": "Compartilhe seu link com os amigos. Eles não vão precisar achar as palavras certas para você se sentir cuidado.",
-    "m4": "Para alguém do outro lado do mundo",
-    "m4_text": "Vocês ainda não se conhecem. Mas um gesto pode conectar vocês por um instante e deixar o dia de alguém um pouco mais leve."
+    "m4": "Para a vovó, sem motivo especial",
+    "m4_text": "Não precisa de ocasião nem de uma ligação longa. Um pequeno sinal de que você se lembra dela pode deixar o dia dela um pouco mais leve."
   },
   "app": {
     "title": "Carinho à mão enquanto você está no computador",
@@ -167,7 +167,7 @@
   "faq": {
     "title": "Todo mundo tem um pouco de amor para compartilhar.",
     "q1": "A pessoa vai saber que fui eu?",
-    "a1": "Não. O sinal chega sem nome e sem palavras — só um sinal de que alguém pensou nela. Não guardamos registro de quem enviou o quê para quem.",
+    "a1": "O sinal chega sem nome e sem palavras — só um sinal de que alguém próximo pensou nela. E só quem recebeu o Love ID dela pode enviar.",
     "q2": "Preciso comprar o coração?",
     "a2": "Você pode começar com o app para computador. O Heart será uma forma extra, física, de receber sinais.",
     "q3": "Quem recebe um sinal de “Alguém por aí”?",
@@ -191,7 +191,7 @@
   "invite": {
     "title": "Te enviaram um Love ID — lovearound",
     "og_title": "Te enviaram um Love ID no lovearound",
-    "description": "lovearound é um jeito tranquilo de dizer “estou pensando em você”: um toque, e um sinal carinhoso chega à pessoa. Adicione este Love ID para enviar a ela. Ela não vai saber que foi você.",
+    "description": "lovearound é um jeito tranquilo de dizer “estou pensando em você”: um toque, e um sinal carinhoso chega à pessoa. Adicione este Love ID para enviar a ela.",
     "kicker": "Te enviaram um Love ID",
     "no_code": "Este link não tem um Love ID. Peça para enviarem de novo.",
     "copy": "Copiar link",
@@ -210,8 +210,8 @@
     "share_text": "Abrir no computador",
     "web": "App web",
     "tg": "No Telegram",
-    "anon": "O sinal chega sem nome: a pessoa não vai saber que foi você.",
-    "short": "Adiciona-o e poderás enviar corações a esta pessoa. Ela não vai saber que és tu.",
+    "anon": "O sinal chega sem palavras: só um aviso de que alguém próximo está pensando nessa pessoa.",
+    "short": "Adiciona-o e poderás enviar corações a esta pessoa.",
     "ios_sub": "beta, pelo TestFlight",
     "ios_go": "Instalar",
     "ios_have": "Já tens a app?",

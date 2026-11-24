@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "lovearound — share love",
-    "description": "A small gesture of care can cross any distance. Send it to someone you hold dear, or to someone you haven’t met yet.",
+    "description": "A small gesture of care can cross any distance. Send it to your family and friends, and let them know they’re on your mind.",
     "og_title": "lovearound — share love. Feel connected to the world."
   },
   "lang": {
@@ -17,28 +17,28 @@
     "open": "Open"
   },
   "hero": {
-    "kicker": "A platform that helps love find its way to people",
+    "kicker": "A quiet way to tell your people they matter to you",
     "title": "Share love.<br>Feel connected to the world.",
-    "lead": "A small gesture of care can cross any distance. Send it to someone you hold dear, or to someone you haven’t met yet.",
-    "text": "lovearound is a way to send and receive signals of love. Everyone has their own Love ID. An anonymous signal arrives on a connected computer or device and gently reminds you: someone thought of you. No words, and no need to reply.",
+    "lead": "A small gesture of care can cross any distance. Send it to your family and friends, and let them know they’re on your mind.",
+    "text": "lovearound is a way to send and receive signals of love. Everyone has their own Love ID. A signal arrives on a connected computer or device and gently reminds you: someone thought of you. No words, and no need to reply.",
     "cta": "Download the app",
     "open": "Open the app",
     "how": "How it works"
   },
   "idea": {
     "title": "More love.<br>More connection between us.",
-    "lead": "A small gesture of care can cross a room, a city or an ocean. It can reach someone close or someone you’ve never met, and let them feel they’re not alone.",
-    "text": "Once you’ve received love, you can pass it on. To a friend, to family, or to someone on the other side of the world. That’s how one gesture becomes the start of a chain that connects more and more people.",
+    "lead": "A small gesture of care can cross a room, a city or an ocean. It reaches someone close to you and lets them feel they’re not alone.",
+    "text": "Once you’ve received love, you can pass it on. To a friend, to family, to anyone who matters to you. That’s how one gesture becomes the start of a chain that connects more and more people.",
     "why": "That’s why we’re building lovearound:",
     "why_text": "so love can travel more freely around the world, and we can feel connected to each other more often."
   },
   "platform": {
     "title": "Send it your way. Feel it everywhere at once.",
-    "analogy": "Your Love ID works like an email address: there’s only one, yet mail lands on your phone and your laptop at the same time. Signals work the same way: they reach everything you’ve connected. Only the sender is never shown.",
+    "analogy": "Your Love ID works like an email address: there’s only one, yet mail lands on your phone and your laptop at the same time. Signals work the same way: they reach everything you’ve connected. A signal carries no words: only a sign that someone close is thinking of you.",
     "p1": "Send it your way",
     "p1_text": "From the app on your computer, with a button on your own device, or at random, to “Someone out there”.",
-    "p2": "No one will know it was you",
-    "p2_text": "A signal arrives without a name. We don’t keep who sent what to whom, so the recipient can never find out.",
+    "p2": "No words needed",
+    "p2_text": "A signal has no text and no name on it: just a sign that someone close is thinking of you. Nothing to read, nothing to answer.",
     "p3": "Feel it everywhere at once",
     "p3_text": "Connect as many apps and devices to your Love ID as you like. A signal reaches all of them at the same moment.",
     "p4": "Open to everyone",
@@ -56,22 +56,22 @@
     "devices_label": "What’s connected to Sam’s Love ID",
     "hint": "Switch devices on and off: the signal only reaches the ones that are on.",
     "bubble": "♥ Someone thought of you",
-    "bubble_sub": "no name attached",
+    "bubble_sub": "no words needed",
     "st_press": "Mia taps the heart next to “Sam”",
-    "st_fly": "The signal flies off. The sender’s name stays behind",
-    "st_done": "The signal lit up everything that’s connected. Sam will never know it was Mia.",
+    "st_fly": "The signal flies off: no words, just a heart",
+    "st_done": "The signal lit up everything that’s connected. Sam can feel that someone close cares.",
     "st_none": "Sam has nothing connected, so the signal has nowhere to land. Switch on at least one device."
   },
   "how": {
-    "title": "Love ID — your address for love",
+    "title": "Love ID — your personal link",
     "s1": "Get your Love ID",
-    "s1_text": "It appears the first time you sign in. Share your link so others can send you love.",
+    "s1_text": "It appears the first time you sign in. Share your link with family and friends so they can add you.",
     "s2": "Send a sign of care",
     "s2_text": "Pick someone close, or “Someone out there”. One tap can make someone’s day a little brighter.",
     "s3": "Feel it <span style=\"white-space:nowrap\">your way</span>",
     "s3_text": "Receive signals on your computer or a connected device. Just feel that someone thought of you.",
     "s4": "Pass it on",
-    "s4_text": "Whenever you feel like it, send your own signal to someone close or someone new."
+    "s4_text": "Whenever you feel like it, send your own signal to someone you care about."
   },
   "heart": {
     "kicker": "Feel love close by",
@@ -81,10 +81,10 @@
     "badge": "SOON",
     "h_name": "Heart",
     "h_h3": "A heart on your desk",
-    "h_text": "A warm heart you can hold, with no phone or computer needed — just Wi‑Fi and your Love ID. When someone sends you love, it softly glows and pulses. Touch it, and the love goes on.",
-    "h_li1": "Sits by your bed or on your desk",
+    "h_text": "A small heart-shaped lamp that needs no phone or computer — just Wi‑Fi and your Love ID. When someone close thinks of you, it glows softly. Tap it to pass the care on.",
+    "h_li1": "Sits on your desk or on a shelf",
     "h_li2": "Works on its own, no phone needed",
-    "h_li3": "Receives love and sends it with a touch",
+    "h_li3": "Receives a signal and sends one with a tap",
     "p_name": "Pendant",
     "p_alt": "A heart pendant on a fine chain",
     "p_h3": "A heart to carry with you",
@@ -97,7 +97,7 @@
   },
   "devices": {
     "diy": "Don’t want to wait? Build your own device",
-    "diy_text": "lovearound is an open platform: the API is documented, the apps are open source, and anyone can build their own device or app for Love ID. A lamp, a toy or a small screen on an ESP32 that responds to your Love ID. A step-by-step guide — from the first wires to the first signal.",
+    "diy_text": "lovearound is an open platform: the API is documented, the apps are open source, and anyone can build their own device or app for Love ID. A lamp or a small screen on an ESP32 that responds to your Love ID. A step-by-step guide — from the first wires to the first signal.",
     "diy_go": "How to build it →"
   },
   "moments": {
@@ -108,8 +108,8 @@
     "m2_text": "Before an exam, an interview or a performance. A quiet sign of support that needs no reply.",
     "m3": "To yourself, when you need support",
     "m3_text": "Share your link with friends. They don’t have to find the right words to let you feel cared for.",
-    "m4": "To someone on the other side of the world",
-    "m4_text": "You haven’t met yet. But one gesture can connect you for a moment and make someone’s day a little brighter."
+    "m4": "To Grandma, just because",
+    "m4_text": "No occasion and no long call needed. A small sign that you remember her can make her day a little brighter."
   },
   "app": {
     "title": "Care at hand while you’re at your computer",
@@ -167,7 +167,7 @@
   "faq": {
     "title": "Everyone has a little love to share.",
     "q1": "Will the person know it’s me?",
-    "a1": "No. The signal arrives with no name and no words — just a sign that someone thought of them. We don’t keep a record of who sent what to whom.",
+    "a1": "The signal arrives with no name and no words — just a sign that someone close thought of them. And only people they’ve shared their Love ID with can send one.",
     "q2": "Do I need to buy the heart?",
     "a2": "You can start with the desktop app. Heart will be an extra, physical way to receive signals.",
     "q3": "Who gets a “Someone out there” signal?",
@@ -175,7 +175,7 @@
     "q4": "Do I have to reply to a signal?",
     "a4": "No. You can simply take in the moment. And when you feel like it, send a little love on.",
     "q5": "Can I connect any device?",
-    "a5": "Yes. You can already build your own device, for example on an ESP32, and connect it through the <a href=\"/docs\">open API</a>. Ready-made devices like lamps, bracelets, toys and small screens are in our plans, and we’ll add them step by step.",
+    "a5": "Yes. You can already build your own device, for example on an ESP32, and connect it through the <a href=\"/docs\">open API</a>. Ready-made devices like lamps, bracelets and small screens are in our plans, and we’ll add them step by step.",
     "q6": "How much does it cost?",
     "a6": "The app is free. We’ll share Heart’s price closer to launch.",
     "q7": "What if the app won’t install?",
@@ -191,7 +191,7 @@
   "invite": {
     "title": "You’ve been sent a Love ID — lovearound",
     "og_title": "You’ve been sent a Love ID on lovearound",
-    "description": "lovearound is a quiet way to say “I’m thinking of you”: one tap, and a warm signal reaches the person. Add this Love ID to send them one. They won’t know it’s you.",
+    "description": "lovearound is a quiet way to say “I’m thinking of you”: one tap, and a warm signal reaches the person. Add this Love ID to send them one.",
     "kicker": "You’ve been sent a Love ID",
     "no_code": "There’s no Love ID in this link. Ask for it to be sent again.",
     "copy": "Copy link",
@@ -210,8 +210,8 @@
     "share_text": "Open on a computer",
     "web": "Web app",
     "tg": "In Telegram",
-    "anon": "The signal arrives without a name: the person won’t know it was you.",
-    "short": "Add it and you can send this person hearts. They won't know it's you.",
+    "anon": "The signal arrives without words: just a sign that someone close is thinking of them.",
+    "short": "Add it and you can send this person hearts.",
     "ios_sub": "beta, via TestFlight",
     "ios_go": "Install",
     "ios_have": "Already have it?",
