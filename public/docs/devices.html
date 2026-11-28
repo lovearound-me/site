@@ -68,6 +68,7 @@
             <li class="grp"><a href="#setup">Setup over Bluetooth</a>
               <ul>
                 <li><a href="#setup-order">The order</a></li>
+                <li><a href="#setup-phone">Wi‑Fi or through the phone</a></li>
                 <li><a href="#setup-again">Setting up again</a></li>
                 <li><a href="#setup-firmware">Notes for firmware</a></li>
               </ul>
@@ -139,6 +140,7 @@
         <tr><td><code>model</code></td><td>string</td><td>Optional, up to 32 characters. Shown on the owner’s card, never anywhere else</td></tr>
         <tr><td><code>firmware</code></td><td>string</td><td>Optional, up to 32 characters. Shown on the card</td></tr>
         <tr><td><code>wants</code></td><td>string[]</td><td><code>receive</code> and/or <code>send</code>. Read only once, at <a href="#setup">setup over Bluetooth</a>, and becomes the device’s <code>requested_capabilities</code>: the most it can ever be allowed. Later <code>about</code>s never widen it; only setting up again does</td></tr>
+        <tr><td><code>links</code></td><td>string[]</td><td>The ways the device can talk: <code>server</code> (its own Wi‑Fi) and/or <code>phone</code> (through the owner’s phone). Optional. Without it the apps go by how the device was found: a board in Wi‑Fi setup is <code>server</code>, a toy with the <a href="#gatt">toy service</a> is <code>phone</code>. With both, the app asks <a href="#setup-phone">which one</a></td></tr>
         <tr><td><code>parts</code></td><td>object[]</td><td>Needed, at most 8</td></tr>
         <tr><td><code>parts[].id</code></td><td>string</td><td><code>[a-z0-9_]{1,16}</code>, unique in the device. Defaults to <code>kind</code>, so two parts of one kind need ids of their own</td></tr>
         <tr><td><code>parts[].kind</code></td><td>string</td><td>One of the <a href="#catalog">catalog</a></td></tr>
@@ -311,6 +313,7 @@
       <li><b>Setup mode.</b> A new board, or one after a long press, is in setup mode for 5 minutes and advertises as <code>LoveAround-XXXX</code>. Espressif’s <code>proto-ver</code> reports security version 2. The app lists only boards very near.</li>
       <li><b><code>about</code> and the confirm screen.</b> The app reads <code>about</code> from the custom endpoint <code>lovearound-about</code> and shows what the device wants (receive, send) before anything is made.</li>
       <li><b>Wi‑Fi first.</b> The app sends the Wi‑Fi name and password, and the board reports that it’s connected; keep provisioning running after that (<code>disableAutoStop</code>). Only then does the app create the device, <code>POST /v1/devices { "name", "setup": "bluetooth", "capabilities", "tz" }</code> → <code>201</code> <code>{device, token}</code>, and send the token through the custom endpoint <code>lovearound-token</code>. A wrong password leaves nothing on the account. The device counts as paired: its <code>wants</code> become <code>requested_capabilities</code>, and it can only be narrowed from there. Its <code>book</code> starts as <code>close</code>.</li>
+      <li><b>Or the phone.</b> For a board that lists both <code>links</code>, the app first asks «Wi‑Fi or through this phone». Through the phone, see <a href="#setup-phone">below</a>.</li>
       <li><b>Bluetooth off, then the server.</b> Free Bluetooth before the board’s first TLS connection. The app waits for that first connection and deletes the device if it never comes.</li>
       <li><b>From then on</b> the board works as in <a href="#wifi">Over Wi‑Fi</a>.</li>
     </ol>
@@ -320,6 +323,15 @@
       <li>A <code>401</code> from the server wipes the token and the values: the device was disconnected.</li>
       <li>A board without Bluetooth (ESP32‑S2) uses <a href="/docs/rest#pairing">pairing by code</a> instead.</li>
     </ul>
+
+    <h3 id="setup-phone">Wi‑Fi or through the phone</h3>
+    <p>A board that can do both, such as one with a screen and buttons, lists <code>"links": ["server", "phone"]</code>. When the owner picks the phone:</p>
+    <ol>
+      <li>The app writes <code>{"link":"phone"}</code> to <code>lovearound-token</code> instead of a token; the board answers <code>{"ok":true}</code>. No Wi‑Fi is sent. (One endpoint for both on purpose: phones cache a board’s GATT table by its address, and a newly added endpoint may never show up.)</li>
+      <li>The board keeps the choice, stops provisioning and restarts as a <a href="#ble">Bluetooth-only toy</a>: the same <a href="#gatt">service</a>, under the same name <code>LoveAround-XXXX</code>, but from its own static random address, not the setup one. Bonding is open on that first boot.</li>
+      <li>The app bonds and goes on as for any toy: <code>POST /v1/devices { "name", "setup": "bluetooth", "link": "phone", "capabilities", "tz" }</code>, then <code>PUT /v1/devices/{id}/about</code>.</li>
+    </ol>
+    <p>The way is set when the device is made and never changes on the server. To switch, the app makes a new device and deletes the old one; the board is set up again from setup mode.</p>
 
     <h3 id="setup-again">Setting up again</h3>
     <p>A new Wi‑Fi password, a new place: the owner puts the board into setup mode and the app runs the same steps, but asks for a new token for the same device with <a href="/docs/rest#post-device-token"><code>POST /v1/devices/{id}/token</code></a>. The device keeps its name, values and quiet hours. The old token stops at once, and the server forgets what the device applied: it reports its <code>rev</code> again after the first <code>settings</code>.</p>
@@ -353,6 +365,9 @@
         <tr><td><code>preview</code></td><td>phone&nbsp;→&nbsp;toy</td><td><b>Try it</b></td></tr>
         <tr><td><code>press</code></td><td>toy&nbsp;→&nbsp;phone</td><td><code>{ "type": "press", "part": "btn", "gesture": "press" }</code>; <code>gesture</code> is <code>press</code>, <code>long_press</code> or <code>double_press</code></td></tr>
         <tr><td><code>forget</code></td><td>phone&nbsp;→&nbsp;toy</td><td>Erase the bond and the values, see <a href="#bonding">below</a></td></tr>
+        <tr><td><code>contacts</code></td><td>phone&nbsp;→&nbsp;toy</td><td>For a toy with <code>send</code> and a screen: <code>{ "type": "contacts", "contacts": [ { "id", "label", "close", "rgb": "#RRGGBB" } ] }</code>. The people the device’s <code>book</code> shows, as <code>GET /v1/contacts</code> gives them to a device; at most 40, labels cut to 24 characters. Sent when the list changes</td></tr>
+        <tr><td><code>signal</code></td><td>toy&nbsp;→&nbsp;phone</td><td>A heart picked on the toy’s screen: <code>{ "type": "signal", "to": { "contact": "…" } }</code> or <code>"to": { "anyone": true }</code>. The phone sends it as <code>POST /v1/events</code></td></tr>
+        <tr><td><code>sent</code></td><td>phone&nbsp;→&nbsp;toy</td><td>How that went: <code>{ "type": "sent", "code": 202 }</code>, the HTTP status (<code>202</code> sent, <code>429</code> the hour’s heart to anyone is spent, <code>404</code>, <code>400</code>, <code>403</code>), or <code>-1</code> with no network</td></tr>
       </tbody>
     </table></div>
     <p>Battery goes through the standard Battery Service (<code>0x180F</code>), not this one.</p>
@@ -367,7 +382,7 @@
     <h3 id="bonding">Bonding and <code>forget</code></h3>
     <ul>
       <li>Every characteristic needs an encrypted, bonded link. A phone that isn’t the bonded one gets nothing.</li>
-      <li><code>forget</code> and a factory reset erase the bond and the values, and on a board with Wi‑Fi also the token and the Wi‑Fi.</li>
+      <li><code>forget</code> and a factory reset erase the bond and the values, and on a board with Wi‑Fi also the token, the Wi‑Fi and the way it picked: it comes back in setup mode.</li>
       <li>iOS can’t unpair from an app. So <b>Disconnect</b> in the app sends <code>forget</code> when the toy is near, and says how to reset it when it isn’t.</li>
     </ul>
 
