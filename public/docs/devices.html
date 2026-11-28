@@ -332,6 +332,13 @@
       <li>The app bonds and goes on as for any toy: <code>POST /v1/devices { "name", "setup": "bluetooth", "link": "phone", "capabilities", "tz" }</code>, then <code>PUT /v1/devices/{id}/about</code>.</li>
     </ol>
     <p>The way is set when the device is made and never changes on the server. To switch, the app makes a new device and deletes the old one; the board is set up again from setup mode.</p>
+    <p><b>Which to pick.</b> Through the phone suits receiving best; sending from the device depends on the phone’s system:</p>
+    <ul>
+      <li><b>iPhone, receiving</b> works with the app closed: iOS hands the lovearound notification to the toy by itself (<a href="#hearts">ANCS</a>).</li>
+      <li><b>iPhone, sending</b> (<code>press</code>, <code>signal</code>) needs the app alive. In the background iOS wakes it for Bluetooth, and that works, sometimes with a delay. After the app is swiped away, or after a restart before it is opened, iOS doesn’t wake it, and the press is lost: the toy says the phone isn’t near.</li>
+      <li><b>Android</b> has no ANCS, so receiving and sending both depend on the app staying alive in the background. Battery savers and makers’ task killers break that.</li>
+    </ul>
+    <p>For a device that sends often, pick Wi‑Fi. Through the phone is mainly for receiving, with sending as a bonus while the app is alive.</p>
 
     <h3 id="setup-again">Setting up again</h3>
     <p>A new Wi‑Fi password, a new place: the owner puts the board into setup mode and the app runs the same steps, but asks for a new token for the same device with <a href="/docs/rest#post-device-token"><code>POST /v1/devices/{id}/token</code></a>. The device keeps its name, values and quiet hours. The old token stops at once, and the server forgets what the device applied: it reports its <code>rev</code> again after the first <code>settings</code>.</p>
