@@ -22,6 +22,7 @@
       <a class="nl" href="/docs">Overview</a>
       <a class="nl" href="/docs/rest">REST</a>
       <a class="nl" href="/docs/ws" aria-current="page">WebSocket</a>
+      <a class="nl" href="/docs/devices">Devices</a>
       <a class="nl" href="/docs/esp32">ESP32</a>
       <a class="btn sm" href="/#w-get">Download</a>
     </nav>
@@ -49,6 +50,8 @@
                 <li><a href="#ready"><code>ready</code></a></li>
                 <li><a href="#event"><code>event</code></a></li>
                 <li><a href="#sync"><code>sync</code></a></li>
+                <li><a href="#settings"><code>settings</code></a></li>
+                <li><a href="#preview"><code>preview</code></a></li>
                 <li><a href="#ping"><code>ping</code> <small>frame</small></a></li>
                 <li><a href="#close"><code>close</code> <small>frame</small></a></li>
               </ul>
@@ -71,6 +74,7 @@
             </li>
           </ul>
         </li>
+        <li><a href="/docs/devices">Device protocol</a></li>
         <li><a href="/docs/esp32">ESP32 toy</a></li>
       </ul>
     </nav>
@@ -87,7 +91,7 @@
   <article class="doc">
 
     <h2 id="connect">Connecting</h2>
-    <div class="ep" id="ws-stream" style="margin-top:0"><span class="m ws">WS</span><code>/v1/stream</code><span class="who dev">device, receive permission</span></div>
+    <div class="ep" id="ws-stream" style="margin-top:0"><span class="m ws">WS</span><code>/v1/stream</code><span class="who dev">device</span></div>
     <pre><code>wss://api.lovearound.me/v1/stream
 Authorization: Bearer dev_…</code></pre>
     <p>The token goes in a header, as with REST. The browser’s built-in <code>WebSocket</code> can’t set headers, so connect from your own program: on a board, in Node, Python, on a phone.</p>
@@ -109,7 +113,6 @@ Authorization: Bearer dev_…</code></pre>
       <tbody>
         <tr><td><code>101</code></td><td>The connection is open; <code>ready</code> comes next</td></tr>
         <tr><td><code>401</code></td><td>The token is wrong, the device was disconnected, or the ticket was already used or ran out. Reconnecting with the same token won’t help</td></tr>
-        <tr><td><code>403</code></td><td>The device doesn’t receive right now: <code>receive</code> is off. Keep the token, it can be switched back on in an app. Try again in a few minutes</td></tr>
         <tr><td><code>503</code></td><td>The server is updating or couldn’t read the device’s settings. Connect again in a couple of seconds</td></tr>
       </tbody>
     </table></div>
@@ -145,7 +148,15 @@ Authorization: Bearer dev_…</code></pre>
     <h3 id="sync"><code>sync</code></h3>
     <pre><code>{ &quot;type&quot;: &quot;sync&quot;, &quot;what&quot;: &quot;contacts&quot; }</code></pre>
     <p>The contact list changed: someone was added, renamed, recolored, moved or removed, or another account was merged into this one. If your device shows the list, reload it with <a href="/docs/rest#get-contacts"><code>GET /v1/contacts</code></a>. If it doesn’t, you can skip this message.</p>
-    <p>A device without the <code>send</code> permission gets <code>sync</code> too, but can’t read the list: just skip it.</p>
+    <p>Only apps and devices with the <code>send</code> permission get it: one without has no list to read. The apps also get <code>{ "type": "sync", "what": "devices" }</code> when a device’s settings, battery or what it’s made of change.</p>
+
+    <h3 id="settings"><code>settings</code></h3>
+    <pre><code>{ &quot;type&quot;: &quot;settings&quot;, &quot;rev&quot;: &quot;r3f9a0c1d2e&quot;, &quot;name&quot;: &quot;Ring in the hall&quot;, &quot;values&quot;: { … }, … }</code></pre>
+    <p>A device’s settings, always the whole thing: after <code>ready</code> and after every change. Only for a device that has told the server what it is made of. Apply them, keep them, and report the <code>rev</code> over REST. The fields are in <a href="/docs/devices#settings-msg">Device protocol</a>.</p>
+
+    <h3 id="preview"><code>preview</code></h3>
+    <pre><code>{ &quot;type&quot;: &quot;preview&quot; }</code></pre>
+    <p>The owner tapped <b>Try it</b> on the device’s card: show one heart as the device is set now. It is not a signal, and nobody sent it but the owner. See <a href="/docs/devices#preview">Device protocol</a>.</p>
 
     <h3 id="ping"><code>ping</code> <small>frame</small></h3>
     <p>Every 25 seconds. WebSocket libraries answer it with <code>pong</code> on their own.</p>
@@ -154,7 +165,7 @@ Authorization: Bearer dev_…</code></pre>
     <p>The server closes the stream itself, with no code or reason, when:</p>
     <ul>
       <li>the device was disconnected in the app;</li>
-      <li>the device’s settings changed (what it does, quiet hours, “someone out there”): it reconnects with the new ones;</li>
+      <li>the device’s settings changed (what it does, quiet hours, “someone out there”): it reconnects with the new ones. A change of its light, sound or button doesn’t close the stream: a <a href="#settings"><code>settings</code></a> message comes instead;</li>
       <li>the device got a new token: the old one then gets <code>401</code>;</li>
       <li>the account was deleted, or merged into another (the devices move there and reconnect);</li>
       <li>the server is updating: everyone moves to the new version.</li>
@@ -180,7 +191,7 @@ Authorization: Bearer dev_…</code></pre>
       <li><b>Ping.</b> Answer the server’s <a href="#ping"><code>ping</code></a> and send <a href="#client-ping">your own</a> every 30 seconds.</li>
       <li><b>Reconnecting.</b> Connections drop: Wi‑Fi goes away, the server updates. Reconnect with a pause: start at one second and double it up to a minute; after <code>ready</code>, reset it to one second.</li>
       <li><b>When not to reconnect.</b> If connecting returns <code>401</code>, the token is wrong or the device was disconnected: forget the token and tell the owner instead of hammering the server.</li>
-      <li><b>When to wait longer.</b> <code>403</code> means the device may not receive now. The token still works: try again every few minutes, and it comes back once <code>receive</code> is switched on.</li>
+      <li><b><code>receive</code> off is not an error.</b> A device whose <code>receive</code> is switched off connects as usual and gets its <code>settings</code> and <code>sync</code>, but no signals. It starts getting them again once <code>receive</code> is back on: the server drops the stream, and the device reconnects with the new rights.</li>
     </ul>
 
     <h2 id="many">Several connections</h2>
@@ -231,9 +242,6 @@ function connect() {
       console.error(&quot;the token doesn't work: the device was disconnected&quot;);
       process.exit(1);
     }
-    if (/Unexpected server response: 403/.test(err.message)) {
-      delay = 300_000; // receive is off for now: try again in 5 minutes
-    }
     // an error is always followed by close
   });
 
@@ -275,8 +283,6 @@ async def main():
         except InvalidStatus as e:
             if e.response.status_code == 401:
                 raise SystemExit(&quot;the token doesn't work: the device was disconnected&quot;)
-            if e.response.status_code == 403:
-                delay = 300  # receive is off for now: try again in 5 minutes
         except (OSError, websockets.WebSocketException):
             pass  # dropped, 503, no network: just reconnect
         await asyncio.sleep(delay)
@@ -285,7 +291,7 @@ async def main():
 asyncio.run(main())</code></pre>
     <p>An example for a board is in <a href="/docs/esp32">ESP32 toy</a>.</p>
 
-    <div class="next"><a href="/docs/rest">← REST API</a><a href="/docs/esp32">ESP32 toy →</a></div>
+    <div class="next"><a href="/docs/rest">← REST API</a><a href="/docs/devices">Device protocol →</a></div>
   </article>
 </main>
 </div>

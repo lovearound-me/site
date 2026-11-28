@@ -1,4 +1,5 @@
 // The docs menu: marks the section on screen, and opens and closes on a phone.
+
 (() => {
   const nav = document.getElementById('dnav');
   const toggle = document.querySelector('.dnav-toggle');
@@ -35,6 +36,30 @@
   nav.addEventListener('click', (e) => { if (e.target.closest('a') && isOpen()) open(false, false); });
   narrow.addEventListener('change', () => { if (!narrow.matches && isOpen()) open(false, false); });
 
+  // ---- groups fold; the one with the section on screen opens ----
+  const groups = [...nav.querySelectorAll('.dnav-sub > li.grp')].filter((li) => li.querySelector('ul'));
+  const fold = (li, yes) => {
+    li.classList.toggle('open', yes);
+    li.querySelector('.dnav-fold').setAttribute('aria-expanded', String(yes));
+  };
+  for (const li of groups) {
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'dnav-fold';
+    b.setAttribute('aria-label', 'Sections: ' + li.querySelector('a').textContent.trim());
+    b.setAttribute('aria-expanded', 'false');
+    // Opened by hand: stays open while reading elsewhere; closed by hand: forgets that.
+    b.addEventListener('click', () => { const yes = !li.classList.contains('open'); li.dataset.kept = yes ? '1' : ''; fold(li, yes); });
+    li.prepend(b);
+  }
+  function unfoldFor(a) {
+    const here = a && a.closest('li.grp');
+    for (const li of groups) {
+      li.classList.toggle('has-on', li === here);
+      fold(li, li === here || li.dataset.kept === '1');
+    }
+  }
+
   // ---- the section on screen ----
   const items = [...nav.querySelectorAll('.here a[href^="#"]')]
     .map((a) => [a, document.getElementById(decodeURIComponent(a.hash.slice(1)))])
@@ -47,6 +72,7 @@
     if (item === current) return;
     if (current) { current[0].classList.remove('on'); current[0].removeAttribute('aria-current'); }
     current = item;
+    unfoldFor(item && item[0]);
     if (now) now.textContent = item ? label(item[0]) : '';
     if (!item) return;
     const [a] = item;

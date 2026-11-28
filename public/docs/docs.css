@@ -16,7 +16,7 @@
 .dnav small{font-size:12px;font-weight:600;color:var(--muted)}
 .dnav code{font:600 13px/1.35 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--ink);overflow-wrap:anywhere}
 .dm{flex:none;min-width:46px;padding:2px 0;border-radius:6px;text-align:center;font:800 10px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.02em;color:#fff;background:var(--muted)}
-.dm.get{background:#4F7A5C}.dm.post{background:var(--accent)}.dm.patch{background:#9A6B2F}.dm.delete{background:#6B4A6E}.dm.ws{background:#3F6487}
+.dm.get{background:#4F7A5C}.dm.put{background:#2F6E73}.dm.post{background:var(--accent)}.dm.patch{background:#9A6B2F}.dm.delete{background:#6B4A6E}.dm.ws{background:#3F6487}
 .dnav a.on{background:var(--pink);color:var(--ink)}
 .dnav-sub > li.grp > a.on{color:var(--accent)}
 .dnav a.on code{color:var(--accent-hover)}
@@ -24,6 +24,17 @@
 .dnav-toggle,.dnav-close{font-family:inherit;cursor:pointer;color:var(--ink)}
 .dnav-toggle svg,.dnav-close svg{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round}
 .dnav-label{display:none}
+
+/* PUT has no colour in style.css */
+.m.put{background:#2F6E73}
+
+/* parts catalog: the settings column is a list */
+.doc table.catalog td:last-child{line-height:1.9}
+.doc table.catalog td:first-child{width:1%}
+.doc table.catalog .dflt{color:var(--muted);white-space:nowrap}
+
+/* four "where next" cards: two by two */
+@media (min-width:700px){.cards.four{grid-template-columns:repeat(2,1fr)}}
 
 /* colors table */
 .doc table.colors td i{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:10px;vertical-align:-2px}
@@ -49,3 +60,29 @@
   .doc h2,.doc h3[id],.ep{scroll-margin-top:calc(var(--top-h,67px) + 64px)}
 }
 @media (prefers-reduced-motion:reduce){.dnav,.dnav-open .dnav{transition:none}}
+
+/* The menu is a folding tree. A chevron on every page; the open page shows its
+   sections, and only the group with the section on screen is unfolded
+   (the others fold, a tap opens them). */
+.dnav-pages > li > a{gap:0;padding:8px 12px;font-size:15px;font-weight:800;color:var(--ink)}
+.dnav-pages > li > a::before,
+.dnav-fold::before{content:"";position:absolute;width:6px;height:6px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .15s ease}
+.dnav-pages > li > a::before{position:static;flex:none;margin:0 12px 0 1px;color:var(--muted)}
+.dnav-pages > li > a[aria-current="page"]{color:var(--accent)}
+.dnav-pages > li > a[aria-current="page"]::before{transform:translateY(-2px) rotate(45deg);color:var(--accent)}
+.dnav-pages .dnav-sub{margin:2px 0 12px 20px}
+.dnav-sub a{padding:6px 12px;font-size:14px;font-weight:500;color:var(--body)}
+.dnav-sub > li{position:relative}
+.dnav-sub > li.grp > a{margin-top:0;padding-left:30px;font-size:14px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--ink)}
+.dnav-sub > li:not(.grp) > a{padding-left:30px}
+.dnav-sub > li.grp > ul{margin-left:18px;padding-left:0;border-left:1px solid var(--line)}
+.dnav-sub > li.grp > ul a{padding-left:12px}
+.dnav-sub > li.grp:not(.open) > ul{display:none}
+.dnav-fold{display:block;position:absolute;left:0;top:0;width:30px;height:32px;padding:0;border:0;border-radius:8px;background:none;color:var(--muted);cursor:pointer}
+.dnav-fold::before{left:11px;top:12px}
+li.grp.open > .dnav-fold::before{transform:rotate(45deg);top:10px}
+@media (hover:hover){.dnav-fold:hover{background:var(--well);color:var(--ink)}}
+.dnav-sub a.on,
+.dnav-sub > li.grp > a.on{background:var(--pink);color:var(--accent);font-weight:700}
+.dnav-sub > li.grp.has-on > a{color:var(--accent)}
+@media (prefers-reduced-motion:reduce){.dnav-pages > li > a::before,.dnav-fold::before{transition:none}}

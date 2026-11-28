@@ -22,6 +22,7 @@
       <a class="nl" href="/docs" aria-current="page">Overview</a>
       <a class="nl" href="/docs/rest">REST</a>
       <a class="nl" href="/docs/ws">WebSocket</a>
+      <a class="nl" href="/docs/devices">Devices</a>
       <a class="nl" href="/docs/esp32">ESP32</a>
       <a class="btn sm" href="/#w-get">Download</a>
     </nav>
@@ -46,6 +47,7 @@
         </li>
         <li><a href="/docs/rest">REST API</a></li>
         <li><a href="/docs/ws">WebSocket</a></li>
+        <li><a href="/docs/devices">Device protocol</a></li>
         <li><a href="/docs/esp32">ESP32 toy</a></li>
       </ul>
     </nav>
@@ -73,7 +75,8 @@
         <tr><td><b>Love ID</b></td><td>Your 10-character code, for example <code>GSSV7-A33HN</code>, and the link with it: <code>lovearound.me/i/GSSV7-A33HN</code>. People add you to their list with it.</td></tr>
         <tr><td><b>Contact</b></td><td>A person in your list. It has an <code>id</code>, plus a label and a color only you can see. The person isn’t told they were added.</td></tr>
         <tr><td><b>Close one</b></td><td>A contact marked as close: a circle at the top of the apps. Up to 12.</td></tr>
-        <tr><td><b>Device</b></td><td>A toy, lamp or script connected to your account with its own token. It can receive signals, send them, or both.</td></tr>
+        <tr><td><b>Device</b></td><td>A toy, lamp or script connected to your account with its own token, or a Bluetooth toy that goes through your phone. It can receive signals, send them, or both.</td></tr>
+        <tr><td><b>Part</b></td><td>What a device is made of: a light, a sound, a button. A device lists its parts, and the apps draw its settings from them. See <a href="/docs/devices">Device protocol</a>.</td></tr>
         <tr><td><b>Event</b></td><td>What the server delivers to online devices. There is one type for now: <code>signal</code>.</td></tr>
         <tr><td><b>Stream</b></td><td>The WebSocket a device keeps open to receive events.</td></tr>
         <tr><td><b>Telegram bot</b></td><td><a href="https://t.me/LoveAroundMeBot">@LoveAroundMeBot</a>, one more app of the same account. Signals to you also show up in your chat with it.</td></tr>
@@ -128,7 +131,7 @@
       <thead><tr><th>Who</th><th>Token</th><th>What it can do</th></tr></thead>
       <tbody>
         <tr><td><b>App</b></td><td>A Firebase ID token from signing in to lovearound</td><td>Everything: account, contact list, devices, signals</td></tr>
-        <tr><td><b>Device</b></td><td><code>dev_</code> followed by 32 letters and digits. Made in any lovearound app: <b>Settings → Devices → Connect a device</b>, or by <a href="/docs/rest#pairing">pairing by code</a></td><td>Send signals and read the contact list (if allowed to <code>send</code>), receive signals (if allowed to <code>receive</code>). Anything else is <code>403</code></td></tr>
+        <tr><td><b>Device</b></td><td><code>dev_</code> followed by 32 letters and digits. Made in any lovearound app: <b>Settings → Devices → Connect a device</b>, by <a href="/docs/rest#pairing">pairing by code</a>, or by <a href="/docs/devices#setup">setup over Bluetooth</a></td><td>Send signals and read the contact list (if allowed to <code>send</code>), receive signals (if allowed to <code>receive</code>). Anything else is <code>403</code></td></tr>
       </tbody>
     </table></div>
     <p>Your own device or script only needs a device token. It is shown once. If it leaks, get a <a href="/docs/rest#post-device-token">new one</a>, or disconnect the device in the same place: the old token and every connection opened with it stop working at once.</p>
@@ -142,9 +145,10 @@
     </ul>
 
     <h2 id="next">Where next</h2>
-    <div class="cards">
+    <div class="cards four">
       <a href="/docs/rest"><b>REST API</b><span>Every request: signals, contacts, devices, the account. Status codes and limits.</span><em>Open →</em></a>
       <a href="/docs/ws"><b>WebSocket</b><span>The event stream: connecting, messages, reconnecting, examples in Node and Python.</span><em>Open →</em></a>
+      <a href="/docs/devices"><b>Device protocol</b><span>For makers: parts and their settings, setup over Bluetooth, Bluetooth-only toys, privacy rules.</span><em>Open →</em></a>
       <a href="/docs/esp32"><b>ESP32 toy</b><span>Glows when someone thinks of you and sends a heart at the press of a button. Wiring and sketch.</span><em>Build it →</em></a>
     </div>
     <p>The lovearound apps for <a href="https://github.com/lovearound-me/mac">macOS</a>, <a href="https://github.com/lovearound-me/windows">Windows</a> and <a href="https://github.com/lovearound-me/linux">Linux</a> and the <a href="https://github.com/lovearound-me/web">web app</a> are open source and talk to the server through this same API. Their code is on <a href="https://github.com/lovearound-me">GitHub</a>.</p>

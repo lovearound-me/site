@@ -22,6 +22,7 @@
       <a class="nl" href="/docs">Overview</a>
       <a class="nl" href="/docs/rest">REST</a>
       <a class="nl" href="/docs/ws">WebSocket</a>
+      <a class="nl" href="/docs/devices">Devices</a>
       <a class="nl" href="/docs/esp32" aria-current="page">ESP32</a>
       <a class="btn sm" href="/#w-get">Download</a>
     </nav>
@@ -36,6 +37,7 @@
         <li><a href="/docs">Overview</a></li>
         <li><a href="/docs/rest">REST API</a></li>
         <li><a href="/docs/ws">WebSocket</a></li>
+        <li><a href="/docs/devices">Device protocol</a></li>
         <li class="here"><a href="/docs/esp32" aria-current="page">ESP32 toy</a>
           <ul class="dnav-sub">
             <li><a href="#token">1. Get a device token</a></li>
@@ -186,7 +188,8 @@ void loop() {
       <li><b>Several buttons.</b> Each with its own contact. Light each one in the color you gave that person in the app: the list carries it as <code>color</code>, see <a href="/docs/rest#colors">colors</a>. A signal you receive never says whose it is, so it glows in a color of the toy’s own.</li>
       <li><b>A vibration motor or a buzzer</b> instead of LEDs.</li>
       <li><b>Quiet at night.</b> Give the device quiet hours (<a href="/docs/rest#patch-device"><code>quiet_hours</code></a>): the server sends it nothing from 23:00 to 8:00, with no code on the board.</li>
-      <li><b>Wi‑Fi and token without reflashing.</b> Through a setup access point, for example with the WiFiManager library.</li>
+      <li><b>Settings in the app.</b> Tell the server what the toy is made of (a light, a buzzer, a button), and every lovearound app gets a card for it: color, brightness, effect, whom the paw sends to. See <a href="/docs/devices">Device protocol</a>.</li>
+      <li><b>Wi‑Fi and token without reflashing.</b> From the phone, <a href="/docs/devices#setup">over Bluetooth</a>, or through a setup access point, for example with the WiFiManager library.</li>
       <li><b>A screen and choosing a person.</b> A board with a screen, for example the LilyGO T‑Display‑S3 AMOLED: two buttons scroll the list, after 3 seconds the heart flies to the chosen person, and the last item is “Someone out there”. The list comes from <code>GET /v1/contacts</code> and refreshes on <code>{&quot;type&quot;:&quot;sync&quot;}</code>.</li>
       <li><b>No token in the firmware.</b> A board with a screen can show a code instead, and you confirm it from your phone: see <a href="/docs/rest#pairing">Pairing by code</a>.</li>
     </ul>
@@ -196,9 +199,10 @@ void loop() {
       <li><b>The token lets anyone send hearts in your name.</b> Don’t publish a sketch with a real token in it.</li>
       <li><b>A disconnected device loses access at once</b>, open connection included.</li>
       <li><b>Don’t leave <code>setInsecure()</code> in a finished device.</b> Check the server’s certificate with <code>setCACert</code>.</li>
+      <li><b>Don’t name your model to the server.</b> No model or firmware in <code>X-Client</code> or the User-Agent: with this few people, a model name gives the sender away. More in the <a href="/docs/devices#privacy">privacy rules for makers</a>.</li>
     </ul>
 
-    <div class="next"><a href="/docs/ws">← WebSocket</a><a href="/docs">Overview →</a></div>
+    <div class="next"><a href="/docs/devices">← Device protocol</a><a href="/docs">Overview →</a></div>
   </article>
 </main>
 </div>

@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<!-- lovearound.web.app and lovearound.firebaseapp.com serve this same site: send them to the real address. -->
+<script>if (/\.(web\.app|firebaseapp\.com)$/.test(location.hostname)) location.replace('https://lovearound.me' + location.pathname + location.search + location.hash);</script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Device protocol — lovearound</title>
+<meta name="description" content="For makers of boards and toys: what a device is made of, its settings in the lovearound apps, setup over Bluetooth, Bluetooth-only toys and the privacy rules.">
+<link rel="icon" href="/heart.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap">
+<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/docs/docs.css">
+</head>
+<body class="docs">
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="/"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.3-9C1.4 8.6 3.6 5 7.2 5c2.1 0 3.5 1.1 4.8 2.9C13.3 6.1 14.7 5 16.8 5c3.6 0 5.8 3.6 4.5 7-1.8 4.4-9.3 9-9.3 9z"/></svg>lovearound</a>
+    <nav class="nav" aria-label="Docs">
+      <a class="nl" href="/docs">Overview</a>
+      <a class="nl" href="/docs/rest">REST</a>
+      <a class="nl" href="/docs/ws">WebSocket</a>
+      <a class="nl" href="/docs/devices" aria-current="page">Devices</a>
+      <a class="nl" href="/docs/esp32">ESP32</a>
+      <a class="btn sm" href="/#w-get">Download</a>
+    </nav>
+  </div>
+</header>
+<div class="dnav-bar"><div class="wrap"><button class="dnav-toggle" type="button" aria-expanded="false" aria-controls="dnav"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h10"/></svg><span class="dnav-label">Contents</span><span class="dnav-page">Device protocol</span><span class="dnav-now"></span></button></div></div>
+<div class="wrap docs-shell">
+  <aside class="dnav" id="dnav">
+    <div class="dnav-head"><b>Docs</b><button class="dnav-close" type="button" aria-label="Close the menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+    <nav aria-label="Docs pages and sections">
+      <ul class="dnav-pages">
+        <li><a href="/docs">Overview</a></li>
+        <li><a href="/docs/rest">REST API</a></li>
+        <li><a href="/docs/ws">WebSocket</a></li>
+        <li class="here"><a href="/docs/devices" aria-current="page">Device protocol</a>
+          <ul class="dnav-sub">
+            <li><a href="#how">Two ways in</a></li>
+            <li class="grp"><a href="#about">What a device says</a>
+              <ul>
+                <li><a href="#about-fields">Fields</a></li>
+                <li><a href="#catalog">Parts catalog</a></li>
+              </ul>
+            </li>
+            <li class="grp"><a href="#settings">Settings</a>
+              <ul>
+                <li><a href="#settings-msg"><code>settings</code></a></li>
+                <li><a href="#targets">Button targets</a></li>
+                <li><a href="#rev">Applying: <code>rev</code></a></li>
+                <li><a href="#preview"><code>preview</code></a></li>
+              </ul>
+            </li>
+            <li class="grp"><a href="#wifi">Over Wi‑Fi</a>
+              <ul>
+                <li><a href="#get-self"><span class="dm get">GET</span><code>/v1/devices/self</code></a></li>
+                <li><a href="#put-about"><span class="dm put">PUT</span><code>/v1/devices/self/about</code></a></li>
+                <li><a href="#post-state"><span class="dm post">POST</span><code>/v1/devices/self/state</code></a></li>
+                <li><a href="#patch-self"><span class="dm patch">PATCH</span><code>/v1/devices/self</code></a></li>
+                <li><a href="#get-contacts"><span class="dm get">GET</span><code>/v1/contacts</code></a></li>
+                <li><a href="#stream">On the stream</a></li>
+                <li><a href="#owner">What the apps call</a></li>
+              </ul>
+            </li>
+            <li class="grp"><a href="#setup">Setup over Bluetooth</a>
+              <ul>
+                <li><a href="#setup-order">The order</a></li>
+                <li><a href="#setup-again">Setting up again</a></li>
+                <li><a href="#setup-firmware">Notes for firmware</a></li>
+              </ul>
+            </li>
+            <li class="grp"><a href="#ble">Bluetooth-only toys</a>
+              <ul>
+                <li><a href="#gatt">The GATT service</a></li>
+                <li><a href="#framing">Framing</a></li>
+                <li><a href="#bonding">Bonding and <code>forget</code></a></li>
+                <li><a href="#hearts">How hearts arrive</a></li>
+                <li><a href="#ancs">ANCS rules</a></li>
+                <li><a href="#ble-server">On the server</a></li>
+              </ul>
+            </li>
+            <li><a href="#compat">Compatibility</a></li>
+            <li><a href="#errors">Errors and limits</a></li>
+            <li><a href="#privacy">Privacy rules for makers</a></li>
+          </ul>
+        </li>
+        <li><a href="/docs/esp32">ESP32 toy</a></li>
+      </ul>
+    </nav>
+  </aside>
+  <div class="dnav-scrim" hidden></div>
+<main class="docs-main">
+
+  <div class="doc-hero short">
+    <span class="kicker">Docs</span>
+    <h1>Device protocol</h1>
+    <p class="lead">For makers of boards and toys: tell the server what your device is made of, and the lovearound apps draw its settings for you.</p>
+  </div>
+
+  <article class="doc">
+
+    <h2 id="how">Two ways in</h2>
+    <p>A device says what it is made of: a ring of LEDs, a buzzer, a button. These are its <b>parts</b>. Each kind of part has standard settings, and every lovearound app draws a row for each part on the device’s card: color, brightness, effect, volume, whom the button sends to. You write no settings screen of your own.</p>
+    <p>The same messages travel two ways:</p>
+    <ul>
+      <li><b>A Wi‑Fi device</b> talks to the server itself, with its own device token: <a href="/docs/rest">REST</a> to send and report, the <a href="/docs/ws">stream</a> to receive. It can be set up <a href="#setup">over Bluetooth</a> from the phone, by <a href="/docs/rest#pairing">pairing by code</a>, or with a token from <b>Settings → Devices</b>.</li>
+      <li><b>A Bluetooth-only toy</b> talks to the owner’s phone, and the phone talks to the server for it. See <a href="#ble">Bluetooth-only toys</a>.</li>
+    </ul>
+    <p>Either way a device gets a signal and nothing else about it: no sender, no color of the sender, no text. There is no setting by sender, and there never will be: no “light differently for different people”.</p>
+
+    <h2 id="about"><code>about</code>: what a device is made of</h2>
+    <pre><code>{
+  "proto": 1,
+  "model": "heart-ring",
+  "firmware": "2.1.0",
+  "wants": ["receive", "send"],
+  "parts": [
+    { "id": "ring", "kind": "light", "leds": 24,
+      "settings": ["color", "brightness", "effect", "speed", "duration", "idle"],
+      "effects": ["glow", "heartbeat", "wave", "sparkle", "rainbow"],
+      "default": { "effect": "heartbeat", "brightness": 60 } },
+    { "id": "beep", "kind": "sound",
+      "settings": ["volume", "melody"],
+      "melodies": ["short", "two_notes", "heartbeat"] },
+    { "id": "btn", "kind": "button",
+      "settings": ["press", "long_press"] }
+  ]
+}</code></pre>
+    <p>The smallest one is a single light that only has a color:</p>
+    <pre><code>{ "proto": 1, "parts": [ { "kind": "light", "settings": ["color"] } ] }</code></pre>
+    <h3 id="about-fields">Fields</h3>
+    <div class="tbl"><table>
+      <thead><tr><th>Field</th><th>Type</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><code>proto</code></td><td>int</td><td><code>1</code>. Needed</td></tr>
+        <tr><td><code>model</code></td><td>string</td><td>Optional, up to 32 characters. Shown on the owner’s card, never anywhere else</td></tr>
+        <tr><td><code>firmware</code></td><td>string</td><td>Optional, up to 32 characters. Shown on the card</td></tr>
+        <tr><td><code>wants</code></td><td>string[]</td><td><code>receive</code> and/or <code>send</code>. Read only once, at <a href="#setup">setup over Bluetooth</a>, and becomes the device’s <code>requested_capabilities</code>: the most it can ever be allowed. Later <code>about</code>s never widen it; only setting up again does</td></tr>
+        <tr><td><code>parts</code></td><td>object[]</td><td>Needed, at most 8</td></tr>
+        <tr><td><code>parts[].id</code></td><td>string</td><td><code>[a-z0-9_]{1,16}</code>, unique in the device. Defaults to <code>kind</code>, so two parts of one kind need ids of their own</td></tr>
+        <tr><td><code>parts[].kind</code></td><td>string</td><td>One of the <a href="#catalog">catalog</a></td></tr>
+        <tr><td><code>parts[].settings</code></td><td>string[]</td><td>The settings this part really has, from its kind’s list. List only what you have: the apps show only these</td></tr>
+        <tr><td><code>parts[].effects</code>, <code>parts[].melodies</code></td><td>string[]</td><td>The device’s own list for <code>effect</code> and <code>melody</code>, 16 names at most. Names from the catalog get a translated label in the apps; any other name <code>[a-z0-9_]{1,24}</code> passes and is shown as it is; a name that doesn’t fit is dropped. Without its list, <code>effect</code> or <code>melody</code> is no setting</td></tr>
+        <tr><td><code>parts[].leds</code></td><td>int</td><td>A light’s LED count, for the card. Optional</td></tr>
+        <tr><td><code>parts[].default</code></td><td>object</td><td>This part’s defaults where they differ from the platform’s. A default that fails the checks is dropped; a button’s can’t name a contact</td></tr>
+      </tbody>
+    </table></div>
+    <ul>
+      <li>The whole <code>about</code> is at most 4 KB as sent.</li>
+      <li>Unknown kinds, settings and fields are dropped, so a newer firmware works with an older server. The server keeps the raw <code>about</code> and reads it through the catalog each time, so they appear once it learns them. The device object’s <code>about</code> is that reading: every <code>id</code> filled in, known settings only, <code>on</code> listed where the kind has it.</li>
+      <li>Send it at every boot. An <code>about</code> that drops a part, a setting or an effect drops the owner’s value for it too, and <code>rev</code> changes.</li>
+      <li>On Bluetooth it travels with <code>"type": "about"</code>, like every message there.</li>
+    </ul>
+
+    <h3 id="catalog">Parts catalog</h3>
+    <p>Each setting ends with the platform’s default. Numbers are whole.</p>
+    <div class="tbl"><table class="catalog">
+      <thead><tr><th>Kind</th><th>What it is</th><th>Settings</th></tr></thead>
+      <tbody>
+        <tr><td><code>light</code></td><td>An LED, an RGB LED, a WS2812 strip or ring, a matrix</td><td>
+          <code>on</code> bool <span class="dflt">· default true</span><br>
+          <code>color</code>: <code>#RRGGBB</code> (the apps offer the <a href="/docs/rest#colors">12 colors</a> and any other; stored upper-cased), or <code>random</code>: a different one each time <span class="dflt">· default <code>#E86A9A</code></span><br>
+          <code>brightness</code> 1–100; the device decides what 100 is <span class="dflt">· default 60</span><br>
+          <code>effect</code> from the part’s <code>effects</code>; the catalog knows <code>glow</code> <code>pulse</code> <code>heartbeat</code> <code>breathe</code> <code>wave</code> <code>fill</code> <code>sparkle</code> <code>rainbow</code> <span class="dflt">· default the first in the list</span><br>
+          <code>speed</code> 1–100 <span class="dflt">· default 50</span><br>
+          <code>duration</code> 1–60 seconds <span class="dflt">· default 3</span><br>
+          <code>idle</code>: a night light between hearts, <code>"off"</code> or <code>{ "color", "brightness" }</code> <span class="dflt">· default <code>"off"</code></span><br>
+          <code>auto_brightness</code> bool, for a device with a light sensor <span class="dflt">· default false</span></td></tr>
+        <tr><td><code>sound</code></td><td>A buzzer, a speaker</td><td>
+          <code>on</code> bool <span class="dflt">· default true</span><br>
+          <code>volume</code> 0–100; a plain buzzer has only 0 and 100 <span class="dflt">· default 50</span><br>
+          <code>melody</code> from the part’s <code>melodies</code> <span class="dflt">· default the first in the list</span></td></tr>
+        <tr><td><code>vibration</code></td><td>A vibration motor</td><td>
+          <code>on</code> bool <span class="dflt">· default true</span><br>
+          <code>strength</code> 1–100 <span class="dflt">· default 60</span><br>
+          <code>pattern</code>: <code>one</code>, <code>two</code> or <code>heartbeat</code> <span class="dflt">· default <code>heartbeat</code></span></td></tr>
+        <tr><td><code>motion</code></td><td>A servo or a motor: a flag that rises, a paw that waves</td><td>
+          <code>on</code> bool <span class="dflt">· default true</span><br>
+          <code>speed</code> 1–100 <span class="dflt">· default 50</span><br>
+          <code>times</code> 1–10 <span class="dflt">· default 3</span></td></tr>
+        <tr><td><code>switch</code></td><td>A relay or a smart socket: a real lamp, a garland</td><td>
+          <code>on</code> bool <span class="dflt">· default true</span><br>
+          <code>mode</code>: <code>on</code> or <code>blink</code> <span class="dflt">· default <code>on</code></span><br>
+          <code>duration</code> 1–600 seconds <span class="dflt">· default 10</span></td></tr>
+        <tr><td><code>screen</code></td><td>An OLED, TFT or e‑ink screen, a matrix</td><td>
+          <code>brightness</code> 1–100 <span class="dflt">· default 60</span><br>
+          <code>sleep_after</code> in seconds: 10, 60, 300, or 0 for never <span class="dflt">· default 60</span><br>
+          <code>idle_view</code>: <code>clock</code>, <code>heart</code> or <code>off</code> <span class="dflt">· default <code>heart</code></span><br>
+          <code>effect</code> from the part’s <code>effects</code> <span class="dflt">· default the first in the list</span><br>
+          <code>rotate</code>: 0, 90, 180 or 270 <span class="dflt">· default 0</span><br>
+          <code>lang</code>: a language code, 2–8 letters, digits and dashes, like <code>en</code> or <code>pt-BR</code> <span class="dflt">· default <code>en</code></span></td></tr>
+        <tr><td><code>button</code></td><td>A button, a touch pad, a knob</td><td>
+          <code>press</code>, <code>long_press</code>, <code>double_press</code>: a <a href="#targets">target</a> <span class="dflt">· default <code>null</code></span><br>
+          <code>confirm</code> bool: blink when a heart was sent <span class="dflt">· default true</span></td></tr>
+      </tbody>
+    </table></div>
+    <ul>
+      <li>Every kind but <code>button</code> and <code>screen</code> has <code>on</code>, listed or not: a light, a sound, a motor or a switch can be off.</li>
+      <li>A part’s <code>default</code> wins over the platform’s.</li>
+      <li>Battery is a report, not a setting: <code>battery</code> 0–100 comes with <a href="#post-state"><code>state</code></a> and shows in the card’s header.</li>
+      <li>Two parts of one kind are fine: the row title in the app then carries the part’s <code>id</code>.</li>
+    </ul>
+
+    <h2 id="settings">Settings</h2>
+    <h3 id="settings-msg">The <code>settings</code> message</h3>
+    <p>One object carries a device’s settings everywhere: in REST responses, on the stream and over Bluetooth.</p>
+    <pre><code>{
+  "type": "settings",
+  "rev": "r3f9a0c1d2e",
+  "name": "Ring in the hall",
+  "capabilities": ["receive", "send"],
+  "tz": "Europe/Lisbon",
+  "utc_offset": 0,
+  "now": "2026-11-28T10:00:00Z",
+  "values": {
+    "ring": { "on": true, "color": "#E86A9A", "brightness": 60, "effect": "heartbeat",
+              "speed": 50, "duration": 3, "idle": "off" },
+    "beep": { "on": false, "volume": 40, "melody": "short" },
+    "btn":  { "press": { "anyone": true }, "long_press": { "contact": "DXEjjB91rJYQvgaGGdsx" } }
+  }
+}</code></pre>
+    <div class="tbl"><table>
+      <thead><tr><th>Field</th><th>Type</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><code>rev</code></td><td>string</td><td>The revision. Opaque: apply it, echo it back, never compare two. It is a hash of what the device applies (<code>name</code>, <code>capabilities</code>, <code>tz</code>, <code>values</code>), so it changes with any of them, and only then</td></tr>
+        <tr><td><code>name</code></td><td>string</td><td>The name the owner gave the device, for a screen</td></tr>
+        <tr><td><code>capabilities</code></td><td>string[]</td><td>What it may do now: <code>receive</code>, <code>send</code>, or neither. A toy honors it itself: without <code>receive</code> it shows no hearts, without <code>send</code> its button sends nothing</td></tr>
+        <tr><td><code>tz</code></td><td>string</td><td>The device’s time zone, like <code>Europe/Lisbon</code>; without one, its quiet hours’ zone, else <code>UTC</code></td></tr>
+        <tr><td><code>utc_offset</code></td><td>int</td><td>The offset from UTC in minutes now: an ESP32 or a toy can’t read an IANA zone</td></tr>
+        <tr><td><code>now</code></td><td>string</td><td>The time when this was sent, for a device without a clock</td></tr>
+        <tr><td><code>values</code></td><td>object</td><td>By part <code>id</code>, then by setting. Always complete: the server fills in the defaults</td></tr>
+      </tbody>
+    </table></div>
+    <p>It comes only to a device that has sent its <code>about</code>: as the answer to <a href="#put-about"><code>PUT about</code></a>, on the stream right after <code>ready</code> and after every change (values, name, capabilities, time zone, a button’s contact deleted), and in <a href="#get-self"><code>GET /v1/devices/self</code></a>. Always the whole thing. Apply it, keep it across reboots, then report the <code>rev</code> you applied (<a href="#rev">below</a>). Skip a setting or a part you don’t know.</p>
+
+    <h3 id="targets">Button targets</h3>
+    <p>A button’s target is written the way a signal writes <code>to</code>, so the firmware pastes it straight into <a href="/docs/rest#post-events"><code>POST /v1/events</code></a>:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Value</th><th>The press</th></tr></thead>
+      <tbody>
+        <tr><td><code>{ "contact": "DXEjjB91rJYQvgaGGdsx" }</code></td><td>Sends a heart to this person. Only for a device with <code>send</code>, and only someone in its <a href="#get-contacts"><code>book</code></a> (else <code>400</code> <code>no_send</code> or <code>bad_value</code>)</td></tr>
+        <tr><td><code>{ "anyone": true }</code></td><td>Sends a heart to someone out there</td></tr>
+        <tr><td><code>null</code></td><td>Does nothing. The default</td></tr>
+      </tbody>
+    </table></div>
+    <pre><code>{ "type": "signal", "to": { "contact": "DXEjjB91rJYQvgaGGdsx" } }</code></pre>
+    <p>When the owner deletes that contact, the target becomes <code>null</code> (not the default), <code>rev</code> changes and the device gets its settings again. A device without <code>send</code> gets <code>null</code> for every target.</p>
+
+    <h3 id="rev">Applying: <code>rev</code> and state</h3>
+    <p>The server keeps the values the owner wants with their <code>rev</code>, and the last <code>rev</code> the device reported as applied. While the two differ, the app says the change will apply once the device is online. Report it with <a href="#post-state"><code>POST /v1/devices/self/state</code></a> over Wi‑Fi, or with an <code>applied</code> message <a href="#gatt">over Bluetooth</a>. A new token makes the server forget what was applied: the device starts over.</p>
+
+    <h3 id="preview"><code>preview</code></h3>
+    <pre><code>{ "type": "preview" }</code></pre>
+    <p>The owner tapped <b>Try it</b> on the card: show one heart, exactly as the device is set now. It is not a signal: it only ever goes from the owner to their own device, at most once a second. It reaches a device that is online right now, or nobody. The app gets <code>409</code> <code>offline</code> when the device has no open stream, <code>no_about</code> before it sent an <code>about</code>, <code>phone_link</code> for a <a href="#ble">Bluetooth-only toy</a> (the phone shows it itself), and <code>429</code> <code>too_many</code> more often than once a second.</p>
+
+    <h2 id="wifi">Over Wi‑Fi</h2>
+    <p>With its device token, a Wi‑Fi device uses these routes on <code>https://api.lovearound.me</code>, besides <a href="/docs/rest#post-events"><code>POST /v1/events</code></a> for sending.</p>
+
+    <div class="ep" id="get-self"><span class="m get">GET</span><code>/v1/devices/self</code><span class="who dev">device</span></div>
+    <p>The device as its card shows it, plus <code>tz</code>, <code>utc_offset</code> and <code>now</code>, and once it has sent an <code>about</code>, <code>rev</code> and <code>values</code>: the fields of the <a href="#settings-msg"><code>settings</code></a>. For a device that can’t keep a stream open. An app’s sign-in gets <code>403</code>.</p>
+
+    <div class="ep" id="put-about"><span class="m put">PUT</span><code>/v1/devices/self/about</code><span class="who dev">device</span></div>
+    <p>The <a href="#about"><code>about</code></a>, at every boot. The response is <code>200</code> with the <code>settings</code>, already checked against this <code>about</code>: a device that sleeps between hearts needs only this one call. Errors: <code>413</code> <code>too_large</code>, <code>400</code> <code>bad_json</code>, <code>bad_about</code>, <code>too_many_parts</code>, <code>bad_part_id</code>, <code>duplicate_part</code>.</p>
+
+    <div class="ep" id="post-state"><span class="m post">POST</span><code>/v1/devices/self/state</code><span class="who dev">device</span></div>
+    <pre><code>{ "rev": "r3f9a0c1d2e", "battery": 80 }</code></pre>
+    <p>Either field or both; the response is <code>204</code>. Send <code>rev</code> exactly as the <code>settings</code> gave it, after applying them, and <code>battery</code> (0–100) when it has changed noticeably, on its own too. The owner’s apps then get <code>{"type":"sync","what":"devices"}</code>. Errors: <code>400</code> <code>bad_value</code> for a malformed <code>rev</code> or <code>battery</code>, <code>400</code> <code>bad_request</code> for an empty body. Never send state because a heart was shown: see <a href="#privacy">privacy</a>.</p>
+
+    <div class="ep" id="patch-self"><span class="m patch">PATCH</span><code>/v1/devices/self</code><span class="who dev">device</span></div>
+    <p>A change like <a href="/docs/rest#patch-device"><code>PATCH /v1/devices/{id}</code></a>, within what the device asked for when it was set up; it may also set its own <code>tz</code> (an IANA name, else <code>400</code> <code>bad_tz</code>; <code>null</code> for none). <code>book</code> is refused with <code>403</code> <code>not_allowed</code>: a device can’t widen whom it sees.</p>
+
+    <div class="ep" id="get-contacts"><span class="m get">GET</span><code>/v1/contacts</code><span class="who dev">device, send permission</span></div>
+    <p>As <a href="/docs/rest#get-contacts">before</a>, with two changes for a device: each contact also has <code>rgb</code>, its color as <code>#RRGGBB</code>, so firmware needs no table of the 12; and the list has only the people the device’s <code>book</code> allows: everyone, close people, or the ones the owner picked. A device set up over Bluetooth starts with close people. Older devices see everyone. The book only filters this list: <code>POST /v1/events</code> doesn’t check it. When the book changes, a device that may send gets <code>{"type":"sync","what":"contacts"}</code>.</p>
+
+    <h3 id="stream">On the stream</h3>
+    <ul>
+      <li>After <code>ready</code>, and after every change, comes <code>{"type":"settings", …}</code>: always the whole thing. Only for a device that has sent its <code>about</code>.</li>
+      <li><code>{"type":"preview"}</code> when the owner taps <b>Try it</b>.</li>
+      <li><code>{"type":"sync","what":"contacts"}</code> as before, but only to apps and to devices with <code>send</code>.</li>
+      <li>The stream also opens for a device without <code>receive</code>, with no <code>403</code>: it gets settings and <code>sync</code>, no signals, and it is never picked for a signal to anyone.</li>
+      <li>A change of rights or a new token still closes the stream. A change of values doesn’t: a new <code>settings</code> comes instead.</li>
+      <li>The stream stays one-way. Report <code>applied</code> and battery over REST.</li>
+    </ul>
+
+    <h3 id="owner">What the apps call</h3>
+    <p>For reference: the owner’s apps do this with the person’s sign-in, never with a device token. Changing settings looks like this:</p>
+    <pre><code>PATCH /v1/devices/{id}/settings
+{ "values": { "ring": { "brightness": 80 }, "beep": { "volume": null } } }</code></pre>
+    <div class="tbl"><table>
+      <thead><tr><th>Request</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><code>PATCH /v1/devices/{id}/settings</code></td><td>The example above: merged into the stored values, <code>null</code> means back to the default. Checked against the device’s <code>about</code>: the kind, the setting, the range, the device’s own lists. The answer is the device; the <code>settings</code> goes to its stream. Errors: <code>409</code> <code>no_about</code>; <code>400</code> <code>unknown_part</code>, <code>unknown_setting</code>, <code>bad_value</code>, <code>no_send</code>, with <code>part</code> and <code>setting</code>; <code>429</code> <code>too_many</code> past 10 a minute per device: the apps hold sliders back</td></tr>
+        <tr><td><code>POST /v1/devices/{id}/preview</code></td><td><b>Try it</b>: <code>202</code>; <code>409</code> <code>offline</code>, <code>no_about</code>, <code>phone_link</code>; <code>429</code> <code>too_many</code></td></tr>
+        <tr><td><code>PATCH /v1/devices/{id}</code></td><td>As before, plus <code>tz</code> (else <code>400</code> <code>bad_tz</code>) and <code>book</code>: <code>"all"</code>, <code>"close"</code> or a list of contact ids (else <code>400</code> <code>bad_book</code>)</td></tr>
+        <tr><td><code>POST /v1/devices</code></td><td>Also takes <code>setup</code> (<code>"bluetooth"</code>, else <code>400</code> <code>bad_setup</code>), <code>link</code> (<code>"server"</code> or <code>"phone"</code>, else <code>400</code> <code>bad_link</code>) and <code>tz</code>. With <code>link: "phone"</code> there is no token: <code>201</code> <code>{device}</code></td></tr>
+        <tr><td><code>POST /v1/devices/{id}/token</code></td><td>Also for a device set up over Bluetooth: <a href="#setup-again">setting it up again</a>. <code>409</code> for a device paired by code, <code>409</code> <code>phone_link</code> for a Bluetooth-only toy</td></tr>
+        <tr><td><code>PUT /v1/devices/{id}/about</code>, <code>POST /v1/devices/{id}/state</code></td><td>The phone, for a <a href="#ble-server">Bluetooth-only toy</a> only: <code>409</code> <code>server_link</code> for any other device</td></tr>
+      </tbody>
+    </table></div>
+    <p>The device object gains <code>setup</code> (<code>app</code>, <code>code</code> or <code>bluetooth</code>), <code>link</code> (<code>server</code> or <code>phone</code>), <code>tz</code>, <code>book</code>, <code>online</code> (a stream of it is open now; missing for a Bluetooth-only toy) and <code>about</code>; once there is an <code>about</code>, <code>rev</code> and <code>values</code> (complete); and <code>applied</code> and <code>battery</code> once the device has said them. The owner’s apps get <code>{"type":"sync","what":"devices"}</code> when a device’s <code>about</code>, applied <code>rev</code>, battery or values change.</p>
+
+    <h2 id="setup">Setup over Bluetooth</h2>
+    <p>A board with Bluetooth gets its Wi‑Fi and its token from the phone: no token in the firmware, no access point. It uses Espressif’s Wi‑Fi provisioning: <code>WiFiProv</code> in Arduino, <code>wifi_provisioning</code> in ESP‑IDF, the ESPProvision libraries on iPhone and Android. Security 1, without a code: the phone and the board agree on a key over the air, so listening in gives nothing. A device code against a look-alike device comes later; the apps can already enter one.</p>
+    <p>An example firmware is coming; there is no code here yet.</p>
+
+    <h3 id="setup-order">The order</h3>
+    <ol>
+      <li><b>Setup mode.</b> A new board, or one after a long press, is in setup mode for 5 minutes and advertises as <code>LoveAround-XXXX</code>. Espressif’s <code>proto-ver</code> says <code>no_pop</code>, so the app knows before the session that no code is needed. The app lists only boards very near.</li>
+      <li><b><code>about</code> and the confirm screen.</b> The app reads <code>about</code> from the custom endpoint <code>lovearound-about</code> and shows what the device wants (receive, send) before anything is made.</li>
+      <li><b>Wi‑Fi first.</b> The app sends the Wi‑Fi name and password, and the board reports that it’s connected; keep provisioning running after that (<code>disableAutoStop</code>). Only then does the app create the device, <code>POST /v1/devices { "name", "setup": "bluetooth", "capabilities", "tz" }</code> → <code>201</code> <code>{device, token}</code>, and send the token through the custom endpoint <code>lovearound-token</code>. A wrong password leaves nothing on the account. The device counts as paired: its <code>wants</code> become <code>requested_capabilities</code>, and it can only be narrowed from there. Its <code>book</code> starts as <code>close</code>.</li>
+      <li><b>Bluetooth off, then the server.</b> Free Bluetooth before the board’s first TLS connection. The app waits for that first connection and deletes the device if it never comes.</li>
+      <li><b>From then on</b> the board works as in <a href="#wifi">Over Wi‑Fi</a>.</li>
+    </ol>
+    <ul>
+      <li>Out of setup mode the board takes nothing over Bluetooth.</li>
+      <li>In setup mode a working board keeps working and never gives out its token or its Wi‑Fi.</li>
+      <li>A <code>401</code> from the server wipes the token and the values: the device was disconnected.</li>
+      <li>A board without Bluetooth (ESP32‑S2) uses <a href="/docs/rest#pairing">pairing by code</a> instead.</li>
+    </ul>
+
+    <h3 id="setup-again">Setting up again</h3>
+    <p>A new Wi‑Fi password, a new place: the owner puts the board into setup mode and the app runs the same steps, but asks for a new token for the same device with <a href="/docs/rest#post-device-token"><code>POST /v1/devices/{id}/token</code></a>. The device keeps its name, values and quiet hours. The old token stops at once, and the server forgets what the device applied: it reports its <code>rev</code> again after the first <code>settings</code>.</p>
+
+    <h3 id="setup-firmware">Notes for firmware</h3>
+    <ul>
+      <li>Arduino’s <code>WiFiProv</code> has no custom endpoints. Call <code>network_prov_mgr_endpoint_create()</code> and <code>network_prov_mgr_endpoint_register()</code> between <code>initProvision()</code> and <code>beginProvision()</code>. We haven’t tried this yet.</li>
+      <li>A 4 MB board needs a partition table with room for Wi‑Fi, Bluetooth and TLS together. Pick it before updates over the air arrive, since it can’t change after.</li>
+    </ul>
+
+    <h2 id="ble">Bluetooth-only toys</h2>
+    <p>A toy without Wi‑Fi talks to the owner’s phone, and the phone talks to the server. <b>One toy, one phone:</b> a toy bonds with one phone. A new bond is possible only in setup mode (a long press, 5 minutes) and replaces the old one.</p>
+
+    <h3 id="gatt">The GATT service</h3>
+    <p>One service for every lovearound toy, <code>80e80001-eb5b-4050-86c3-f6516f771280</code>, with two characteristics:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Characteristic</th><th>UUID</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><code>rx</code></td><td><code>80e80002-eb5b-4050-86c3-f6516f771280</code></td><td>Phone → toy. Write with response</td></tr>
+        <tr><td><code>tx</code></td><td><code>80e80003-eb5b-4050-86c3-f6516f771280</code></td><td>Toy → phone. Indicate</td></tr>
+      </tbody>
+    </table></div>
+    <p>Both carry the same typed JSON as everywhere else:</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Message</th><th>Way</th><th></th></tr></thead>
+      <tbody>
+        <tr><td><code>about</code></td><td>toy&nbsp;→&nbsp;phone</td><td>The <a href="#about"><code>about</code></a>, with <code>"type": "about"</code></td></tr>
+        <tr><td><code>settings</code></td><td>phone&nbsp;→&nbsp;toy</td><td>The <a href="#settings-msg"><code>settings</code></a>, when the phone is near and they changed</td></tr>
+        <tr><td><code>applied</code></td><td>toy&nbsp;→&nbsp;phone</td><td><code>{ "type": "applied", "rev": "r3f9a0c1d2e" }</code></td></tr>
+        <tr><td><code>event</code></td><td>phone&nbsp;→&nbsp;toy</td><td>A signal: the same object as on the <a href="/docs/ws#event">stream</a></td></tr>
+        <tr><td><code>preview</code></td><td>phone&nbsp;→&nbsp;toy</td><td><b>Try it</b></td></tr>
+        <tr><td><code>press</code></td><td>toy&nbsp;→&nbsp;phone</td><td><code>{ "type": "press", "part": "btn", "gesture": "press" }</code>; <code>gesture</code> is <code>press</code>, <code>long_press</code> or <code>double_press</code></td></tr>
+        <tr><td><code>forget</code></td><td>phone&nbsp;→&nbsp;toy</td><td>Erase the bond and the values, see <a href="#bonding">below</a></td></tr>
+      </tbody>
+    </table></div>
+    <p>Battery goes through the standard Battery Service (<code>0x180F</code>), not this one.</p>
+
+    <h3 id="framing">Framing</h3>
+    <ul>
+      <li>A message longer than one packet goes in chunks. Each chunk starts with one flag byte: <code>0x01</code> when more follows, <code>0x00</code> on the last one. The rest of the chunk is the next bytes of the JSON.</li>
+      <li>A message is at most 4 KB.</li>
+      <li>Drop a half-received message when the link drops.</li>
+    </ul>
+
+    <h3 id="bonding">Bonding and <code>forget</code></h3>
+    <ul>
+      <li>Every characteristic needs an encrypted, bonded link. A phone that isn’t the bonded one gets nothing.</li>
+      <li><code>forget</code> and a factory reset erase the bond and the values, and on a board with Wi‑Fi also the token and the Wi‑Fi.</li>
+      <li>iOS can’t unpair from an app. So <b>Disconnect</b> in the app sends <code>forget</code> when the toy is near, and says how to reset it when it isn’t.</li>
+    </ul>
+
+    <h3 id="hearts">How hearts arrive</h3>
+    <ul>
+      <li><b>iPhone:</b> iOS hands notifications to a bonded accessory by itself, through ANCS, even with our app asleep. The toy shows a heart for a lovearound notification, following the <a href="#ancs">ANCS rules</a>. This works while lovearound notifications are allowed on the phone and the phone is near; the phone’s quiet hours and its “someone out there” setting apply.</li>
+      <li><b>iPhone, app open:</b> then the app shows no banner, so iOS forwards nothing, and the open app writes <code>event</code> itself.</li>
+      <li><b>Android:</b> the server’s push wakes our app, and it writes <code>event</code>.</li>
+      <li><b>Merge:</b> a trigger that comes while a heart is showing joins it. This also covers one heart that arrives both ways.</li>
+      <li><b>The button:</b> a press wakes our app over Bluetooth, and the app sends as the <a href="#targets">button’s settings</a> say. On iPhone, not after the app was swiped away.</li>
+    </ul>
+
+    <h3 id="ancs">ANCS rules</h3>
+    <p>iOS hands a bonded accessory the notifications of every app. Every firmware must keep to these rules:</p>
+    <ol>
+      <li><b>Ask only for the app identifier.</b> For a new notification, ask for its App Identifier attribute and nothing else. Never ask for the title, subtitle or message of another app’s notification.</li>
+      <li><b>Only <code>me.lovearound.ios</code>.</b> Ignore every other app.</li>
+      <li><b>No subtitle is a heart.</b> A heart notification never has a subtitle. Any other notification the app may add will have one: ignore it. Ask for the subtitle only of a <code>me.lovearound.ios</code> notification.</li>
+      <li><b>No replays.</b> Skip notifications flagged <code>PreExisting</code> and the events <code>Modified</code> and <code>Removed</code>: act only on a fresh <code>Added</code>. Otherwise every reconnect would show old hearts again.</li>
+    </ol>
+    <p>What iOS still does: a Focus doesn’t stop the forwarding, and a Scheduled Summary forwards late. Apple’s Accessory Notifications, where the person picks which apps an accessory gets (in the EU, iOS 26.4 and later), comes later.</p>
+
+    <h3 id="ble-server">On the server</h3>
+    <ul>
+      <li>The phone registers the toy with <code>POST /v1/devices { "name", "setup": "bluetooth", "link": "phone", "capabilities" }</code> → <code>201</code> <code>{device}</code>, with no token. It posts the toy’s <code>about</code> and state for it with <code>PUT /v1/devices/{id}/about</code> and <code>POST /v1/devices/{id}/state</code>, and the values live on the server, so the toy’s card is the same as any device’s.</li>
+      <li>The server can’t deliver to the toy itself: the toy shows what the phone gets. So its card hides who can reach it, <code>accept_anyone</code> and <code>quiet_hours</code> are refused with <code>400</code> <code>phone_link</code> (<code>quiet_hours: null</code> passes), <code>preview</code> answers <code>409</code> <code>phone_link</code> (the phone writes it to the toy itself), and its <code>online</code> is missing.</li>
+      <li><code>capabilities</code> travel inside <code>settings</code>, so switching off <b>Receives hearts</b> reaches the toy too.</li>
+    </ul>
+
+    <h2 id="compat">Compatibility</h2>
+    <ul>
+      <li><b>Skip what you don’t know:</b> message types, fields, parts and settings in <code>values</code>. The server and the apps do the same with yours: unknown parts and settings are dropped, unknown kinds aren’t shown.</li>
+      <li>Names outside the catalog in <code>effects</code> and <code>melodies</code> pass, and the apps show them as they are.</li>
+      <li><code>rev</code> is opaque; never compare it or parse it.</li>
+      <li><code>about</code> never widens what a device may do; only setting up again does.</li>
+      <li>Later, not in v1: custom settings with their own labels, a device narrowing a range (say, brightness at most 60), a device changing its own values (a knob), a code at setup, updates over the air, two accounts sharing one toy.</li>
+    </ul>
+
+    <h2 id="errors">Errors and limits</h2>
+    <p>Every error, on these routes and all the others, is JSON with a <code>code</code> for programs, and <code>part</code> and <code>setting</code> when it is about one:</p>
+    <pre><code>{ "error": "brightness: 1-100", "code": "bad_value", "part": "ring", "setting": "brightness" }</code></pre>
+    <p><code>error</code> is for people and may change; <code>code</code> stays. Decide by the HTTP status and <code>code</code>.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>Code</th><th>Status</th><th>When</th></tr></thead>
+      <tbody>
+        <tr><td><code>bad_json</code></td><td><code>400</code></td><td>The body isn’t JSON</td></tr>
+        <tr><td><code>not_json</code></td><td><code>415</code></td><td>No <code>Content-Type: application/json</code></td></tr>
+        <tr><td><code>bad_body</code></td><td><code>422</code></td><td>JSON of the wrong shape: an unknown field, a wrong type</td></tr>
+        <tr><td><code>too_large</code></td><td><code>413</code></td><td><code>about</code> over 4 KB</td></tr>
+        <tr><td><code>bad_about</code></td><td><code>400</code></td><td><code>about</code> isn’t an object, has no <code>proto</code> or <code>parts</code>, or <code>model</code> or <code>firmware</code> over 32 characters</td></tr>
+        <tr><td><code>too_many_parts</code></td><td><code>400</code></td><td>More than 8 parts</td></tr>
+        <tr><td><code>bad_part_id</code></td><td><code>400</code></td><td>A part <code>id</code> outside <code>[a-z0-9_]{1,16}</code></td></tr>
+        <tr><td><code>duplicate_part</code></td><td><code>400</code></td><td>Two parts with one <code>id</code>, often two of one kind without ids</td></tr>
+        <tr><td><code>unknown_part</code>, <code>unknown_setting</code></td><td><code>400</code></td><td>Setting a part or a setting the <code>about</code> doesn’t have</td></tr>
+        <tr><td><code>bad_value</code></td><td><code>400</code></td><td>A value out of range or not in the list, a contact that isn’t in the book; also a malformed <code>rev</code> or <code>battery</code> in <code>state</code></td></tr>
+        <tr><td><code>no_send</code></td><td><code>400</code></td><td>A button target naming a contact, on a device without <code>send</code></td></tr>
+        <tr><td><code>bad_tz</code>, <code>bad_book</code>, <code>bad_setup</code>, <code>bad_link</code></td><td><code>400</code></td><td>A field of the device that doesn’t fit</td></tr>
+        <tr><td><code>phone_link</code></td><td><code>400</code>, <code>409</code></td><td>Something only the server can do, asked of a Bluetooth-only toy: <code>accept_anyone</code>, <code>quiet_hours</code>, <b>Try it</b>, a new token</td></tr>
+        <tr><td><code>server_link</code></td><td><code>409</code></td><td>The phone’s routes for a Bluetooth-only toy, used on another device</td></tr>
+        <tr><td><code>no_about</code></td><td><code>409</code></td><td>Settings or <b>Try it</b> before the device sent an <code>about</code></td></tr>
+        <tr><td><code>offline</code></td><td><code>409</code></td><td><b>Try it</b> with no open stream of the device</td></tr>
+        <tr><td><code>not_allowed</code></td><td><code>403</code></td><td>A device changing its own <code>book</code></td></tr>
+        <tr><td><code>too_many</code></td><td><code>429</code></td><td>Settings more than 10 a minute, <b>Try it</b> more than once a second, per device</td></tr>
+      </tbody>
+    </table></div>
+    <p>An error without a code of its own carries its status’s: <code>bad_request</code>, <code>unauthorized</code>, <code>forbidden</code>, <code>not_found</code>, <code>conflict</code>, <code>gone</code>, <code>too_large</code>, <code>too_many</code>, <code>unavailable</code>, <code>internal</code>.</p>
+    <div class="tbl"><table>
+      <thead><tr><th>What</th><th>Limit</th><th>Beyond that</th></tr></thead>
+      <tbody>
+        <tr><td><code>about</code></td><td>4 KB, 8 parts</td><td><code>413</code> <code>too_large</code>, <code>400</code> <code>too_many_parts</code></td></tr>
+        <tr><td><code>model</code>, <code>firmware</code></td><td>32 characters</td><td><code>400</code> <code>bad_about</code></td></tr>
+        <tr><td><code>effects</code>, <code>melodies</code></td><td>16 names of <code>[a-z0-9_]{1,24}</code></td><td>The rest is dropped</td></tr>
+        <tr><td>Changing settings</td><td>10 a minute per device</td><td><code>429</code> <code>too_many</code></td></tr>
+        <tr><td><b>Try it</b></td><td>Once a second per device</td><td><code>429</code> <code>too_many</code></td></tr>
+        <tr><td>A Bluetooth message</td><td>4 KB</td><td>Dropped</td></tr>
+        <tr><td>Setup mode</td><td>5 minutes</td><td>The board leaves it</td></tr>
+      </tbody>
+    </table></div>
+    <p>As everywhere, <code>401</code> means the device is gone: wipe the token and the values. <code>403</code> means it may not do this; keep the token.</p>
+
+    <h2 id="privacy">Privacy rules for makers</h2>
+    <p>With only a handful of people on lovearound, small details give a sender away. Every firmware keeps to these:</p>
+    <ul>
+      <li><b>No model name in <code>X-Client</code> or <code>User-Agent</code>.</b> Leave <code>X-Client</code> out, or use a generic name. For a device token the signal log says <code>device</code> and nothing more, never a model or a firmware: with this few people, a model name is the sender. <code>model</code> and <code>firmware</code> in <code>about</code> go only to the owner’s card.</li>
+      <li><b>Never report a heart you showed.</b> No acknowledgement, no counter, no state sent because of a heart, no log of when hearts came.</li>
+      <li><b>Only our notifications.</b> Over ANCS, read nothing of other apps’ notifications but their app identifier.</li>
+      <li><b>No sender, ever.</b> Don’t try to tell hearts apart by who sent them: nothing in a signal says it, and the platform will never add it.</li>
+    </ul>
+
+    <div class="next"><a href="/docs/ws">← WebSocket</a><a href="/docs/esp32">ESP32 toy →</a></div>
+  </article>
+</main>
+</div>
+
+<footer>
+  <div class="wrap">
+    <span class="motto">SPREAD LOVE. FEEL CONNECTED.</span>
+    <span><a href="https://github.com/lovearound-me">GitHub</a> · <a href="https://t.me/lovearound_help">Telegram</a> · © 2026 lovearound</span>
+  </div>
+</footer>
+<script src="/docs/nav.js" defer></script>
+</body>
+</html>

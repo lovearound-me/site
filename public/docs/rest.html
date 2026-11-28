@@ -22,6 +22,7 @@
       <a class="nl" href="/docs">Overview</a>
       <a class="nl" href="/docs/rest" aria-current="page">REST</a>
       <a class="nl" href="/docs/ws">WebSocket</a>
+      <a class="nl" href="/docs/devices">Devices</a>
       <a class="nl" href="/docs/esp32">ESP32</a>
       <a class="btn sm" href="/#w-get">Download</a>
     </nav>
@@ -97,6 +98,7 @@
           </ul>
         </li>
         <li><a href="/docs/ws">WebSocket</a></li>
+        <li><a href="/docs/devices">Device protocol</a></li>
         <li><a href="/docs/esp32">ESP32 toy</a></li>
       </ul>
     </nav>
@@ -118,27 +120,27 @@
       <li><b>Authorization:</b> <code>Authorization: Bearer &lt;token&gt;</code> on every request. The kinds of token are in the <a href="/docs#access">overview</a>.</li>
       <li><b>Request body:</b> JSON with the <code>Content-Type: application/json</code> header.</li>
       <li><b>Time:</b> ISO 8601 strings in UTC, for example <code>2026-10-10T14:00:00.000Z</code>.</li>
-      <li><b><code>X-Client</code></b> (optional): the client’s name and version, for example <code>my-lamp/1.2</code>, up to 64 characters. It goes into the server log along with the signal and helps track down problems. Without it, the log gets the User-Agent.</li>
+      <li><b><code>X-Client</code></b> (optional): an app’s name and version, up to 64 characters; it helps track down problems. A device can leave it out: with a device token the signal log says only <code>device</code>. Never put your model or firmware name in it, or in the User-Agent: with this few people, a model name gives the sender away. See the <a href="/docs/devices#privacy">privacy rules for makers</a>.</li>
       <li><b>From a web page:</b> the server answers CORS only for <code>https://app.lovearound.me</code> and for <code>http://localhost</code> or <code>http://127.0.0.1</code> on any port, so a page of your own can be tried locally. Never <code>*</code>.</li>
     </ul>
     <p>Each request is marked with who may call it:</p>
     <p><span class="who">app</span> — a signed-in person’s token only; a device gets <code>403</code>. <span class="who dev">device</span> — a device token works too. <span class="who dev">no token</span> — nothing in <code>Authorization</code>.</p>
 
     <h3 id="errors">Errors</h3>
-    <p>An error comes with an HTTP status and a body:</p>
-    <pre><code>{ "error": "already in contacts" }</code></pre>
-    <p>The text in <code>error</code> is for people and logs. Decide by the status code, not the text.</p>
+    <p>An error comes with an HTTP status and a JSON body, always:</p>
+    <pre><code>{ "error": "already in contacts", "code": "conflict" }</code></pre>
+    <p>The text in <code>error</code> is for people and logs, and may change. <code>code</code> is for programs and stays: decide by the status and <code>code</code>, never the text. An error about one part of a device also has <code>part</code> and <code>setting</code>. Most errors carry their status’s code: <code>bad_request</code>, <code>unauthorized</code>, <code>forbidden</code>, <code>not_found</code>, <code>conflict</code>, <code>gone</code>, <code>too_large</code>, <code>too_many</code>, <code>unavailable</code>, <code>internal</code>. Some have their own, listed with their request; the device ones are in <a href="/docs/devices#errors">Device protocol</a>.</p>
     <div class="tbl"><table>
       <thead><tr><th>Code</th><th>When</th></tr></thead>
       <tbody>
-        <tr><td><code>400</code></td><td>The request makes sense but a value is wrong: an empty label, a malformed code, a color outside 0–11, nothing to change. Also <code>400</code> when the body isn’t valid JSON</td></tr>
+        <tr><td><code>400</code></td><td>The request makes sense but a value is wrong: an empty label, a malformed code, a color outside 0–11, nothing to change. Also <code>400</code> <code>bad_json</code> when the body isn’t valid JSON</td></tr>
         <tr><td><code>401</code></td><td>No token, or it’s wrong or expired; the device was disconnected or its account deleted</td></tr>
         <tr><td><code>403</code></td><td>A device token can’t do this: the request is app-only, or the device lacks the permission. A permission can be switched off and back on in an app, so a device keeps its token after a <code>403</code>; only <code>401</code> means it’s gone</td></tr>
         <tr><td><code>404</code></td><td>No such contact or device in your account, or no such pairing code</td></tr>
         <tr><td><code>409</code></td><td>The person is already in the list, there are already 12 close people, or there are already 20 devices</td></tr>
         <tr><td><code>410</code></td><td>Pairing by code: the code ran out or its token was already taken. Ask for a new code</td></tr>
-        <tr><td><code>415</code></td><td>No <code>Content-Type: application/json</code></td></tr>
-        <tr><td><code>422</code></td><td>The JSON doesn’t fit the schema: a required field is missing, an extra field in an event, a wrong type. The response body here is plain text, not JSON</td></tr>
+        <tr><td><code>415</code></td><td><code>not_json</code>: no <code>Content-Type: application/json</code></td></tr>
+        <tr><td><code>422</code></td><td><code>bad_body</code>: the JSON doesn’t fit the schema: a required field is missing, an unknown field, a wrong type</td></tr>
         <tr><td><code>429</code></td><td>A limit was hit, see below</td></tr>
         <tr><td><code>503</code></td><td>The server is updating, or a part of it didn’t answer. Retry in a couple of seconds</td></tr>
         <tr><td><code>5xx</code></td><td>Something failed on the server. Retry later, with a pause</td></tr>
@@ -157,6 +159,7 @@
         <tr><td>Devices per account</td><td>20</td><td><code>409</code></td></tr>
         <tr><td>Pairing codes asked for</td><td>30 per hour per IP</td><td><code>429</code></td></tr>
         <tr><td>Wrong pairing codes tried</td><td>10 per hour per account, 30 per hour per IP</td><td><code>429</code></td></tr>
+        <tr><td>Changing a device’s settings</td><td>10 per minute per device</td><td><code>429</code>, see <a href="/docs/devices#errors">Device protocol</a></td></tr>
       </tbody>
     </table></div>
 
@@ -201,6 +204,7 @@
         <tr><td><code>position</code></td><td>int</td><td>Order in the list</td></tr>
         <tr><td><code>close</code></td><td>bool</td><td>A close one: a circle at the top of the apps and on the Telegram bot’s home. Handy to show first. 12 at most</td></tr>
         <tr><td><code>color</code></td><td>int</td><td>Your color for them, 0–11, see <a href="#colors">colors</a>. Like the label, only you see it. Missing on an old entry that has never been given one</td></tr>
+        <tr><td><code>rgb</code></td><td>string</td><td>The same color as <code>#RRGGBB</code>, so a device needs no table of the twelve. <a href="/docs/devices#get-contacts">More</a></td></tr>
         <tr><td><code>created_at</code></td><td>string</td><td>When they were added</td></tr>
         <tr><td><code>invite_url</code></td><td>string</td><td>The link they were added by, to pass them on. Only with an app token, never with a device token; missing on old entries</td></tr>
       </tbody>
@@ -211,7 +215,7 @@
     <p>The whole list, by <code>position</code>, then by when they were added.</p>
     <pre><code>{ "contacts": [ { "id": "DXEjjB91rJYQvgaGGdsx", "label": "Mom", … }, … ] }</code></pre>
     <p>When the list changes, a <a href="/docs/ws#sync"><code>sync</code></a> arrives over WebSocket: load it again then.</p>
-    <p>A device without the <code>send</code> permission gets <code>403</code> here: it has nobody to send to, so it doesn’t see your people.</p>
+    <p>A device without the <code>send</code> permission gets <code>403</code> here: it has nobody to send to, so it doesn’t see your people. A device that may send sees only the people its <a href="/docs/devices#get-contacts"><code>book</code></a> allows: everyone, close people, or the ones you picked.</p>
 
     <div class="ep" id="post-contacts"><span class="m post">POST</span><code>/v1/contacts</code><span class="who">app</span></div>
     <p>Add a person by their Love ID:</p>
@@ -274,15 +278,16 @@
         <tr><td><code>last_seen_at</code></td><td>string</td><td>When the device last opened a stream. Missing if it never has</td></tr>
       </tbody>
     </table></div>
+    <p>With protocol v1 the device object also gets <code>online</code>, <code>tz</code>, <code>setup</code>, <code>link</code>, <code>about</code>, <code>rev</code>, <code>values</code>, <code>applied</code>, <code>battery</code> and <code>book</code>: what the device is made of and how it is set. They are described in <a href="/docs/devices">Device protocol</a>.</p>
 
     <div class="ep" id="get-devices"><span class="m get">GET</span><code>/v1/devices</code><span class="who">app</span></div>
     <p>The devices, by creation time: <code>{ "devices": [ … ] }</code>.</p>
 
     <div class="ep" id="post-devices"><span class="m post">POST</span><code>/v1/devices</code><span class="who">app</span></div>
     <pre><code>{ "name": "Kitty on the shelf", "kind": "toy", "capabilities": ["receive"] }</code></pre>
-    <p><code>kind</code> defaults to <code>custom</code>, <code>capabilities</code> to both. The response is <code>201</code>:</p>
+    <p><code>kind</code> defaults to <code>custom</code>, <code>capabilities</code> to both. Optional too: <code>tz</code>, and <code>setup</code> and <code>link</code> for a device set up over Bluetooth (see <a href="/docs/devices#setup">Device protocol</a>). The response is <code>201</code>:</p>
     <pre><code>{ "device": { "id": "r7Hc2LqW9xPz4KmN0aTe", … }, "token": "dev_4kq9XbT2mWc7RfLp8sHn3vYzAe6uJd5G" }</code></pre>
-    <p>The token is shown only here; the server keeps just its hash. Errors: <code>400</code> a bad name, <code>kind</code> or capabilities, <code>409</code> there are already 20 devices.</p>
+    <p>The token is shown only here; the server keeps just its hash. A Bluetooth-only toy (<code>"link": "phone"</code>) gets no token: <code>{ "device": … }</code>. Errors: <code>400</code> a bad name, <code>kind</code> or capabilities, <code>bad_tz</code>, <code>bad_setup</code>, <code>bad_link</code>, <code>409</code> there are already 20 devices.</p>
 
     <div class="ep" id="patch-device"><span class="m patch">PATCH</span><code>/v1/devices/{id}</code><span class="who">app</span></div>
     <p>Change a device. Send only what changes:</p>
@@ -295,18 +300,21 @@
     <ul>
       <li><code>capabilities</code> can be empty. A device paired by code can only switch off what it asked for and back on: anything beyond <code>requested_capabilities</code> is a <code>400</code>.</li>
       <li><code>accept_anyone</code>, once set, wins over the stream’s <code>?anyone=</code>.</li>
+      <li><code>tz</code>: the device’s time zone, an IANA name like <code>Europe/Lisbon</code> (else <code>400</code> <code>bad_tz</code>); <code>null</code> for none, and then its quiet hours’ zone counts, else UTC. It reaches the device in its settings.</li>
+      <li><code>book</code>: whom the device sees in <a href="#get-contacts"><code>GET /v1/contacts</code></a>, <code>"all"</code>, <code>"close"</code> or a list of contact ids (else <code>400</code> <code>bad_book</code>). The device itself can’t change it. Its light, sound and button are set with <a href="/docs/devices#owner"><code>PATCH /v1/devices/{id}/settings</code></a>.</li>
       <li><code>quiet_hours</code>: the two times must differ, and the window may cross midnight; <code>null</code> turns it off. In the window the device gets no signal at all, and nothing is kept for later: a signal reaches a device now or never. Your other apps and devices get it as usual. A “someone out there” signal skips a device in its quiet hours and goes to someone who will see it.</li>
     </ul>
     <p>There is no setting by sender: a signal never says who sent it. The response is the device. If <code>capabilities</code>, <code>accept_anyone</code> or <code>quiet_hours</code> changed, the server closes the device’s streams, and it reconnects with the new settings. Errors: <code>400</code> a bad field or nothing to change, <code>404</code> no such device.</p>
 
     <div class="ep" id="post-device-token"><span class="m post">POST</span><code>/v1/devices/{id}/token</code><span class="who">app</span></div>
-    <p>A new token for a device made in an app, when the old one leaked or got lost: <code>{ "token": "dev_…" }</code>, shown only here. The old token stops working at once and its streams are closed: put the new one into the firmware. A device paired by code gets <code>409</code>: disconnect it and pair it again.</p>
+    <p>A new token for a device made in an app, when the old one leaked or got lost: <code>{ "token": "dev_…" }</code>, shown only here. The old token stops working at once and its streams are closed: put the new one into the firmware. A device paired by code gets <code>409</code>: disconnect it and pair it again. A device set up over Bluetooth gets one when it is <a href="/docs/devices#setup-again">set up again</a>, and keeps its name and settings; a Bluetooth-only toy has no token, <code>409</code> <code>phone_link</code>. Either way the server forgets the settings the device said it applied.</p>
 
     <div class="ep" id="delete-device"><span class="m delete">DELETE</span><code>/v1/devices/{id}</code><span class="who">app</span></div>
     <p>Disconnect a device. Its token stops working at once and the streams it opened are closed. The response is <code>204</code>, or <code>404</code> if there is no such device.</p>
 
     <div class="ep" id="delete-device-self"><span class="m delete">DELETE</span><code>/v1/devices/self</code><span class="who dev">device</span></div>
     <p>A device leaves its account on its own, with its device token: what “Sign out” on a watch does. The same as being disconnected in the app: <code>204</code>, the token stops working at once. An app’s sign-in gets <code>403</code>: it names the device by id.</p>
+    <p>A device also reads its own settings and tells the server what it is made of, under <code>/v1/devices/self</code> too: see <a href="/docs/devices#wifi">Device protocol</a>.</p>
 
     <h2 id="pairing">Pairing a device by code</h2>
     <p>For a device with a screen and no way to sign in, like a watch or a lamp with a display. Instead of a token pasted into its firmware, it shows a code, and the person confirms it while signed in. The device then gets a device token of its own, as if it had been made in <b>Settings → Devices</b>.</p>
@@ -428,7 +436,7 @@
     <p>The link is good for 10 minutes, once; whichever Telegram opens it joins the account. From a browser, only lovearound.me may call this. Errors: <code>503</code> the bot didn’t answer: try again.</p>
 
     <h2 id="stream">Stream</h2>
-    <div class="ep" id="ws-stream"><span class="m ws">WS</span><code>/v1/stream</code><span class="who dev">device, receive permission</span></div>
+    <div class="ep" id="ws-stream"><span class="m ws">WS</span><code>/v1/stream</code><span class="who dev">device</span></div>
     <p>Receiving signals. Described in <a href="/docs/ws">WebSocket</a>.</p>
 
     <div class="ep" id="post-stream-ticket"><span class="m post">POST</span><code>/v1/stream/ticket</code><span class="who">app</span></div>
